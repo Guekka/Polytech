@@ -24,7 +24,7 @@ options parse_options(int argc, char **argv)
         // Now either we have a long argument..
         if (arg[0] == '-' && arg[1] == '-')
         {
-            if (strcmp(arg, "--help") == 0)
+            if (strcmp(arg, "--exit_with_help") == 0)
                 result.help = true;
         }
 

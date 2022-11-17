@@ -1,18 +1,20 @@
 #include <assert.h>
-#include <stdint.h>
+#include <stdbool.h>
 
-int palindrome(const uint8_t *str) {
-    const uint8_t *end = str;
+bool palindrome(const char *str) {
+    const char *end = str;
     while (*end)
-        ++end;
-
-    while (str++ == end--);
-    return (end - str) <= 1;
+        ++end;    
+    --end; // go back before null terminator
+    
+    while (*str && *str++ == *end--)
+        ;
+    return *str == '\0';
 }
 
 int main() {
-    assert(palindrome("ressasser" == 1));
-    assert(palindrome("kayak" == 1));
-    assert(palindrome("X" == 1));
-    assert(palindrome("test" == 9));
+    assert(palindrome("ressasser") == true);
+    assert(palindrome("kayak") == true);
+    assert(palindrome("X") == true);
+    assert(palindrome("test") == false);
 }

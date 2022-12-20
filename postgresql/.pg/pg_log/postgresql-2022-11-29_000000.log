@@ -1,0 +1,19 @@
+2022-11-29 05:58:54.346 UTC [16210] LOG:  received fast shutdown request
+2022-11-29 05:58:54.351 UTC [16210] LOG:  aborting any active transactions
+2022-11-29 05:58:54.352 UTC [19208] FATAL:  terminating connection due to administrator command
+2022-11-29 05:58:54.352 UTC [18920] FATAL:  terminating connection due to administrator command
+2022-11-29 05:58:54.352 UTC [16330] FATAL:  terminating connection due to administrator command
+2022-11-29 05:58:54.352 UTC [18882] FATAL:  terminating connection due to administrator command
+2022-11-29 05:58:54.352 UTC [16328] FATAL:  terminating connection due to administrator command
+2022-11-29 05:58:54.352 UTC [19066] FATAL:  terminating connection due to administrator command
+2022-11-29 05:58:54.352 UTC [19208] LOG:  disconnection: session time: 15:14:25.618 user=postgres database=tp3 host=::1 port=42002
+2022-11-29 05:58:54.352 UTC [18920] LOG:  disconnection: session time: 15:18:07.185 user=postgres database=tp3 host=::1 port=33088
+2022-11-29 05:58:54.352 UTC [16328] LOG:  disconnection: session time: 15:52:19.703 user=postgres database=postgres host=::1 port=53164
+2022-11-29 05:58:54.352 UTC [16330] LOG:  disconnection: session time: 15:52:19.646 user=postgres database=postgres host=::1 port=53184
+2022-11-29 05:58:54.352 UTC [18882] LOG:  disconnection: session time: 15:18:46.341 user=postgres database=tp3 host=::1 port=34140
+2022-11-29 05:58:54.352 UTC [19066] LOG:  disconnection: session time: 15:16:12.105 user=postgres database=tp3 host=::1 port=53650
+2022-11-29 05:58:54.352 UTC [16329] FATAL:  terminating connection due to administrator command
+2022-11-29 05:58:54.352 UTC [16329] LOG:  disconnection: session time: 15:52:19.664 user=postgres database=postgres host=::1 port=53172
+2022-11-29 05:58:54.354 UTC [16210] LOG:  background worker "logical replication launcher" (PID 16218) exited with exit code 1
+2022-11-29 05:58:54.356 UTC [16213] LOG:  shutting down
+2022-11-29 05:58:54.373 UTC [16210] LOG:  database system is shut down

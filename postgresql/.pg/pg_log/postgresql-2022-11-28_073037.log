@@ -1,0 +1,3423 @@
+2022-11-28 07:30:37.531 UTC [8090] LOG:  starting PostgreSQL 14.5 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 11.3.0, 64-bit
+2022-11-28 07:30:37.531 UTC [8090] LOG:  listening on IPv6 address "::1", port 5555
+2022-11-28 07:30:37.531 UTC [8090] LOG:  listening on IPv4 address "127.0.0.1", port 5555
+2022-11-28 07:30:37.534 UTC [8090] LOG:  listening on Unix socket "/home/edgar/code/Polytech_SI3_S5/postgresql/.pg/.s.PGSQL.5555"
+2022-11-28 07:30:37.539 UTC [8092] LOG:  database system was shut down at 2022-11-27 20:22:58 UTC
+2022-11-28 07:30:37.544 UTC [8090] LOG:  database system is ready to accept connections
+2022-11-28 07:32:45.260 UTC [8943] LOG:  connection received: host=::1 port=41142
+2022-11-28 07:32:45.266 UTC [8943] LOG:  connection authorized: user=postgres database=postgres application_name=pgAdmin 4 - DB:postgres
+2022-11-28 07:32:45.268 UTC [8943] LOG:  statement: SET DateStyle=ISO; SET client_min_messages=notice; SELECT set_config('bytea_output','hex',false) FROM pg_settings WHERE name = 'bytea_output'; SET client_encoding='UNICODE';
+2022-11-28 07:32:45.282 UTC [8943] LOG:  duration: 14.069 ms
+2022-11-28 07:32:45.283 UTC [8943] LOG:  statement: SELECT version()
+2022-11-28 07:32:45.283 UTC [8943] LOG:  duration: 0.277 ms
+2022-11-28 07:32:45.284 UTC [8943] LOG:  statement: 
+	SELECT
+	    db.oid as did, db.datname, db.datallowconn,
+	    pg_encoding_to_char(db.encoding) AS serverencoding,
+	    has_database_privilege(db.oid, 'CREATE') as cancreate,
+	    datistemplate
+	FROM
+	    pg_catalog.pg_database db
+	WHERE db.datname = current_database()
+2022-11-28 07:32:45.290 UTC [8943] LOG:  duration: 6.080 ms
+2022-11-28 07:32:45.290 UTC [8943] LOG:  statement: 
+	        SELECT
+	             gss_authenticated, encrypted
+	        FROM
+	            pg_catalog.pg_stat_gssapi
+	        WHERE pid = pg_backend_pid()
+2022-11-28 07:32:45.292 UTC [8943] LOG:  duration: 1.875 ms
+2022-11-28 07:32:45.293 UTC [8943] LOG:  statement: 
+	        SELECT
+	            roles.oid as id, roles.rolname as name,
+	            roles.rolsuper as is_superuser,
+	            CASE WHEN roles.rolsuper THEN true ELSE roles.rolcreaterole END as
+	            can_create_role,
+	            CASE WHEN roles.rolsuper THEN true
+	            ELSE roles.rolcreatedb END as can_create_db,
+	            CASE WHEN 'pg_signal_backend'=ANY(ARRAY(WITH RECURSIVE cte AS (
+	            SELECT pg_roles.oid,pg_roles.rolname FROM pg_roles
+	                WHERE pg_roles.oid = roles.oid
+	            UNION ALL
+	            SELECT m.roleid,pgr.rolname FROM cte cte_1
+	                JOIN pg_auth_members m ON m.member = cte_1.oid
+	                JOIN pg_roles pgr ON pgr.oid = m.roleid)
+	            SELECT rolname  FROM cte)) THEN True
+	            ELSE False END as can_signal_backend
+	        FROM
+	            pg_catalog.pg_roles as roles
+	        WHERE
+	            rolname = current_user
+2022-11-28 07:32:45.298 UTC [8943] LOG:  duration: 5.265 ms
+2022-11-28 07:32:45.302 UTC [8944] LOG:  connection received: host=::1 port=41146
+2022-11-28 07:32:45.304 UTC [8944] LOG:  connection authorized: user=postgres database=postgres application_name=pgAdmin 4 - CONN:2503945
+2022-11-28 07:32:45.307 UTC [8944] LOG:  statement: SET DateStyle=ISO; SET client_min_messages=notice; SELECT set_config('bytea_output','hex',false) FROM pg_settings WHERE name = 'bytea_output'; SET client_encoding='UNICODE';
+2022-11-28 07:32:45.308 UTC [8944] LOG:  duration: 1.714 ms
+2022-11-28 07:32:45.309 UTC [8944] LOG:  statement: SELECT version()
+2022-11-28 07:32:45.309 UTC [8944] LOG:  duration: 0.251 ms
+2022-11-28 07:32:45.309 UTC [8944] LOG:  statement: 
+	SELECT
+	    db.oid as did, db.datname, db.datallowconn,
+	    pg_encoding_to_char(db.encoding) AS serverencoding,
+	    has_database_privilege(db.oid, 'CREATE') as cancreate,
+	    datistemplate
+	FROM
+	    pg_catalog.pg_database db
+	WHERE db.datname = current_database()
+2022-11-28 07:32:45.310 UTC [8944] LOG:  duration: 0.757 ms
+2022-11-28 07:32:45.310 UTC [8944] LOG:  statement: 
+	        SELECT
+	             gss_authenticated, encrypted
+	        FROM
+	            pg_catalog.pg_stat_gssapi
+	        WHERE pid = pg_backend_pid()
+2022-11-28 07:32:45.311 UTC [8944] LOG:  duration: 0.553 ms
+2022-11-28 07:32:45.312 UTC [8944] LOG:  statement: 
+	        SELECT
+	            roles.oid as id, roles.rolname as name,
+	            roles.rolsuper as is_superuser,
+	            CASE WHEN roles.rolsuper THEN true ELSE roles.rolcreaterole END as
+	            can_create_role,
+	            CASE WHEN roles.rolsuper THEN true
+	            ELSE roles.rolcreatedb END as can_create_db,
+	            CASE WHEN 'pg_signal_backend'=ANY(ARRAY(WITH RECURSIVE cte AS (
+	            SELECT pg_roles.oid,pg_roles.rolname FROM pg_roles
+	                WHERE pg_roles.oid = roles.oid
+	            UNION ALL
+	            SELECT m.roleid,pgr.rolname FROM cte cte_1
+	                JOIN pg_auth_members m ON m.member = cte_1.oid
+	                JOIN pg_roles pgr ON pgr.oid = m.roleid)
+	            SELECT rolname  FROM cte)) THEN True
+	            ELSE False END as can_signal_backend
+	        FROM
+	            pg_catalog.pg_roles as roles
+	        WHERE
+	            rolname = current_user
+2022-11-28 07:32:45.313 UTC [8944] LOG:  duration: 1.714 ms
+2022-11-28 07:32:45.318 UTC [8945] LOG:  connection received: host=::1 port=41160
+2022-11-28 07:32:45.320 UTC [8945] LOG:  connection authorized: user=postgres database=postgres application_name=pgAdmin 4 - CONN:7690828
+2022-11-28 07:32:45.322 UTC [8945] LOG:  statement: SET DateStyle=ISO; SET client_min_messages=notice; SELECT set_config('bytea_output','hex',false) FROM pg_settings WHERE name = 'bytea_output'; SET client_encoding='UNICODE';
+2022-11-28 07:32:45.324 UTC [8945] LOG:  duration: 2.055 ms
+2022-11-28 07:32:45.325 UTC [8945] LOG:  statement: SELECT version()
+2022-11-28 07:32:45.325 UTC [8945] LOG:  duration: 0.400 ms
+2022-11-28 07:32:45.326 UTC [8945] LOG:  statement: 
+	SELECT
+	    db.oid as did, db.datname, db.datallowconn,
+	    pg_encoding_to_char(db.encoding) AS serverencoding,
+	    has_database_privilege(db.oid, 'CREATE') as cancreate,
+	    datistemplate
+	FROM
+	    pg_catalog.pg_database db
+	WHERE db.datname = current_database()
+2022-11-28 07:32:45.326 UTC [8945] LOG:  duration: 0.890 ms
+2022-11-28 07:32:45.327 UTC [8945] LOG:  statement: 
+	        SELECT
+	             gss_authenticated, encrypted
+	        FROM
+	            pg_catalog.pg_stat_gssapi
+	        WHERE pid = pg_backend_pid()
+2022-11-28 07:32:45.327 UTC [8945] LOG:  duration: 0.830 ms
+2022-11-28 07:32:45.328 UTC [8945] LOG:  statement: 
+	        SELECT
+	            roles.oid as id, roles.rolname as name,
+	            roles.rolsuper as is_superuser,
+	            CASE WHEN roles.rolsuper THEN true ELSE roles.rolcreaterole END as
+	            can_create_role,
+	            CASE WHEN roles.rolsuper THEN true
+	            ELSE roles.rolcreatedb END as can_create_db,
+	            CASE WHEN 'pg_signal_backend'=ANY(ARRAY(WITH RECURSIVE cte AS (
+	            SELECT pg_roles.oid,pg_roles.rolname FROM pg_roles
+	                WHERE pg_roles.oid = roles.oid
+	            UNION ALL
+	            SELECT m.roleid,pgr.rolname FROM cte cte_1
+	                JOIN pg_auth_members m ON m.member = cte_1.oid
+	                JOIN pg_roles pgr ON pgr.oid = m.roleid)
+	            SELECT rolname  FROM cte)) THEN True
+	            ELSE False END as can_signal_backend
+	        FROM
+	            pg_catalog.pg_roles as roles
+	        WHERE
+	            rolname = current_user
+2022-11-28 07:32:45.330 UTC [8945] LOG:  duration: 2.198 ms
+2022-11-28 07:32:45.413 UTC [8943] LOG:  statement: SELECT CASE WHEN usesuper
+	       THEN pg_catalog.pg_is_in_recovery()
+	       ELSE FALSE
+	       END as inrecovery,
+	       CASE WHEN usesuper AND pg_catalog.pg_is_in_recovery()
+	       THEN pg_is_wal_replay_paused()
+	       ELSE FALSE
+	       END as isreplaypaused
+	FROM pg_catalog.pg_user WHERE usename=current_user
+2022-11-28 07:32:45.414 UTC [8943] LOG:  duration: 1.060 ms
+2022-11-28 07:32:45.583 UTC [8943] LOG:  statement: 
+	SELECT
+	    has_table_privilege(
+	      'pgagent.pga_job', 'INSERT, SELECT, UPDATE'
+	    ) has_priviledge
+	WHERE EXISTS(
+	    SELECT has_schema_privilege('pgagent', 'USAGE')
+	    WHERE EXISTS(
+	        SELECT cl.oid FROM pg_catalog.pg_class cl
+	        LEFT JOIN pg_catalog.pg_namespace ns ON ns.oid=relnamespace
+	        WHERE relname='pga_job' AND nspname='pgagent'
+	    )
+	)
+	
+2022-11-28 07:32:45.589 UTC [8943] LOG:  duration: 6.002 ms
+2022-11-28 07:32:45.744 UTC [8943] LOG:  statement: SELECT
+	    db.oid as did, db.datname as name, ta.spcname as spcname, db.datallowconn,
+	    db.datistemplate AS is_template,
+	    pg_catalog.has_database_privilege(db.oid, 'CREATE') as cancreate, datdba as owner
+	FROM
+	    pg_catalog.pg_database db
+	    LEFT OUTER JOIN pg_catalog.pg_tablespace ta ON db.dattablespace = ta.oid
+	WHERE         db.oid > 16383::OID OR db.datname IN ('postgres', 'edb')
+	
+	ORDER BY datname;
+2022-11-28 07:32:45.745 UTC [8943] LOG:  duration: 1.481 ms
+2022-11-28 07:32:45.961 UTC [8943] LOG:  statement: SELECT
+	    db.oid AS did, db.oid, db.datname AS name, db.dattablespace AS spcoid,
+	    spcname, datallowconn, pg_catalog.pg_encoding_to_char(encoding) AS encoding,
+	    pg_catalog.pg_get_userbyid(datdba) AS datowner,
+	    (select pg_catalog.current_setting('lc_collate')) as datcollate,
+	    (select pg_catalog.current_setting('lc_ctype')) as datctype,
+	    datconnlimit,
+	    pg_catalog.has_database_privilege(db.oid, 'CREATE') AS cancreate,
+	    pg_catalog.current_setting('default_tablespace') AS default_tablespace,
+	    descr.description AS comments, db.datistemplate AS is_template,
+	        '' AS tblacl,
+	        '' AS seqacl,
+	        '' AS funcacl,
+	    pg_catalog.array_to_string(datacl::text[], ', ') AS acl
+	FROM pg_catalog.pg_database db
+	    LEFT OUTER JOIN pg_catalog.pg_tablespace ta ON db.dattablespace=ta.OID
+	    LEFT OUTER JOIN pg_catalog.pg_shdescription descr ON (
+	        db.oid=descr.objoid AND descr.classoid='pg_database'::regclass
+	    )
+	WHERE
+	    db.oid = 14767::OID
+	
+	
+	ORDER BY datname;
+2022-11-28 07:32:45.971 UTC [8943] LOG:  duration: 9.607 ms
+2022-11-28 07:32:46.007 UTC [8943] LOG:  statement: SELECT
+	    'datacl' AS deftype, COALESCE(gt.rolname, 'PUBLIC') AS grantee,
+	    g.rolname AS grantor, pg_catalog.array_agg(privilege_type) AS privileges,
+	    pg_catalog.array_agg(is_grantable) AS grantable
+	FROM
+	    (SELECT
+	        d.grantee, d.grantor, d.is_grantable,
+	        CASE d.privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN'
+	        END AS privilege_type
+	    FROM
+	        (SELECT
+	            (d).grantee AS grantee, (d).grantor AS grantor,
+	            (d).is_grantable AS is_grantable,
+	            (d).privilege_type AS privilege_type
+	        FROM
+	            (SELECT pg_catalog.aclexplode(db.datacl) AS d FROM pg_catalog.pg_database db
+	            WHERE db.oid = 14767::OID) a
+	        ) d
+	    ) d
+	    LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	    LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee;
+2022-11-28 07:32:46.010 UTC [8943] LOG:  duration: 3.041 ms
+2022-11-28 07:32:46.048 UTC [8943] LOG:  statement: SELECT * from (
+	(SELECT
+	    CASE (e.deftype)
+	    WHEN 'r' THEN 'deftblacl'
+	    WHEN 'S' THEN 'defseqacl'
+	    WHEN 'f' THEN 'deffuncacl'
+	    WHEN 'T' THEN 'deftypeacl'
+	    END AS deftype,
+	   'revoke' as acltype,
+	    COALESCE(gt.rolname, 'PUBLIC') AS grantee, g.rolname AS grantor, pg_catalog.array_agg(e.privilege_type) as privileges, pg_catalog.array_agg(e.is_grantable) as grantable
+	FROM(
+	   SELECT
+	        (d.acl).grantee as grantee, (d.acl).grantor AS grantor, (d.acl).is_grantable AS is_grantable,
+	        CASE (d.acl).privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN'
+	        END AS privilege_type,
+	        d.defaclobjtype as deftype
+	    FROM
+	     (select
+	         b.defaclobjtype,
+	         pg_catalog.aclexplode(b.revoke_priv) as acl
+	      from
+	         (select
+	            a.defaclobjtype,
+	            a.defaclrole,
+	            a.defaultprivileges,
+	            a.acldefault,
+	            array(select unnest(a.acldefault) except select unnest(a.defaultprivileges)) as revoke_priv
+	            from
+	               (SELECT
+	                  defaclobjtype,
+	                  defaclrole,
+	                  defaclacl as defaultprivileges,
+	                  CASE
+	                     WHEN defaclnamespace = 0 THEN acldefault(CASE WHEN defaclobjtype = 'S' THEN 's'::"char" ELSE defaclobjtype END, defaclrole)
+	                     ELSE '{}'
+	                  END AS acldefault
+	                 FROM pg_catalog.pg_default_acl dacl
+	                 WHERE dacl.defaclnamespace = 0::OID
+	               ) a
+	            ) b
+	         where not b.revoke_priv = '{}'
+	      ) d
+	   ) e
+	LEFT JOIN pg_catalog.pg_roles g ON (e.grantor = g.oid)
+	LEFT JOIN pg_catalog.pg_roles gt ON (e.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname, e.deftype
+	ORDER BY e.deftype)
+	
+	UNION
+	(
+	SELECT
+	    CASE (e.deftype)
+	    WHEN 'r' THEN 'deftblacl'
+	    WHEN 'S' THEN 'defseqacl'
+	    WHEN 'f' THEN 'deffuncacl'
+	    WHEN 'T' THEN 'deftypeacl'
+	    END AS deftype,
+	   'grant' as acltype,
+	    COALESCE(gt.rolname, 'PUBLIC') AS grantee, g.rolname AS grantor, pg_catalog.array_agg(e.privilege_type) as privileges, pg_catalog.array_agg(e.is_grantable) as grantable
+	FROM(
+	   SELECT
+	        (d.acl).grantee as grantee, (d.acl).grantor AS grantor, (d.acl).is_grantable AS is_grantable,
+	        CASE (d.acl).privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN'
+	        END AS privilege_type,
+	        d.defaclobjtype as deftype
+	    FROM(
+	      select
+	         *,
+	         pg_catalog.aclexplode(b.grant_priv) as acl
+	      from
+	         (select
+	            a.defaclobjtype,
+	            a.defaclrole,
+	            a.defaultprivileges,
+	            a.acldefault,
+	            array(select unnest(a.defaultprivileges) except select unnest(a.acldefault)) as grant_priv
+	            from
+	               (SELECT
+	                  defaclobjtype,
+	                  defaclrole,
+	                  defaclacl as defaultprivileges,
+	                  CASE
+	                     WHEN defaclnamespace = 0
+	                     THEN acldefault(CASE WHEN defaclobjtype = 'S' THEN 's'::"char" ELSE defaclobjtype END, defaclrole)
+	                     ELSE '{}'
+	                  END AS acldefault
+	                 FROM pg_catalog.pg_default_acl dacl
+	                 WHERE dacl.defaclnamespace = 0::OID
+	               ) a
+	           ) b where not b.grant_priv = '{}'
+	      ) d
+	   ) e
+	LEFT JOIN pg_catalog.pg_roles g ON (e.grantor = g.oid)
+	   LEFT JOIN pg_catalog.pg_roles gt ON (e.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname, e.deftype
+	ORDER BY e.deftype)) f order by f.acltype DESC
+	
+2022-11-28 07:32:46.055 UTC [8943] LOG:  duration: 7.618 ms
+2022-11-28 07:32:46.095 UTC [8943] LOG:  statement: SELECT
+	    rl.*, r.rolname AS user_name, db.datname as db_name
+	FROM pg_catalog.pg_db_role_setting AS rl
+	    LEFT JOIN pg_catalog.pg_roles AS r ON rl.setrole = r.oid
+	    LEFT JOIN pg_catalog.pg_database AS db ON rl.setdatabase = db.oid
+	WHERE setdatabase = 14767
+2022-11-28 07:32:46.096 UTC [8943] LOG:  duration: 0.836 ms
+2022-11-28 07:32:46.521 UTC [8943] LOG:  statement: SELECT
+	    nsp.oid,
+	    nsp.nspname as name,
+	    pg_catalog.has_schema_privilege(nsp.oid, 'CREATE') as can_create,
+	    pg_catalog.has_schema_privilege(nsp.oid, 'USAGE') as has_usage
+	FROM
+	    pg_catalog.pg_namespace nsp
+	WHERE
+	            nspname NOT LIKE 'pg!_%' escape '!' AND
+	            NOT (
+	(nsp.nspname = 'pg_catalog' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'pg_class' AND
+	            relnamespace = nsp.oid LIMIT 1)) OR
+	    (nsp.nspname = 'pgagent' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'pga_job' AND
+	            relnamespace = nsp.oid LIMIT 1)) OR
+	    (nsp.nspname = 'information_schema' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'tables' AND
+	            relnamespace = nsp.oid LIMIT 1))
+	    )
+	
+	    
+	ORDER BY nspname;
+2022-11-28 07:32:46.522 UTC [8943] LOG:  duration: 1.014 ms
+2022-11-28 07:32:46.792 UTC [8943] LOG:  statement: SELECT
+	    nsp.nspname as schema_name,
+	    (nsp.nspname = 'pg_catalog' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'pg_class' AND
+	            relnamespace = nsp.oid LIMIT 1)) OR
+	    (nsp.nspname = 'pgagent' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'pga_job' AND
+	            relnamespace = nsp.oid LIMIT 1)) OR
+	    (nsp.nspname = 'information_schema' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'tables' AND
+	            relnamespace = nsp.oid LIMIT 1)) AS is_catalog,
+	    CASE
+	    WHEN nsp.nspname = ANY('{information_schema}')
+	        THEN false
+	    ELSE true END AS db_support
+	FROM
+	    pg_catalog.pg_namespace nsp
+	WHERE
+	    nsp.oid = 16832::OID;
+2022-11-28 07:32:46.792 UTC [8943] LOG:  duration: 0.557 ms
+2022-11-28 07:32:51.675 UTC [8943] LOG:  statement: SELECT
+	    CASE
+	    WHEN (nspname LIKE E'pg\\_temp\\_%') THEN 1
+	    WHEN (nspname LIKE E'pg\\_%') THEN 0
+	    ELSE 3 END AS nsptyp,
+	    nsp.nspname AS name,
+	    nsp.oid,
+	    pg_catalog.array_to_string(nsp.nspacl::text[], ', ') as acl,
+	    r.rolname AS namespaceowner, description,
+	    pg_catalog.has_schema_privilege(nsp.oid, 'CREATE') AS can_create,
+	        (SELECT pg_catalog.array_to_string(ARRAY(
+	        SELECT pg_catalog.array_to_string(defaclacl::text[], ', ')
+	            FROM pg_catalog.pg_default_acl
+	        WHERE defaclobjtype = 'r' AND defaclnamespace = nsp.oid
+	    ), ', ')) AS tblacl,
+	        (SELECT pg_catalog.array_to_string(ARRAY(
+	        SELECT pg_catalog.array_to_string(defaclacl::text[], ', ')
+	            FROM pg_catalog.pg_default_acl
+	        WHERE defaclobjtype = 'S' AND defaclnamespace = nsp.oid
+	    ), ', ')) AS seqacl,
+	        (SELECT pg_catalog.array_to_string(ARRAY(
+	        SELECT pg_catalog.array_to_string(defaclacl::text[], ', ')
+	            FROM pg_catalog.pg_default_acl
+	        WHERE defaclobjtype = 'f' AND defaclnamespace = nsp.oid
+	    ), ', ')) AS funcacl,
+	        (SELECT pg_catalog.array_to_string(ARRAY(
+	        SELECT pg_catalog.array_to_string(defaclacl::text[], ', ')
+	            FROM pg_catalog.pg_default_acl
+	        WHERE defaclobjtype = 'T' AND defaclnamespace = nsp.oid
+	    ), ', ')) AS typeacl,
+	    (SELECT pg_catalog.array_agg(provider || '=' || label) FROM pg_catalog.pg_seclabels sl1 WHERE sl1.objoid=nsp.oid) AS seclabels
+	FROM
+	    pg_catalog.pg_namespace nsp
+	    LEFT OUTER JOIN pg_catalog.pg_description des ON
+	        (des.objoid=nsp.oid AND des.classoid='pg_namespace'::regclass)
+	    LEFT JOIN pg_catalog.pg_roles r ON (r.oid = nsp.nspowner)
+	WHERE
+	        nsp.oid=16832::oid AND
+	        NOT (
+	(nsp.nspname = 'pg_catalog' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'pg_class' AND
+	            relnamespace = nsp.oid LIMIT 1)) OR
+	    (nsp.nspname = 'pgagent' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'pga_job' AND
+	            relnamespace = nsp.oid LIMIT 1)) OR
+	    (nsp.nspname = 'information_schema' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'tables' AND
+	            relnamespace = nsp.oid LIMIT 1))
+	    )
+	    ORDER BY 1, nspname;
+2022-11-28 07:32:51.702 UTC [8943] LOG:  duration: 27.484 ms
+2022-11-28 07:32:51.744 UTC [8943] LOG:  statement: SELECT
+	    'nspacl' as deftype, COALESCE(gt.rolname, 'PUBLIC') AS grantee,
+	    g.rolname AS grantor, pg_catalog.array_agg(b.privilege_type) AS privileges,
+	    pg_catalog.array_agg(b.is_grantable) AS grantable
+	FROM
+	    (SELECT
+	        (d).grantee AS grantee, (d).grantor AS grantor,
+	        (d).is_grantable AS is_grantable,
+	        CASE (d).privilege_type
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN - ' || (d).privilege_type
+	        END AS privilege_type
+	    FROM
+	        (SELECT pg_catalog.aclexplode(nsp.nspacl) as d
+	        FROM pg_catalog.pg_namespace nsp
+	        WHERE nsp.oid = 16832::OID
+	        ) a
+	    ) b
+	    LEFT JOIN pg_catalog.pg_roles g ON (b.grantor = g.oid)
+	    LEFT JOIN pg_catalog.pg_roles gt ON (b.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee;
+2022-11-28 07:32:51.745 UTC [8943] LOG:  duration: 1.286 ms
+2022-11-28 07:32:51.786 UTC [8943] LOG:  statement: SELECT
+	    CASE (a.deftype)
+	    WHEN 'r' THEN 'deftblacl'
+	    WHEN 'S' THEN 'defseqacl'
+	    WHEN 'f' THEN 'deffuncacl'
+	    WHEN 'T' THEN 'deftypeacl'
+	    ELSE 'UNKNOWN - ' || a.deftype::text
+	    END AS deftype,
+	    COALESCE(gt.rolname, 'PUBLIC') grantee, g.rolname grantor, pg_catalog.array_agg(a.privilege_type) as privileges, pg_catalog.array_agg(a.is_grantable) as grantable
+	FROM
+	    (SELECT
+	        (acl).grantee as grantee, (acl).grantor AS grantor, (acl).is_grantable AS is_grantable,
+	        CASE (acl).privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN - ' || (acl).privilege_type
+	        END AS privilege_type,
+	        defaclobjtype as deftype
+	    FROM
+	        (SELECT defaclobjtype, pg_catalog.aclexplode(defaclacl) as acl
+	            FROM
+	                pg_catalog.pg_namespace nsp
+	                LEFT OUTER JOIN pg_catalog.pg_default_acl dacl ON (dacl.defaclnamespace = nsp.oid)
+	            WHERE
+	                nsp.oid=16832::oid
+	        ) d) a
+	    LEFT JOIN pg_catalog.pg_roles g ON (a.grantor = g.oid)
+	    LEFT JOIN pg_catalog.pg_roles gt ON (a.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname, a.deftype
+	ORDER BY a.deftype;
+2022-11-28 07:32:51.787 UTC [8943] LOG:  duration: 1.485 ms
+2022-11-28 07:32:59.924 UTC [8943] LOG:  statement: SELECT rel.oid, rel.relname AS name,
+	    (SELECT count(*) FROM pg_catalog.pg_trigger WHERE tgrelid=rel.oid AND tgisinternal = FALSE) AS triggercount,
+	    (SELECT count(*) FROM pg_catalog.pg_trigger WHERE tgrelid=rel.oid AND tgisinternal = FALSE AND tgenabled = 'O') AS has_enable_triggers,
+	    (CASE WHEN rel.relkind = 'p' THEN true ELSE false END) AS is_partitioned,
+	    (SELECT count(1) FROM pg_catalog.pg_inherits WHERE inhrelid=rel.oid LIMIT 1) as is_inherits,
+	    (SELECT count(1) FROM pg_catalog.pg_inherits WHERE inhparent=rel.oid LIMIT 1) as is_inherited
+	FROM pg_catalog.pg_class rel
+	    WHERE rel.relkind IN ('r','s','t','p') AND rel.relnamespace = 16832::oid
+	    AND NOT rel.relispartition
+	        ORDER BY rel.relname;
+2022-11-28 07:32:59.930 UTC [8943] LOG:  duration: 5.608 ms
+2022-11-28 07:33:01.033 UTC [8943] LOG:  statement: SELECT rel.oid, rel.relname AS name, rel.reltablespace AS spcoid,rel.relacl AS relacl_str,
+	  (CASE WHEN length(spc.spcname::text) > 0 OR rel.relkind = 'p' THEN spc.spcname ELSE
+	    (SELECT sp.spcname FROM pg_catalog.pg_database dtb
+	    JOIN pg_catalog.pg_tablespace sp ON dtb.dattablespace=sp.oid
+	    WHERE dtb.oid = 14767::oid)
+	  END) as spcname,
+	  (CASE rel.relreplident
+	          WHEN 'd' THEN 'default'
+	          WHEN 'n' THEN 'nothing'
+	          WHEN 'f' THEN 'full'
+	          WHEN 'i' THEN 'index'
+	  END) as replica_identity,
+	  (select nspname FROM pg_catalog.pg_namespace WHERE oid = 16832::oid ) as schema,
+	  pg_catalog.pg_get_userbyid(rel.relowner) AS relowner, rel.relkind,
+	  (CASE WHEN rel.relkind = 'p' THEN true ELSE false END) AS is_partitioned,
+	  rel.relhassubclass, rel.reltuples::bigint, des.description, con.conname, con.conkey,
+		EXISTS(select 1 FROM pg_catalog.pg_trigger
+				JOIN pg_catalog.pg_proc pt ON pt.oid=tgfoid AND pt.proname='logtrigger'
+				JOIN pg_catalog.pg_proc pc ON pc.pronamespace=pt.pronamespace AND pc.proname='slonyversion'
+				WHERE tgrelid=rel.oid) AS isrepl,
+		(SELECT count(*) FROM pg_catalog.pg_trigger WHERE tgrelid=rel.oid AND tgisinternal = FALSE) AS triggercount,
+		(SELECT ARRAY(SELECT CASE WHEN (nspname NOT LIKE 'pg\_%') THEN
+	            pg_catalog.quote_ident(nspname)||'.'||pg_catalog.quote_ident(c.relname)
+	            ELSE pg_catalog.quote_ident(c.relname) END AS inherited_tables
+	    FROM pg_catalog.pg_inherits i
+	    JOIN pg_catalog.pg_class c ON c.oid = i.inhparent
+	    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+	    WHERE i.inhrelid = rel.oid ORDER BY inhseqno)) AS coll_inherits,
+	  (SELECT count(*)
+			FROM pg_catalog.pg_inherits i
+	      JOIN pg_catalog.pg_class c ON c.oid = i.inhparent
+	      JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+			WHERE i.inhrelid = rel.oid) AS inherited_tables_cnt,
+		(CASE WHEN rel.relpersistence = 'u' THEN true ELSE false END) AS relpersistence,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'fillfactor=([0-9]*)') AS fillfactor,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'parallel_workers=([0-9]*)') AS parallel_workers,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'toast_tuple_target=([0-9]*)') AS toast_tuple_target,
+		(substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_enabled=([a-z|0-9]*)'))::BOOL AS autovacuum_enabled,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_vacuum_threshold=([0-9]*)') AS autovacuum_vacuum_threshold,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_vacuum_scale_factor=([0-9]*[.]?[0-9]*)') AS autovacuum_vacuum_scale_factor,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_analyze_threshold=([0-9]*)') AS autovacuum_analyze_threshold,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_analyze_scale_factor=([0-9]*[.]?[0-9]*)') AS autovacuum_analyze_scale_factor,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_vacuum_cost_delay=([0-9]*)') AS autovacuum_vacuum_cost_delay,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_vacuum_cost_limit=([0-9]*)') AS autovacuum_vacuum_cost_limit,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_freeze_min_age=([0-9]*)') AS autovacuum_freeze_min_age,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_freeze_max_age=([0-9]*)') AS autovacuum_freeze_max_age,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_freeze_table_age=([0-9]*)') AS autovacuum_freeze_table_age,
+		(substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_enabled=([a-z|0-9]*)'))::BOOL AS toast_autovacuum_enabled,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_vacuum_threshold=([0-9]*)') AS toast_autovacuum_vacuum_threshold,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_vacuum_scale_factor=([0-9]*[.]?[0-9]*)') AS toast_autovacuum_vacuum_scale_factor,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_analyze_threshold=([0-9]*)') AS toast_autovacuum_analyze_threshold,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_analyze_scale_factor=([0-9]*[.]?[0-9]*)') AS toast_autovacuum_analyze_scale_factor,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_vacuum_cost_delay=([0-9]*)') AS toast_autovacuum_vacuum_cost_delay,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_vacuum_cost_limit=([0-9]*)') AS toast_autovacuum_vacuum_cost_limit,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_freeze_min_age=([0-9]*)') AS toast_autovacuum_freeze_min_age,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_freeze_max_age=([0-9]*)') AS toast_autovacuum_freeze_max_age,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_freeze_table_age=([0-9]*)') AS toast_autovacuum_freeze_table_age,
+		rel.reloptions AS reloptions, tst.reloptions AS toast_reloptions, rel.reloftype,
+		CASE WHEN typ.typname IS NOT NULL THEN (select pg_catalog.quote_ident(nspname) FROM pg_catalog.pg_namespace WHERE oid = 16832::oid )||'.'||pg_catalog.quote_ident(typ.typname) ELSE typ.typname END AS typname,
+		typ.typrelid AS typoid, rel.relrowsecurity as rlspolicy, rel.relforcerowsecurity as forcerlspolicy,
+		(CASE WHEN rel.reltoastrelid = 0 THEN false ELSE true END) AS hastoasttable,
+		(SELECT pg_catalog.array_agg(provider || '=' || label) FROM pg_catalog.pg_seclabels sl1 WHERE sl1.objoid=rel.oid AND sl1.objsubid=0) AS seclabels,
+		(CASE WHEN rel.oid <= 16383::oid THEN true ElSE false END) AS is_sys_table
+		-- Added for partition table
+	    , (CASE WHEN rel.relkind = 'p' THEN pg_catalog.pg_get_partkeydef(16895::oid) ELSE '' END) AS partition_scheme FROM pg_catalog.pg_class rel
+	  LEFT OUTER JOIN pg_catalog.pg_tablespace spc on spc.oid=rel.reltablespace
+	  LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=rel.oid AND des.objsubid=0 AND des.classoid='pg_class'::regclass)
+	  LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid AND con.contype='p'
+	  LEFT OUTER JOIN pg_catalog.pg_class tst ON tst.oid = rel.reltoastrelid
+	  LEFT JOIN pg_catalog.pg_type typ ON rel.reloftype=typ.oid
+	WHERE rel.relkind IN ('r','s','t','p') AND rel.relnamespace = 16832::oid
+	AND NOT rel.relispartition
+	  AND rel.oid = 16895::oid ORDER BY rel.relname;
+2022-11-28 07:33:01.048 UTC [8943] LOG:  duration: 14.585 ms
+2022-11-28 07:33:01.091 UTC [8943] LOG:  statement: SELECT COUNT(*)::text FROM public.depart;
+2022-11-28 07:33:01.094 UTC [8943] LOG:  duration: 2.591 ms
+2022-11-28 07:33:01.132 UTC [8943] LOG:  statement: SELECT 'relacl' as deftype, COALESCE(gt.rolname, 'PUBLIC') grantee, g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type) as privileges, pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+			WHEN 'CONNECT' THEN 'c'
+			WHEN 'CREATE' THEN 'C'
+			WHEN 'DELETE' THEN 'd'
+			WHEN 'EXECUTE' THEN 'X'
+			WHEN 'INSERT' THEN 'a'
+			WHEN 'REFERENCES' THEN 'x'
+			WHEN 'SELECT' THEN 'r'
+			WHEN 'TEMPORARY' THEN 'T'
+			WHEN 'TRIGGER' THEN 't'
+			WHEN 'TRUNCATE' THEN 'D'
+			WHEN 'UPDATE' THEN 'w'
+			WHEN 'USAGE' THEN 'U'
+			ELSE 'UNKNOWN'
+		END AS privilege_type
+	  FROM
+	    (SELECT rel.relacl
+	        FROM pg_catalog.pg_class rel
+	          LEFT OUTER JOIN pg_catalog.pg_tablespace spc on spc.oid=rel.reltablespace
+	          LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid AND con.contype='p'
+	          LEFT OUTER JOIN pg_catalog.pg_class tst ON tst.oid = rel.reltoastrelid
+	          LEFT JOIN pg_catalog.pg_type typ ON rel.reloftype=typ.oid
+	        WHERE rel.relkind IN ('r','s','t','p') AND rel.relnamespace = 16832::oid
+	            AND rel.oid = 16895::oid
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        aclexplode(rel.relacl) as d
+	        FROM pg_catalog.pg_class rel
+	          LEFT OUTER JOIN pg_catalog.pg_tablespace spc on spc.oid=rel.reltablespace
+	          LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid AND con.contype='p'
+	          LEFT OUTER JOIN pg_catalog.pg_class tst ON tst.oid = rel.reltoastrelid
+	          LEFT JOIN pg_catalog.pg_type typ ON rel.reloftype=typ.oid
+	        WHERE rel.relkind IN ('r','s','t','p') AND rel.relnamespace = 16832::oid
+	            AND rel.oid = 16895::oid
+	        ) a ORDER BY privilege_type) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-28 07:33:01.133 UTC [8943] LOG:  duration: 1.868 ms
+2022-11-28 07:33:01.135 UTC [8943] LOG:  statement: SELECT 'relacl' as deftype, COALESCE(gt.rolname, 'PUBLIC') grantee, g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type) as privileges, pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+			WHEN 'CONNECT' THEN 'c'
+			WHEN 'CREATE' THEN 'C'
+			WHEN 'DELETE' THEN 'd'
+			WHEN 'EXECUTE' THEN 'X'
+			WHEN 'INSERT' THEN 'a'
+			WHEN 'REFERENCES' THEN 'x'
+			WHEN 'SELECT' THEN 'r'
+			WHEN 'TEMPORARY' THEN 'T'
+			WHEN 'TRIGGER' THEN 't'
+			WHEN 'TRUNCATE' THEN 'D'
+			WHEN 'UPDATE' THEN 'w'
+			WHEN 'USAGE' THEN 'U'
+			ELSE 'UNKNOWN'
+		END AS privilege_type
+	  FROM
+	    (SELECT rel.relacl
+	        FROM pg_catalog.pg_class rel
+	          LEFT OUTER JOIN pg_catalog.pg_tablespace spc on spc.oid=rel.reltablespace
+	          LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid AND con.contype='p'
+	          LEFT OUTER JOIN pg_catalog.pg_class tst ON tst.oid = rel.reltoastrelid
+	          LEFT JOIN pg_catalog.pg_type typ ON rel.reloftype=typ.oid
+	        WHERE rel.relkind IN ('r','s','t','p') AND rel.relnamespace = 16832::oid
+	            AND rel.oid = 16895::oid
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        aclexplode(rel.relacl) as d
+	        FROM pg_catalog.pg_class rel
+	          LEFT OUTER JOIN pg_catalog.pg_tablespace spc on spc.oid=rel.reltablespace
+	          LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid AND con.contype='p'
+	          LEFT OUTER JOIN pg_catalog.pg_class tst ON tst.oid = rel.reltoastrelid
+	          LEFT JOIN pg_catalog.pg_type typ ON rel.reloftype=typ.oid
+	        WHERE rel.relkind IN ('r','s','t','p') AND rel.relnamespace = 16832::oid
+	            AND rel.oid = 16895::oid
+	        ) a ORDER BY privilege_type) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-28 07:33:01.137 UTC [8943] LOG:  duration: 1.846 ms
+2022-11-28 07:33:01.145 UTC [8943] LOG:  statement: SELECT name, setting::numeric AS setting FROM pg_catalog.pg_settings WHERE name IN('autovacuum_vacuum_threshold','autovacuum_analyze_threshold','autovacuum_vacuum_scale_factor','autovacuum_analyze_scale_factor','autovacuum_vacuum_cost_delay','autovacuum_vacuum_cost_limit','autovacuum_freeze_max_age','vacuum_freeze_min_age','vacuum_freeze_table_age') ORDER BY name
+2022-11-28 07:33:01.146 UTC [8943] LOG:  duration: 1.442 ms
+2022-11-28 07:33:01.148 UTC [8943] LOG:  statement: SELECT name, setting::numeric AS setting FROM pg_catalog.pg_settings WHERE name IN('autovacuum_vacuum_threshold','autovacuum_vacuum_scale_factor','autovacuum_vacuum_cost_delay','autovacuum_vacuum_cost_limit','autovacuum_freeze_max_age','vacuum_freeze_min_age','vacuum_freeze_table_age') ORDER BY name
+2022-11-28 07:33:01.149 UTC [8943] LOG:  duration: 1.158 ms
+2022-11-28 07:33:01.164 UTC [8943] LOG:  statement: SELECT DISTINCT ON (att.attnum) att.attname as name, att.atttypid, att.attlen, att.attnum, att.attndims,
+			att.atttypmod, att.attacl, att.attnotnull, att.attoptions, att.attstattarget,
+			att.attstorage, att.attidentity,
+			pg_catalog.pg_get_expr(def.adbin, def.adrelid) AS defval,
+			pg_catalog.format_type(ty.oid,NULL) AS typname,
+	        pg_catalog.format_type(ty.oid,att.atttypmod) AS displaytypname,
+			pg_catalog.format_type(ty.oid,att.atttypmod) AS cltype,
+	        CASE WHEN ty.typelem > 0 THEN ty.typelem ELSE ty.oid END as elemoid,
+			(SELECT nspname FROM pg_catalog.pg_namespace WHERE oid = ty.typnamespace) as typnspname,
+	        ty.typstorage AS defaultstorage,
+			description, pi.indkey,
+		(SELECT count(1) FROM pg_catalog.pg_type t2 WHERE t2.typname=ty.typname) > 1 AS isdup,
+		CASE WHEN length(coll.collname::text) > 0 AND length(nspc.nspname::text) > 0  THEN
+		  pg_catalog.concat(pg_catalog.quote_ident(nspc.nspname),'.',pg_catalog.quote_ident(coll.collname))
+		ELSE '' END AS collspcname,
+		EXISTS(SELECT 1 FROM pg_catalog.pg_constraint WHERE conrelid=att.attrelid AND contype='f' AND att.attnum=ANY(conkey)) As is_fk,
+		(SELECT pg_catalog.array_agg(provider || '=' || label) FROM pg_catalog.pg_seclabels sl1 WHERE sl1.objoid=att.attrelid AND sl1.objsubid=att.attnum) AS seclabels,
+		(CASE WHEN (att.attnum < 1) THEN true ElSE false END) AS is_sys_column,
+		(CASE WHEN (att.attidentity in ('a', 'd')) THEN 'i' WHEN (att.attgenerated in ('s')) THEN 'g' ELSE 'n' END) AS colconstype,
+		(CASE WHEN (att.attgenerated in ('s')) THEN pg_catalog.pg_get_expr(def.adbin, def.adrelid) END) AS genexpr, tab.relname as relname,
+		(CASE WHEN tab.relkind = 'v' THEN true ELSE false END) AS is_view_only,
+		seq.*
+	FROM pg_catalog.pg_attribute att
+	  JOIN pg_catalog.pg_type ty ON ty.oid=atttypid
+	  LEFT OUTER JOIN pg_catalog.pg_attrdef def ON adrelid=att.attrelid AND adnum=att.attnum
+	  LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=att.attrelid AND des.objsubid=att.attnum AND des.classoid='pg_class'::regclass)
+	  LEFT OUTER JOIN (pg_catalog.pg_depend dep JOIN pg_catalog.pg_class cs ON dep.classid='pg_class'::regclass AND dep.objid=cs.oid AND cs.relkind='S') ON dep.refobjid=att.attrelid AND dep.refobjsubid=att.attnum
+	  LEFT OUTER JOIN pg_catalog.pg_index pi ON pi.indrelid=att.attrelid AND indisprimary
+	  LEFT OUTER JOIN pg_catalog.pg_collation coll ON att.attcollation=coll.oid
+	  LEFT OUTER JOIN pg_catalog.pg_namespace nspc ON coll.collnamespace=nspc.oid
+	  LEFT OUTER JOIN pg_catalog.pg_sequence seq ON cs.oid=seq.seqrelid
+	  LEFT OUTER JOIN pg_catalog.pg_class tab on tab.oid = att.attrelid
+	WHERE att.attrelid = 16895::oid
+	    AND att.attnum > 0
+	    AND att.attisdropped IS FALSE
+	    ORDER BY att.attnum;
+2022-11-28 07:33:01.177 UTC [8943] LOG:  duration: 13.475 ms
+2022-11-28 07:33:01.216 UTC [8943] LOG:  statement: SELECT t.main_oid, pg_catalog.ARRAY_AGG(t.typname) as edit_types
+	FROM
+	(SELECT pc.castsource AS main_oid, pg_catalog.format_type(tt.oid,NULL) AS typname
+	FROM pg_catalog.pg_type tt
+	    JOIN pg_catalog.pg_cast pc ON tt.oid=pc.casttarget
+	    WHERE pc.castsource IN (23,1082)
+	    AND pc.castcontext IN ('i', 'a')
+	UNION
+	SELECT tt.typbasetype AS main_oid, pg_catalog.format_type(tt.oid,NULL) AS typname
+	FROM pg_catalog.pg_type tt
+	WHERE tt.typbasetype  IN (23,1082)
+	) t
+	GROUP BY t.main_oid;
+2022-11-28 07:33:01.218 UTC [8943] LOG:  duration: 2.134 ms
+2022-11-28 07:33:01.256 UTC [8943] LOG:  statement: SELECT 'attacl' as deftype,
+	    COALESCE(gt.rolname, 'PUBLIC') grantee,
+	    g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type order by privilege_type) as privileges,
+	    pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN'
+	    END AS privilege_type
+	  FROM
+	    (SELECT attacl
+	        FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16895::oid
+	        AND att.attnum = 1::int
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        pg_catalog.aclexplode(attacl) as d FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16895::oid
+	        AND att.attnum = 1::int) a) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-28 07:33:01.258 UTC [8943] LOG:  duration: 2.142 ms
+2022-11-28 07:33:01.259 UTC [8943] LOG:  statement: SELECT 'attacl' as deftype,
+	    COALESCE(gt.rolname, 'PUBLIC') grantee,
+	    g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type order by privilege_type) as privileges,
+	    pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN'
+	    END AS privilege_type
+	  FROM
+	    (SELECT attacl
+	        FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16895::oid
+	        AND att.attnum = 2::int
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        pg_catalog.aclexplode(attacl) as d FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16895::oid
+	        AND att.attnum = 2::int) a) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-28 07:33:01.261 UTC [8943] LOG:  duration: 1.852 ms
+2022-11-28 07:33:01.262 UTC [8943] LOG:  statement: SELECT 'attacl' as deftype,
+	    COALESCE(gt.rolname, 'PUBLIC') grantee,
+	    g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type order by privilege_type) as privileges,
+	    pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN'
+	    END AS privilege_type
+	  FROM
+	    (SELECT attacl
+	        FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16895::oid
+	        AND att.attnum = 3::int
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        pg_catalog.aclexplode(attacl) as d FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16895::oid
+	        AND att.attnum = 3::int) a) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-28 07:33:01.263 UTC [8943] LOG:  duration: 1.458 ms
+2022-11-28 07:33:01.281 UTC [8943] LOG:  statement: SELECT cls.oid,
+	    cls.relname as name,
+	    indnkeyatts as col_count,
+	    CASE WHEN length(spcname::text) > 0 THEN spcname ELSE
+	        (SELECT sp.spcname FROM pg_catalog.pg_database dtb
+	        JOIN pg_catalog.pg_tablespace sp ON dtb.dattablespace=sp.oid
+	        WHERE dtb.oid = 14767::oid)
+	    END as spcname,
+	    CASE contype
+	        WHEN 'p' THEN desp.description
+	        WHEN 'u' THEN desp.description
+	        WHEN 'x' THEN desp.description
+	        ELSE des.description
+	    END AS comment,
+	    condeferrable,
+	    condeferred,
+	    conislocal,
+	    substring(pg_catalog.array_to_string(cls.reloptions, ',') from 'fillfactor=([0-9]*)') AS fillfactor
+	FROM pg_catalog.pg_index idx
+	JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	LEFT OUTER JOIN pg_catalog.pg_tablespace ta on ta.oid=cls.reltablespace
+	LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=cls.oid AND des.classoid='pg_class'::regclass)
+	LEFT OUTER JOIN pg_catalog.pg_description desp ON (desp.objoid=con.oid AND desp.objsubid = 0 AND desp.classoid='pg_constraint'::regclass)
+	WHERE indrelid = 16895::oid
+	AND contype='p'
+	ORDER BY cls.relname
+2022-11-28 07:33:01.286 UTC [8943] LOG:  duration: 5.716 ms
+2022-11-28 07:33:01.333 UTC [8943] LOG:  statement: SELECT * FROM (
+	SELECT  pg_catalog.pg_get_indexdef(16898 , 1 , true) AS column, 0 AS dummy
+	UNION SELECT  pg_catalog.pg_get_indexdef(16898, 2, true) AS column, 1 AS dummy
+	) tmp
+	ORDER BY dummy
+2022-11-28 07:33:01.334 UTC [8943] LOG:  duration: 0.772 ms
+2022-11-28 07:33:01.347 UTC [8943] LOG:  statement: -- pg_get_indexdef did not support INCLUDE columns
+	
+	SELECT a.attname as colname
+	FROM (
+	    SELECT
+	      i.indnkeyatts,
+	      i.indrelid,
+	      pg_catalog.unnest(indkey) AS table_colnum,
+	      pg_catalog.unnest(ARRAY(SELECT pg_catalog.generate_series(1, i.indnatts) AS n)) attnum
+	    FROM
+	      pg_catalog.pg_index i
+	    WHERE i.indexrelid = 16898::OID
+	) i JOIN pg_catalog.pg_attribute a
+	ON (a.attrelid = i.indrelid AND i.table_colnum = a.attnum)
+	WHERE i.attnum > i.indnkeyatts
+	ORDER BY i.attnum
+2022-11-28 07:33:01.348 UTC [8943] LOG:  duration: 1.071 ms
+2022-11-28 07:33:01.350 UTC [8943] LOG:  statement: SELECT cls.oid,
+	    cls.relname as name,
+	    indnkeyatts as col_count,
+	    CASE WHEN length(spcname::text) > 0 THEN spcname ELSE
+	        (SELECT sp.spcname FROM pg_catalog.pg_database dtb
+	        JOIN pg_catalog.pg_tablespace sp ON dtb.dattablespace=sp.oid
+	        WHERE dtb.oid = 14767::oid)
+	    END as spcname,
+	    CASE contype
+	        WHEN 'p' THEN desp.description
+	        WHEN 'u' THEN desp.description
+	        WHEN 'x' THEN desp.description
+	        ELSE des.description
+	    END AS comment,
+	    condeferrable,
+	    condeferred,
+	    conislocal,
+	    substring(pg_catalog.array_to_string(cls.reloptions, ',') from 'fillfactor=([0-9]*)') AS fillfactor
+	FROM pg_catalog.pg_index idx
+	JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	LEFT OUTER JOIN pg_catalog.pg_tablespace ta on ta.oid=cls.reltablespace
+	LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=cls.oid AND des.classoid='pg_class'::regclass)
+	LEFT OUTER JOIN pg_catalog.pg_description desp ON (desp.objoid=con.oid AND desp.objsubid = 0 AND desp.classoid='pg_constraint'::regclass)
+	WHERE indrelid = 16895::oid
+	AND contype='u'
+	ORDER BY cls.relname
+2022-11-28 07:33:01.353 UTC [8943] LOG:  duration: 2.896 ms
+2022-11-28 07:33:01.389 UTC [8943] LOG:  statement: SELECT ct.oid,
+	      conname as name,
+	      condeferrable,
+	      condeferred,
+	      confupdtype,
+	      confdeltype,
+	      CASE confmatchtype
+	        WHEN 's' THEN FALSE
+	        WHEN 'f' THEN TRUE
+	      END AS confmatchtype,
+	      conkey,
+	      confkey,
+	      confrelid,
+	      nl.nspname as fknsp,
+	      cl.relname as fktab,
+	      nr.nspname as refnsp,
+	      cr.relname as reftab,
+	      description as comment,
+	      convalidated,
+	      conislocal
+	FROM pg_catalog.pg_constraint ct
+	JOIN pg_catalog.pg_class cl ON cl.oid=conrelid
+	JOIN pg_catalog.pg_namespace nl ON nl.oid=cl.relnamespace
+	JOIN pg_catalog.pg_class cr ON cr.oid=confrelid
+	JOIN pg_catalog.pg_namespace nr ON nr.oid=cr.relnamespace
+	LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=ct.oid AND des.classoid='pg_constraint'::regclass)
+	WHERE contype='f' AND
+	conrelid = 16895::oid
+	ORDER BY conname
+2022-11-28 07:33:01.391 UTC [8943] LOG:  duration: 1.531 ms
+2022-11-28 07:33:01.428 UTC [8943] LOG:  statement: SELECT a1.attname as conattname,
+	    a2.attname as confattname
+	FROM pg_catalog.pg_attribute a1,
+	    pg_catalog.pg_attribute a2
+	WHERE a1.attrelid=16895::oid
+	    AND a1.attnum=1
+	    AND a2.attrelid=16848::oid
+	    AND a2.attnum=1
+	
+2022-11-28 07:33:01.433 UTC [8943] LOG:  duration: 5.154 ms
+2022-11-28 07:33:01.466 UTC [8943] LOG:  statement: SELECT nsp.nspname AS schema,
+	    rel.relname AS table
+	FROM
+	    pg_catalog.pg_class rel
+	JOIN pg_catalog.pg_namespace nsp
+	ON rel.relnamespace = nsp.oid::oid
+	WHERE rel.oid = 16848::oid
+2022-11-28 07:33:01.467 UTC [8943] LOG:  duration: 0.777 ms
+2022-11-28 07:33:01.504 UTC [8943] LOG:  statement: SELECT   cls.oid, cls.relname as idxname, indnatts as col_count
+	  FROM pg_catalog.pg_index idx
+	  JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	  LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	  LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16895::oid
+	    AND con.contype='p'
+	
+	UNION
+	
+	SELECT  cls.oid, cls.relname as idxname, indnatts
+	    FROM pg_catalog.pg_index idx
+	    JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	    LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	    LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16895::oid
+	    AND con.contype='x'
+	
+	UNION
+	
+	SELECT  cls.oid, cls.relname as idxname, indnatts
+	    FROM pg_catalog.pg_index idx
+	    JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	    LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	    LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16895::oid
+	    AND con.contype='u'
+	
+	UNION
+	
+	SELECT  cls.oid, cls.relname as idxname, indnatts
+	    FROM pg_catalog.pg_index idx
+	    JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	    LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	    LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16895::oid
+	   AND conname IS NULL
+2022-11-28 07:33:01.509 UTC [8943] LOG:  duration: 5.071 ms
+2022-11-28 07:33:01.548 UTC [8943] LOG:  statement: SELECT  pg_catalog.pg_get_indexdef(16898 , 1 , true) AS column
+	UNION SELECT  pg_catalog.pg_get_indexdef(16898, 2, true) AS column
+	
+2022-11-28 07:33:01.549 UTC [8943] LOG:  duration: 0.395 ms
+2022-11-28 07:33:01.585 UTC [8943] LOG:  statement: SELECT c.oid, conname as name, relname, nspname, description as comment,
+	       pg_catalog.pg_get_expr(conbin, conrelid, true) as consrc,
+	       connoinherit, NOT convalidated as convalidated, conislocal
+	    FROM pg_catalog.pg_constraint c
+	    JOIN pg_catalog.pg_class cl ON cl.oid=conrelid
+	    JOIN pg_catalog.pg_namespace nl ON nl.oid=relnamespace
+	LEFT OUTER JOIN
+	    pg_catalog.pg_description des ON (des.objoid=c.oid AND
+	                           des.classoid='pg_constraint'::regclass)
+	WHERE contype = 'c'
+	    AND conrelid = 16895::oid
+	
+2022-11-28 07:33:01.586 UTC [8943] LOG:  duration: 1.010 ms
+2022-11-28 07:33:01.600 UTC [8943] LOG:  statement: SELECT cls.oid,
+	    cls.relname as name,
+	    indnkeyatts as col_count,
+	    amname,
+	    CASE WHEN length(spcname::text) > 0 THEN spcname ELSE
+	        (SELECT sp.spcname FROM pg_catalog.pg_database dtb
+	        JOIN pg_catalog.pg_tablespace sp ON dtb.dattablespace=sp.oid
+	        WHERE dtb.oid = 14767::oid)
+	    END as spcname,
+	    CASE contype
+	        WHEN 'p' THEN desp.description
+	        WHEN 'u' THEN desp.description
+	        WHEN 'x' THEN desp.description
+	        ELSE des.description
+	    END AS comment,
+	    condeferrable,
+	    condeferred,
+	    substring(pg_catalog.array_to_string(cls.reloptions, ',') from 'fillfactor=([0-9]*)') AS fillfactor,
+	    pg_catalog.pg_get_expr(idx.indpred, idx.indrelid, true) AS indconstraint
+	FROM pg_catalog.pg_index idx
+	JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	LEFT OUTER JOIN pg_catalog.pg_tablespace ta on ta.oid=cls.reltablespace
+	JOIN pg_catalog.pg_am am ON am.oid=cls.relam
+	LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=cls.oid AND des.classoid='pg_class'::regclass)
+	LEFT OUTER JOIN pg_catalog.pg_description desp ON (desp.objoid=con.oid AND desp.objsubid = 0 AND desp.classoid='pg_constraint'::regclass)
+	WHERE indrelid = 16895::oid
+	AND contype='x'
+	ORDER BY cls.relname
+2022-11-28 07:33:01.610 UTC [8943] LOG:  duration: 10.109 ms
+2022-11-28 07:33:02.025 UTC [8943] LOG:  statement: SELECT DISTINCT ON(cls.relname) cls.oid, cls.relname as name,
+	(SELECT (CASE WHEN count(i.inhrelid) > 0 THEN true ELSE false END) FROM pg_inherits i WHERE i.inhrelid = cls.oid) as is_inherited,
+	CASE WHEN contype IN ('p', 'u', 'x') THEN desp.description ELSE des.description END AS description
+	FROM pg_catalog.pg_index idx
+	    JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	    JOIN pg_catalog.pg_class tab ON tab.oid=indrelid
+	    LEFT OUTER JOIN pg_catalog.pg_tablespace ta on ta.oid=cls.reltablespace
+	    JOIN pg_catalog.pg_namespace n ON n.oid=tab.relnamespace
+	    JOIN pg_catalog.pg_am am ON am.oid=cls.relam
+	    LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	    LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	    LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=cls.oid AND des.classoid='pg_class'::regclass)
+	    LEFT OUTER JOIN pg_catalog.pg_description desp ON (desp.objoid=con.oid AND desp.objsubid = 0 AND desp.classoid='pg_constraint'::regclass)
+	WHERE indrelid = 16895::OID
+	    AND conname is NULL
+	    ORDER BY cls.relname
+2022-11-28 07:33:02.027 UTC [8943] LOG:  duration: 2.099 ms
+2022-11-28 07:33:02.064 UTC [8943] LOG:  statement: SELECT
+	    pl.oid AS oid,
+	    pl.polname AS name
+	FROM
+	    pg_catalog.pg_policy pl
+	WHERE
+	    pl.polrelid	 = 16895
+	ORDER BY
+	    pl.polname;
+2022-11-28 07:33:02.065 UTC [8943] LOG:  duration: 0.863 ms
+2022-11-28 07:33:02.103 UTC [8943] LOG:  statement: SELECT t.oid, t.tgname as name, t.tgenabled AS is_enable_trigger
+	FROM pg_catalog.pg_trigger t
+	    WHERE NOT tgisinternal
+	    AND tgrelid = 16895::OID
+	    ORDER BY tgname;
+2022-11-28 07:33:02.104 UTC [8943] LOG:  duration: 0.304 ms
+2022-11-28 07:33:02.108 UTC [8943] LOG:  statement: SELECT
+	    rw.oid AS oid,
+	    rw.rulename AS name,
+	    CASE WHEN rw.ev_enabled != 'D' THEN True ELSE False END AS enabled,
+	    rw.ev_enabled AS is_enable_rule
+	
+	FROM
+	    pg_catalog.pg_rewrite rw
+	WHERE
+	    rw.ev_class = 16895
+	ORDER BY
+	    rw.rulename
+2022-11-28 07:33:02.109 UTC [8943] LOG:  duration: 0.641 ms
+2022-11-28 07:33:26.531 UTC [8943] LOG:  statement: SELECT rel.oid, rel.relname AS name, rel.reltablespace AS spcoid,rel.relacl AS relacl_str,
+	  (CASE WHEN length(spc.spcname::text) > 0 OR rel.relkind = 'p' THEN spc.spcname ELSE
+	    (SELECT sp.spcname FROM pg_catalog.pg_database dtb
+	    JOIN pg_catalog.pg_tablespace sp ON dtb.dattablespace=sp.oid
+	    WHERE dtb.oid = 14767::oid)
+	  END) as spcname,
+	  (CASE rel.relreplident
+	          WHEN 'd' THEN 'default'
+	          WHEN 'n' THEN 'nothing'
+	          WHEN 'f' THEN 'full'
+	          WHEN 'i' THEN 'index'
+	  END) as replica_identity,
+	  (select nspname FROM pg_catalog.pg_namespace WHERE oid = 16832::oid ) as schema,
+	  pg_catalog.pg_get_userbyid(rel.relowner) AS relowner, rel.relkind,
+	  (CASE WHEN rel.relkind = 'p' THEN true ELSE false END) AS is_partitioned,
+	  rel.relhassubclass, rel.reltuples::bigint, des.description, con.conname, con.conkey,
+		EXISTS(select 1 FROM pg_catalog.pg_trigger
+				JOIN pg_catalog.pg_proc pt ON pt.oid=tgfoid AND pt.proname='logtrigger'
+				JOIN pg_catalog.pg_proc pc ON pc.pronamespace=pt.pronamespace AND pc.proname='slonyversion'
+				WHERE tgrelid=rel.oid) AS isrepl,
+		(SELECT count(*) FROM pg_catalog.pg_trigger WHERE tgrelid=rel.oid AND tgisinternal = FALSE) AS triggercount,
+		(SELECT ARRAY(SELECT CASE WHEN (nspname NOT LIKE 'pg\_%') THEN
+	            pg_catalog.quote_ident(nspname)||'.'||pg_catalog.quote_ident(c.relname)
+	            ELSE pg_catalog.quote_ident(c.relname) END AS inherited_tables
+	    FROM pg_catalog.pg_inherits i
+	    JOIN pg_catalog.pg_class c ON c.oid = i.inhparent
+	    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+	    WHERE i.inhrelid = rel.oid ORDER BY inhseqno)) AS coll_inherits,
+	  (SELECT count(*)
+			FROM pg_catalog.pg_inherits i
+	      JOIN pg_catalog.pg_class c ON c.oid = i.inhparent
+	      JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+			WHERE i.inhrelid = rel.oid) AS inherited_tables_cnt,
+		(CASE WHEN rel.relpersistence = 'u' THEN true ELSE false END) AS relpersistence,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'fillfactor=([0-9]*)') AS fillfactor,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'parallel_workers=([0-9]*)') AS parallel_workers,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'toast_tuple_target=([0-9]*)') AS toast_tuple_target,
+		(substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_enabled=([a-z|0-9]*)'))::BOOL AS autovacuum_enabled,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_vacuum_threshold=([0-9]*)') AS autovacuum_vacuum_threshold,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_vacuum_scale_factor=([0-9]*[.]?[0-9]*)') AS autovacuum_vacuum_scale_factor,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_analyze_threshold=([0-9]*)') AS autovacuum_analyze_threshold,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_analyze_scale_factor=([0-9]*[.]?[0-9]*)') AS autovacuum_analyze_scale_factor,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_vacuum_cost_delay=([0-9]*)') AS autovacuum_vacuum_cost_delay,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_vacuum_cost_limit=([0-9]*)') AS autovacuum_vacuum_cost_limit,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_freeze_min_age=([0-9]*)') AS autovacuum_freeze_min_age,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_freeze_max_age=([0-9]*)') AS autovacuum_freeze_max_age,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_freeze_table_age=([0-9]*)') AS autovacuum_freeze_table_age,
+		(substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_enabled=([a-z|0-9]*)'))::BOOL AS toast_autovacuum_enabled,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_vacuum_threshold=([0-9]*)') AS toast_autovacuum_vacuum_threshold,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_vacuum_scale_factor=([0-9]*[.]?[0-9]*)') AS toast_autovacuum_vacuum_scale_factor,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_analyze_threshold=([0-9]*)') AS toast_autovacuum_analyze_threshold,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_analyze_scale_factor=([0-9]*[.]?[0-9]*)') AS toast_autovacuum_analyze_scale_factor,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_vacuum_cost_delay=([0-9]*)') AS toast_autovacuum_vacuum_cost_delay,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_vacuum_cost_limit=([0-9]*)') AS toast_autovacuum_vacuum_cost_limit,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_freeze_min_age=([0-9]*)') AS toast_autovacuum_freeze_min_age,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_freeze_max_age=([0-9]*)') AS toast_autovacuum_freeze_max_age,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_freeze_table_age=([0-9]*)') AS toast_autovacuum_freeze_table_age,
+		rel.reloptions AS reloptions, tst.reloptions AS toast_reloptions, rel.reloftype,
+		CASE WHEN typ.typname IS NOT NULL THEN (select pg_catalog.quote_ident(nspname) FROM pg_catalog.pg_namespace WHERE oid = 16832::oid )||'.'||pg_catalog.quote_ident(typ.typname) ELSE typ.typname END AS typname,
+		typ.typrelid AS typoid, rel.relrowsecurity as rlspolicy, rel.relforcerowsecurity as forcerlspolicy,
+		(CASE WHEN rel.reltoastrelid = 0 THEN false ELSE true END) AS hastoasttable,
+		(SELECT pg_catalog.array_agg(provider || '=' || label) FROM pg_catalog.pg_seclabels sl1 WHERE sl1.objoid=rel.oid AND sl1.objsubid=0) AS seclabels,
+		(CASE WHEN rel.oid <= 16383::oid THEN true ElSE false END) AS is_sys_table
+		-- Added for partition table
+	    , (CASE WHEN rel.relkind = 'p' THEN pg_catalog.pg_get_partkeydef(16855::oid) ELSE '' END) AS partition_scheme FROM pg_catalog.pg_class rel
+	  LEFT OUTER JOIN pg_catalog.pg_tablespace spc on spc.oid=rel.reltablespace
+	  LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=rel.oid AND des.objsubid=0 AND des.classoid='pg_class'::regclass)
+	  LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid AND con.contype='p'
+	  LEFT OUTER JOIN pg_catalog.pg_class tst ON tst.oid = rel.reltoastrelid
+	  LEFT JOIN pg_catalog.pg_type typ ON rel.reloftype=typ.oid
+	WHERE rel.relkind IN ('r','s','t','p') AND rel.relnamespace = 16832::oid
+	AND NOT rel.relispartition
+	  AND rel.oid = 16855::oid ORDER BY rel.relname;
+2022-11-28 07:33:26.538 UTC [8943] LOG:  duration: 7.556 ms
+2022-11-28 07:33:26.543 UTC [8943] LOG:  statement: SELECT COUNT(*)::text FROM public.etape;
+2022-11-28 07:33:26.545 UTC [8943] LOG:  duration: 1.427 ms
+2022-11-28 07:33:26.546 UTC [8943] LOG:  statement: SELECT 'relacl' as deftype, COALESCE(gt.rolname, 'PUBLIC') grantee, g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type) as privileges, pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+			WHEN 'CONNECT' THEN 'c'
+			WHEN 'CREATE' THEN 'C'
+			WHEN 'DELETE' THEN 'd'
+			WHEN 'EXECUTE' THEN 'X'
+			WHEN 'INSERT' THEN 'a'
+			WHEN 'REFERENCES' THEN 'x'
+			WHEN 'SELECT' THEN 'r'
+			WHEN 'TEMPORARY' THEN 'T'
+			WHEN 'TRIGGER' THEN 't'
+			WHEN 'TRUNCATE' THEN 'D'
+			WHEN 'UPDATE' THEN 'w'
+			WHEN 'USAGE' THEN 'U'
+			ELSE 'UNKNOWN'
+		END AS privilege_type
+	  FROM
+	    (SELECT rel.relacl
+	        FROM pg_catalog.pg_class rel
+	          LEFT OUTER JOIN pg_catalog.pg_tablespace spc on spc.oid=rel.reltablespace
+	          LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid AND con.contype='p'
+	          LEFT OUTER JOIN pg_catalog.pg_class tst ON tst.oid = rel.reltoastrelid
+	          LEFT JOIN pg_catalog.pg_type typ ON rel.reloftype=typ.oid
+	        WHERE rel.relkind IN ('r','s','t','p') AND rel.relnamespace = 16832::oid
+	            AND rel.oid = 16855::oid
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        aclexplode(rel.relacl) as d
+	        FROM pg_catalog.pg_class rel
+	          LEFT OUTER JOIN pg_catalog.pg_tablespace spc on spc.oid=rel.reltablespace
+	          LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid AND con.contype='p'
+	          LEFT OUTER JOIN pg_catalog.pg_class tst ON tst.oid = rel.reltoastrelid
+	          LEFT JOIN pg_catalog.pg_type typ ON rel.reloftype=typ.oid
+	        WHERE rel.relkind IN ('r','s','t','p') AND rel.relnamespace = 16832::oid
+	            AND rel.oid = 16855::oid
+	        ) a ORDER BY privilege_type) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-28 07:33:26.548 UTC [8943] LOG:  duration: 2.201 ms
+2022-11-28 07:33:26.550 UTC [8943] LOG:  statement: SELECT 'relacl' as deftype, COALESCE(gt.rolname, 'PUBLIC') grantee, g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type) as privileges, pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+			WHEN 'CONNECT' THEN 'c'
+			WHEN 'CREATE' THEN 'C'
+			WHEN 'DELETE' THEN 'd'
+			WHEN 'EXECUTE' THEN 'X'
+			WHEN 'INSERT' THEN 'a'
+			WHEN 'REFERENCES' THEN 'x'
+			WHEN 'SELECT' THEN 'r'
+			WHEN 'TEMPORARY' THEN 'T'
+			WHEN 'TRIGGER' THEN 't'
+			WHEN 'TRUNCATE' THEN 'D'
+			WHEN 'UPDATE' THEN 'w'
+			WHEN 'USAGE' THEN 'U'
+			ELSE 'UNKNOWN'
+		END AS privilege_type
+	  FROM
+	    (SELECT rel.relacl
+	        FROM pg_catalog.pg_class rel
+	          LEFT OUTER JOIN pg_catalog.pg_tablespace spc on spc.oid=rel.reltablespace
+	          LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid AND con.contype='p'
+	          LEFT OUTER JOIN pg_catalog.pg_class tst ON tst.oid = rel.reltoastrelid
+	          LEFT JOIN pg_catalog.pg_type typ ON rel.reloftype=typ.oid
+	        WHERE rel.relkind IN ('r','s','t','p') AND rel.relnamespace = 16832::oid
+	            AND rel.oid = 16855::oid
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        aclexplode(rel.relacl) as d
+	        FROM pg_catalog.pg_class rel
+	          LEFT OUTER JOIN pg_catalog.pg_tablespace spc on spc.oid=rel.reltablespace
+	          LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid AND con.contype='p'
+	          LEFT OUTER JOIN pg_catalog.pg_class tst ON tst.oid = rel.reltoastrelid
+	          LEFT JOIN pg_catalog.pg_type typ ON rel.reloftype=typ.oid
+	        WHERE rel.relkind IN ('r','s','t','p') AND rel.relnamespace = 16832::oid
+	            AND rel.oid = 16855::oid
+	        ) a ORDER BY privilege_type) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-28 07:33:26.552 UTC [8943] LOG:  duration: 2.559 ms
+2022-11-28 07:33:26.554 UTC [8943] LOG:  statement: SELECT DISTINCT ON (att.attnum) att.attname as name, att.atttypid, att.attlen, att.attnum, att.attndims,
+			att.atttypmod, att.attacl, att.attnotnull, att.attoptions, att.attstattarget,
+			att.attstorage, att.attidentity,
+			pg_catalog.pg_get_expr(def.adbin, def.adrelid) AS defval,
+			pg_catalog.format_type(ty.oid,NULL) AS typname,
+	        pg_catalog.format_type(ty.oid,att.atttypmod) AS displaytypname,
+			pg_catalog.format_type(ty.oid,att.atttypmod) AS cltype,
+	        CASE WHEN ty.typelem > 0 THEN ty.typelem ELSE ty.oid END as elemoid,
+			(SELECT nspname FROM pg_catalog.pg_namespace WHERE oid = ty.typnamespace) as typnspname,
+	        ty.typstorage AS defaultstorage,
+			description, pi.indkey,
+		(SELECT count(1) FROM pg_catalog.pg_type t2 WHERE t2.typname=ty.typname) > 1 AS isdup,
+		CASE WHEN length(coll.collname::text) > 0 AND length(nspc.nspname::text) > 0  THEN
+		  pg_catalog.concat(pg_catalog.quote_ident(nspc.nspname),'.',pg_catalog.quote_ident(coll.collname))
+		ELSE '' END AS collspcname,
+		EXISTS(SELECT 1 FROM pg_catalog.pg_constraint WHERE conrelid=att.attrelid AND contype='f' AND att.attnum=ANY(conkey)) As is_fk,
+		(SELECT pg_catalog.array_agg(provider || '=' || label) FROM pg_catalog.pg_seclabels sl1 WHERE sl1.objoid=att.attrelid AND sl1.objsubid=att.attnum) AS seclabels,
+		(CASE WHEN (att.attnum < 1) THEN true ElSE false END) AS is_sys_column,
+		(CASE WHEN (att.attidentity in ('a', 'd')) THEN 'i' WHEN (att.attgenerated in ('s')) THEN 'g' ELSE 'n' END) AS colconstype,
+		(CASE WHEN (att.attgenerated in ('s')) THEN pg_catalog.pg_get_expr(def.adbin, def.adrelid) END) AS genexpr, tab.relname as relname,
+		(CASE WHEN tab.relkind = 'v' THEN true ELSE false END) AS is_view_only,
+		seq.*
+	FROM pg_catalog.pg_attribute att
+	  JOIN pg_catalog.pg_type ty ON ty.oid=atttypid
+	  LEFT OUTER JOIN pg_catalog.pg_attrdef def ON adrelid=att.attrelid AND adnum=att.attnum
+	  LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=att.attrelid AND des.objsubid=att.attnum AND des.classoid='pg_class'::regclass)
+	  LEFT OUTER JOIN (pg_catalog.pg_depend dep JOIN pg_catalog.pg_class cs ON dep.classid='pg_class'::regclass AND dep.objid=cs.oid AND cs.relkind='S') ON dep.refobjid=att.attrelid AND dep.refobjsubid=att.attnum
+	  LEFT OUTER JOIN pg_catalog.pg_index pi ON pi.indrelid=att.attrelid AND indisprimary
+	  LEFT OUTER JOIN pg_catalog.pg_collation coll ON att.attcollation=coll.oid
+	  LEFT OUTER JOIN pg_catalog.pg_namespace nspc ON coll.collnamespace=nspc.oid
+	  LEFT OUTER JOIN pg_catalog.pg_sequence seq ON cs.oid=seq.seqrelid
+	  LEFT OUTER JOIN pg_catalog.pg_class tab on tab.oid = att.attrelid
+	WHERE att.attrelid = 16855::oid
+	    AND att.attnum > 0
+	    AND att.attisdropped IS FALSE
+	    ORDER BY att.attnum;
+2022-11-28 07:33:26.561 UTC [8943] LOG:  duration: 7.438 ms
+2022-11-28 07:33:26.564 UTC [8943] LOG:  statement: SELECT t.main_oid, pg_catalog.ARRAY_AGG(t.typname) as edit_types
+	FROM
+	(SELECT pc.castsource AS main_oid, pg_catalog.format_type(tt.oid,NULL) AS typname
+	FROM pg_catalog.pg_type tt
+	    JOIN pg_catalog.pg_cast pc ON tt.oid=pc.casttarget
+	    WHERE pc.castsource IN (23)
+	    AND pc.castcontext IN ('i', 'a')
+	UNION
+	SELECT tt.typbasetype AS main_oid, pg_catalog.format_type(tt.oid,NULL) AS typname
+	FROM pg_catalog.pg_type tt
+	WHERE tt.typbasetype  IN (23)
+	) t
+	GROUP BY t.main_oid;
+2022-11-28 07:33:26.565 UTC [8943] LOG:  duration: 0.993 ms
+2022-11-28 07:33:26.566 UTC [8943] LOG:  statement: SELECT 'attacl' as deftype,
+	    COALESCE(gt.rolname, 'PUBLIC') grantee,
+	    g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type order by privilege_type) as privileges,
+	    pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN'
+	    END AS privilege_type
+	  FROM
+	    (SELECT attacl
+	        FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16855::oid
+	        AND att.attnum = 1::int
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        pg_catalog.aclexplode(attacl) as d FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16855::oid
+	        AND att.attnum = 1::int) a) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-28 07:33:26.567 UTC [8943] LOG:  duration: 1.035 ms
+2022-11-28 07:33:26.569 UTC [8943] LOG:  statement: SELECT 'attacl' as deftype,
+	    COALESCE(gt.rolname, 'PUBLIC') grantee,
+	    g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type order by privilege_type) as privileges,
+	    pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN'
+	    END AS privilege_type
+	  FROM
+	    (SELECT attacl
+	        FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16855::oid
+	        AND att.attnum = 2::int
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        pg_catalog.aclexplode(attacl) as d FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16855::oid
+	        AND att.attnum = 2::int) a) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-28 07:33:26.570 UTC [8943] LOG:  duration: 1.377 ms
+2022-11-28 07:33:26.571 UTC [8943] LOG:  statement: SELECT 'attacl' as deftype,
+	    COALESCE(gt.rolname, 'PUBLIC') grantee,
+	    g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type order by privilege_type) as privileges,
+	    pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN'
+	    END AS privilege_type
+	  FROM
+	    (SELECT attacl
+	        FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16855::oid
+	        AND att.attnum = 3::int
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        pg_catalog.aclexplode(attacl) as d FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16855::oid
+	        AND att.attnum = 3::int) a) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-28 07:33:26.572 UTC [8943] LOG:  duration: 0.994 ms
+2022-11-28 07:33:26.574 UTC [8943] LOG:  statement: SELECT 'attacl' as deftype,
+	    COALESCE(gt.rolname, 'PUBLIC') grantee,
+	    g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type order by privilege_type) as privileges,
+	    pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN'
+	    END AS privilege_type
+	  FROM
+	    (SELECT attacl
+	        FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16855::oid
+	        AND att.attnum = 4::int
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        pg_catalog.aclexplode(attacl) as d FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16855::oid
+	        AND att.attnum = 4::int) a) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-28 07:33:26.575 UTC [8943] LOG:  duration: 1.039 ms
+2022-11-28 07:33:26.576 UTC [8943] LOG:  statement: SELECT cls.oid,
+	    cls.relname as name,
+	    indnkeyatts as col_count,
+	    CASE WHEN length(spcname::text) > 0 THEN spcname ELSE
+	        (SELECT sp.spcname FROM pg_catalog.pg_database dtb
+	        JOIN pg_catalog.pg_tablespace sp ON dtb.dattablespace=sp.oid
+	        WHERE dtb.oid = 14767::oid)
+	    END as spcname,
+	    CASE contype
+	        WHEN 'p' THEN desp.description
+	        WHEN 'u' THEN desp.description
+	        WHEN 'x' THEN desp.description
+	        ELSE des.description
+	    END AS comment,
+	    condeferrable,
+	    condeferred,
+	    conislocal,
+	    substring(pg_catalog.array_to_string(cls.reloptions, ',') from 'fillfactor=([0-9]*)') AS fillfactor
+	FROM pg_catalog.pg_index idx
+	JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	LEFT OUTER JOIN pg_catalog.pg_tablespace ta on ta.oid=cls.reltablespace
+	LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=cls.oid AND des.classoid='pg_class'::regclass)
+	LEFT OUTER JOIN pg_catalog.pg_description desp ON (desp.objoid=con.oid AND desp.objsubid = 0 AND desp.classoid='pg_constraint'::regclass)
+	WHERE indrelid = 16855::oid
+	AND contype='p'
+	ORDER BY cls.relname
+2022-11-28 07:33:26.579 UTC [8943] LOG:  duration: 2.944 ms
+2022-11-28 07:33:26.581 UTC [8943] LOG:  statement: SELECT * FROM (
+	SELECT  pg_catalog.pg_get_indexdef(16858 , 1 , true) AS column, 0 AS dummy
+	UNION SELECT  pg_catalog.pg_get_indexdef(16858, 2, true) AS column, 1 AS dummy
+	) tmp
+	ORDER BY dummy
+2022-11-28 07:33:26.582 UTC [8943] LOG:  duration: 0.745 ms
+2022-11-28 07:33:26.584 UTC [8943] LOG:  statement: -- pg_get_indexdef did not support INCLUDE columns
+	
+	SELECT a.attname as colname
+	FROM (
+	    SELECT
+	      i.indnkeyatts,
+	      i.indrelid,
+	      pg_catalog.unnest(indkey) AS table_colnum,
+	      pg_catalog.unnest(ARRAY(SELECT pg_catalog.generate_series(1, i.indnatts) AS n)) attnum
+	    FROM
+	      pg_catalog.pg_index i
+	    WHERE i.indexrelid = 16858::OID
+	) i JOIN pg_catalog.pg_attribute a
+	ON (a.attrelid = i.indrelid AND i.table_colnum = a.attnum)
+	WHERE i.attnum > i.indnkeyatts
+	ORDER BY i.attnum
+2022-11-28 07:33:26.585 UTC [8943] LOG:  duration: 1.211 ms
+2022-11-28 07:33:26.587 UTC [8943] LOG:  statement: SELECT cls.oid,
+	    cls.relname as name,
+	    indnkeyatts as col_count,
+	    CASE WHEN length(spcname::text) > 0 THEN spcname ELSE
+	        (SELECT sp.spcname FROM pg_catalog.pg_database dtb
+	        JOIN pg_catalog.pg_tablespace sp ON dtb.dattablespace=sp.oid
+	        WHERE dtb.oid = 14767::oid)
+	    END as spcname,
+	    CASE contype
+	        WHEN 'p' THEN desp.description
+	        WHEN 'u' THEN desp.description
+	        WHEN 'x' THEN desp.description
+	        ELSE des.description
+	    END AS comment,
+	    condeferrable,
+	    condeferred,
+	    conislocal,
+	    substring(pg_catalog.array_to_string(cls.reloptions, ',') from 'fillfactor=([0-9]*)') AS fillfactor
+	FROM pg_catalog.pg_index idx
+	JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	LEFT OUTER JOIN pg_catalog.pg_tablespace ta on ta.oid=cls.reltablespace
+	LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=cls.oid AND des.classoid='pg_class'::regclass)
+	LEFT OUTER JOIN pg_catalog.pg_description desp ON (desp.objoid=con.oid AND desp.objsubid = 0 AND desp.classoid='pg_constraint'::regclass)
+	WHERE indrelid = 16855::oid
+	AND contype='u'
+	ORDER BY cls.relname
+2022-11-28 07:33:26.589 UTC [8943] LOG:  duration: 2.681 ms
+2022-11-28 07:33:26.591 UTC [8943] LOG:  statement: SELECT ct.oid,
+	      conname as name,
+	      condeferrable,
+	      condeferred,
+	      confupdtype,
+	      confdeltype,
+	      CASE confmatchtype
+	        WHEN 's' THEN FALSE
+	        WHEN 'f' THEN TRUE
+	      END AS confmatchtype,
+	      conkey,
+	      confkey,
+	      confrelid,
+	      nl.nspname as fknsp,
+	      cl.relname as fktab,
+	      nr.nspname as refnsp,
+	      cr.relname as reftab,
+	      description as comment,
+	      convalidated,
+	      conislocal
+	FROM pg_catalog.pg_constraint ct
+	JOIN pg_catalog.pg_class cl ON cl.oid=conrelid
+	JOIN pg_catalog.pg_namespace nl ON nl.oid=cl.relnamespace
+	JOIN pg_catalog.pg_class cr ON cr.oid=confrelid
+	JOIN pg_catalog.pg_namespace nr ON nr.oid=cr.relnamespace
+	LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=ct.oid AND des.classoid='pg_constraint'::regclass)
+	WHERE contype='f' AND
+	conrelid = 16855::oid
+	ORDER BY conname
+2022-11-28 07:33:26.592 UTC [8943] LOG:  duration: 1.237 ms
+2022-11-28 07:33:26.594 UTC [8943] LOG:  statement: SELECT a1.attname as conattname,
+	    a2.attname as confattname
+	FROM pg_catalog.pg_attribute a1,
+	    pg_catalog.pg_attribute a2
+	WHERE a1.attrelid=16855::oid
+	    AND a1.attnum=2
+	    AND a2.attrelid=16838::oid
+	    AND a2.attnum=1
+	
+2022-11-28 07:33:26.595 UTC [8943] LOG:  duration: 0.977 ms
+2022-11-28 07:33:26.596 UTC [8943] LOG:  statement: SELECT nsp.nspname AS schema,
+	    rel.relname AS table
+	FROM
+	    pg_catalog.pg_class rel
+	JOIN pg_catalog.pg_namespace nsp
+	ON rel.relnamespace = nsp.oid::oid
+	WHERE rel.oid = 16838::oid
+2022-11-28 07:33:26.597 UTC [8943] LOG:  duration: 0.531 ms
+2022-11-28 07:33:26.598 UTC [8943] LOG:  statement: SELECT   cls.oid, cls.relname as idxname, indnatts as col_count
+	  FROM pg_catalog.pg_index idx
+	  JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	  LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	  LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16855::oid
+	    AND con.contype='p'
+	
+	UNION
+	
+	SELECT  cls.oid, cls.relname as idxname, indnatts
+	    FROM pg_catalog.pg_index idx
+	    JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	    LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	    LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16855::oid
+	    AND con.contype='x'
+	
+	UNION
+	
+	SELECT  cls.oid, cls.relname as idxname, indnatts
+	    FROM pg_catalog.pg_index idx
+	    JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	    LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	    LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16855::oid
+	    AND con.contype='u'
+	
+	UNION
+	
+	SELECT  cls.oid, cls.relname as idxname, indnatts
+	    FROM pg_catalog.pg_index idx
+	    JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	    LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	    LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16855::oid
+	   AND conname IS NULL
+2022-11-28 07:33:26.602 UTC [8943] LOG:  duration: 4.249 ms
+2022-11-28 07:33:26.604 UTC [8943] LOG:  statement: SELECT  pg_catalog.pg_get_indexdef(16858 , 1 , true) AS column
+	UNION SELECT  pg_catalog.pg_get_indexdef(16858, 2, true) AS column
+	
+2022-11-28 07:33:26.604 UTC [8943] LOG:  duration: 0.361 ms
+2022-11-28 07:33:26.606 UTC [8943] LOG:  statement: SELECT a1.attname as conattname,
+	    a2.attname as confattname
+	FROM pg_catalog.pg_attribute a1,
+	    pg_catalog.pg_attribute a2
+	WHERE a1.attrelid=16855::oid
+	    AND a1.attnum=1
+	    AND a2.attrelid=16848::oid
+	    AND a2.attnum=1
+	
+2022-11-28 07:33:26.606 UTC [8943] LOG:  duration: 0.539 ms
+2022-11-28 07:33:26.608 UTC [8943] LOG:  statement: SELECT nsp.nspname AS schema,
+	    rel.relname AS table
+	FROM
+	    pg_catalog.pg_class rel
+	JOIN pg_catalog.pg_namespace nsp
+	ON rel.relnamespace = nsp.oid::oid
+	WHERE rel.oid = 16848::oid
+2022-11-28 07:33:26.608 UTC [8943] LOG:  duration: 0.546 ms
+2022-11-28 07:33:26.610 UTC [8943] LOG:  statement: SELECT   cls.oid, cls.relname as idxname, indnatts as col_count
+	  FROM pg_catalog.pg_index idx
+	  JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	  LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	  LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16855::oid
+	    AND con.contype='p'
+	
+	UNION
+	
+	SELECT  cls.oid, cls.relname as idxname, indnatts
+	    FROM pg_catalog.pg_index idx
+	    JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	    LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	    LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16855::oid
+	    AND con.contype='x'
+	
+	UNION
+	
+	SELECT  cls.oid, cls.relname as idxname, indnatts
+	    FROM pg_catalog.pg_index idx
+	    JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	    LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	    LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16855::oid
+	    AND con.contype='u'
+	
+	UNION
+	
+	SELECT  cls.oid, cls.relname as idxname, indnatts
+	    FROM pg_catalog.pg_index idx
+	    JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	    LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	    LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16855::oid
+	   AND conname IS NULL
+2022-11-28 07:33:26.613 UTC [8943] LOG:  duration: 3.460 ms
+2022-11-28 07:33:26.614 UTC [8943] LOG:  statement: SELECT  pg_catalog.pg_get_indexdef(16858 , 1 , true) AS column
+	UNION SELECT  pg_catalog.pg_get_indexdef(16858, 2, true) AS column
+	
+2022-11-28 07:33:26.615 UTC [8943] LOG:  duration: 0.367 ms
+2022-11-28 07:33:26.617 UTC [8943] LOG:  statement: SELECT c.oid, conname as name, relname, nspname, description as comment,
+	       pg_catalog.pg_get_expr(conbin, conrelid, true) as consrc,
+	       connoinherit, NOT convalidated as convalidated, conislocal
+	    FROM pg_catalog.pg_constraint c
+	    JOIN pg_catalog.pg_class cl ON cl.oid=conrelid
+	    JOIN pg_catalog.pg_namespace nl ON nl.oid=relnamespace
+	LEFT OUTER JOIN
+	    pg_catalog.pg_description des ON (des.objoid=c.oid AND
+	                           des.classoid='pg_constraint'::regclass)
+	WHERE contype = 'c'
+	    AND conrelid = 16855::oid
+	
+2022-11-28 07:33:26.617 UTC [8943] LOG:  duration: 0.768 ms
+2022-11-28 07:33:26.619 UTC [8943] LOG:  statement: SELECT cls.oid,
+	    cls.relname as name,
+	    indnkeyatts as col_count,
+	    amname,
+	    CASE WHEN length(spcname::text) > 0 THEN spcname ELSE
+	        (SELECT sp.spcname FROM pg_catalog.pg_database dtb
+	        JOIN pg_catalog.pg_tablespace sp ON dtb.dattablespace=sp.oid
+	        WHERE dtb.oid = 14767::oid)
+	    END as spcname,
+	    CASE contype
+	        WHEN 'p' THEN desp.description
+	        WHEN 'u' THEN desp.description
+	        WHEN 'x' THEN desp.description
+	        ELSE des.description
+	    END AS comment,
+	    condeferrable,
+	    condeferred,
+	    substring(pg_catalog.array_to_string(cls.reloptions, ',') from 'fillfactor=([0-9]*)') AS fillfactor,
+	    pg_catalog.pg_get_expr(idx.indpred, idx.indrelid, true) AS indconstraint
+	FROM pg_catalog.pg_index idx
+	JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	LEFT OUTER JOIN pg_catalog.pg_tablespace ta on ta.oid=cls.reltablespace
+	JOIN pg_catalog.pg_am am ON am.oid=cls.relam
+	LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=cls.oid AND des.classoid='pg_class'::regclass)
+	LEFT OUTER JOIN pg_catalog.pg_description desp ON (desp.objoid=con.oid AND desp.objsubid = 0 AND desp.classoid='pg_constraint'::regclass)
+	WHERE indrelid = 16855::oid
+	AND contype='x'
+	ORDER BY cls.relname
+2022-11-28 07:33:26.622 UTC [8943] LOG:  duration: 3.969 ms
+2022-11-28 07:33:26.629 UTC [8943] LOG:  statement: SELECT DISTINCT ON(cls.relname) cls.oid, cls.relname as name,
+	(SELECT (CASE WHEN count(i.inhrelid) > 0 THEN true ELSE false END) FROM pg_inherits i WHERE i.inhrelid = cls.oid) as is_inherited,
+	CASE WHEN contype IN ('p', 'u', 'x') THEN desp.description ELSE des.description END AS description
+	FROM pg_catalog.pg_index idx
+	    JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	    JOIN pg_catalog.pg_class tab ON tab.oid=indrelid
+	    LEFT OUTER JOIN pg_catalog.pg_tablespace ta on ta.oid=cls.reltablespace
+	    JOIN pg_catalog.pg_namespace n ON n.oid=tab.relnamespace
+	    JOIN pg_catalog.pg_am am ON am.oid=cls.relam
+	    LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	    LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	    LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=cls.oid AND des.classoid='pg_class'::regclass)
+	    LEFT OUTER JOIN pg_catalog.pg_description desp ON (desp.objoid=con.oid AND desp.objsubid = 0 AND desp.classoid='pg_constraint'::regclass)
+	WHERE indrelid = 16855::OID
+	    AND conname is NULL
+	    ORDER BY cls.relname
+2022-11-28 07:33:26.631 UTC [8943] LOG:  duration: 2.178 ms
+2022-11-28 07:33:26.633 UTC [8943] LOG:  statement: SELECT
+	    pl.oid AS oid,
+	    pl.polname AS name
+	FROM
+	    pg_catalog.pg_policy pl
+	WHERE
+	    pl.polrelid	 = 16855
+	ORDER BY
+	    pl.polname;
+2022-11-28 07:33:26.633 UTC [8943] LOG:  duration: 0.437 ms
+2022-11-28 07:33:26.634 UTC [8943] LOG:  statement: SELECT t.oid, t.tgname as name, t.tgenabled AS is_enable_trigger
+	FROM pg_catalog.pg_trigger t
+	    WHERE NOT tgisinternal
+	    AND tgrelid = 16855::OID
+	    ORDER BY tgname;
+2022-11-28 07:33:26.634 UTC [8943] LOG:  duration: 0.386 ms
+2022-11-28 07:33:26.636 UTC [8943] LOG:  statement: SELECT
+	    rw.oid AS oid,
+	    rw.rulename AS name,
+	    CASE WHEN rw.ev_enabled != 'D' THEN True ELSE False END AS enabled,
+	    rw.ev_enabled AS is_enable_rule
+	
+	FROM
+	    pg_catalog.pg_rewrite rw
+	WHERE
+	    rw.ev_class = 16855
+	ORDER BY
+	    rw.rulename
+2022-11-28 07:33:26.636 UTC [8943] LOG:  duration: 0.461 ms
+2022-11-28 07:33:31.905 UTC [8943] LOG:  statement: SELECT
+	    CASE
+	    WHEN (nspname LIKE E'pg\\_temp\\_%') THEN 1
+	    WHEN (nspname LIKE E'pg\\_%') THEN 0
+	    ELSE 3 END AS nsptyp,
+	    nsp.nspname AS name,
+	    nsp.oid,
+	    pg_catalog.array_to_string(nsp.nspacl::text[], ', ') as acl,
+	    r.rolname AS namespaceowner, description,
+	    pg_catalog.has_schema_privilege(nsp.oid, 'CREATE') AS can_create,
+	        (SELECT pg_catalog.array_to_string(ARRAY(
+	        SELECT pg_catalog.array_to_string(defaclacl::text[], ', ')
+	            FROM pg_catalog.pg_default_acl
+	        WHERE defaclobjtype = 'r' AND defaclnamespace = nsp.oid
+	    ), ', ')) AS tblacl,
+	        (SELECT pg_catalog.array_to_string(ARRAY(
+	        SELECT pg_catalog.array_to_string(defaclacl::text[], ', ')
+	            FROM pg_catalog.pg_default_acl
+	        WHERE defaclobjtype = 'S' AND defaclnamespace = nsp.oid
+	    ), ', ')) AS seqacl,
+	        (SELECT pg_catalog.array_to_string(ARRAY(
+	        SELECT pg_catalog.array_to_string(defaclacl::text[], ', ')
+	            FROM pg_catalog.pg_default_acl
+	        WHERE defaclobjtype = 'f' AND defaclnamespace = nsp.oid
+	    ), ', ')) AS funcacl,
+	        (SELECT pg_catalog.array_to_string(ARRAY(
+	        SELECT pg_catalog.array_to_string(defaclacl::text[], ', ')
+	            FROM pg_catalog.pg_default_acl
+	        WHERE defaclobjtype = 'T' AND defaclnamespace = nsp.oid
+	    ), ', ')) AS typeacl,
+	    (SELECT pg_catalog.array_agg(provider || '=' || label) FROM pg_catalog.pg_seclabels sl1 WHERE sl1.objoid=nsp.oid) AS seclabels
+	FROM
+	    pg_catalog.pg_namespace nsp
+	    LEFT OUTER JOIN pg_catalog.pg_description des ON
+	        (des.objoid=nsp.oid AND des.classoid='pg_namespace'::regclass)
+	    LEFT JOIN pg_catalog.pg_roles r ON (r.oid = nsp.nspowner)
+	WHERE
+	        nsp.oid=16832::oid AND
+	        NOT (
+	(nsp.nspname = 'pg_catalog' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'pg_class' AND
+	            relnamespace = nsp.oid LIMIT 1)) OR
+	    (nsp.nspname = 'pgagent' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'pga_job' AND
+	            relnamespace = nsp.oid LIMIT 1)) OR
+	    (nsp.nspname = 'information_schema' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'tables' AND
+	            relnamespace = nsp.oid LIMIT 1))
+	    )
+	    ORDER BY 1, nspname;
+2022-11-28 07:33:31.910 UTC [8943] LOG:  duration: 5.127 ms
+2022-11-28 07:33:31.912 UTC [8943] LOG:  statement: SELECT
+	    'nspacl' as deftype, COALESCE(gt.rolname, 'PUBLIC') AS grantee,
+	    g.rolname AS grantor, pg_catalog.array_agg(b.privilege_type) AS privileges,
+	    pg_catalog.array_agg(b.is_grantable) AS grantable
+	FROM
+	    (SELECT
+	        (d).grantee AS grantee, (d).grantor AS grantor,
+	        (d).is_grantable AS is_grantable,
+	        CASE (d).privilege_type
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN - ' || (d).privilege_type
+	        END AS privilege_type
+	    FROM
+	        (SELECT pg_catalog.aclexplode(nsp.nspacl) as d
+	        FROM pg_catalog.pg_namespace nsp
+	        WHERE nsp.oid = 16832::OID
+	        ) a
+	    ) b
+	    LEFT JOIN pg_catalog.pg_roles g ON (b.grantor = g.oid)
+	    LEFT JOIN pg_catalog.pg_roles gt ON (b.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee;
+2022-11-28 07:33:31.913 UTC [8943] LOG:  duration: 0.897 ms
+2022-11-28 07:33:31.915 UTC [8943] LOG:  statement: SELECT
+	    CASE (a.deftype)
+	    WHEN 'r' THEN 'deftblacl'
+	    WHEN 'S' THEN 'defseqacl'
+	    WHEN 'f' THEN 'deffuncacl'
+	    WHEN 'T' THEN 'deftypeacl'
+	    ELSE 'UNKNOWN - ' || a.deftype::text
+	    END AS deftype,
+	    COALESCE(gt.rolname, 'PUBLIC') grantee, g.rolname grantor, pg_catalog.array_agg(a.privilege_type) as privileges, pg_catalog.array_agg(a.is_grantable) as grantable
+	FROM
+	    (SELECT
+	        (acl).grantee as grantee, (acl).grantor AS grantor, (acl).is_grantable AS is_grantable,
+	        CASE (acl).privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN - ' || (acl).privilege_type
+	        END AS privilege_type,
+	        defaclobjtype as deftype
+	    FROM
+	        (SELECT defaclobjtype, pg_catalog.aclexplode(defaclacl) as acl
+	            FROM
+	                pg_catalog.pg_namespace nsp
+	                LEFT OUTER JOIN pg_catalog.pg_default_acl dacl ON (dacl.defaclnamespace = nsp.oid)
+	            WHERE
+	                nsp.oid=16832::oid
+	        ) d) a
+	    LEFT JOIN pg_catalog.pg_roles g ON (a.grantor = g.oid)
+	    LEFT JOIN pg_catalog.pg_roles gt ON (a.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname, a.deftype
+	ORDER BY a.deftype;
+2022-11-28 07:33:31.916 UTC [8943] LOG:  duration: 1.353 ms
+2022-11-28 07:33:35.739 UTC [9015] LOG:  connection received: host=::1 port=54546
+2022-11-28 07:33:35.740 UTC [9015] LOG:  connection authorized: user=postgres database=postgres application_name=pgAdmin 4 - CONN:2791306
+2022-11-28 07:33:35.741 UTC [9015] LOG:  statement: SET DateStyle=ISO; SET client_min_messages=notice; SELECT set_config('bytea_output','hex',false) FROM pg_settings WHERE name = 'bytea_output'; SET client_encoding='UNICODE';
+2022-11-28 07:33:35.743 UTC [9015] LOG:  duration: 1.399 ms
+2022-11-28 07:33:35.743 UTC [9015] LOG:  statement: SELECT version()
+2022-11-28 07:33:35.743 UTC [9015] LOG:  duration: 0.125 ms
+2022-11-28 07:33:35.743 UTC [9015] LOG:  statement: 
+	SELECT
+	    db.oid as did, db.datname, db.datallowconn,
+	    pg_encoding_to_char(db.encoding) AS serverencoding,
+	    has_database_privilege(db.oid, 'CREATE') as cancreate,
+	    datistemplate
+	FROM
+	    pg_catalog.pg_database db
+	WHERE db.datname = current_database()
+2022-11-28 07:33:35.744 UTC [9015] LOG:  duration: 0.437 ms
+2022-11-28 07:33:35.744 UTC [9015] LOG:  statement: 
+	        SELECT
+	             gss_authenticated, encrypted
+	        FROM
+	            pg_catalog.pg_stat_gssapi
+	        WHERE pid = pg_backend_pid()
+2022-11-28 07:33:35.744 UTC [9015] LOG:  duration: 0.345 ms
+2022-11-28 07:33:35.745 UTC [9015] LOG:  statement: 
+	        SELECT
+	            roles.oid as id, roles.rolname as name,
+	            roles.rolsuper as is_superuser,
+	            CASE WHEN roles.rolsuper THEN true ELSE roles.rolcreaterole END as
+	            can_create_role,
+	            CASE WHEN roles.rolsuper THEN true
+	            ELSE roles.rolcreatedb END as can_create_db,
+	            CASE WHEN 'pg_signal_backend'=ANY(ARRAY(WITH RECURSIVE cte AS (
+	            SELECT pg_roles.oid,pg_roles.rolname FROM pg_roles
+	                WHERE pg_roles.oid = roles.oid
+	            UNION ALL
+	            SELECT m.roleid,pgr.rolname FROM cte cte_1
+	                JOIN pg_auth_members m ON m.member = cte_1.oid
+	                JOIN pg_roles pgr ON pgr.oid = m.roleid)
+	            SELECT rolname  FROM cte)) THEN True
+	            ELSE False END as can_signal_backend
+	        FROM
+	            pg_catalog.pg_roles as roles
+	        WHERE
+	            rolname = current_user
+2022-11-28 07:33:35.746 UTC [9015] LOG:  duration: 1.415 ms
+2022-11-28 07:39:53.079 UTC [9015] ERROR:  syntax error at or near "window" at character 9
+2022-11-28 07:39:53.079 UTC [9015] STATEMENT:  
+	create window w as
+	    select c.id as idClient, c.nom as nomClient, c.prenom as prenomClient, c.adresse as adresseClient, c.pays as paysClient,
+	           r.id as idReservation, r.nomVoyageur as nomVoyageur, r.prenomVoyageur as prenomVoyageur, r.idVoyage as idVoyage, r.dateDepart as dateDepart, r.dateReservation as dateReservation, r.idClient as idClient,
+	           d.idVoyage as idVoyage, d.dateDepart as dateDepart, d.capacite as capacite,
+	           v.id as idVoyage, v.nom as nomVoyage, v.prix as prixVoyage,
+	           e.idVoyage as idVoyage, e.idVille as idVille, e.numOrdre as numOrdre, e.duree as duree,
+	           a.idVille as idVille, a.nom as nomVille, a.pays as paysVille,
+	           l.idVoyage as idVoyage, l.idVilleDepart as idVilleDepart, l.idVilleArrivee as idVilleArrivee, l.type as type, l.duree as duree,
+	           vda.idVille as idVilleDepart, vda.nom as nomVilleDepart, vda.pays as paysVilleDepart,
+	           vaa.idVille as idVilleArrivee, vaa.nom as nomVilleArrivee, vaa.pays as paysVilleArrivee
+	    from client c
+	    inner join reservation r on c.id = r.idClient
+	    inner join depart d on r.idVoyage = d.idVoyage and r.dateDepart = d.dateDepart
+	    inner join voyage v on r.idVoyage = v.id
+	    inner join etape e on r.idVoyage = e.idVoyage
+	    inner join ville a on e.idVille = a.idVille
+	    inner join liaison l on r.idVoyage = l.idVoyage
+	    inner join ville vda on l.idVilleDepart = vda.idVille
+	    inner join ville vaa on l.idVilleArrivee = vaa.idVille;
+2022-11-28 07:41:31.787 UTC [9015] LOG:  statement: 
+	create view w as
+	    select c.id as idClient, c.nom as nomClient, c.prenom as prenomClient, c.adresse as adresseClient, c.pays as paysClient,
+	           r.id as idReservation, r.nomVoyageur as nomVoyageur, r.prenomVoyageur as prenomVoyageur, r.idVoyage as idVoyage, r.dateDepart as dateDepart, r.dateReservation as dateReservation, r.idClient as idClient,
+	           d.idVoyage as idVoyage, d.dateDepart as dateDepart, d.capacite as capacite,
+	           v.id as idVoyage, v.nom as nomVoyage, v.prix as prixVoyage,
+	           e.idVoyage as idVoyage, e.idVille as idVille, e.numOrdre as numOrdre, e.duree as duree,
+	           a.idVille as idVille, a.nom as nomVille, a.pays as paysVille,
+	           l.idVoyage as idVoyage, l.idVilleDepart as idVilleDepart, l.idVilleArrivee as idVilleArrivee, l.type as type, l.duree as duree,
+	           vda.idVille as idVilleDepart, vda.nom as nomVilleDepart, vda.pays as paysVilleDepart,
+	           vaa.idVille as idVilleArrivee, vaa.nom as nomVilleArrivee, vaa.pays as paysVilleArrivee
+	    from client c
+	    inner join reservation r on c.id = r.idClient
+	    inner join depart d on r.idVoyage = d.idVoyage and r.dateDepart = d.dateDepart
+	    inner join voyage v on r.idVoyage = v.id
+	    inner join etape e on r.idVoyage = e.idVoyage
+	    inner join ville a on e.idVille = a.idVille
+	    inner join liaison l on r.idVoyage = l.idVoyage
+	    inner join ville vda on l.idVilleDepart = vda.idVille
+	    inner join ville vaa on l.idVilleArrivee = vaa.idVille;
+2022-11-28 07:41:31.787 UTC [9015] ERROR:  column a.idville does not exist at character 1307
+2022-11-28 07:41:31.787 UTC [9015] HINT:  Perhaps you meant to reference the column "e.idville".
+2022-11-28 07:41:31.787 UTC [9015] STATEMENT:  
+	create view w as
+	    select c.id as idClient, c.nom as nomClient, c.prenom as prenomClient, c.adresse as adresseClient, c.pays as paysClient,
+	           r.id as idReservation, r.nomVoyageur as nomVoyageur, r.prenomVoyageur as prenomVoyageur, r.idVoyage as idVoyage, r.dateDepart as dateDepart, r.dateReservation as dateReservation, r.idClient as idClient,
+	           d.idVoyage as idVoyage, d.dateDepart as dateDepart, d.capacite as capacite,
+	           v.id as idVoyage, v.nom as nomVoyage, v.prix as prixVoyage,
+	           e.idVoyage as idVoyage, e.idVille as idVille, e.numOrdre as numOrdre, e.duree as duree,
+	           a.idVille as idVille, a.nom as nomVille, a.pays as paysVille,
+	           l.idVoyage as idVoyage, l.idVilleDepart as idVilleDepart, l.idVilleArrivee as idVilleArrivee, l.type as type, l.duree as duree,
+	           vda.idVille as idVilleDepart, vda.nom as nomVilleDepart, vda.pays as paysVilleDepart,
+	           vaa.idVille as idVilleArrivee, vaa.nom as nomVilleArrivee, vaa.pays as paysVilleArrivee
+	    from client c
+	    inner join reservation r on c.id = r.idClient
+	    inner join depart d on r.idVoyage = d.idVoyage and r.dateDepart = d.dateDepart
+	    inner join voyage v on r.idVoyage = v.id
+	    inner join etape e on r.idVoyage = e.idVoyage
+	    inner join ville a on e.idVille = a.idVille
+	    inner join liaison l on r.idVoyage = l.idVoyage
+	    inner join ville vda on l.idVilleDepart = vda.idVille
+	    inner join ville vaa on l.idVilleArrivee = vaa.idVille;
+2022-11-28 07:44:35.910 UTC [9015] LOG:  statement: 
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.IDVILLE AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		A.PAYS AS PAYSVILLE,
+		L.IDVOYAGE AS IDVOYAGE,
+		L.IDVILLEDEPART AS IDVILLEDEPART,
+		L.IDVILLEARRIVEE AS IDVILLEARRIVEE,
+		L.TYPE AS TYPE,
+		L.DUREE AS DUREE,
+		VDA.IDVILLE AS IDVILLEDEPART,
+		VDA.NOM AS NOMVILLEDEPART,
+		VDA.PAYS AS PAYSVILLEDEPART,
+		VAA.IDVILLE AS IDVILLEARRIVEE,
+		VAA.NOM AS NOMVILLEARRIVEE,
+		VAA.PAYS AS PAYSVILLEARRIVEE
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.IDVILLE
+	LEFT OUTER JOIN LIAISON L ON R.IDVOYAGE = L.IDVOYAGE
+	LEFT OUTER JOIN VILLE VDA ON L.IDVILLEDEPART = VDA.IDVILLE
+	LEFT OUTER JOIN VILLE VAA ON L.IDVILLEARRIVEE = VAA.IDVILLE;
+2022-11-28 07:44:35.910 UTC [9015] ERROR:  column a.idville does not exist at character 1251
+2022-11-28 07:44:35.910 UTC [9015] HINT:  Perhaps you meant to reference the column "e.idville".
+2022-11-28 07:44:35.910 UTC [9015] STATEMENT:  
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.IDVILLE AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		A.PAYS AS PAYSVILLE,
+		L.IDVOYAGE AS IDVOYAGE,
+		L.IDVILLEDEPART AS IDVILLEDEPART,
+		L.IDVILLEARRIVEE AS IDVILLEARRIVEE,
+		L.TYPE AS TYPE,
+		L.DUREE AS DUREE,
+		VDA.IDVILLE AS IDVILLEDEPART,
+		VDA.NOM AS NOMVILLEDEPART,
+		VDA.PAYS AS PAYSVILLEDEPART,
+		VAA.IDVILLE AS IDVILLEARRIVEE,
+		VAA.NOM AS NOMVILLEARRIVEE,
+		VAA.PAYS AS PAYSVILLEARRIVEE
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.IDVILLE
+	LEFT OUTER JOIN LIAISON L ON R.IDVOYAGE = L.IDVOYAGE
+	LEFT OUTER JOIN VILLE VDA ON L.IDVILLEDEPART = VDA.IDVILLE
+	LEFT OUTER JOIN VILLE VAA ON L.IDVILLEARRIVEE = VAA.IDVILLE;
+2022-11-28 07:45:06.331 UTC [9015] LOG:  statement: 
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.IDVILLE AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		A.PAYS AS PAYSVILLE,
+		L.IDVOYAGE AS IDVOYAGE,
+		L.IDVILLEDEPART AS IDVILLEDEPART,
+		L.IDVILLEARRIVEE AS IDVILLEARRIVEE,
+		L.TYPE AS TYPE,
+		L.DUREE AS DUREE,
+		VDA.IDVILLE AS IDVILLEDEPART,
+		VDA.NOM AS NOMVILLEDEPART,
+		VDA.PAYS AS PAYSVILLEDEPART,
+		VAA.IDVILLE AS IDVILLEARRIVEE,
+		VAA.NOM AS NOMVILLEARRIVEE,
+		VAA.PAYS AS PAYSVILLEARRIVEE
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN LIAISON L ON R.IDVOYAGE = L.IDVOYAGE
+	LEFT OUTER JOIN VILLE VDA ON L.IDVILLEDEPART = VDA.IDVILLE
+	LEFT OUTER JOIN VILLE VAA ON L.IDVILLEARRIVEE = VAA.IDVILLE;
+2022-11-28 07:45:06.332 UTC [9015] ERROR:  relation "liaison" does not exist at character 1272
+2022-11-28 07:45:06.332 UTC [9015] STATEMENT:  
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.IDVILLE AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		A.PAYS AS PAYSVILLE,
+		L.IDVOYAGE AS IDVOYAGE,
+		L.IDVILLEDEPART AS IDVILLEDEPART,
+		L.IDVILLEARRIVEE AS IDVILLEARRIVEE,
+		L.TYPE AS TYPE,
+		L.DUREE AS DUREE,
+		VDA.IDVILLE AS IDVILLEDEPART,
+		VDA.NOM AS NOMVILLEDEPART,
+		VDA.PAYS AS PAYSVILLEDEPART,
+		VAA.IDVILLE AS IDVILLEARRIVEE,
+		VAA.NOM AS NOMVILLEARRIVEE,
+		VAA.PAYS AS PAYSVILLEARRIVEE
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN LIAISON L ON R.IDVOYAGE = L.IDVOYAGE
+	LEFT OUTER JOIN VILLE VDA ON L.IDVILLEDEPART = VDA.IDVILLE
+	LEFT OUTER JOIN VILLE VAA ON L.IDVILLEARRIVEE = VAA.IDVILLE;
+2022-11-28 07:45:16.192 UTC [9015] LOG:  statement: 
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.IDVILLE AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		A.PAYS AS PAYSVILLE,
+		L.IDVOYAGE AS IDVOYAGE,
+		L.IDVILLEDEPART AS IDVILLEDEPART,
+		L.IDVILLEARRIVEE AS IDVILLEARRIVEE,
+		L.TYPE AS TYPE,
+		L.DUREE AS DUREE,
+		VDA.IDVILLE AS IDVILLEDEPART,
+		VDA.NOM AS NOMVILLEDEPART,
+		VDA.PAYS AS PAYSVILLEDEPART,
+		VAA.IDVILLE AS IDVILLEARRIVEE,
+		VAA.NOM AS NOMVILLEARRIVEE,
+		VAA.PAYS AS PAYSVILLEARRIVEE
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	
+2022-11-28 07:45:16.192 UTC [9015] ERROR:  column a.idville does not exist at character 589
+2022-11-28 07:45:16.192 UTC [9015] HINT:  Perhaps you meant to reference the column "e.idville".
+2022-11-28 07:45:16.192 UTC [9015] STATEMENT:  
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.IDVILLE AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		A.PAYS AS PAYSVILLE,
+		L.IDVOYAGE AS IDVOYAGE,
+		L.IDVILLEDEPART AS IDVILLEDEPART,
+		L.IDVILLEARRIVEE AS IDVILLEARRIVEE,
+		L.TYPE AS TYPE,
+		L.DUREE AS DUREE,
+		VDA.IDVILLE AS IDVILLEDEPART,
+		VDA.NOM AS NOMVILLEDEPART,
+		VDA.PAYS AS PAYSVILLEDEPART,
+		VAA.IDVILLE AS IDVILLEARRIVEE,
+		VAA.NOM AS NOMVILLEARRIVEE,
+		VAA.PAYS AS PAYSVILLEARRIVEE
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	
+2022-11-28 07:45:26.423 UTC [9015] LOG:  statement: 
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		A.PAYS AS PAYSVILLE,
+		L.IDVOYAGE AS IDVOYAGE,
+		L.IDVILLEDEPART AS IDVILLEDEPART,
+		L.IDVILLEARRIVEE AS IDVILLEARRIVEE,
+		L.TYPE AS TYPE,
+		L.DUREE AS DUREE,
+		VDA.IDVILLE AS IDVILLEDEPART,
+		VDA.NOM AS NOMVILLEDEPART,
+		VDA.PAYS AS PAYSVILLEDEPART,
+		VAA.IDVILLE AS IDVILLEARRIVEE,
+		VAA.NOM AS NOMVILLEARRIVEE,
+		VAA.PAYS AS PAYSVILLEARRIVEE
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	
+2022-11-28 07:45:26.423 UTC [9015] ERROR:  column a.pays does not exist at character 627
+2022-11-28 07:45:26.423 UTC [9015] HINT:  Perhaps you meant to reference the column "c.pays".
+2022-11-28 07:45:26.423 UTC [9015] STATEMENT:  
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		A.PAYS AS PAYSVILLE,
+		L.IDVOYAGE AS IDVOYAGE,
+		L.IDVILLEDEPART AS IDVILLEDEPART,
+		L.IDVILLEARRIVEE AS IDVILLEARRIVEE,
+		L.TYPE AS TYPE,
+		L.DUREE AS DUREE,
+		VDA.IDVILLE AS IDVILLEDEPART,
+		VDA.NOM AS NOMVILLEDEPART,
+		VDA.PAYS AS PAYSVILLEDEPART,
+		VAA.IDVILLE AS IDVILLEARRIVEE,
+		VAA.NOM AS NOMVILLEARRIVEE,
+		VAA.PAYS AS PAYSVILLEARRIVEE
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	
+2022-11-28 07:45:55.556 UTC [9015] LOG:  statement: 
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		A.PAYS AS PAYSVILLE,
+		L.IDVOYAGE AS IDVOYAGE,
+		L.IDVILLEDEPART AS IDVILLEDEPART,
+		L.IDVILLEARRIVEE AS IDVILLEARRIVEE,
+		L.TYPE AS TYPE,
+		L.DUREE AS DUREE,
+		VDA.IDVILLE AS IDVILLEDEPART,
+		VDA.NOM AS NOMVILLEDEPART,
+		VDA.PAYS AS PAYSVILLEDEPART,
+		VAA.IDVILLE AS IDVILLEARRIVEE,
+		VAA.NOM AS NOMVILLEARRIVEE,
+		VAA.PAYS AS PAYSVILLEARRIVEE
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.code = A.codePays
+2022-11-28 07:45:55.557 UTC [9015] ERROR:  column a.pays does not exist at character 627
+2022-11-28 07:45:55.557 UTC [9015] HINT:  Perhaps you meant to reference the column "c.pays".
+2022-11-28 07:45:55.557 UTC [9015] STATEMENT:  
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		A.PAYS AS PAYSVILLE,
+		L.IDVOYAGE AS IDVOYAGE,
+		L.IDVILLEDEPART AS IDVILLEDEPART,
+		L.IDVILLEARRIVEE AS IDVILLEARRIVEE,
+		L.TYPE AS TYPE,
+		L.DUREE AS DUREE,
+		VDA.IDVILLE AS IDVILLEDEPART,
+		VDA.NOM AS NOMVILLEDEPART,
+		VDA.PAYS AS PAYSVILLEDEPART,
+		VAA.IDVILLE AS IDVILLEARRIVEE,
+		VAA.NOM AS NOMVILLEARRIVEE,
+		VAA.PAYS AS PAYSVILLEARRIVEE
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.code = A.codePays
+2022-11-28 07:46:59.950 UTC [9015] ERROR:  syntax error at or near "FROM" at character 803
+2022-11-28 07:46:59.950 UTC [9015] STATEMENT:  
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		C.NOMPAYS AS NOMPAYS,
+		C.CODE as CODEPAYS,
+		L.IDVOYAGE AS IDVOYAGE,
+		L.IDVILLEDEPART AS IDVILLEDEPART,
+		L.IDVILLEARRIVEE AS IDVILLEARRIVEE,
+		L.TYPE AS TYPE,
+		L.DUREE AS DUREE,
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.code = A.codePays
+2022-11-28 07:47:04.480 UTC [9015] LOG:  statement: 
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		C.NOMPAYS AS NOMPAYS,
+		C.CODE as CODEPAYS,
+		L.IDVOYAGE AS IDVOYAGE,
+		L.IDVILLEDEPART AS IDVILLEDEPART,
+		L.IDVILLEARRIVEE AS IDVILLEARRIVEE,
+		L.TYPE AS TYPE,
+		L.DUREE AS DUREE
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.code = A.codePays
+2022-11-28 07:47:04.481 UTC [9015] ERROR:  column c.nompays does not exist at character 627
+2022-11-28 07:47:04.481 UTC [9015] HINT:  Perhaps you meant to reference the column "c.pays".
+2022-11-28 07:47:04.481 UTC [9015] STATEMENT:  
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		C.NOMPAYS AS NOMPAYS,
+		C.CODE as CODEPAYS,
+		L.IDVOYAGE AS IDVOYAGE,
+		L.IDVILLEDEPART AS IDVILLEDEPART,
+		L.IDVILLEARRIVEE AS IDVILLEARRIVEE,
+		L.TYPE AS TYPE,
+		L.DUREE AS DUREE
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.code = A.codePays
+2022-11-28 07:47:16.444 UTC [9015] LOG:  statement: 
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		C.NOM AS NOMPAYS,
+		C.CODE as CODEPAYS,
+		L.IDVOYAGE AS IDVOYAGE,
+		L.IDVILLEDEPART AS IDVILLEDEPART,
+		L.IDVILLEARRIVEE AS IDVILLEARRIVEE,
+		L.TYPE AS TYPE,
+		L.DUREE AS DUREE
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.code = A.codePays
+2022-11-28 07:47:16.444 UTC [9015] ERROR:  column c.code does not exist at character 646
+2022-11-28 07:47:16.444 UTC [9015] HINT:  Perhaps you meant to reference the column "p.code".
+2022-11-28 07:47:16.444 UTC [9015] STATEMENT:  
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		C.NOM AS NOMPAYS,
+		C.CODE as CODEPAYS,
+		L.IDVOYAGE AS IDVOYAGE,
+		L.IDVILLEDEPART AS IDVILLEDEPART,
+		L.IDVILLEARRIVEE AS IDVILLEARRIVEE,
+		L.TYPE AS TYPE,
+		L.DUREE AS DUREE
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.code = A.codePays
+2022-11-28 07:47:29.903 UTC [9015] LOG:  statement: 
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		P.NOM AS NOMPAYS,
+		P.CODE AS CODEPAYS,
+		L.IDVOYAGE AS IDVOYAGE,
+		L.IDVILLEDEPART AS IDVILLEDEPART,
+		L.IDVILLEARRIVEE AS IDVILLEARRIVEE,
+		L.TYPE AS TYPE,
+		L.DUREE AS DUREE
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.CODE = A.CODEPAYS
+2022-11-28 07:47:29.903 UTC [9015] ERROR:  missing FROM-clause entry for table "l" at character 667
+2022-11-28 07:47:29.903 UTC [9015] STATEMENT:  
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		P.NOM AS NOMPAYS,
+		P.CODE AS CODEPAYS,
+		L.IDVOYAGE AS IDVOYAGE,
+		L.IDVILLEDEPART AS IDVILLEDEPART,
+		L.IDVILLEARRIVEE AS IDVILLEARRIVEE,
+		L.TYPE AS TYPE,
+		L.DUREE AS DUREE
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.CODE = A.CODEPAYS
+2022-11-28 07:47:42.134 UTC [9015] LOG:  statement: 
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		P.NOM AS NOMPAYS,
+		P.CODE AS CODEPAYS
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.CODE = A.CODEPAYS
+2022-11-28 07:47:42.134 UTC [9015] ERROR:  column "idclient" specified more than once
+2022-11-28 07:47:42.134 UTC [9015] STATEMENT:  
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		R.IDCLIENT AS IDCLIENT,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		P.NOM AS NOMPAYS,
+		P.CODE AS CODEPAYS
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.CODE = A.CODEPAYS
+2022-11-28 07:48:02.658 UTC [9015] LOG:  statement: 
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		P.NOM AS NOMPAYS,
+		P.CODE AS CODEPAYS
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.CODE = A.CODEPAYS
+2022-11-28 07:48:02.658 UTC [9015] ERROR:  column "idvoyage" specified more than once
+2022-11-28 07:48:02.658 UTC [9015] STATEMENT:  
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVOYAGE AS IDVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		P.NOM AS NOMPAYS,
+		P.CODE AS CODEPAYS
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.CODE = A.CODEPAYS
+2022-11-28 07:48:10.975 UTC [9015] LOG:  statement: 
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		P.NOM AS NOMPAYS,
+		P.CODE AS CODEPAYS
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.CODE = A.CODEPAYS
+2022-11-28 07:48:10.975 UTC [9015] ERROR:  column "idvoyage" specified more than once
+2022-11-28 07:48:10.975 UTC [9015] STATEMENT:  
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		D.IDVOYAGE AS IDVOYAGE,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		P.NOM AS NOMPAYS,
+		P.CODE AS CODEPAYS
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.CODE = A.CODEPAYS
+2022-11-28 07:48:20.613 UTC [9015] LOG:  statement: 
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		P.NOM AS NOMPAYS,
+		P.CODE AS CODEPAYS
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.CODE = A.CODEPAYS
+2022-11-28 07:48:20.613 UTC [9015] ERROR:  column "idvoyage" specified more than once
+2022-11-28 07:48:20.613 UTC [9015] STATEMENT:  
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		P.NOM AS NOMPAYS,
+		P.CODE AS CODEPAYS
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.CODE = A.CODEPAYS
+2022-11-28 07:48:41.564 UTC [9015] LOG:  statement: 
+	
+2022-11-28 07:48:41.564 UTC [9015] LOG:  duration: 0.119 ms
+2022-11-28 07:48:58.235 UTC [9015] LOG:  statement: 
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		P.NOM AS NOMPAYS,
+		P.CODE AS CODEPAYS
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.CODE = A.CODEPAYS;
+	
+	
+	SELECT *
+	FROM W;
+2022-11-28 07:48:58.235 UTC [9015] ERROR:  column "idvoyage" specified more than once
+2022-11-28 07:48:58.235 UTC [9015] STATEMENT:  
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.ID AS IDVOYAGE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		P.NOM AS NOMPAYS,
+		P.CODE AS CODEPAYS
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.CODE = A.CODEPAYS;
+	
+	
+	SELECT *
+	FROM W;
+2022-11-28 07:49:07.939 UTC [9015] LOG:  statement: 
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		P.NOM AS NOMPAYS,
+		P.CODE AS CODEPAYS
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.CODE = A.CODEPAYS;
+	
+	
+	SELECT *
+	FROM W;
+2022-11-28 07:49:07.939 UTC [9015] ERROR:  column "datedepart" specified more than once
+2022-11-28 07:49:07.939 UTC [9015] STATEMENT:  
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATEDEPART AS DATEDEPART,
+		R.DATERESERVATION AS DATERESERVATION,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		P.NOM AS NOMPAYS,
+		P.CODE AS CODEPAYS
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.CODE = A.CODEPAYS;
+	
+	
+	SELECT *
+	FROM W;
+2022-11-28 07:49:13.854 UTC [9015] LOG:  statement: 
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATERESERVATION AS DATERESERVATION,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		P.NOM AS NOMPAYS,
+		P.CODE AS CODEPAYS
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.CODE = A.CODEPAYS;
+	
+	
+	SELECT *
+	FROM W;
+2022-11-28 07:49:13.854 UTC [9015] ERROR:  column "idville" specified more than once
+2022-11-28 07:49:13.854 UTC [9015] STATEMENT:  
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATERESERVATION AS DATERESERVATION,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.IDVILLE AS IDVILLE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		P.NOM AS NOMPAYS,
+		P.CODE AS CODEPAYS
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.CODE = A.CODEPAYS;
+	
+	
+	SELECT *
+	FROM W;
+2022-11-28 07:49:18.364 UTC [9015] LOG:  statement: 
+	CREATE VIEW W AS
+	SELECT C.ID AS IDCLIENT,
+		C.NOM AS NOMCLIENT,
+		C.PRENOM AS PRENOMCLIENT,
+		C.ADRESSE AS ADRESSECLIENT,
+		C.PAYS AS PAYSCLIENT,
+		R.ID AS IDRESERVATION,
+		R.NOMVOYAGEUR AS NOMVOYAGEUR,
+		R.PRENOMVOYAGEUR AS PRENOMVOYAGEUR,
+		R.IDVOYAGE AS IDVOYAGE,
+		R.DATERESERVATION AS DATERESERVATION,
+		D.DATEDEPART AS DATEDEPART,
+		D.CAPACITE AS CAPACITE,
+		V.NOM AS NOMVOYAGE,
+		V.PRIX AS PRIXVOYAGE,
+		E.NUMORDRE AS NUMORDRE,
+		E.DUREE AS DUREE,
+		A.ID AS IDVILLE,
+		A.NOM AS NOMVILLE,
+		P.NOM AS NOMPAYS,
+		P.CODE AS CODEPAYS
+	FROM CLIENT C
+	LEFT OUTER JOIN RESERVATION R ON C.ID = R.IDCLIENT
+	LEFT OUTER JOIN DEPART D ON R.IDVOYAGE = D.IDVOYAGE
+	AND R.DATEDEPART = D.DATEDEPART
+	LEFT OUTER JOIN VOYAGE V ON R.IDVOYAGE = V.ID
+	LEFT OUTER JOIN ETAPE E ON R.IDVOYAGE = E.IDVOYAGE
+	LEFT OUTER JOIN VILLE A ON E.IDVILLE = A.ID
+	LEFT OUTER JOIN PAYS P ON P.CODE = A.CODEPAYS;
+	
+	
+	SELECT *
+	FROM W;
+2022-11-28 07:49:18.390 UTC [9015] LOG:  duration: 26.173 ms
+2022-11-28 07:49:18.507 UTC [9015] LOG:  statement: SELECT at.attname, ty.typname, at.attnum
+	    FROM pg_catalog.pg_attribute at
+	    LEFT JOIN pg_catalog.pg_type ty ON (ty.oid = at.atttypid)
+	WHERE attrelid=16905::oid
+	    AND at.attnum > 0
+	    AND at.attisdropped = FALSE
+	
+2022-11-28 07:49:18.509 UTC [9015] LOG:  duration: 2.116 ms
+2022-11-28 07:49:18.523 UTC [9015] LOG:  statement: SELECT at.attname, at.attnum, ty.typname
+	FROM pg_catalog.pg_attribute at LEFT JOIN pg_catalog.pg_type ty ON (ty.oid = at.atttypid)
+	WHERE attrelid=16905::oid AND attnum = ANY (
+	    (SELECT con.conkey FROM pg_catalog.pg_class rel LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid
+	    AND con.contype='p' WHERE rel.relkind IN ('r','s','t', 'p') AND rel.oid = 16905::oid)::oid[])
+	
+2022-11-28 07:49:18.525 UTC [9015] LOG:  duration: 2.636 ms
+2022-11-28 07:49:18.563 UTC [9015] LOG:  statement: SELECT DISTINCT att.attname as name, att.attnum as OID, pg_catalog.format_type(ty.oid,NULL) AS datatype,
+	att.attnotnull as not_null, att.atthasdef as has_default_val
+	FROM pg_catalog.pg_attribute att
+	    JOIN pg_catalog.pg_type ty ON ty.oid=atttypid
+	    JOIN pg_catalog.pg_namespace tn ON tn.oid=ty.typnamespace
+	    JOIN pg_catalog.pg_class cl ON cl.oid=att.attrelid
+	    JOIN pg_catalog.pg_namespace na ON na.oid=cl.relnamespace
+	    LEFT OUTER JOIN pg_catalog.pg_type et ON et.oid=ty.typelem
+	    LEFT OUTER JOIN pg_catalog.pg_attrdef def ON adrelid=att.attrelid AND adnum=att.attnum
+	    LEFT OUTER JOIN (pg_catalog.pg_depend JOIN pg_catalog.pg_class cs ON classid='pg_class'::regclass AND objid=cs.oid AND cs.relkind='S') ON refobjid=att.attrelid AND refobjsubid=att.attnum
+	    LEFT OUTER JOIN pg_catalog.pg_namespace ns ON ns.oid=cs.relnamespace
+	    LEFT OUTER JOIN pg_catalog.pg_index pi ON pi.indrelid=att.attrelid AND indisprimary
+	WHERE
+	    att.attrelid = 16905::oid
+	    AND att.attnum > 0
+	    AND att.attisdropped IS FALSE
+	ORDER BY att.attnum
+2022-11-28 07:49:18.567 UTC [9015] LOG:  duration: 3.558 ms
+2022-11-28 07:49:18.571 UTC [9015] LOG:  statement: SELECT oid, pg_catalog.format_type(oid, NULL) AS typname FROM pg_catalog.pg_type WHERE oid IN (23, 1043, 1043, 1043, 1042, 23, 1043, 1043, 23, 1082, 1082, 23, 1043, 1700, 23, 23, 23, 1043, 1043, 1042) ORDER BY oid;
+2022-11-28 07:49:18.571 UTC [9015] LOG:  duration: 0.768 ms
+2022-11-28 07:50:52.377 UTC [8943] LOG:  disconnection: session time: 0:18:07.117 user=postgres database=postgres host=::1 port=41142
+2022-11-28 07:50:52.377 UTC [8944] LOG:  disconnection: session time: 0:18:07.074 user=postgres database=postgres host=::1 port=41146
+2022-11-28 07:50:52.377 UTC [8945] LOG:  disconnection: session time: 0:18:07.058 user=postgres database=postgres host=::1 port=41160
+2022-11-28 07:50:52.377 UTC [9015] LOG:  disconnection: session time: 0:17:16.638 user=postgres database=postgres host=::1 port=54546
+2022-11-28 09:36:32.883 UTC [8090] LOG:  received smart shutdown request
+2022-11-28 09:36:32.888 UTC [8090] LOG:  background worker "logical replication launcher" (PID 8098) exited with exit code 1
+2022-11-28 09:36:32.888 UTC [8093] LOG:  shutting down
+2022-11-28 09:36:32.903 UTC [8090] LOG:  database system is shut down

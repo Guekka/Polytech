@@ -1,0 +1,4 @@
+2022-12-14 18:18:08.635 UTC [25700] LOG:  received smart shutdown request
+2022-12-14 18:18:08.641 UTC [25700] LOG:  background worker "logical replication launcher" (PID 25708) exited with exit code 1
+2022-12-14 18:18:08.641 UTC [25703] LOG:  shutting down
+2022-12-14 18:18:08.657 UTC [25700] LOG:  database system is shut down

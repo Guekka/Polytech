@@ -1,0 +1,7 @@
+
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ô≥ÌØ
+d	java:S116
+"ORename this field "JOHN" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(†™‘ß
+d	java:S116"ORename this field "PAUL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìÜ≥≠
+c	java:S116"NRename this field "MSG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ã®∏è
+g	java:S116"RRename this field "SUBJECT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹åÃ«

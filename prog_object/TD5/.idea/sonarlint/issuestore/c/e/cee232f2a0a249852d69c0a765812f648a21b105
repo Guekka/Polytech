@@ -1,0 +1,7 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ıí¢ÿÿÿÿÿ
+@
+java:S1181G"%Catch Exception instead of Throwable.(‡˜ÚÚøÿÿÿÿ
+M
+java:S1172Š"6Remove these unused method parameters "filename", "e".(“ñ×š
+W	java:S125‹"<This block of commented-out lines of code should be removed.(¶‡óÅıÿÿÿÿ

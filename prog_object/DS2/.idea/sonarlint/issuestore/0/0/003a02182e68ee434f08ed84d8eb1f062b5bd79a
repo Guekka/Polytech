@@ -1,0 +1,12 @@
+
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ï³í¯
+d	java:S116"ORename this field "JOHN" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.( ªÔ§
+d	java:S116"ORename this field "PAUL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(“†³­
+c	java:S116"NRename this field "MSG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚ÇÌ™
+l	java:S116"RRename this field "SUBJECT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—ÑîŒşÿÿÿÿ
+B
+java:S1125i"'Remove the unnecessary boolean literal.(ÓÎêüÿÿÿÿ
+v
+java:S6201u"`Replace this instanceof check and cast with 'instanceof MailItemWithSubject mailitemwithsubject'(Ó†Ç¯
+K
+java:S1144h"5Remove this unused private "assertlocalfalse" method.(»Ü¯Å

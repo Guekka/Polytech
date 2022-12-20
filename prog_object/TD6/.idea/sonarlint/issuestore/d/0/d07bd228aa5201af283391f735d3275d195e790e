@@ -1,0 +1,30 @@
+
+o
+java:S2293?"YReplace the type specification in this constructor call with the diamond operator ("<>").(Õö€É
+k	java:S117S"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»æ‰Ôÿÿÿÿÿ
+f	java:S117l"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(µû«
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(„‰æÇ
+o	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(®÷ÅÕ
+T
+java:S5993"9Change the visibility of this constructor to "protected".(Ó¯ñ»üÿÿÿÿ
+T
+java:S5993"9Change the visibility of this constructor to "protected".(Ê„×´şÿÿÿÿ
+S	java:S106 "9Replace this use of System.out or System.err by a logger.(Á§â—ıÿÿÿÿ
+`
+java:S1124#"EReorder the modifiers to comply with the Java Language Specification.(â³™İÿÿÿÿÿ
+>
+java:S1172)"(Remove this unused method parameter "c".(¼ƒÌÂ
+[
+java:S1124)"EReorder the modifiers to comply with the Java Language Specification.(¼ƒÌÂ
+=
+java:S1872G"'Use an "instanceof" comparison instead.(ˆĞ™ä
+>	java:S108K")Either remove or fill this block of code.(‚Üò
+?
+java:S1905Y")Remove this unnecessary cast to "String".(î¨Ò
+D
+java:S1905[")Remove this unnecessary cast to "String".(¬‰€Úÿÿÿÿÿ
+S	java:S106a"9Replace this use of System.out or System.err by a logger.(¶Û¼Íøÿÿÿÿ
+`
+java:S1124e"EReorder the modifiers to comply with the Java Language Specification.(ğ˜Ğ’øÿÿÿÿ
+=
+java:S1872w"'Use an "instanceof" comparison instead.(°Éş

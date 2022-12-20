@@ -1,11 +1,4 @@
-let
-nixpkgs = import (builtins.fetchTarball https://github.com/NixOS/nixpkgs/archive/20.03.tar.gz) {
-  overlays = [];
-  config = {};
-};
-
-in
-with nixpkgs;
+with import <nixpkgs> {};
 
 stdenv.mkDerivation {
   name = "postgres-env";
@@ -19,6 +12,7 @@ stdenv.mkDerivation {
     writeText "postgresql.conf"
       ''
         # Add Custom Settings
+        listen_adresses = 'localhost'
         log_min_messages = warning
         log_min_error_statement = error
         log_min_duration_statement = 100  # ms
@@ -34,10 +28,17 @@ stdenv.mkDerivation {
         log_min_error_statement = error
       '';
 
+  pgAdminConf = 
+    writeText "config_local.py"
+      ''
+        import os
+        DATA_DIR = os.path.realpath("./.pgAdmin")
+      '';
 
   # ENV Variables
   LD_LIBRARY_PATH = "${geos}/lib:${gdal}/lib";
   PGDATA = "${toString ./.}/.pg";
+  
 
   # Post Shell Hook
   shellHook = ''

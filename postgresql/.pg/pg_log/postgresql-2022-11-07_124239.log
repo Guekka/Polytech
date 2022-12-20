@@ -1,0 +1,1342 @@
+2022-11-07 12:42:39.132 UTC [31119] LOG:  starting PostgreSQL 14.5 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 11.3.0, 64-bit
+2022-11-07 12:42:39.133 UTC [31119] LOG:  listening on IPv6 address "::1", port 5555
+2022-11-07 12:42:39.133 UTC [31119] LOG:  listening on IPv4 address "127.0.0.1", port 5555
+2022-11-07 12:42:39.136 UTC [31119] LOG:  listening on Unix socket "/home/edgar/code/Polytech_SI3_S5/postgresql/.pg/.s.PGSQL.5555"
+2022-11-07 12:42:39.139 UTC [31121] LOG:  database system was shut down at 2022-11-07 12:42:38 UTC
+2022-11-07 12:42:39.144 UTC [31119] LOG:  database system is ready to accept connections
+2022-11-07 12:42:42.352 UTC [31129] LOG:  connection received: host=[local]
+2022-11-07 12:42:42.353 UTC [31129] LOG:  connection authorized: user=postgres database=postgres application_name=psql
+2022-11-07 12:42:52.933 UTC [31129] LOG:  statement: CREATE TABLE classe (
+	    num integer PRIMARY KEY,
+	    libelle character varying(30) NOT NULL
+	);
+2022-11-07 12:42:52.955 UTC [31129] LOG:  duration: 21.564 ms
+2022-11-07 12:42:52.955 UTC [31129] LOG:  statement: CREATE TABLE enr (
+	    marque integer PRIMARY KEY,
+	    num integer NOT NULL,
+	    pays character(2) NOT NULL,
+	    deposant integer NOT NULL,
+	    date_enr date NOT NULL
+	);
+2022-11-07 12:42:52.959 UTC [31129] LOG:  duration: 3.755 ms
+2022-11-07 12:42:52.959 UTC [31129] LOG:  statement: CREATE TABLE marque (
+	    id integer PRIMARY KEY,
+	    nom character varying(30) NOT NULL,
+	    classe integer NOT NULL,
+	    pays character(2) NOT NULL,
+	    prop integer NOT NULL
+	);
+2022-11-07 12:42:52.963 UTC [31129] LOG:  duration: 3.766 ms
+2022-11-07 12:42:52.963 UTC [31129] LOG:  statement: CREATE TABLE pays (
+	    code character(2) PRIMARY KEY,
+	    nom character varying(50) NOT NULL
+	);
+2022-11-07 12:42:52.973 UTC [31129] LOG:  duration: 10.056 ms
+2022-11-07 12:42:52.974 UTC [31129] LOG:  statement: CREATE TABLE societe (
+	    id integer NOT NULL,
+	    nom character varying(40) NOT NULL,
+	    ville character varying(20),
+	    pays character(2) NOT NULL
+	);
+2022-11-07 12:42:52.977 UTC [31129] LOG:  duration: 3.044 ms
+2022-11-07 12:42:52.977 UTC [31129] LOG:  statement: CREATE TABLE vente (
+	    marque integer NOT NULL,
+	    vendeur integer NOT NULL,
+	    acquereur integer NOT NULL,
+	    date_vente date NOT NULL
+	);
+2022-11-07 12:42:52.980 UTC [31129] LOG:  duration: 2.805 ms
+2022-11-07 12:42:55.943 UTC [31129] LOG:  statement: BEGIN;
+2022-11-07 12:42:55.944 UTC [31129] LOG:  duration: 0.085 ms
+2022-11-07 12:42:55.944 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (1, 'cosmetiques, parfums');
+2022-11-07 12:42:55.945 UTC [31129] LOG:  duration: 0.758 ms
+2022-11-07 12:42:55.945 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (2, 'electronique');
+2022-11-07 12:42:55.945 UTC [31129] LOG:  duration: 0.263 ms
+2022-11-07 12:42:55.945 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (3, 'chimie');
+2022-11-07 12:42:55.945 UTC [31129] LOG:  duration: 0.150 ms
+2022-11-07 12:42:55.946 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (4, 'aliments');
+2022-11-07 12:42:55.946 UTC [31129] LOG:  duration: 0.113 ms
+2022-11-07 12:42:55.946 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (5, 'mecanique, machine_outils');
+2022-11-07 12:42:55.946 UTC [31129] LOG:  duration: 0.155 ms
+2022-11-07 12:42:55.946 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (6, 'logiciels');
+2022-11-07 12:42:55.946 UTC [31129] LOG:  duration: 0.085 ms
+2022-11-07 12:42:55.946 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (7, 'automobiles');
+2022-11-07 12:42:55.947 UTC [31129] LOG:  duration: 0.104 ms
+2022-11-07 12:42:55.947 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (8, 'aeronautique');
+2022-11-07 12:42:55.947 UTC [31129] LOG:  duration: 0.122 ms
+2022-11-07 12:42:55.947 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (9, 'textiles');
+2022-11-07 12:42:55.947 UTC [31129] LOG:  duration: 0.088 ms
+2022-11-07 12:42:55.947 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (10, 'pharmacie, genie genetique');
+2022-11-07 12:42:55.947 UTC [31129] LOG:  duration: 0.139 ms
+2022-11-07 12:42:55.947 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (11, 'vetements, accessoires');
+2022-11-07 12:42:55.948 UTC [31129] LOG:  duration: 0.296 ms
+2022-11-07 12:42:55.948 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (12, 'imprimerie');
+2022-11-07 12:42:55.948 UTC [31129] LOG:  duration: 0.228 ms
+2022-11-07 12:42:55.948 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (13, 'cinema, radio, television');
+2022-11-07 12:42:55.949 UTC [31129] LOG:  duration: 0.216 ms
+2022-11-07 12:42:55.949 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (14, 'publicite, affichage');
+2022-11-07 12:42:55.949 UTC [31129] LOG:  duration: 0.195 ms
+2022-11-07 12:42:55.949 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (15, 'bureautique');
+2022-11-07 12:42:55.949 UTC [31129] LOG:  duration: 0.173 ms
+2022-11-07 12:42:55.950 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (16, 'materiel medical');
+2022-11-07 12:42:55.950 UTC [31129] LOG:  duration: 0.210 ms
+2022-11-07 12:42:55.950 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (17, 'hydraulique');
+2022-11-07 12:42:55.950 UTC [31129] LOG:  duration: 0.195 ms
+2022-11-07 12:42:55.950 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (18, 'agriculture');
+2022-11-07 12:42:55.950 UTC [31129] LOG:  duration: 0.204 ms
+2022-11-07 12:42:55.951 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (19, 'batiment, travaux-publics');
+2022-11-07 12:42:55.951 UTC [31129] LOG:  duration: 0.144 ms
+2022-11-07 12:42:55.951 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (20, 'juridique');
+2022-11-07 12:42:55.951 UTC [31129] LOG:  duration: 0.183 ms
+2022-11-07 12:42:55.951 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (21, 'sante');
+2022-11-07 12:42:55.951 UTC [31129] LOG:  duration: 0.137 ms
+2022-11-07 12:42:55.951 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (22, 'hotellerie, tourisme');
+2022-11-07 12:42:55.951 UTC [31129] LOG:  duration: 0.051 ms
+2022-11-07 12:42:55.951 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (23, 'commercial');
+2022-11-07 12:42:55.952 UTC [31129] LOG:  duration: 0.147 ms
+2022-11-07 12:42:55.952 UTC [31129] LOG:  statement: INSERT INTO classe VALUES (24, 'petro-chimie');
+2022-11-07 12:42:55.952 UTC [31129] LOG:  duration: 0.158 ms
+2022-11-07 12:42:55.952 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (1, 1100, 'US', 1, '2012-02-02');
+2022-11-07 12:42:55.952 UTC [31129] LOG:  duration: 0.449 ms
+2022-11-07 12:42:55.952 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (19, 22200, 'US', 46, '2020-11-01');
+2022-11-07 12:42:55.953 UTC [31129] LOG:  duration: 0.181 ms
+2022-11-07 12:42:55.953 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (20, 32500, 'US', 46, '2021-01-01');
+2022-11-07 12:42:55.953 UTC [31129] LOG:  duration: 0.171 ms
+2022-11-07 12:42:55.953 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (45, 72510, 'US', 28, '2025-01-01');
+2022-11-07 12:42:55.953 UTC [31129] LOG:  duration: 0.132 ms
+2022-11-07 12:42:55.953 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (67, 170550, 'US', 28, '2035-01-01');
+2022-11-07 12:42:55.953 UTC [31129] LOG:  duration: 0.049 ms
+2022-11-07 12:42:55.953 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (21, 308500, 'US', 46, '2050-01-01');
+2022-11-07 12:42:55.953 UTC [31129] LOG:  duration: 0.049 ms
+2022-11-07 12:42:55.953 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (48, 309610, 'US', 20, '2050-01-01');
+2022-11-07 12:42:55.953 UTC [31129] LOG:  duration: 0.049 ms
+2022-11-07 12:42:55.953 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (28, 410501, 'US', 46, '2067-01-01');
+2022-11-07 12:42:55.953 UTC [31129] LOG:  duration: 0.048 ms
+2022-11-07 12:42:55.953 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (41, 425561, 'US', 28, '2068-04-01');
+2022-11-07 12:42:55.954 UTC [31129] LOG:  duration: 0.049 ms
+2022-11-07 12:42:55.954 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (72, 440931, 'US', 27, '1970-05-10');
+2022-11-07 12:42:55.954 UTC [31129] LOG:  duration: 0.048 ms
+2022-11-07 12:42:55.954 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (3, 520550, 'US', 1, '1978-02-02');
+2022-11-07 12:42:55.954 UTC [31129] LOG:  duration: 0.069 ms
+2022-11-07 12:42:55.954 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (4, 530575, 'US', 46, '1979-02-02');
+2022-11-07 12:42:55.954 UTC [31129] LOG:  duration: 0.168 ms
+2022-11-07 12:42:55.954 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (77, 530679, 'US', 27, '1979-02-02');
+2022-11-07 12:42:55.954 UTC [31129] LOG:  duration: 0.164 ms
+2022-11-07 12:42:55.954 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (2, 620200, 'US', 1, '1982-03-01');
+2022-11-07 12:42:55.954 UTC [31129] LOG:  duration: 0.182 ms
+2022-11-07 12:42:55.955 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (32, 630200, 'US', 47, '1983-03-01');
+2022-11-07 12:42:55.955 UTC [31129] LOG:  duration: 0.189 ms
+2022-11-07 12:42:55.955 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (85, 630310, 'US', 21, '1983-04-01');
+2022-11-07 12:42:55.955 UTC [31129] LOG:  duration: 0.174 ms
+2022-11-07 12:42:55.955 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (54, 632405, 'US', 9, '1983-04-01');
+2022-11-07 12:42:55.955 UTC [31129] LOG:  duration: 0.200 ms
+2022-11-07 12:42:55.955 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (37, 652505, 'US', 26, '1988-04-01');
+2022-11-07 12:42:55.956 UTC [31129] LOG:  duration: 0.185 ms
+2022-11-07 12:42:55.956 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (63, 700250, 'US', 28, '1990-05-01');
+2022-11-07 12:42:55.956 UTC [31129] LOG:  duration: 0.184 ms
+2022-11-07 12:42:55.956 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (58, 731220, 'US', 9, '1993-01-01');
+2022-11-07 12:42:55.956 UTC [31129] LOG:  duration: 0.053 ms
+2022-11-07 12:42:55.956 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (13, 11000, 'DE', 1, '2012-02-02');
+2022-11-07 12:42:55.956 UTC [31129] LOG:  duration: 0.047 ms
+2022-11-07 12:42:55.956 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (25, 22200, 'DE', 46, '2020-11-01');
+2022-11-07 12:42:55.956 UTC [31129] LOG:  duration: 0.106 ms
+2022-11-07 12:42:55.956 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (26, 32600, 'DE', 46, '2021-01-01');
+2022-11-07 12:42:55.956 UTC [31129] LOG:  duration: 0.083 ms
+2022-11-07 12:42:55.957 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (46, 73510, 'DE', 20, '2025-01-01');
+2022-11-07 12:42:55.957 UTC [31129] LOG:  duration: 0.045 ms
+2022-11-07 12:42:55.957 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (68, 171551, 'DE', 24, '2035-01-01');
+2022-11-07 12:42:55.957 UTC [31129] LOG:  duration: 0.156 ms
+2022-11-07 12:42:55.957 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (49, 309330, 'DE', 20, '2050-02-01');
+2022-11-07 12:42:55.957 UTC [31129] LOG:  duration: 0.049 ms
+2022-11-07 12:42:55.957 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (29, 411567, 'DE', 48, '2067-01-01');
+2022-11-07 12:42:55.957 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:55.957 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (42, 426589, 'DE', 26, '2068-04-01');
+2022-11-07 12:42:55.957 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:55.957 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (73, 441990, 'DE', 27, '1970-05-10');
+2022-11-07 12:42:55.957 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:55.957 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (15, 521570, 'DE', 1, '1978-02-02');
+2022-11-07 12:42:55.957 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:55.957 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (17, 521571, 'DE', 1, '1978-02-02');
+2022-11-07 12:42:55.957 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.957 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (16, 531575, 'DE', 46, '1979-02-02');
+2022-11-07 12:42:55.957 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.957 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (78, 530678, 'DE', 27, '1979-02-02');
+2022-11-07 12:42:55.957 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:55.958 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (14, 625600, 'DE', 1, '1982-03-01');
+2022-11-07 12:42:55.958 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.958 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (33, 631400, 'DE', 47, '1983-03-01');
+2022-11-07 12:42:55.958 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:55.958 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (86, 634310, 'DE', 21, '1983-04-01');
+2022-11-07 12:42:55.958 UTC [31129] LOG:  duration: 0.056 ms
+2022-11-07 12:42:55.958 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (55, 635444, 'DE', 9, '1983-04-01');
+2022-11-07 12:42:55.958 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:55.958 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (38, 652505, 'DE', 26, '1988-04-01');
+2022-11-07 12:42:55.958 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:55.958 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (64, 701250, 'DE', 20, '1990-05-01');
+2022-11-07 12:42:55.958 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:55.958 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (9, 11100, 'UK', 1, '2012-02-02');
+2022-11-07 12:42:55.958 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:55.958 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (81, 23200, 'UK', 46, '2020-11-01');
+2022-11-07 12:42:55.958 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.958 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (82, 32600, 'UK', 46, '2021-01-01');
+2022-11-07 12:42:55.958 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:55.958 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (69, 171551, 'UK', 24, '2035-01-01');
+2022-11-07 12:42:55.958 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.958 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (83, 300700, 'UK', 46, '2050-01-01');
+2022-11-07 12:42:55.958 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:55.958 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (50, 306330, 'UK', 20, '2050-02-01');
+2022-11-07 12:42:55.958 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:55.958 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (30, 412567, 'UK', 48, '2067-01-01');
+2022-11-07 12:42:55.958 UTC [31129] LOG:  duration: 0.050 ms
+2022-11-07 12:42:55.959 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (43, 426449, 'UK', 26, '2068-04-01');
+2022-11-07 12:42:55.959 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.959 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (74, 441990, 'UK', 27, '1970-05-10');
+2022-11-07 12:42:55.959 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:55.959 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (11, 522570, 'UK', 1, '1978-02-02');
+2022-11-07 12:42:55.959 UTC [31129] LOG:  duration: 0.093 ms
+2022-11-07 12:42:55.959 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (12, 531675, 'UK', 46, '1979-02-02');
+2022-11-07 12:42:55.959 UTC [31129] LOG:  duration: 0.081 ms
+2022-11-07 12:42:55.959 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (79, 530678, 'UK', 27, '1979-02-02');
+2022-11-07 12:42:55.959 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:55.959 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (10, 625700, 'UK', 1, '1982-03-01');
+2022-11-07 12:42:55.959 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.959 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (34, 632400, 'UK', 47, '1983-03-01');
+2022-11-07 12:42:55.959 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.959 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (87, 634510, 'UK', 21, '1983-04-01');
+2022-11-07 12:42:55.959 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:55.959 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (56, 636484, 'UK', 9, '1983-04-01');
+2022-11-07 12:42:55.959 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:55.959 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (39, 653605, 'UK', 26, '1988-04-01');
+2022-11-07 12:42:55.959 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.959 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (65, 701350, 'UK', 20, '1990-05-01');
+2022-11-07 12:42:55.959 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.959 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (60, 731250, 'UK', 9, '1993-05-01');
+2022-11-07 12:42:55.960 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:55.960 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (5, 11101, 'FR', 1, '2012-02-02');
+2022-11-07 12:42:55.960 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:55.960 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (22, 23201, 'FR', 46, '2020-11-01');
+2022-11-07 12:42:55.960 UTC [31129] LOG:  duration: 0.093 ms
+2022-11-07 12:42:55.960 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (23, 32601, 'FR', 46, '2021-01-01');
+2022-11-07 12:42:55.960 UTC [31129] LOG:  duration: 0.172 ms
+2022-11-07 12:42:55.960 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (44, 73511, 'FR', 20, '2025-01-01');
+2022-11-07 12:42:55.960 UTC [31129] LOG:  duration: 0.194 ms
+2022-11-07 12:42:55.961 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (66, 171555, 'FR', 24, '2035-01-01');
+2022-11-07 12:42:55.961 UTC [31129] LOG:  duration: 0.218 ms
+2022-11-07 12:42:55.961 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (24, 300700, 'FR', 46, '2050-01-01');
+2022-11-07 12:42:55.961 UTC [31129] LOG:  duration: 0.241 ms
+2022-11-07 12:42:55.961 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (47, 306361, 'FR', 20, '2050-02-01');
+2022-11-07 12:42:55.961 UTC [31129] LOG:  duration: 0.081 ms
+2022-11-07 12:42:55.961 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (27, 412568, 'FR', 48, '2067-01-01');
+2022-11-07 12:42:55.962 UTC [31129] LOG:  duration: 0.093 ms
+2022-11-07 12:42:55.962 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (40, 426440, 'FR', 26, '2068-04-01');
+2022-11-07 12:42:55.962 UTC [31129] LOG:  duration: 0.212 ms
+2022-11-07 12:42:55.962 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (71, 443990, 'FR', 27, '1970-05-10');
+2022-11-07 12:42:55.962 UTC [31129] LOG:  duration: 0.198 ms
+2022-11-07 12:42:55.963 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (7, 522572, 'FR', 1, '1978-02-02');
+2022-11-07 12:42:55.963 UTC [31129] LOG:  duration: 0.291 ms
+2022-11-07 12:42:55.963 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (8, 534675, 'FR', 46, '1979-02-02');
+2022-11-07 12:42:55.963 UTC [31129] LOG:  duration: 0.200 ms
+2022-11-07 12:42:55.964 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (76, 534678, 'FR', 27, '1979-02-02');
+2022-11-07 12:42:55.964 UTC [31129] LOG:  duration: 0.182 ms
+2022-11-07 12:42:55.964 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (6, 625900, 'FR', 1, '1982-03-01');
+2022-11-07 12:42:55.964 UTC [31129] LOG:  duration: 0.193 ms
+2022-11-07 12:42:55.964 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (31, 635400, 'FR', 47, '1983-03-01');
+2022-11-07 12:42:55.964 UTC [31129] LOG:  duration: 0.169 ms
+2022-11-07 12:42:55.965 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (84, 636510, 'FR', 21, '1983-04-01');
+2022-11-07 12:42:55.965 UTC [31129] LOG:  duration: 0.269 ms
+2022-11-07 12:42:55.965 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (53, 637484, 'FR', 14, '1983-04-01');
+2022-11-07 12:42:55.965 UTC [31129] LOG:  duration: 0.195 ms
+2022-11-07 12:42:55.965 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (36, 653605, 'FR', 26, '1988-04-01');
+2022-11-07 12:42:55.965 UTC [31129] LOG:  duration: 0.170 ms
+2022-11-07 12:42:55.966 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (62, 701350, 'FR', 20, '1990-05-01');
+2022-11-07 12:42:55.966 UTC [31129] LOG:  duration: 0.267 ms
+2022-11-07 12:42:55.966 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (61, 731290, 'FR', 9, '1993-05-01');
+2022-11-07 12:42:55.966 UTC [31129] LOG:  duration: 0.197 ms
+2022-11-07 12:42:55.966 UTC [31129] LOG:  statement: INSERT INTO enr VALUES (89, 720402, 'MX', 31, '1992-05-01');
+2022-11-07 12:42:55.966 UTC [31129] LOG:  duration: 0.180 ms
+2022-11-07 12:42:55.967 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (1, 'Coca Cola', 4, 'US', 1);
+2022-11-07 12:42:55.967 UTC [31129] LOG:  duration: 0.612 ms
+2022-11-07 12:42:55.967 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (2, 'Coca Cola Light', 4, 'US', 1);
+2022-11-07 12:42:55.968 UTC [31129] LOG:  duration: 0.214 ms
+2022-11-07 12:42:55.968 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (3, 'Coke', 4, 'US', 1);
+2022-11-07 12:42:55.968 UTC [31129] LOG:  duration: 0.174 ms
+2022-11-07 12:42:55.968 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (4, 'Sprite', 4, 'US', 1);
+2022-11-07 12:42:55.968 UTC [31129] LOG:  duration: 0.188 ms
+2022-11-07 12:42:55.968 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (5, 'Coca Cola', 4, 'FR', 1);
+2022-11-07 12:42:55.968 UTC [31129] LOG:  duration: 0.127 ms
+2022-11-07 12:42:55.968 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (6, 'Coca Cola Light', 4, 'FR', 1);
+2022-11-07 12:42:55.968 UTC [31129] LOG:  duration: 0.065 ms
+2022-11-07 12:42:55.969 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (7, 'Coke', 4, 'FR', 2);
+2022-11-07 12:42:55.969 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:55.969 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (8, 'Sprite', 4, 'FR', 2);
+2022-11-07 12:42:55.969 UTC [31129] LOG:  duration: 0.125 ms
+2022-11-07 12:42:55.969 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (9, 'Coca Cola', 4, 'UK', 1);
+2022-11-07 12:42:55.969 UTC [31129] LOG:  duration: 0.124 ms
+2022-11-07 12:42:55.969 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (10, 'Coca Cola Light', 4, 'UK', 1);
+2022-11-07 12:42:55.969 UTC [31129] LOG:  duration: 0.149 ms
+2022-11-07 12:42:55.969 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (11, 'Coke', 4, 'UK', 1);
+2022-11-07 12:42:55.969 UTC [31129] LOG:  duration: 0.081 ms
+2022-11-07 12:42:55.969 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (12, 'Sprite', 4, 'UK', 1);
+2022-11-07 12:42:55.969 UTC [31129] LOG:  duration: 0.066 ms
+2022-11-07 12:42:55.970 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (13, 'Coca Cola', 4, 'DE', 3);
+2022-11-07 12:42:55.970 UTC [31129] LOG:  duration: 0.123 ms
+2022-11-07 12:42:55.970 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (14, 'Coca Cola Light', 4, 'DE', 3);
+2022-11-07 12:42:55.970 UTC [31129] LOG:  duration: 0.103 ms
+2022-11-07 12:42:55.970 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (15, 'Coke', 4, 'DE', 3);
+2022-11-07 12:42:55.970 UTC [31129] LOG:  duration: 0.131 ms
+2022-11-07 12:42:55.970 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (16, 'Sprite', 4, 'DE', 3);
+2022-11-07 12:42:55.970 UTC [31129] LOG:  duration: 0.161 ms
+2022-11-07 12:42:55.970 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (17, 'KOKE', 4, 'DE', 3);
+2022-11-07 12:42:55.970 UTC [31129] LOG:  duration: 0.067 ms
+2022-11-07 12:42:55.971 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (18, 'Cola', 4, 'FR', 2);
+2022-11-07 12:42:55.971 UTC [31129] LOG:  duration: 0.177 ms
+2022-11-07 12:42:55.971 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (19, 'Pepsi Cola', 4, 'US', 46);
+2022-11-07 12:42:55.971 UTC [31129] LOG:  duration: 0.151 ms
+2022-11-07 12:42:55.971 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (20, 'PEPSI', 4, 'US', 46);
+2022-11-07 12:42:55.971 UTC [31129] LOG:  duration: 0.174 ms
+2022-11-07 12:42:55.972 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (21, 'Schweepes', 4, 'US', 46);
+2022-11-07 12:42:55.972 UTC [31129] LOG:  duration: 0.200 ms
+2022-11-07 12:42:55.972 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (22, 'Pepsi Cola', 4, 'FR', 48);
+2022-11-07 12:42:55.972 UTC [31129] LOG:  duration: 0.187 ms
+2022-11-07 12:42:55.972 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (23, 'PEPSI', 4, 'FR', 48);
+2022-11-07 12:42:55.972 UTC [31129] LOG:  duration: 0.171 ms
+2022-11-07 12:42:55.973 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (24, 'Schweepes', 4, 'FR', 46);
+2022-11-07 12:42:55.973 UTC [31129] LOG:  duration: 0.247 ms
+2022-11-07 12:42:55.973 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (25, 'Pepsi Cola', 4, 'DE', 49);
+2022-11-07 12:42:55.973 UTC [31129] LOG:  duration: 0.171 ms
+2022-11-07 12:42:55.973 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (26, 'PEPSI', 4, 'DE', 49);
+2022-11-07 12:42:55.973 UTC [31129] LOG:  duration: 0.167 ms
+2022-11-07 12:42:55.974 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (27, 'Orangina', 4, 'FR', 48);
+2022-11-07 12:42:55.974 UTC [31129] LOG:  duration: 0.193 ms
+2022-11-07 12:42:55.974 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (28, 'Orangina', 4, 'US', 48);
+2022-11-07 12:42:55.974 UTC [31129] LOG:  duration: 0.170 ms
+2022-11-07 12:42:55.974 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (29, 'Orangina', 4, 'DE', 48);
+2022-11-07 12:42:55.975 UTC [31129] LOG:  duration: 0.166 ms
+2022-11-07 12:42:55.975 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (30, 'Orangina', 4, 'UK', 48);
+2022-11-07 12:42:55.975 UTC [31129] LOG:  duration: 0.203 ms
+2022-11-07 12:42:55.975 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (31, 'Danone', 4, 'FR', 47);
+2022-11-07 12:42:55.975 UTC [31129] LOG:  duration: 0.176 ms
+2022-11-07 12:42:55.975 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (32, 'Danone', 4, 'US', 47);
+2022-11-07 12:42:55.976 UTC [31129] LOG:  duration: 0.176 ms
+2022-11-07 12:42:55.976 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (33, 'Danone', 4, 'DE', 47);
+2022-11-07 12:42:55.976 UTC [31129] LOG:  duration: 0.130 ms
+2022-11-07 12:42:55.976 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (34, 'Danone', 4, 'UK', 47);
+2022-11-07 12:42:55.976 UTC [31129] LOG:  duration: 0.166 ms
+2022-11-07 12:42:55.976 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (35, 'Dune', 4, 'FR', 47);
+2022-11-07 12:42:55.976 UTC [31129] LOG:  duration: 0.164 ms
+2022-11-07 12:42:55.977 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (36, 'Shalimar', 1, 'FR', 26);
+2022-11-07 12:42:55.977 UTC [31129] LOG:  duration: 0.190 ms
+2022-11-07 12:42:55.977 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (37, 'Shalimar', 1, 'US', 26);
+2022-11-07 12:42:55.977 UTC [31129] LOG:  duration: 0.171 ms
+2022-11-07 12:42:55.977 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (38, 'Shalimar', 1, 'DE', 26);
+2022-11-07 12:42:55.977 UTC [31129] LOG:  duration: 0.169 ms
+2022-11-07 12:42:55.978 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (39, 'Shalimar', 1, 'UK', 26);
+2022-11-07 12:42:55.978 UTC [31129] LOG:  duration: 0.202 ms
+2022-11-07 12:42:55.978 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (40, 'Passion', 1, 'FR', 26);
+2022-11-07 12:42:55.978 UTC [31129] LOG:  duration: 0.179 ms
+2022-11-07 12:42:55.978 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (41, 'Passion', 1, 'US', 26);
+2022-11-07 12:42:55.978 UTC [31129] LOG:  duration: 0.169 ms
+2022-11-07 12:42:55.979 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (42, 'Passion', 1, 'DE', 26);
+2022-11-07 12:42:55.979 UTC [31129] LOG:  duration: 0.113 ms
+2022-11-07 12:42:55.979 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (43, 'Passion', 1, 'UK', 26);
+2022-11-07 12:42:55.979 UTC [31129] LOG:  duration: 0.165 ms
+2022-11-07 12:42:55.979 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (44, 'Dune', 1, 'FR', 20);
+2022-11-07 12:42:55.979 UTC [31129] LOG:  duration: 0.167 ms
+2022-11-07 12:42:55.979 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (45, 'Dune', 1, 'US', 20);
+2022-11-07 12:42:55.980 UTC [31129] LOG:  duration: 0.170 ms
+2022-11-07 12:42:55.980 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (46, 'Dune', 1, 'DE', 20);
+2022-11-07 12:42:55.980 UTC [31129] LOG:  duration: 0.174 ms
+2022-11-07 12:42:55.980 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (47, 'Miss Dior', 1, 'FR', 20);
+2022-11-07 12:42:55.980 UTC [31129] LOG:  duration: 0.091 ms
+2022-11-07 12:42:55.980 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (48, 'Miss Dior', 1, 'US', 20);
+2022-11-07 12:42:55.980 UTC [31129] LOG:  duration: 0.148 ms
+2022-11-07 12:42:55.980 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (49, 'Miss Dior', 1, 'DE', 20);
+2022-11-07 12:42:55.981 UTC [31129] LOG:  duration: 0.077 ms
+2022-11-07 12:42:55.981 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (50, 'Miss Dior', 1, 'UK', 20);
+2022-11-07 12:42:55.981 UTC [31129] LOG:  duration: 0.244 ms
+2022-11-07 12:42:55.981 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (51, 'Miss Dior', 1, 'MX', 50);
+2022-11-07 12:42:55.981 UTC [31129] LOG:  duration: 0.169 ms
+2022-11-07 12:42:55.981 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (52, 'Dune', 1, 'MX', 50);
+2022-11-07 12:42:55.982 UTC [31129] LOG:  duration: 0.162 ms
+2022-11-07 12:42:55.982 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (53, 'ORACLE', 6, 'FR', 10);
+2022-11-07 12:42:55.982 UTC [31129] LOG:  duration: 0.179 ms
+2022-11-07 12:42:55.982 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (54, 'ORACLE', 6, 'US', 9);
+2022-11-07 12:42:55.982 UTC [31129] LOG:  duration: 0.160 ms
+2022-11-07 12:42:55.983 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (55, 'ORACLE', 6, 'DE', 12);
+2022-11-07 12:42:55.983 UTC [31129] LOG:  duration: 0.251 ms
+2022-11-07 12:42:55.983 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (56, 'ORACLE', 6, 'UK', 11);
+2022-11-07 12:42:55.983 UTC [31129] LOG:  duration: 0.203 ms
+2022-11-07 12:42:55.983 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (57, 'ORACLE7', 6, 'FR', 9);
+2022-11-07 12:42:55.983 UTC [31129] LOG:  duration: 0.194 ms
+2022-11-07 12:42:55.984 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (58, 'ORACLE7', 6, 'US', 9);
+2022-11-07 12:42:55.984 UTC [31129] LOG:  duration: 0.225 ms
+2022-11-07 12:42:55.984 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (59, 'ORACLE7', 6, 'DE', 9);
+2022-11-07 12:42:55.984 UTC [31129] LOG:  duration: 0.179 ms
+2022-11-07 12:42:55.984 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (60, 'ORACLE7', 6, 'UK', 9);
+2022-11-07 12:42:55.984 UTC [31129] LOG:  duration: 0.169 ms
+2022-11-07 12:42:55.985 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (61, 'ORACLE', 11, 'FR', 26);
+2022-11-07 12:42:55.985 UTC [31129] LOG:  duration: 0.048 ms
+2022-11-07 12:42:55.985 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (62, 'Dune', 11, 'FR', 20);
+2022-11-07 12:42:55.985 UTC [31129] LOG:  duration: 0.047 ms
+2022-11-07 12:42:55.985 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (63, 'Dune', 11, 'US', 28);
+2022-11-07 12:42:55.985 UTC [31129] LOG:  duration: 0.148 ms
+2022-11-07 12:42:55.985 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (64, 'Dune', 11, 'DE', 20);
+2022-11-07 12:42:55.985 UTC [31129] LOG:  duration: 0.135 ms
+2022-11-07 12:42:55.985 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (65, 'Dune', 11, 'UK', 20);
+2022-11-07 12:42:55.985 UTC [31129] LOG:  duration: 0.140 ms
+2022-11-07 12:42:55.985 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (66, 'Lanvin', 11, 'FR', 21);
+2022-11-07 12:42:55.985 UTC [31129] LOG:  duration: 0.057 ms
+2022-11-07 12:42:55.986 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (67, 'Lanvin', 11, 'US', 21);
+2022-11-07 12:42:55.986 UTC [31129] LOG:  duration: 0.134 ms
+2022-11-07 12:42:55.986 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (68, 'Lanvin', 11, 'DE', 21);
+2022-11-07 12:42:55.986 UTC [31129] LOG:  duration: 0.228 ms
+2022-11-07 12:42:55.986 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (69, 'Lanvin', 11, 'UK', 21);
+2022-11-07 12:42:55.986 UTC [31129] LOG:  duration: 0.200 ms
+2022-11-07 12:42:55.986 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (70, 'Coup de Coeur', 11, 'MX', 50);
+2022-11-07 12:42:55.986 UTC [31129] LOG:  duration: 0.147 ms
+2022-11-07 12:42:55.987 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (71, 'Exorcyl', 10, 'FR', 27);
+2022-11-07 12:42:55.987 UTC [31129] LOG:  duration: 0.062 ms
+2022-11-07 12:42:55.987 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (72, 'Exorcyl', 10, 'US', 27);
+2022-11-07 12:42:55.987 UTC [31129] LOG:  duration: 0.159 ms
+2022-11-07 12:42:55.987 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (73, 'Exorcyl', 10, 'DE', 31);
+2022-11-07 12:42:55.987 UTC [31129] LOG:  duration: 0.174 ms
+2022-11-07 12:42:55.987 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (74, 'Exorcyl', 10, 'UK', 27);
+2022-11-07 12:42:55.987 UTC [31129] LOG:  duration: 0.050 ms
+2022-11-07 12:42:55.987 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (75, 'Exorcyl', 10, 'MX', 27);
+2022-11-07 12:42:55.987 UTC [31129] LOG:  duration: 0.047 ms
+2022-11-07 12:42:55.987 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (76, 'Drobsol', 10, 'FR', 27);
+2022-11-07 12:42:55.987 UTC [31129] LOG:  duration: 0.047 ms
+2022-11-07 12:42:55.987 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (77, 'Drobsol', 10, 'US', 27);
+2022-11-07 12:42:55.987 UTC [31129] LOG:  duration: 0.045 ms
+2022-11-07 12:42:55.988 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (78, 'Drobsol', 10, 'DE', 31);
+2022-11-07 12:42:55.988 UTC [31129] LOG:  duration: 0.056 ms
+2022-11-07 12:42:55.988 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (79, 'Drobsol', 10, 'UK', 27);
+2022-11-07 12:42:55.988 UTC [31129] LOG:  duration: 0.045 ms
+2022-11-07 12:42:55.988 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (80, 'Drobsol', 10, 'MX', 27);
+2022-11-07 12:42:55.988 UTC [31129] LOG:  duration: 0.048 ms
+2022-11-07 12:42:55.988 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (81, 'Pepsi Cola', 4, 'UK', 46);
+2022-11-07 12:42:55.988 UTC [31129] LOG:  duration: 0.048 ms
+2022-11-07 12:42:55.988 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (82, 'PEPSI', 4, 'UK', 46);
+2022-11-07 12:42:55.988 UTC [31129] LOG:  duration: 0.045 ms
+2022-11-07 12:42:55.988 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (83, 'Schweepes', 4, 'UK', 46);
+2022-11-07 12:42:55.988 UTC [31129] LOG:  duration: 0.046 ms
+2022-11-07 12:42:55.988 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (84, 'Coup de Coeur', 11, 'FR', 21);
+2022-11-07 12:42:55.988 UTC [31129] LOG:  duration: 0.045 ms
+2022-11-07 12:42:55.988 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (85, 'Coup de Coeur', 11, 'US', 21);
+2022-11-07 12:42:55.988 UTC [31129] LOG:  duration: 0.046 ms
+2022-11-07 12:42:55.988 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (86, 'Coup de Coeur', 11, 'DE', 21);
+2022-11-07 12:42:55.988 UTC [31129] LOG:  duration: 0.045 ms
+2022-11-07 12:42:55.988 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (87, 'Coup de Coeur', 11, 'UK', 21);
+2022-11-07 12:42:55.988 UTC [31129] LOG:  duration: 0.047 ms
+2022-11-07 12:42:55.988 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (88, 'Cortisol', 10, 'FR', 31);
+2022-11-07 12:42:55.988 UTC [31129] LOG:  duration: 0.045 ms
+2022-11-07 12:42:55.988 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (89, 'Cortisol', 10, 'US', 31);
+2022-11-07 12:42:55.988 UTC [31129] LOG:  duration: 0.047 ms
+2022-11-07 12:42:55.989 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (90, 'Cortisol', 10, 'DE', 31);
+2022-11-07 12:42:55.989 UTC [31129] LOG:  duration: 0.046 ms
+2022-11-07 12:42:55.989 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (91, 'Cortislo', 10, 'UK', 31);
+2022-11-07 12:42:55.989 UTC [31129] LOG:  duration: 0.046 ms
+2022-11-07 12:42:55.989 UTC [31129] LOG:  statement: INSERT INTO marque VALUES (92, 'Cortisol', 10, 'MX', 31);
+2022-11-07 12:42:55.989 UTC [31129] LOG:  duration: 0.050 ms
+2022-11-07 12:42:55.989 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('AF', 'Afghanistan');
+2022-11-07 12:42:55.989 UTC [31129] LOG:  duration: 0.380 ms
+2022-11-07 12:42:55.989 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('AL', 'Albania');
+2022-11-07 12:42:55.989 UTC [31129] LOG:  duration: 0.200 ms
+2022-11-07 12:42:55.990 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('DZ', 'Algeria');
+2022-11-07 12:42:55.990 UTC [31129] LOG:  duration: 0.064 ms
+2022-11-07 12:42:55.990 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('AS', 'American Samoa');
+2022-11-07 12:42:55.990 UTC [31129] LOG:  duration: 0.171 ms
+2022-11-07 12:42:55.990 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('AD', 'Andorra');
+2022-11-07 12:42:55.990 UTC [31129] LOG:  duration: 0.071 ms
+2022-11-07 12:42:55.990 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('AO', 'Angola');
+2022-11-07 12:42:55.990 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:55.990 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('AI', 'Anguilla');
+2022-11-07 12:42:55.990 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:55.990 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('AQ', 'Antarctica');
+2022-11-07 12:42:55.990 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:55.990 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('AG', 'Antigua and Barbuda');
+2022-11-07 12:42:55.990 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.990 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('AR', 'Argentina');
+2022-11-07 12:42:55.990 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.990 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('AM', 'Armenia');
+2022-11-07 12:42:55.990 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:55.990 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('AW', 'Aruba');
+2022-11-07 12:42:55.991 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.991 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('AU', 'Australia');
+2022-11-07 12:42:55.991 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:55.991 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('AT', 'Austria');
+2022-11-07 12:42:55.991 UTC [31129] LOG:  duration: 0.050 ms
+2022-11-07 12:42:55.991 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('AZ', 'Azerbaijan');
+2022-11-07 12:42:55.991 UTC [31129] LOG:  duration: 0.122 ms
+2022-11-07 12:42:55.991 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BS', 'Bahamas');
+2022-11-07 12:42:55.991 UTC [31129] LOG:  duration: 0.056 ms
+2022-11-07 12:42:55.991 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BH', 'Bahrain');
+2022-11-07 12:42:55.991 UTC [31129] LOG:  duration: 0.046 ms
+2022-11-07 12:42:55.991 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BD', 'Bangladesh');
+2022-11-07 12:42:55.991 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:55.991 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BB', 'Barbados');
+2022-11-07 12:42:55.991 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.991 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BY', 'Belarus');
+2022-11-07 12:42:55.991 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:55.991 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BE', 'Belgium');
+2022-11-07 12:42:55.991 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:55.991 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BZ', 'Belize');
+2022-11-07 12:42:55.991 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:55.991 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BJ', 'Benin');
+2022-11-07 12:42:55.991 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.992 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BM', 'Bermuda');
+2022-11-07 12:42:55.992 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:55.992 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BT', 'Bhutan');
+2022-11-07 12:42:55.992 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.992 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BO', 'Bolivia');
+2022-11-07 12:42:55.992 UTC [31129] LOG:  duration: 0.046 ms
+2022-11-07 12:42:55.992 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BA', 'Bosnia and Herzegovina');
+2022-11-07 12:42:55.992 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.992 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BW', 'Botswana');
+2022-11-07 12:42:55.992 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.992 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BV', 'Bouvet Island');
+2022-11-07 12:42:55.992 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:55.992 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BR', 'Brazil');
+2022-11-07 12:42:55.992 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:55.992 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('IO', 'British Indian Ocean Territory');
+2022-11-07 12:42:55.992 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:55.992 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BN', 'Brunei Darussalam');
+2022-11-07 12:42:55.992 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.992 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BG', 'Bulgaria');
+2022-11-07 12:42:55.992 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:55.992 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BF', 'Burkina Faso');
+2022-11-07 12:42:55.992 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.992 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('BI', 'Burundi');
+2022-11-07 12:42:55.992 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:55.992 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('KH', 'Cambodia');
+2022-11-07 12:42:55.992 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:55.993 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('CM', 'Cameroon');
+2022-11-07 12:42:55.993 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:55.993 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('CA', 'Canada');
+2022-11-07 12:42:55.993 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.993 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('CV', 'Cape Verde');
+2022-11-07 12:42:55.993 UTC [31129] LOG:  duration: 0.056 ms
+2022-11-07 12:42:55.993 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('KY', 'Cayman Islands');
+2022-11-07 12:42:55.993 UTC [31129] LOG:  duration: 0.093 ms
+2022-11-07 12:42:55.993 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('CF', 'Central African Republic');
+2022-11-07 12:42:55.993 UTC [31129] LOG:  duration: 0.046 ms
+2022-11-07 12:42:55.993 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('TD', 'Chad');
+2022-11-07 12:42:55.993 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.993 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('NU', 'Niue');
+2022-11-07 12:42:55.993 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.993 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('CL', 'Chile');
+2022-11-07 12:42:55.993 UTC [31129] LOG:  duration: 0.050 ms
+2022-11-07 12:42:55.993 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('CN', 'China');
+2022-11-07 12:42:55.993 UTC [31129] LOG:  duration: 0.046 ms
+2022-11-07 12:42:55.993 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('CX', 'Christmas Island');
+2022-11-07 12:42:55.993 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:55.993 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('CC', 'Cocos (Keeling Islands)');
+2022-11-07 12:42:55.993 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:55.994 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('CO', 'Colombia');
+2022-11-07 12:42:55.994 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:55.994 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('KM', 'Comoros');
+2022-11-07 12:42:55.994 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:55.994 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('CG', 'Congo');
+2022-11-07 12:42:55.994 UTC [31129] LOG:  duration: 0.195 ms
+2022-11-07 12:42:55.994 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('CK', 'Cook Islands');
+2022-11-07 12:42:55.994 UTC [31129] LOG:  duration: 0.160 ms
+2022-11-07 12:42:55.994 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('CR', 'Costa Rica');
+2022-11-07 12:42:55.994 UTC [31129] LOG:  duration: 0.186 ms
+2022-11-07 12:42:55.995 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('CI', 'Cote D''Ivoire (Ivory Coast)');
+2022-11-07 12:42:55.995 UTC [31129] LOG:  duration: 0.170 ms
+2022-11-07 12:42:55.995 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('HR', 'Croatia (Hrvatska');
+2022-11-07 12:42:55.995 UTC [31129] LOG:  duration: 0.205 ms
+2022-11-07 12:42:55.995 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('CU', 'Cuba');
+2022-11-07 12:42:55.995 UTC [31129] LOG:  duration: 0.089 ms
+2022-11-07 12:42:55.995 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('CY', 'Cyprus');
+2022-11-07 12:42:55.995 UTC [31129] LOG:  duration: 0.050 ms
+2022-11-07 12:42:55.995 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('CZ', 'Czech Republic');
+2022-11-07 12:42:55.995 UTC [31129] LOG:  duration: 0.049 ms
+2022-11-07 12:42:55.996 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('DK', 'Denmark');
+2022-11-07 12:42:55.996 UTC [31129] LOG:  duration: 0.241 ms
+2022-11-07 12:42:55.996 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('DJ', 'Djibouti');
+2022-11-07 12:42:55.996 UTC [31129] LOG:  duration: 0.173 ms
+2022-11-07 12:42:55.996 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('DM', 'Dominica');
+2022-11-07 12:42:55.997 UTC [31129] LOG:  duration: 0.170 ms
+2022-11-07 12:42:55.997 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('DO', 'Dominican Republic');
+2022-11-07 12:42:55.997 UTC [31129] LOG:  duration: 0.188 ms
+2022-11-07 12:42:55.997 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('TP', 'East Timor');
+2022-11-07 12:42:55.997 UTC [31129] LOG:  duration: 0.171 ms
+2022-11-07 12:42:55.997 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('EC', 'Ecuador');
+2022-11-07 12:42:55.998 UTC [31129] LOG:  duration: 0.220 ms
+2022-11-07 12:42:55.998 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('EG', 'Egypt');
+2022-11-07 12:42:55.998 UTC [31129] LOG:  duration: 0.172 ms
+2022-11-07 12:42:55.998 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('SV', 'El Salvador');
+2022-11-07 12:42:55.998 UTC [31129] LOG:  duration: 0.167 ms
+2022-11-07 12:42:55.998 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('GQ', 'Equatorial Guinea');
+2022-11-07 12:42:55.998 UTC [31129] LOG:  duration: 0.158 ms
+2022-11-07 12:42:55.998 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('ER', 'Eritrea');
+2022-11-07 12:42:55.999 UTC [31129] LOG:  duration: 0.055 ms
+2022-11-07 12:42:55.999 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('EE', 'Estonia');
+2022-11-07 12:42:55.999 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:55.999 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('ET', 'Ethiopia');
+2022-11-07 12:42:55.999 UTC [31129] LOG:  duration: 0.136 ms
+2022-11-07 12:42:55.999 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('FK', 'Falkland Islands (Malvinas)');
+2022-11-07 12:42:55.999 UTC [31129] LOG:  duration: 0.219 ms
+2022-11-07 12:42:55.999 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('FO', 'Faroe Islands');
+2022-11-07 12:42:55.999 UTC [31129] LOG:  duration: 0.165 ms
+2022-11-07 12:42:55.999 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('FJ', 'Fiji');
+2022-11-07 12:42:56.000 UTC [31129] LOG:  duration: 0.116 ms
+2022-11-07 12:42:56.000 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('FI', 'Finland');
+2022-11-07 12:42:56.000 UTC [31129] LOG:  duration: 0.184 ms
+2022-11-07 12:42:56.000 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('FX', 'FR, Metropolitan');
+2022-11-07 12:42:56.000 UTC [31129] LOG:  duration: 0.059 ms
+2022-11-07 12:42:56.000 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('GF', 'French Guiana');
+2022-11-07 12:42:56.000 UTC [31129] LOG:  duration: 0.047 ms
+2022-11-07 12:42:56.000 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('PF', 'French Polynesia');
+2022-11-07 12:42:56.000 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:56.000 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('TF', 'French Southern Territories');
+2022-11-07 12:42:56.000 UTC [31129] LOG:  duration: 0.046 ms
+2022-11-07 12:42:56.000 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('GA', 'Gabon');
+2022-11-07 12:42:56.000 UTC [31129] LOG:  duration: 0.047 ms
+2022-11-07 12:42:56.000 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('GM', 'Gambia');
+2022-11-07 12:42:56.000 UTC [31129] LOG:  duration: 0.045 ms
+2022-11-07 12:42:56.001 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('GE', 'Georgia');
+2022-11-07 12:42:56.001 UTC [31129] LOG:  duration: 0.046 ms
+2022-11-07 12:42:56.001 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('GH', 'Ghana');
+2022-11-07 12:42:56.001 UTC [31129] LOG:  duration: 0.065 ms
+2022-11-07 12:42:56.001 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('GI', 'Gibraltar');
+2022-11-07 12:42:56.001 UTC [31129] LOG:  duration: 0.168 ms
+2022-11-07 12:42:56.001 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('GR', 'Greece');
+2022-11-07 12:42:56.001 UTC [31129] LOG:  duration: 0.048 ms
+2022-11-07 12:42:56.001 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('GL', 'Greenland');
+2022-11-07 12:42:56.001 UTC [31129] LOG:  duration: 0.048 ms
+2022-11-07 12:42:56.001 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('GD', 'Grenada');
+2022-11-07 12:42:56.001 UTC [31129] LOG:  duration: 0.045 ms
+2022-11-07 12:42:56.001 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('GP', 'Guadeloupe');
+2022-11-07 12:42:56.001 UTC [31129] LOG:  duration: 0.048 ms
+2022-11-07 12:42:56.001 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('GU', 'Guam');
+2022-11-07 12:42:56.001 UTC [31129] LOG:  duration: 0.046 ms
+2022-11-07 12:42:56.001 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('GT', 'Guatemala');
+2022-11-07 12:42:56.001 UTC [31129] LOG:  duration: 0.048 ms
+2022-11-07 12:42:56.002 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('GN', 'Guinea');
+2022-11-07 12:42:56.002 UTC [31129] LOG:  duration: 0.045 ms
+2022-11-07 12:42:56.002 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('GW', 'Guinea-Bissau');
+2022-11-07 12:42:56.002 UTC [31129] LOG:  duration: 0.046 ms
+2022-11-07 12:42:56.002 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('GY', 'Guyana');
+2022-11-07 12:42:56.002 UTC [31129] LOG:  duration: 0.161 ms
+2022-11-07 12:42:56.002 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('HT', 'Haiti');
+2022-11-07 12:42:56.002 UTC [31129] LOG:  duration: 0.051 ms
+2022-11-07 12:42:56.002 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('HM', 'Heard and McDonald Islands');
+2022-11-07 12:42:56.002 UTC [31129] LOG:  duration: 0.170 ms
+2022-11-07 12:42:56.002 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('HN', 'Honduras');
+2022-11-07 12:42:56.002 UTC [31129] LOG:  duration: 0.046 ms
+2022-11-07 12:42:56.003 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('HK', 'Hong Kong');
+2022-11-07 12:42:56.003 UTC [31129] LOG:  duration: 0.167 ms
+2022-11-07 12:42:56.003 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('HU', 'Hungary');
+2022-11-07 12:42:56.003 UTC [31129] LOG:  duration: 0.137 ms
+2022-11-07 12:42:56.003 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('IS', 'Iceland');
+2022-11-07 12:42:56.003 UTC [31129] LOG:  duration: 0.048 ms
+2022-11-07 12:42:56.003 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('IN', 'India');
+2022-11-07 12:42:56.003 UTC [31129] LOG:  duration: 0.130 ms
+2022-11-07 12:42:56.003 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('ID', 'Indonesia');
+2022-11-07 12:42:56.004 UTC [31129] LOG:  duration: 0.074 ms
+2022-11-07 12:42:56.004 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('IR', 'Iran');
+2022-11-07 12:42:56.004 UTC [31129] LOG:  duration: 0.142 ms
+2022-11-07 12:42:56.004 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('IQ', 'Iraq');
+2022-11-07 12:42:56.004 UTC [31129] LOG:  duration: 0.119 ms
+2022-11-07 12:42:56.004 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('IE', 'Ireland');
+2022-11-07 12:42:56.004 UTC [31129] LOG:  duration: 0.110 ms
+2022-11-07 12:42:56.004 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('IL', 'Israel');
+2022-11-07 12:42:56.004 UTC [31129] LOG:  duration: 0.060 ms
+2022-11-07 12:42:56.004 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('IT', 'Italy');
+2022-11-07 12:42:56.004 UTC [31129] LOG:  duration: 0.045 ms
+2022-11-07 12:42:56.004 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('JM', 'Jamaica');
+2022-11-07 12:42:56.004 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:56.004 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('JP', 'Japan');
+2022-11-07 12:42:56.005 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:56.005 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('JO', 'Jordan');
+2022-11-07 12:42:56.005 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.005 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('KZ', 'Kazakhstan');
+2022-11-07 12:42:56.005 UTC [31129] LOG:  duration: 0.059 ms
+2022-11-07 12:42:56.005 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('KE', 'Kenya');
+2022-11-07 12:42:56.005 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:56.005 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('KI', 'Kiribati');
+2022-11-07 12:42:56.005 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:56.005 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('KP', 'Korea (North)');
+2022-11-07 12:42:56.005 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:56.005 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('KR', 'Korea (South)');
+2022-11-07 12:42:56.005 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:56.005 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('KW', 'Kuwait');
+2022-11-07 12:42:56.005 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:56.005 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('KG', 'Kyrgyzstan');
+2022-11-07 12:42:56.005 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:56.005 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('LA', 'Laos');
+2022-11-07 12:42:56.005 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:56.005 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('LV', 'Latvia');
+2022-11-07 12:42:56.005 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:56.005 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('LB', 'Lebanon');
+2022-11-07 12:42:56.005 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:56.005 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('LS', 'Lesotho');
+2022-11-07 12:42:56.005 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:56.005 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('LR', 'Liberia');
+2022-11-07 12:42:56.006 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:56.006 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('LY', 'Libya');
+2022-11-07 12:42:56.006 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.006 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('LI', 'Liechtenstein');
+2022-11-07 12:42:56.006 UTC [31129] LOG:  duration: 0.055 ms
+2022-11-07 12:42:56.006 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('LT', 'Lithuania');
+2022-11-07 12:42:56.006 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:56.006 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('LU', 'Luxembourg');
+2022-11-07 12:42:56.006 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:56.006 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MO', 'Macau');
+2022-11-07 12:42:56.006 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.006 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MK', 'Macedonia');
+2022-11-07 12:42:56.006 UTC [31129] LOG:  duration: 0.047 ms
+2022-11-07 12:42:56.006 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MG', 'Madagascar');
+2022-11-07 12:42:56.006 UTC [31129] LOG:  duration: 0.123 ms
+2022-11-07 12:42:56.006 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MW', 'Malawi');
+2022-11-07 12:42:56.006 UTC [31129] LOG:  duration: 0.070 ms
+2022-11-07 12:42:56.006 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MY', 'Malaysia');
+2022-11-07 12:42:56.007 UTC [31129] LOG:  duration: 0.132 ms
+2022-11-07 12:42:56.007 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MV', 'Maldives');
+2022-11-07 12:42:56.007 UTC [31129] LOG:  duration: 0.148 ms
+2022-11-07 12:42:56.007 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('ML', 'Mali');
+2022-11-07 12:42:56.007 UTC [31129] LOG:  duration: 0.067 ms
+2022-11-07 12:42:56.007 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MT', 'Malta');
+2022-11-07 12:42:56.007 UTC [31129] LOG:  duration: 0.048 ms
+2022-11-07 12:42:56.007 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MH', 'Marshall Islands');
+2022-11-07 12:42:56.007 UTC [31129] LOG:  duration: 0.049 ms
+2022-11-07 12:42:56.007 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MQ', 'Martinique');
+2022-11-07 12:42:56.007 UTC [31129] LOG:  duration: 0.051 ms
+2022-11-07 12:42:56.007 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MR', 'Mauritania');
+2022-11-07 12:42:56.008 UTC [31129] LOG:  duration: 0.176 ms
+2022-11-07 12:42:56.008 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MU', 'Mauritius');
+2022-11-07 12:42:56.008 UTC [31129] LOG:  duration: 0.100 ms
+2022-11-07 12:42:56.008 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('YT', 'Mayotte');
+2022-11-07 12:42:56.008 UTC [31129] LOG:  duration: 0.148 ms
+2022-11-07 12:42:56.008 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MX', 'Mexico');
+2022-11-07 12:42:56.008 UTC [31129] LOG:  duration: 0.172 ms
+2022-11-07 12:42:56.008 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('FM', 'Micronesia');
+2022-11-07 12:42:56.008 UTC [31129] LOG:  duration: 0.063 ms
+2022-11-07 12:42:56.009 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MD', 'Moldova');
+2022-11-07 12:42:56.009 UTC [31129] LOG:  duration: 0.200 ms
+2022-11-07 12:42:56.009 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MC', 'Monaco');
+2022-11-07 12:42:56.009 UTC [31129] LOG:  duration: 0.205 ms
+2022-11-07 12:42:56.009 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MN', 'Mongolia');
+2022-11-07 12:42:56.009 UTC [31129] LOG:  duration: 0.099 ms
+2022-11-07 12:42:56.009 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MS', 'Montserrat');
+2022-11-07 12:42:56.010 UTC [31129] LOG:  duration: 0.151 ms
+2022-11-07 12:42:56.010 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MA', 'Morocco');
+2022-11-07 12:42:56.010 UTC [31129] LOG:  duration: 0.212 ms
+2022-11-07 12:42:56.010 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MZ', 'Mozambique');
+2022-11-07 12:42:56.010 UTC [31129] LOG:  duration: 0.189 ms
+2022-11-07 12:42:56.010 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MM', 'Myanmar');
+2022-11-07 12:42:56.011 UTC [31129] LOG:  duration: 0.218 ms
+2022-11-07 12:42:56.011 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('NA', 'Namibia');
+2022-11-07 12:42:56.011 UTC [31129] LOG:  duration: 0.243 ms
+2022-11-07 12:42:56.011 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('NR', 'Nauru');
+2022-11-07 12:42:56.011 UTC [31129] LOG:  duration: 0.177 ms
+2022-11-07 12:42:56.012 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('NP', 'Nepal');
+2022-11-07 12:42:56.012 UTC [31129] LOG:  duration: 0.173 ms
+2022-11-07 12:42:56.012 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('NL', 'Netherlands');
+2022-11-07 12:42:56.012 UTC [31129] LOG:  duration: 0.185 ms
+2022-11-07 12:42:56.012 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('AN', 'Netherlands Antilles');
+2022-11-07 12:42:56.012 UTC [31129] LOG:  duration: 0.201 ms
+2022-11-07 12:42:56.013 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('NC', 'New Caledonia');
+2022-11-07 12:42:56.013 UTC [31129] LOG:  duration: 0.188 ms
+2022-11-07 12:42:56.013 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('NZ', 'New Zealand');
+2022-11-07 12:42:56.013 UTC [31129] LOG:  duration: 0.216 ms
+2022-11-07 12:42:56.013 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('NI', 'Nicaragua');
+2022-11-07 12:42:56.013 UTC [31129] LOG:  duration: 0.173 ms
+2022-11-07 12:42:56.014 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('NE', 'Niger');
+2022-11-07 12:42:56.014 UTC [31129] LOG:  duration: 0.195 ms
+2022-11-07 12:42:56.014 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('NG', 'Nigeria');
+2022-11-07 12:42:56.014 UTC [31129] LOG:  duration: 0.220 ms
+2022-11-07 12:42:56.014 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('NF', 'Norfolk Island');
+2022-11-07 12:42:56.014 UTC [31129] LOG:  duration: 0.173 ms
+2022-11-07 12:42:56.015 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('MP', 'Northern Mariana Islands');
+2022-11-07 12:42:56.015 UTC [31129] LOG:  duration: 0.205 ms
+2022-11-07 12:42:56.015 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('NO', 'Norway');
+2022-11-07 12:42:56.015 UTC [31129] LOG:  duration: 0.175 ms
+2022-11-07 12:42:56.015 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('OM', 'Oman');
+2022-11-07 12:42:56.016 UTC [31129] LOG:  duration: 0.180 ms
+2022-11-07 12:42:56.016 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('PK', 'Pakistan');
+2022-11-07 12:42:56.016 UTC [31129] LOG:  duration: 0.124 ms
+2022-11-07 12:42:56.016 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('PW', 'Palau');
+2022-11-07 12:42:56.016 UTC [31129] LOG:  duration: 0.147 ms
+2022-11-07 12:42:56.016 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('PA', 'Panama');
+2022-11-07 12:42:56.016 UTC [31129] LOG:  duration: 0.173 ms
+2022-11-07 12:42:56.017 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('PG', 'Papua New Guinea');
+2022-11-07 12:42:56.017 UTC [31129] LOG:  duration: 0.191 ms
+2022-11-07 12:42:56.017 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('PY', 'Paraguay');
+2022-11-07 12:42:56.017 UTC [31129] LOG:  duration: 0.287 ms
+2022-11-07 12:42:56.017 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('PE', 'Peru');
+2022-11-07 12:42:56.018 UTC [31129] LOG:  duration: 0.230 ms
+2022-11-07 12:42:56.018 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('PH', 'Philippines');
+2022-11-07 12:42:56.018 UTC [31129] LOG:  duration: 0.221 ms
+2022-11-07 12:42:56.018 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('PN', 'Pitcairn');
+2022-11-07 12:42:56.018 UTC [31129] LOG:  duration: 0.082 ms
+2022-11-07 12:42:56.018 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('PL', 'Poland');
+2022-11-07 12:42:56.018 UTC [31129] LOG:  duration: 0.157 ms
+2022-11-07 12:42:56.019 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('PT', 'Portugal');
+2022-11-07 12:42:56.019 UTC [31129] LOG:  duration: 0.076 ms
+2022-11-07 12:42:56.019 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('PR', 'Puerto Rico');
+2022-11-07 12:42:56.019 UTC [31129] LOG:  duration: 0.181 ms
+2022-11-07 12:42:56.019 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('QA', 'Qatar');
+2022-11-07 12:42:56.019 UTC [31129] LOG:  duration: 0.053 ms
+2022-11-07 12:42:56.019 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('RE', 'Reunion');
+2022-11-07 12:42:56.020 UTC [31129] LOG:  duration: 0.158 ms
+2022-11-07 12:42:56.020 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('RO', 'Romania');
+2022-11-07 12:42:56.020 UTC [31129] LOG:  duration: 0.147 ms
+2022-11-07 12:42:56.020 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('RU', 'Russian Federation');
+2022-11-07 12:42:56.020 UTC [31129] LOG:  duration: 0.169 ms
+2022-11-07 12:42:56.020 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('RW', 'Rwanda');
+2022-11-07 12:42:56.020 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:56.020 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('KN', 'Saint Kitts and Nevis');
+2022-11-07 12:42:56.020 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:56.020 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('LC', 'Saint Lucia');
+2022-11-07 12:42:56.020 UTC [31129] LOG:  duration: 0.046 ms
+2022-11-07 12:42:56.020 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('VC', 'Saint Vincent and The Grenadines');
+2022-11-07 12:42:56.020 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:56.021 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('WS', 'Samoa');
+2022-11-07 12:42:56.021 UTC [31129] LOG:  duration: 0.362 ms
+2022-11-07 12:42:56.021 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('SM', 'San Marino');
+2022-11-07 12:42:56.021 UTC [31129] LOG:  duration: 0.188 ms
+2022-11-07 12:42:56.021 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('ST', 'Sao Tome and Principe');
+2022-11-07 12:42:56.022 UTC [31129] LOG:  duration: 0.162 ms
+2022-11-07 12:42:56.022 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('SA', 'Saudi Arabia');
+2022-11-07 12:42:56.022 UTC [31129] LOG:  duration: 0.203 ms
+2022-11-07 12:42:56.022 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('SN', 'Senegal');
+2022-11-07 12:42:56.022 UTC [31129] LOG:  duration: 0.163 ms
+2022-11-07 12:42:56.022 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('SC', 'Seychelles');
+2022-11-07 12:42:56.022 UTC [31129] LOG:  duration: 0.106 ms
+2022-11-07 12:42:56.023 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('SL', 'Sierra Leone');
+2022-11-07 12:42:56.023 UTC [31129] LOG:  duration: 0.138 ms
+2022-11-07 12:42:56.023 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('SG', 'Singapore');
+2022-11-07 12:42:56.023 UTC [31129] LOG:  duration: 0.166 ms
+2022-11-07 12:42:56.023 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('SK', 'Slovak Republic');
+2022-11-07 12:42:56.023 UTC [31129] LOG:  duration: 0.101 ms
+2022-11-07 12:42:56.023 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('SI', 'Slovenia');
+2022-11-07 12:42:56.023 UTC [31129] LOG:  duration: 0.062 ms
+2022-11-07 12:42:56.023 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('SB', 'Solomon Islands');
+2022-11-07 12:42:56.023 UTC [31129] LOG:  duration: 0.089 ms
+2022-11-07 12:42:56.024 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('SO', 'Somalia');
+2022-11-07 12:42:56.024 UTC [31129] LOG:  duration: 0.120 ms
+2022-11-07 12:42:56.024 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('ZA', 'South Africa');
+2022-11-07 12:42:56.024 UTC [31129] LOG:  duration: 0.125 ms
+2022-11-07 12:42:56.024 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('GS', 'S. Georgia and S. Sandwich Isls.');
+2022-11-07 12:42:56.024 UTC [31129] LOG:  duration: 0.151 ms
+2022-11-07 12:42:56.024 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('ES', 'Spain');
+2022-11-07 12:42:56.024 UTC [31129] LOG:  duration: 0.163 ms
+2022-11-07 12:42:56.024 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('LK', 'Sri Lanka');
+2022-11-07 12:42:56.025 UTC [31129] LOG:  duration: 0.089 ms
+2022-11-07 12:42:56.025 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('SH', 'St. Helena');
+2022-11-07 12:42:56.025 UTC [31129] LOG:  duration: 0.046 ms
+2022-11-07 12:42:56.025 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('PM', 'St. Pierre and Miquelon');
+2022-11-07 12:42:56.025 UTC [31129] LOG:  duration: 0.133 ms
+2022-11-07 12:42:56.025 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('SD', 'Sudan');
+2022-11-07 12:42:56.025 UTC [31129] LOG:  duration: 0.066 ms
+2022-11-07 12:42:56.025 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('SR', 'Suriname');
+2022-11-07 12:42:56.025 UTC [31129] LOG:  duration: 0.136 ms
+2022-11-07 12:42:56.025 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('SJ', 'Svalbard and Jan Mayen Islands');
+2022-11-07 12:42:56.025 UTC [31129] LOG:  duration: 0.070 ms
+2022-11-07 12:42:56.026 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('SZ', 'Swaziland');
+2022-11-07 12:42:56.026 UTC [31129] LOG:  duration: 0.153 ms
+2022-11-07 12:42:56.026 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('SE', 'Sweden');
+2022-11-07 12:42:56.026 UTC [31129] LOG:  duration: 0.094 ms
+2022-11-07 12:42:56.026 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('CH', 'Switzerland');
+2022-11-07 12:42:56.026 UTC [31129] LOG:  duration: 0.154 ms
+2022-11-07 12:42:56.026 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('SY', 'Syria');
+2022-11-07 12:42:56.026 UTC [31129] LOG:  duration: 0.053 ms
+2022-11-07 12:42:56.026 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('TW', 'Taiwan');
+2022-11-07 12:42:56.026 UTC [31129] LOG:  duration: 0.127 ms
+2022-11-07 12:42:56.027 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('TJ', 'Tajikistan');
+2022-11-07 12:42:56.027 UTC [31129] LOG:  duration: 0.069 ms
+2022-11-07 12:42:56.027 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('TZ', 'Tanzania');
+2022-11-07 12:42:56.027 UTC [31129] LOG:  duration: 0.151 ms
+2022-11-07 12:42:56.027 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('TH', 'Thailand');
+2022-11-07 12:42:56.027 UTC [31129] LOG:  duration: 0.110 ms
+2022-11-07 12:42:56.027 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('TG', 'Togo');
+2022-11-07 12:42:56.027 UTC [31129] LOG:  duration: 0.146 ms
+2022-11-07 12:42:56.027 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('TK', 'Tokelau');
+2022-11-07 12:42:56.027 UTC [31129] LOG:  duration: 0.057 ms
+2022-11-07 12:42:56.027 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('TO', 'Tonga');
+2022-11-07 12:42:56.027 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:56.028 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('TT', 'Trinidad and Tobago');
+2022-11-07 12:42:56.028 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:56.028 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('TN', 'Tunisia');
+2022-11-07 12:42:56.028 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:56.028 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('TR', 'Turkey');
+2022-11-07 12:42:56.028 UTC [31129] LOG:  duration: 0.063 ms
+2022-11-07 12:42:56.028 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('TM', 'Turkmenistan');
+2022-11-07 12:42:56.028 UTC [31129] LOG:  duration: 0.073 ms
+2022-11-07 12:42:56.028 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('TC', 'Turks and Caicos Islands');
+2022-11-07 12:42:56.028 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:56.028 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('TV', 'Tuvalu');
+2022-11-07 12:42:56.028 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:56.028 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('UG', 'Uganda');
+2022-11-07 12:42:56.028 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:56.028 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('UA', 'Ukraine');
+2022-11-07 12:42:56.028 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:56.028 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('AE', 'United Arab Emirates');
+2022-11-07 12:42:56.028 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:56.028 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('UM', 'US Minor Outlying Islands');
+2022-11-07 12:42:56.028 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:56.028 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('UY', 'Uruguay');
+2022-11-07 12:42:56.029 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:56.029 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('UZ', 'Uzbekistan');
+2022-11-07 12:42:56.029 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:56.029 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('VU', 'Vanuatu');
+2022-11-07 12:42:56.029 UTC [31129] LOG:  duration: 0.248 ms
+2022-11-07 12:42:56.029 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('VA', 'Vatican City State (Holy See)');
+2022-11-07 12:42:56.029 UTC [31129] LOG:  duration: 0.143 ms
+2022-11-07 12:42:56.029 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('VE', 'Venezuela');
+2022-11-07 12:42:56.029 UTC [31129] LOG:  duration: 0.161 ms
+2022-11-07 12:42:56.030 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('VN', 'Viet Nam');
+2022-11-07 12:42:56.030 UTC [31129] LOG:  duration: 0.243 ms
+2022-11-07 12:42:56.030 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('VG', 'Virgin Islands (British)');
+2022-11-07 12:42:56.030 UTC [31129] LOG:  duration: 0.171 ms
+2022-11-07 12:42:56.030 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('VI', 'Virgin Islands (US)');
+2022-11-07 12:42:56.030 UTC [31129] LOG:  duration: 0.167 ms
+2022-11-07 12:42:56.031 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('WF', 'Wallis and Futuna Islands');
+2022-11-07 12:42:56.031 UTC [31129] LOG:  duration: 0.248 ms
+2022-11-07 12:42:56.031 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('EH', 'Western Sahara');
+2022-11-07 12:42:56.031 UTC [31129] LOG:  duration: 0.172 ms
+2022-11-07 12:42:56.031 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('YE', 'Yemen');
+2022-11-07 12:42:56.031 UTC [31129] LOG:  duration: 0.051 ms
+2022-11-07 12:42:56.031 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('YU', 'Yugoslavia');
+2022-11-07 12:42:56.032 UTC [31129] LOG:  duration: 0.136 ms
+2022-11-07 12:42:56.032 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('ZR', 'Zaire');
+2022-11-07 12:42:56.032 UTC [31129] LOG:  duration: 0.056 ms
+2022-11-07 12:42:56.032 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('ZM', 'Zambia');
+2022-11-07 12:42:56.032 UTC [31129] LOG:  duration: 0.143 ms
+2022-11-07 12:42:56.032 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('ZW', 'Zimbabwe');
+2022-11-07 12:42:56.032 UTC [31129] LOG:  duration: 0.058 ms
+2022-11-07 12:42:56.032 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('DE', 'Germany');
+2022-11-07 12:42:56.032 UTC [31129] LOG:  duration: 0.073 ms
+2022-11-07 12:42:56.032 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('FR', 'France');
+2022-11-07 12:42:56.032 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:56.032 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('UK', 'United Kingdom');
+2022-11-07 12:42:56.032 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:56.032 UTC [31129] LOG:  statement: INSERT INTO pays VALUES ('US', 'United States');
+2022-11-07 12:42:56.032 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:56.033 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (1, 'Coca Cola, Inc.', 'Denver', 'US');
+2022-11-07 12:42:56.033 UTC [31129] LOG:  duration: 0.237 ms
+2022-11-07 12:42:56.033 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (2, 'Ste. Coca Cola', 'Paris', 'FR');
+2022-11-07 12:42:56.033 UTC [31129] LOG:  duration: 0.052 ms
+2022-11-07 12:42:56.033 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (3, 'Coca Cola Gmbh.', 'Kohln', 'DE');
+2022-11-07 12:42:56.033 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:56.033 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (4, 'SUN MicroSystems, Inc.', 'Mountain View', 'US');
+2022-11-07 12:42:56.033 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:56.033 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (5, 'Ste. SUN', 'Velizy', 'FR');
+2022-11-07 12:42:56.033 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:56.033 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (6, 'IBM Corp.', 'Yorktown', 'US');
+2022-11-07 12:42:56.033 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.033 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (7, 'IBM', 'Paris', 'FR');
+2022-11-07 12:42:56.033 UTC [31129] LOG:  duration: 0.039 ms
+2022-11-07 12:42:56.033 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (8, 'IBM Ltd.', 'Manchester', 'UK');
+2022-11-07 12:42:56.033 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:56.033 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (9, 'ORACLE Corp.', 'Redwood City', 'US');
+2022-11-07 12:42:56.033 UTC [31129] LOG:  duration: 0.044 ms
+2022-11-07 12:42:56.033 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (10, 'Ste. ORACLE', 'Aix-en-Pce', 'FR');
+2022-11-07 12:42:56.034 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.034 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (11, 'ORACLE Ltd.', 'Heathrow', 'UK');
+2022-11-07 12:42:56.034 UTC [31129] LOG:  duration: 0.039 ms
+2022-11-07 12:42:56.034 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (12, 'ORACLE Gmbh.', 'Hamburg', 'DE');
+2022-11-07 12:42:56.034 UTC [31129] LOG:  duration: 0.051 ms
+2022-11-07 12:42:56.034 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (13, 'VERILOG Compy.', 'New-York City', 'US');
+2022-11-07 12:42:56.034 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:56.034 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (14, 'Cie. VERILOG', 'Toulouse', 'FR');
+2022-11-07 12:42:56.034 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.034 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (15, 'AIRBUS Ind.', 'Heathrow', 'UK');
+2022-11-07 12:42:56.034 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.034 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (16, 'AIRBUS  Gmbh.', 'Hamburg', 'DE');
+2022-11-07 12:42:56.034 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:56.034 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (17, 'DASSAULT Corp.', 'Dallas', 'US');
+2022-11-07 12:42:56.034 UTC [31129] LOG:  duration: 0.039 ms
+2022-11-07 12:42:56.034 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (18, 'Ste. Marcel Dassault', 'Boulogne', 'FR');
+2022-11-07 12:42:56.034 UTC [31129] LOG:  duration: 0.039 ms
+2022-11-07 12:42:56.034 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (19, 'Ste. Electronique Serge Dassault', 'Boulogne', 'FR');
+2022-11-07 12:42:56.034 UTC [31129] LOG:  duration: 0.039 ms
+2022-11-07 12:42:56.034 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (20, 'Ste.Christian DIOR', 'Paris', 'FR');
+2022-11-07 12:42:56.034 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:56.034 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (21, 'Ste. L.V.H.M.', 'Paris', 'FR');
+2022-11-07 12:42:56.034 UTC [31129] LOG:  duration: 0.046 ms
+2022-11-07 12:42:56.034 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (22, 'Ste. OREAL', 'Paris', 'FR');
+2022-11-07 12:42:56.035 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:56.035 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (23, 'Ste. Boussac', 'Paris', 'FR');
+2022-11-07 12:42:56.035 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.035 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (24, 'Ste. LANVIN', 'Paris', 'FR');
+2022-11-07 12:42:56.035 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.035 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (25, 'Ste. Courreges', 'Paris', 'FR');
+2022-11-07 12:42:56.035 UTC [31129] LOG:  duration: 0.043 ms
+2022-11-07 12:42:56.035 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (26, 'Ste. GUERLAIN', 'Grasse', 'FR');
+2022-11-07 12:42:56.035 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.035 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (27, 'Lab. Roussel', 'Paris', 'FR');
+2022-11-07 12:42:56.035 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.035 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (28, 'Helena Rubinstein Ltd.', 'New-York City', 'US');
+2022-11-07 12:42:56.035 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.035 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (29, 'La Roche Posay', 'Limoges', 'FR');
+2022-11-07 12:42:56.035 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.035 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (30, 'UNILEVER Corp.', 'Heathrow', 'UK');
+2022-11-07 12:42:56.035 UTC [31129] LOG:  duration: 0.039 ms
+2022-11-07 12:42:56.035 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (31, 'Hoescht  Gmbh.', 'Hamburg', 'DE');
+2022-11-07 12:42:56.035 UTC [31129] LOG:  duration: 0.039 ms
+2022-11-07 12:42:56.035 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (32, 'BMW  Gmbh.', 'Hamburg', 'DE');
+2022-11-07 12:42:56.035 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.035 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (33, 'Mercedez-Benz  Gmbh.', 'Munchen', 'DE');
+2022-11-07 12:42:56.035 UTC [31129] LOG:  duration: 0.039 ms
+2022-11-07 12:42:56.035 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (34, 'FORD Ltd.', 'New-York City', 'US');
+2022-11-07 12:42:56.035 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.036 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (35, 'CHRYSLER Ltd.', 'Detroit', 'US');
+2022-11-07 12:42:56.036 UTC [31129] LOG:  duration: 0.039 ms
+2022-11-07 12:42:56.036 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (36, 'S.A. Renault', 'Boulogne', 'FR');
+2022-11-07 12:42:56.036 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.036 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (37, 'S.A. PSA', 'PAris', 'FR');
+2022-11-07 12:42:56.036 UTC [31129] LOG:  duration: 0.050 ms
+2022-11-07 12:42:56.036 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (38, 'Rolls Royce Ltd.', 'London', 'UK');
+2022-11-07 12:42:56.036 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:56.036 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (39, 'ROVER Ltd.', 'London', 'UK');
+2022-11-07 12:42:56.036 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.036 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (40, 'Boeing Corp.', 'Denver', 'US');
+2022-11-07 12:42:56.036 UTC [31129] LOG:  duration: 0.039 ms
+2022-11-07 12:42:56.036 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (41, 'Ste. Boeing', 'Paris', 'FR');
+2022-11-07 12:42:56.036 UTC [31129] LOG:  duration: 0.039 ms
+2022-11-07 12:42:56.036 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (42, 'Boeing  Ltd.', 'Heathrow', 'UK');
+2022-11-07 12:42:56.036 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.036 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (43, 'Boeing  Gmbh.', 'Munchen', 'DE');
+2022-11-07 12:42:56.036 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.036 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (44, 'AIRBUS Corp.', 'Houston', 'US');
+2022-11-07 12:42:56.036 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.036 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (45, 'AIRBUS Industrie', 'Toulouse', 'FR');
+2022-11-07 12:42:56.036 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.036 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (46, 'PEPSI Inc.', 'Houston', 'US');
+2022-11-07 12:42:56.036 UTC [31129] LOG:  duration: 0.040 ms
+2022-11-07 12:42:56.036 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (47, 'Ste. Danone', 'Lyon', 'FR');
+2022-11-07 12:42:56.037 UTC [31129] LOG:  duration: 0.038 ms
+2022-11-07 12:42:56.037 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (48, 'Ste. Orangina', 'Lyon', 'FR');
+2022-11-07 12:42:56.037 UTC [31129] LOG:  duration: 0.041 ms
+2022-11-07 12:42:56.037 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (49, 'Pepsi Gmbh.', 'Aichen', 'DE');
+2022-11-07 12:42:56.037 UTC [31129] LOG:  duration: 0.188 ms
+2022-11-07 12:42:56.037 UTC [31129] LOG:  statement: INSERT INTO societe VALUES (50, 'Soc. Perfumes y Trajes', 'Mexico', 'MX');
+2022-11-07 12:42:56.037 UTC [31129] LOG:  duration: 0.094 ms
+2022-11-07 12:42:56.037 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (69, 24, 21, '1994-01-01');
+2022-11-07 12:42:56.037 UTC [31129] LOG:  duration: 0.343 ms
+2022-11-07 12:42:56.038 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (12, 46, 1, '1982-01-01');
+2022-11-07 12:42:56.038 UTC [31129] LOG:  duration: 0.197 ms
+2022-11-07 12:42:56.038 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (56, 9, 11, '1985-01-01');
+2022-11-07 12:42:56.038 UTC [31129] LOG:  duration: 0.139 ms
+2022-11-07 12:42:56.038 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (22, 46, 48, '1987-01-01');
+2022-11-07 12:42:56.038 UTC [31129] LOG:  duration: 0.039 ms
+2022-11-07 12:42:56.038 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (23, 46, 48, '1987-01-01');
+2022-11-07 12:42:56.038 UTC [31129] LOG:  duration: 0.066 ms
+2022-11-07 12:42:56.038 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (66, 24, 21, '1992-01-01');
+2022-11-07 12:42:56.038 UTC [31129] LOG:  duration: 0.036 ms
+2022-11-07 12:42:56.038 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (8, 46, 2, '1980-01-01');
+2022-11-07 12:42:56.038 UTC [31129] LOG:  duration: 0.035 ms
+2022-11-07 12:42:56.039 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (53, 14, 10, '1987-01-01');
+2022-11-07 12:42:56.039 UTC [31129] LOG:  duration: 0.036 ms
+2022-11-07 12:42:56.039 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (45, 28, 20, '2050-01-01');
+2022-11-07 12:42:56.039 UTC [31129] LOG:  duration: 0.036 ms
+2022-11-07 12:42:56.039 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (67, 28, 21, '1992-01-01');
+2022-11-07 12:42:56.039 UTC [31129] LOG:  duration: 0.051 ms
+2022-11-07 12:42:56.039 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (28, 46, 1, '1975-01-01');
+2022-11-07 12:42:56.039 UTC [31129] LOG:  duration: 0.036 ms
+2022-11-07 12:42:56.039 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (28, 1, 48, '1981-01-01');
+2022-11-07 12:42:56.039 UTC [31129] LOG:  duration: 0.036 ms
+2022-11-07 12:42:56.039 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (41, 28, 26, '1972-01-01');
+2022-11-07 12:42:56.039 UTC [31129] LOG:  duration: 0.035 ms
+2022-11-07 12:42:56.039 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (4, 46, 1, '1983-01-01');
+2022-11-07 12:42:56.039 UTC [31129] LOG:  duration: 0.035 ms
+2022-11-07 12:42:56.039 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (13, 1, 3, '2050-01-01');
+2022-11-07 12:42:56.039 UTC [31129] LOG:  duration: 0.034 ms
+2022-11-07 12:42:56.039 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (25, 46, 49, '2051-01-01');
+2022-11-07 12:42:56.039 UTC [31129] LOG:  duration: 0.034 ms
+2022-11-07 12:42:56.039 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (26, 46, 49, '2051-01-01');
+2022-11-07 12:42:56.039 UTC [31129] LOG:  duration: 0.034 ms
+2022-11-07 12:42:56.039 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (67, 24, 21, '2037-01-01');
+2022-11-07 12:42:56.039 UTC [31129] LOG:  duration: 0.035 ms
+2022-11-07 12:42:56.039 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (73, 27, 31, '1978-01-01');
+2022-11-07 12:42:56.039 UTC [31129] LOG:  duration: 0.034 ms
+2022-11-07 12:42:56.039 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (15, 1, 3, '1980-01-01');
+2022-11-07 12:42:56.039 UTC [31129] LOG:  duration: 0.035 ms
+2022-11-07 12:42:56.040 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (17, 1, 3, '1980-01-01');
+2022-11-07 12:42:56.040 UTC [31129] LOG:  duration: 0.042 ms
+2022-11-07 12:42:56.040 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (16, 46, 3, '1980-01-01');
+2022-11-07 12:42:56.040 UTC [31129] LOG:  duration: 0.036 ms
+2022-11-07 12:42:56.040 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (78, 27, 31, '1987-01-01');
+2022-11-07 12:42:56.040 UTC [31129] LOG:  duration: 0.051 ms
+2022-11-07 12:42:56.040 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (14, 1, 3, '1986-01-01');
+2022-11-07 12:42:56.040 UTC [31129] LOG:  duration: 0.064 ms
+2022-11-07 12:42:56.040 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (55, 9, 12, '1986-01-01');
+2022-11-07 12:42:56.040 UTC [31129] LOG:  duration: 0.124 ms
+2022-11-07 12:42:56.040 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (61, 9, 26, '1994-01-01');
+2022-11-07 12:42:56.040 UTC [31129] LOG:  duration: 0.133 ms
+2022-11-07 12:42:56.040 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (30, 48, 49, '2068-03-07');
+2022-11-07 12:42:56.040 UTC [31129] LOG:  duration: 0.036 ms
+2022-11-07 12:42:56.040 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (30, 12, 27, '2068-03-07');
+2022-11-07 12:42:56.040 UTC [31129] LOG:  duration: 0.035 ms
+2022-11-07 12:42:56.041 UTC [31129] LOG:  statement: INSERT INTO vente VALUES (3, 5, 7, '1980-02-05');
+2022-11-07 12:42:56.041 UTC [31129] LOG:  duration: 0.035 ms
+2022-11-07 12:42:56.041 UTC [31129] LOG:  statement: COMMIT;
+2022-11-07 12:42:56.042 UTC [31129] LOG:  duration: 1.623 ms
+2022-11-07 12:53:04.756 UTC [31129] ERROR:  syntax error at or near "." at character 25
+2022-11-07 12:53:04.756 UTC [31129] STATEMENT:  select * from enr
+	print
+	.
+	dump .
+	dump tabl
+	
+	select * from enr;
+2022-11-07 12:53:10.389 UTC [31129] LOG:  statement: ;
+2022-11-07 12:53:10.389 UTC [31129] LOG:  duration: 0.088 ms
+2022-11-07 12:53:12.005 UTC [31129] ERROR:  syntax error at or near "." at character 25
+2022-11-07 12:53:12.005 UTC [31129] STATEMENT:  select * from enr
+	print
+	.
+	dump .
+	dump tabl
+	select * from enr;
+2022-11-07 12:53:16.216 UTC [31129] LOG:  statement: select * from enr;
+2022-11-07 12:53:16.216 UTC [31129] LOG:  duration: 0.499 ms
+2022-11-07 12:53:41.641 UTC [31129] LOG:  statement: select distinct
+	    m1.nom as nom,
+	    m1.classe as classe, 
+	    m1.pays as pays_1,
+	    m1.prop as prop_1,
+	    m2.pays as pays_2,
+	    m2.prop as prop_2
+	from
+	    marque m1, marque m2
+	where
+	    m1.nom = m2.nom and
+	    m1.classe = m2.classe and
+	    m1.pays <> m2.pays and
+	    m1.prop <> m2.prop
+	order by 
+	    nom,
+	    classe,
+	    pays_1,
+	    prop_1,
+	    pays_2,
+	    prop_2;
+2022-11-07 12:53:41.644 UTC [31129] LOG:  duration: 3.723 ms
+2022-11-07 12:56:29.684 UTC [31129] LOG:  statement: select distinct
+	    m1.nom as nom,
+	    m1.classe as classe,
+	    m1.pays as pays_1,
+	    m1.prop as prop_1,
+	    m2.pays as pays_2,
+	    m2.prop as prop_2
+	from
+	    marque m1, marque m2
+	where
+	    m1.nom = m2.nom and
+	    m1.classe = m2.classe and
+	    m1.pays <> m2.pays and
+	    m1.prop <> m2.prop
+	order by
+	    nom,
+	    classe,
+	    pays_1,
+	    prop_1,
+	    pays_2,
+	    prop_2;
+2022-11-07 12:56:29.685 UTC [31129] LOG:  duration: 1.094 ms
+2022-11-07 13:59:12.462 UTC [31129] ERROR:  syntax error at or near "sp_help" at character 1
+2022-11-07 13:59:12.462 UTC [31129] STATEMENT:  sp_help
+	;
+2022-11-07 13:59:24.764 UTC [31129] LOG:  statement: SELECT n.nspname as "Schema",
+	  c.relname as "Name",
+	  CASE c.relkind WHEN 'r' THEN 'table' WHEN 'v' THEN 'view' WHEN 'm' THEN 'materialized view' WHEN 'i' THEN 'index' WHEN 'S' THEN 'sequence' WHEN 's' THEN 'special' WHEN 't' THEN 'TOAST table' WHEN 'f' THEN 'foreign table' WHEN 'p' THEN 'partitioned table' WHEN 'I' THEN 'partitioned index' END as "Type",
+	  pg_catalog.pg_get_userbyid(c.relowner) as "Owner"
+	FROM pg_catalog.pg_class c
+	     LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+	     LEFT JOIN pg_catalog.pg_am am ON am.oid = c.relam
+	WHERE c.relkind IN ('r','p','')
+	      AND n.nspname <> 'pg_catalog'
+	      AND n.nspname !~ '^pg_toast'
+	      AND n.nspname <> 'information_schema'
+	  AND pg_catalog.pg_table_is_visible(c.oid)
+	ORDER BY 1,2;
+2022-11-07 13:59:24.767 UTC [31129] LOG:  duration: 2.300 ms
+2022-11-07 13:59:37.877 UTC [31129] LOG:  statement: select schema_name
+	from information_schema.schemata;
+2022-11-07 13:59:37.878 UTC [31129] LOG:  duration: 1.299 ms
+2022-11-07 13:59:42.913 UTC [31129] LOG:  statement: SELECT n.nspname AS "Name",
+	  pg_catalog.pg_get_userbyid(n.nspowner) AS "Owner"
+	FROM pg_catalog.pg_namespace n
+	WHERE n.nspname !~ '^pg_' AND n.nspname <> 'information_schema'
+	ORDER BY 1;
+2022-11-07 13:59:42.914 UTC [31129] LOG:  duration: 0.591 ms
+2022-11-07 13:59:52.217 UTC [31129] LOG:  statement: SELECT n.nspname as "Schema",
+	  c.relname as "Name",
+	  CASE c.relkind WHEN 'r' THEN 'table' WHEN 'v' THEN 'view' WHEN 'm' THEN 'materialized view' WHEN 'i' THEN 'index' WHEN 'S' THEN 'sequence' WHEN 's' THEN 'special' WHEN 't' THEN 'TOAST table' WHEN 'f' THEN 'foreign table' WHEN 'p' THEN 'partitioned table' WHEN 'I' THEN 'partitioned index' END as "Type",
+	  pg_catalog.pg_get_userbyid(c.relowner) as "Owner"
+	FROM pg_catalog.pg_class c
+	     LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+	     LEFT JOIN pg_catalog.pg_am am ON am.oid = c.relam
+	WHERE c.relkind IN ('r','p','')
+	      AND n.nspname <> 'pg_catalog'
+	      AND n.nspname !~ '^pg_toast'
+	      AND n.nspname <> 'information_schema'
+	  AND pg_catalog.pg_table_is_visible(c.oid)
+	ORDER BY 1,2;
+2022-11-07 13:59:52.218 UTC [31129] LOG:  duration: 1.196 ms
+2022-11-07 14:00:10.209 UTC [31129] LOG:  statement: SELECT n.nspname as "Schema",
+	  c.relname as "Name",
+	  CASE c.relkind WHEN 'r' THEN 'table' WHEN 'v' THEN 'view' WHEN 'm' THEN 'materialized view' WHEN 'i' THEN 'index' WHEN 'S' THEN 'sequence' WHEN 's' THEN 'special' WHEN 't' THEN 'TOAST table' WHEN 'f' THEN 'foreign table' WHEN 'p' THEN 'partitioned table' WHEN 'I' THEN 'partitioned index' END as "Type",
+	  pg_catalog.pg_get_userbyid(c.relowner) as "Owner"
+	FROM pg_catalog.pg_class c
+	     LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+	     LEFT JOIN pg_catalog.pg_am am ON am.oid = c.relam
+	WHERE c.relkind IN ('r','p','t','s','')
+	  AND c.relname OPERATOR(pg_catalog.~) '^(classe)$' COLLATE pg_catalog.default
+	  AND pg_catalog.pg_table_is_visible(c.oid)
+	ORDER BY 1,2;
+2022-11-07 14:00:10.210 UTC [31129] LOG:  duration: 1.162 ms
+2022-11-07 14:00:27.589 UTC [31129] LOG:  statement: SELECT n.nspname AS "Name",
+	  pg_catalog.pg_get_userbyid(n.nspowner) AS "Owner"
+	FROM pg_catalog.pg_namespace n
+	WHERE n.nspname !~ '^pg_' AND n.nspname <> 'information_schema'
+	ORDER BY 1;
+2022-11-07 14:00:27.589 UTC [31129] LOG:  duration: 0.466 ms
+2022-11-07 14:00:28.953 UTC [31129] LOG:  statement: SELECT n.nspname as "Schema",
+	  c.relname as "Name",
+	  CASE c.relkind WHEN 'r' THEN 'table' WHEN 'v' THEN 'view' WHEN 'm' THEN 'materialized view' WHEN 'i' THEN 'index' WHEN 'S' THEN 'sequence' WHEN 's' THEN 'special' WHEN 't' THEN 'TOAST table' WHEN 'f' THEN 'foreign table' WHEN 'p' THEN 'partitioned table' WHEN 'I' THEN 'partitioned index' END as "Type",
+	  pg_catalog.pg_get_userbyid(c.relowner) as "Owner"
+	FROM pg_catalog.pg_class c
+	     LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+	     LEFT JOIN pg_catalog.pg_am am ON am.oid = c.relam
+	WHERE c.relkind IN ('r','p','')
+	      AND n.nspname <> 'pg_catalog'
+	      AND n.nspname !~ '^pg_toast'
+	      AND n.nspname <> 'information_schema'
+	  AND pg_catalog.pg_table_is_visible(c.oid)
+	ORDER BY 1,2;
+2022-11-07 14:00:28.954 UTC [31129] LOG:  duration: 1.251 ms
+2022-11-07 14:00:38.463 UTC [31129] LOG:  statement: select * from classe
+	;
+2022-11-07 14:00:38.463 UTC [31129] LOG:  duration: 0.346 ms
+2022-11-07 14:01:00.656 UTC [31129] LOG:  statement: SELECT *
+	  FROM information_schema.columns
+	;
+2022-11-07 14:01:00.860 UTC [31129] LOG:  duration: 203.898 ms
+2022-11-07 14:01:17.318 UTC [31129] LOG:  statement: select *
+	from table_name
+	where false;
+2022-11-07 14:01:17.318 UTC [31129] ERROR:  relation "table_name" does not exist at character 15
+2022-11-07 14:01:17.318 UTC [31129] STATEMENT:  select *
+	from table_name
+	where false;
+2022-11-07 14:01:30.962 UTC [31129] LOG:  statement: select *
+	from deposant
+	where false;
+2022-11-07 14:01:30.962 UTC [31129] ERROR:  relation "deposant" does not exist at character 15
+2022-11-07 14:01:30.962 UTC [31129] STATEMENT:  select *
+	from deposant
+	where false;
+2022-11-07 14:01:33.624 UTC [31129] LOG:  statement: SELECT n.nspname as "Schema",
+	  c.relname as "Name",
+	  CASE c.relkind WHEN 'r' THEN 'table' WHEN 'v' THEN 'view' WHEN 'm' THEN 'materialized view' WHEN 'i' THEN 'index' WHEN 'S' THEN 'sequence' WHEN 's' THEN 'special' WHEN 't' THEN 'TOAST table' WHEN 'f' THEN 'foreign table' WHEN 'p' THEN 'partitioned table' WHEN 'I' THEN 'partitioned index' END as "Type",
+	  pg_catalog.pg_get_userbyid(c.relowner) as "Owner"
+	FROM pg_catalog.pg_class c
+	     LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+	     LEFT JOIN pg_catalog.pg_am am ON am.oid = c.relam
+	WHERE c.relkind IN ('r','p','')
+	      AND n.nspname <> 'pg_catalog'
+	      AND n.nspname !~ '^pg_toast'
+	      AND n.nspname <> 'information_schema'
+	  AND pg_catalog.pg_table_is_visible(c.oid)
+	ORDER BY 1,2;
+2022-11-07 14:01:33.625 UTC [31129] LOG:  duration: 1.502 ms
+2022-11-07 14:01:47.269 UTC [31129] LOG:  statement: select *
+	from marquet
+	where false;
+2022-11-07 14:01:47.269 UTC [31129] ERROR:  relation "marquet" does not exist at character 15
+2022-11-07 14:01:47.269 UTC [31129] STATEMENT:  select *
+	from marquet
+	where false;
+2022-11-07 14:01:51.801 UTC [31129] LOG:  statement: select *
+	from marque
+	where false;
+2022-11-07 14:01:51.801 UTC [31129] LOG:  duration: 0.434 ms
+2022-11-07 14:02:06.971 UTC [31129] LOG:  statement: select * from enr where false;
+2022-11-07 14:02:06.972 UTC [31129] LOG:  duration: 0.239 ms
+2022-11-07 14:02:16.089 UTC [31129] LOG:  statement: SELECT n.nspname as "Schema",
+	  c.relname as "Name",
+	  CASE c.relkind WHEN 'r' THEN 'table' WHEN 'v' THEN 'view' WHEN 'm' THEN 'materialized view' WHEN 'i' THEN 'index' WHEN 'S' THEN 'sequence' WHEN 's' THEN 'special' WHEN 't' THEN 'TOAST table' WHEN 'f' THEN 'foreign table' WHEN 'p' THEN 'partitioned table' WHEN 'I' THEN 'partitioned index' END as "Type",
+	  pg_catalog.pg_get_userbyid(c.relowner) as "Owner"
+	FROM pg_catalog.pg_class c
+	     LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+	     LEFT JOIN pg_catalog.pg_am am ON am.oid = c.relam
+	WHERE c.relkind IN ('r','p','')
+	      AND n.nspname <> 'pg_catalog'
+	      AND n.nspname !~ '^pg_toast'
+	      AND n.nspname <> 'information_schema'
+	  AND pg_catalog.pg_table_is_visible(c.oid)
+	ORDER BY 1,2;
+2022-11-07 14:02:16.090 UTC [31129] LOG:  duration: 1.423 ms
+2022-11-07 14:02:25.177 UTC [31129] LOG:  statement: select * from date where false;
+2022-11-07 14:02:25.177 UTC [31129] ERROR:  relation "date" does not exist at character 15
+2022-11-07 14:02:25.177 UTC [31129] STATEMENT:  select * from date where false;
+2022-11-07 14:02:29.167 UTC [31129] LOG:  statement: select * from enr where false;
+2022-11-07 14:02:29.167 UTC [31129] LOG:  duration: 0.248 ms
+2022-11-07 14:02:41.379 UTC [31129] LOG:  statement: select * from vente where false;
+2022-11-07 14:02:41.380 UTC [31129] LOG:  duration: 0.401 ms
+2022-11-07 14:05:28.088 UTC [31129] ERROR:  syntax error at or near "order" at character 216
+2022-11-07 14:05:28.088 UTC [31129] STATEMENT:  select
+	    marque.id as marque,
+	    vente.vendeur as vendeur,
+	    enr.deposant as deposant,
+	    vente.date_vente as date_vente
+	from marque join vente join enr join vente on (marque = vendeur and vendeur = deposant)
+	order by marque;
+2022-11-07 14:05:30.956 UTC [31129] ERROR:  syntax error at or near "order" at character 216
+2022-11-07 14:05:30.956 UTC [31129] STATEMENT:  select
+	    marque.id as marque,
+	    vente.vendeur as vendeur,
+	    enr.deposant as deposant,
+	    vente.date_vente as date_vente
+	from marque join vente join enr join vente on (marque = vendeur and vendeur = deposant)
+	order by marque;
+2022-11-07 14:05:55.560 UTC [31129] ERROR:  syntax error at or near "order" at character 216
+2022-11-07 14:05:55.560 UTC [31129] STATEMENT:  select
+	    marque.id as marque,
+	    vente.vendeur as vendeur,
+	    enr.deposant as deposant,
+	    vente.date_vente as date_vente
+	from marque join vente join enr join vente on (marque = vendeur and vendeur = deposant)
+	order by marque;
+2022-11-07 14:07:49.524 UTC [31129] LOG:  statement: select * from enr where false;
+2022-11-07 14:07:49.524 UTC [31129] LOG:  duration: 0.341 ms
+2022-11-07 14:09:39.185 UTC [31129] LOG:  statement: select * from marque where false;
+2022-11-07 14:09:39.186 UTC [31129] LOG:  duration: 0.296 ms
+2022-11-07 14:20:30.790 UTC [31129] LOG:  statement: select * from vente where false;
+2022-11-07 14:20:30.790 UTC [31129] LOG:  duration: 0.362 ms
+2022-11-07 14:45:20.240 UTC [31129] LOG:  statement: SELECT n.nspname as "Schema",
+	  c.relname as "Name",
+	  CASE c.relkind WHEN 'r' THEN 'table' WHEN 'v' THEN 'view' WHEN 'm' THEN 'materialized view' WHEN 'i' THEN 'index' WHEN 'S' THEN 'sequence' WHEN 's' THEN 'special' WHEN 't' THEN 'TOAST table' WHEN 'f' THEN 'foreign table' WHEN 'p' THEN 'partitioned table' WHEN 'I' THEN 'partitioned index' END as "Type",
+	  pg_catalog.pg_get_userbyid(c.relowner) as "Owner"
+	FROM pg_catalog.pg_class c
+	     LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+	     LEFT JOIN pg_catalog.pg_am am ON am.oid = c.relam
+	WHERE c.relkind IN ('r','p','')
+	      AND n.nspname <> 'pg_catalog'
+	      AND n.nspname !~ '^pg_toast'
+	      AND n.nspname <> 'information_schema'
+	  AND pg_catalog.pg_table_is_visible(c.oid)
+	ORDER BY 1,2;
+2022-11-07 14:45:20.241 UTC [31129] LOG:  duration: 1.143 ms
+2022-11-07 14:45:28.797 UTC [31129] LOG:  statement: select * from classe where false;
+2022-11-07 14:45:28.797 UTC [31129] LOG:  duration: 0.352 ms
+2022-11-07 14:45:38.598 UTC [31129] LOG:  statement: select * from marque where false;
+2022-11-07 14:45:38.598 UTC [31129] LOG:  duration: 0.385 ms
+2022-11-07 15:01:23.010 UTC [31129] LOG:  statement: select * from vente where false;
+2022-11-07 15:01:23.010 UTC [31129] LOG:  duration: 0.284 ms
+2022-11-07 15:28:47.057 UTC [31129] LOG:  statement: SELECT pg_catalog.quote_ident(c.relname) FROM pg_catalog.pg_class c WHERE c.relkind IN ('r', 'S', 'v', 'm', 'f', 'p') AND substring(pg_catalog.quote_ident(c.relname),1,3)='soc' AND pg_catalog.pg_table_is_visible(c.oid) AND c.relnamespace <> (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = 'pg_catalog')
+	UNION
+	SELECT pg_catalog.quote_ident(n.nspname) || '.' FROM pg_catalog.pg_namespace n WHERE substring(pg_catalog.quote_ident(n.nspname) || '.',1,3)='soc' AND (SELECT pg_catalog.count(*) FROM pg_catalog.pg_namespace WHERE substring(pg_catalog.quote_ident(nspname) || '.',1,3) = substring('soc',1,pg_catalog.length(pg_catalog.quote_ident(nspname))+1)) > 1
+	UNION
+	SELECT pg_catalog.quote_ident(n.nspname) || '.' || pg_catalog.quote_ident(c.relname) FROM pg_catalog.pg_class c, pg_catalog.pg_namespace n WHERE c.relnamespace = n.oid AND c.relkind IN ('r', 'S', 'v', 'm', 'f', 'p') AND substring(pg_catalog.quote_ident(n.nspname) || '.' || pg_catalog.quote_ident(c.relname),1,3)='soc' AND substring(pg_catalog.quote_ident(n.nspname) || '.',1,3) = substring('soc',1,pg_catalog.length(pg_catalog.quote_ident(n.nspname))+1) AND (SELECT pg_catalog.count(*) FROM pg_catalog.pg_namespace WHERE substring(pg_catalog.quote_ident(nspname) || '.',1,3) = substring('soc',1,pg_catalog.length(pg_catalog.quote_ident(nspname))+1)) = 1
+	LIMIT 1000
+2022-11-07 15:28:47.059 UTC [31129] LOG:  duration: 1.982 ms
+2022-11-07 15:28:47.468 UTC [31129] LOG:  statement: select * from societe where false;
+2022-11-07 15:28:47.468 UTC [31129] LOG:  duration: 0.543 ms
+2022-11-07 16:27:26.288 UTC [31129] LOG:  disconnection: session time: 3:44:43.936 user=postgres database=postgres host=[local]

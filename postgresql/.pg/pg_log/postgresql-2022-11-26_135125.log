@@ -1,0 +1,1547 @@
+2022-11-26 13:51:25.093 UTC [65772] LOG:  starting PostgreSQL 14.5 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 11.3.0, 64-bit
+2022-11-26 13:51:25.094 UTC [65772] LOG:  listening on IPv6 address "::1", port 5555
+2022-11-26 13:51:25.094 UTC [65772] LOG:  listening on IPv4 address "127.0.0.1", port 5555
+2022-11-26 13:51:25.096 UTC [65772] LOG:  listening on Unix socket "/home/edgar/code/Polytech_SI3_S5/postgresql/.pg/.s.PGSQL.5555"
+2022-11-26 13:51:25.099 UTC [65774] LOG:  database system was shut down at 2022-11-26 13:51:16 UTC
+2022-11-26 13:51:25.103 UTC [65772] LOG:  database system is ready to accept connections
+2022-11-26 13:58:24.487 UTC [66104] LOG:  connection received: host=::1 port=34654
+2022-11-26 13:58:24.489 UTC [66104] LOG:  connection authorized: user=postgres database=postgres application_name=pgAdmin 4 - DB:postgres
+2022-11-26 13:58:24.491 UTC [66104] LOG:  statement: SET DateStyle=ISO; SET client_min_messages=notice; SELECT set_config('bytea_output','hex',false) FROM pg_settings WHERE name = 'bytea_output'; SET client_encoding='UNICODE';
+2022-11-26 13:58:24.493 UTC [66104] LOG:  duration: 2.319 ms
+2022-11-26 13:58:24.494 UTC [66104] LOG:  statement: SELECT version()
+2022-11-26 13:58:24.494 UTC [66104] LOG:  duration: 0.339 ms
+2022-11-26 13:58:24.494 UTC [66104] LOG:  statement: 
+	SELECT
+	    db.oid as did, db.datname, db.datallowconn,
+	    pg_encoding_to_char(db.encoding) AS serverencoding,
+	    has_database_privilege(db.oid, 'CREATE') as cancreate,
+	    datistemplate
+	FROM
+	    pg_catalog.pg_database db
+	WHERE db.datname = current_database()
+2022-11-26 13:58:24.495 UTC [66104] LOG:  duration: 1.041 ms
+2022-11-26 13:58:24.496 UTC [66104] LOG:  statement: 
+	        SELECT
+	             gss_authenticated, encrypted
+	        FROM
+	            pg_catalog.pg_stat_gssapi
+	        WHERE pid = pg_backend_pid()
+2022-11-26 13:58:24.497 UTC [66104] LOG:  duration: 0.800 ms
+2022-11-26 13:58:24.497 UTC [66104] LOG:  statement: 
+	        SELECT
+	            roles.oid as id, roles.rolname as name,
+	            roles.rolsuper as is_superuser,
+	            CASE WHEN roles.rolsuper THEN true ELSE roles.rolcreaterole END as
+	            can_create_role,
+	            CASE WHEN roles.rolsuper THEN true
+	            ELSE roles.rolcreatedb END as can_create_db,
+	            CASE WHEN 'pg_signal_backend'=ANY(ARRAY(WITH RECURSIVE cte AS (
+	            SELECT pg_roles.oid,pg_roles.rolname FROM pg_roles
+	                WHERE pg_roles.oid = roles.oid
+	            UNION ALL
+	            SELECT m.roleid,pgr.rolname FROM cte cte_1
+	                JOIN pg_auth_members m ON m.member = cte_1.oid
+	                JOIN pg_roles pgr ON pgr.oid = m.roleid)
+	            SELECT rolname  FROM cte)) THEN True
+	            ELSE False END as can_signal_backend
+	        FROM
+	            pg_catalog.pg_roles as roles
+	        WHERE
+	            rolname = current_user
+2022-11-26 13:58:24.500 UTC [66104] LOG:  duration: 3.067 ms
+2022-11-26 13:58:24.589 UTC [66104] LOG:  statement: SELECT CASE WHEN usesuper
+	       THEN pg_catalog.pg_is_in_recovery()
+	       ELSE FALSE
+	       END as inrecovery,
+	       CASE WHEN usesuper AND pg_catalog.pg_is_in_recovery()
+	       THEN pg_is_wal_replay_paused()
+	       ELSE FALSE
+	       END as isreplaypaused
+	FROM pg_catalog.pg_user WHERE usename=current_user
+2022-11-26 13:58:24.590 UTC [66104] LOG:  duration: 0.986 ms
+2022-11-26 13:58:24.754 UTC [66104] LOG:  statement: 
+	SELECT
+	    has_table_privilege(
+	      'pgagent.pga_job', 'INSERT, SELECT, UPDATE'
+	    ) has_priviledge
+	WHERE EXISTS(
+	    SELECT has_schema_privilege('pgagent', 'USAGE')
+	    WHERE EXISTS(
+	        SELECT cl.oid FROM pg_catalog.pg_class cl
+	        LEFT JOIN pg_catalog.pg_namespace ns ON ns.oid=relnamespace
+	        WHERE relname='pga_job' AND nspname='pgagent'
+	    )
+	)
+	
+2022-11-26 13:58:24.756 UTC [66104] LOG:  duration: 1.594 ms
+2022-11-26 13:58:24.869 UTC [66104] LOG:  statement: SELECT
+	    db.oid as did, db.datname as name, ta.spcname as spcname, db.datallowconn,
+	    db.datistemplate AS is_template,
+	    pg_catalog.has_database_privilege(db.oid, 'CREATE') as cancreate, datdba as owner
+	FROM
+	    pg_catalog.pg_database db
+	    LEFT OUTER JOIN pg_catalog.pg_tablespace ta ON db.dattablespace = ta.oid
+	WHERE         db.oid > 16383::OID OR db.datname IN ('postgres', 'edb')
+	
+	ORDER BY datname;
+2022-11-26 13:58:24.870 UTC [66104] LOG:  duration: 1.434 ms
+2022-11-26 13:58:25.121 UTC [66104] LOG:  statement: SELECT
+	    nsp.oid,
+	    nsp.nspname as name,
+	    pg_catalog.has_schema_privilege(nsp.oid, 'CREATE') as can_create,
+	    pg_catalog.has_schema_privilege(nsp.oid, 'USAGE') as has_usage
+	FROM
+	    pg_catalog.pg_namespace nsp
+	WHERE
+	            nspname NOT LIKE 'pg!_%' escape '!' AND
+	            NOT (
+	(nsp.nspname = 'pg_catalog' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'pg_class' AND
+	            relnamespace = nsp.oid LIMIT 1)) OR
+	    (nsp.nspname = 'pgagent' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'pga_job' AND
+	            relnamespace = nsp.oid LIMIT 1)) OR
+	    (nsp.nspname = 'information_schema' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'tables' AND
+	            relnamespace = nsp.oid LIMIT 1))
+	    )
+	
+	    
+	ORDER BY nspname;
+2022-11-26 13:58:25.122 UTC [66104] LOG:  duration: 1.375 ms
+2022-11-26 13:58:25.209 UTC [66104] LOG:  statement: SELECT
+	    nsp.nspname as schema_name,
+	    (nsp.nspname = 'pg_catalog' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'pg_class' AND
+	            relnamespace = nsp.oid LIMIT 1)) OR
+	    (nsp.nspname = 'pgagent' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'pga_job' AND
+	            relnamespace = nsp.oid LIMIT 1)) OR
+	    (nsp.nspname = 'information_schema' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'tables' AND
+	            relnamespace = nsp.oid LIMIT 1)) AS is_catalog,
+	    CASE
+	    WHEN nsp.nspname = ANY('{information_schema}')
+	        THEN false
+	    ELSE true END AS db_support
+	FROM
+	    pg_catalog.pg_namespace nsp
+	WHERE
+	    nsp.oid = 16758::OID;
+2022-11-26 13:58:25.210 UTC [66104] LOG:  duration: 0.880 ms
+2022-11-26 13:58:25.406 UTC [66104] LOG:  statement: SELECT rel.oid, rel.relname AS name,
+	    (SELECT count(*) FROM pg_catalog.pg_trigger WHERE tgrelid=rel.oid AND tgisinternal = FALSE) AS triggercount,
+	    (SELECT count(*) FROM pg_catalog.pg_trigger WHERE tgrelid=rel.oid AND tgisinternal = FALSE AND tgenabled = 'O') AS has_enable_triggers,
+	    (CASE WHEN rel.relkind = 'p' THEN true ELSE false END) AS is_partitioned,
+	    (SELECT count(1) FROM pg_catalog.pg_inherits WHERE inhrelid=rel.oid LIMIT 1) as is_inherits,
+	    (SELECT count(1) FROM pg_catalog.pg_inherits WHERE inhparent=rel.oid LIMIT 1) as is_inherited
+	FROM pg_catalog.pg_class rel
+	    WHERE rel.relkind IN ('r','s','t','p') AND rel.relnamespace = 16758::oid
+	    AND NOT rel.relispartition
+	        ORDER BY rel.relname;
+2022-11-26 13:58:25.408 UTC [66104] LOG:  duration: 2.025 ms
+2022-11-26 13:58:32.317 UTC [66126] LOG:  connection received: host=::1 port=32946
+2022-11-26 13:58:32.318 UTC [66126] LOG:  connection authorized: user=postgres database=postgres application_name=pgAdmin 4 - CONN:5235805
+2022-11-26 13:58:32.320 UTC [66126] LOG:  statement: SET DateStyle=ISO; SET client_min_messages=notice; SELECT set_config('bytea_output','hex',false) FROM pg_settings WHERE name = 'bytea_output'; SET client_encoding='UNICODE';
+2022-11-26 13:58:32.322 UTC [66126] LOG:  duration: 1.347 ms
+2022-11-26 13:58:32.322 UTC [66126] LOG:  statement: SELECT version()
+2022-11-26 13:58:32.322 UTC [66126] LOG:  duration: 0.090 ms
+2022-11-26 13:58:32.322 UTC [66126] LOG:  statement: 
+	SELECT
+	    db.oid as did, db.datname, db.datallowconn,
+	    pg_encoding_to_char(db.encoding) AS serverencoding,
+	    has_database_privilege(db.oid, 'CREATE') as cancreate,
+	    datistemplate
+	FROM
+	    pg_catalog.pg_database db
+	WHERE db.datname = current_database()
+2022-11-26 13:58:32.322 UTC [66126] LOG:  duration: 0.363 ms
+2022-11-26 13:58:32.323 UTC [66126] LOG:  statement: 
+	        SELECT
+	             gss_authenticated, encrypted
+	        FROM
+	            pg_catalog.pg_stat_gssapi
+	        WHERE pid = pg_backend_pid()
+2022-11-26 13:58:32.323 UTC [66126] LOG:  duration: 0.369 ms
+2022-11-26 13:58:32.323 UTC [66126] LOG:  statement: 
+	        SELECT
+	            roles.oid as id, roles.rolname as name,
+	            roles.rolsuper as is_superuser,
+	            CASE WHEN roles.rolsuper THEN true ELSE roles.rolcreaterole END as
+	            can_create_role,
+	            CASE WHEN roles.rolsuper THEN true
+	            ELSE roles.rolcreatedb END as can_create_db,
+	            CASE WHEN 'pg_signal_backend'=ANY(ARRAY(WITH RECURSIVE cte AS (
+	            SELECT pg_roles.oid,pg_roles.rolname FROM pg_roles
+	                WHERE pg_roles.oid = roles.oid
+	            UNION ALL
+	            SELECT m.roleid,pgr.rolname FROM cte cte_1
+	                JOIN pg_auth_members m ON m.member = cte_1.oid
+	                JOIN pg_roles pgr ON pgr.oid = m.roleid)
+	            SELECT rolname  FROM cte)) THEN True
+	            ELSE False END as can_signal_backend
+	        FROM
+	            pg_catalog.pg_roles as roles
+	        WHERE
+	            rolname = current_user
+2022-11-26 13:58:32.325 UTC [66126] LOG:  duration: 1.463 ms
+2022-11-26 13:58:51.015 UTC [66104] LOG:  statement: SELECT
+	    CASE WHEN c.relkind = 'p' THEN True ELSE False END As ptable
+	FROM
+	    pg_catalog.pg_class c
+	WHERE
+	    c.oid = 16796::oid
+	
+2022-11-26 13:58:51.015 UTC [66104] LOG:  duration: 0.436 ms
+2022-11-26 13:58:52.577 UTC [66104] LOG:  statement: SELECT nsp.nspname AS schema ,rel.relname AS table
+	FROM pg_catalog.pg_class rel
+	    JOIN pg_catalog.pg_namespace nsp
+	    ON rel.relnamespace = nsp.oid::oid
+	    WHERE rel.oid = 16796::oid
+2022-11-26 13:58:52.577 UTC [66104] LOG:  duration: 0.575 ms
+2022-11-26 13:58:52.620 UTC [66104] LOG:  statement: SELECT DISTINCT att.attname as name, att.attnum as OID, pg_catalog.format_type(ty.oid,NULL) AS datatype,
+	att.attnotnull as not_null, att.atthasdef as has_default_val
+	FROM pg_catalog.pg_attribute att
+	    JOIN pg_catalog.pg_type ty ON ty.oid=atttypid
+	    JOIN pg_catalog.pg_namespace tn ON tn.oid=ty.typnamespace
+	    JOIN pg_catalog.pg_class cl ON cl.oid=att.attrelid
+	    JOIN pg_catalog.pg_namespace na ON na.oid=cl.relnamespace
+	    LEFT OUTER JOIN pg_catalog.pg_type et ON et.oid=ty.typelem
+	    LEFT OUTER JOIN pg_catalog.pg_attrdef def ON adrelid=att.attrelid AND adnum=att.attnum
+	    LEFT OUTER JOIN (pg_catalog.pg_depend JOIN pg_catalog.pg_class cs ON classid='pg_class'::regclass AND objid=cs.oid AND cs.relkind='S') ON refobjid=att.attrelid AND refobjsubid=att.attnum
+	    LEFT OUTER JOIN pg_catalog.pg_namespace ns ON ns.oid=cs.relnamespace
+	    LEFT OUTER JOIN pg_catalog.pg_index pi ON pi.indrelid=att.attrelid AND indisprimary
+	WHERE
+	    att.attrelid = 16796::oid
+	    AND att.attnum > 0
+	    AND att.attisdropped IS FALSE
+	ORDER BY att.attnum
+2022-11-26 13:58:52.625 UTC [66104] LOG:  duration: 5.717 ms
+2022-11-26 13:59:21.212 UTC [66104] LOG:  statement: SELECT
+	    CASE WHEN c.relkind = 'p' THEN True ELSE False END As ptable
+	FROM
+	    pg_catalog.pg_class c
+	WHERE
+	    c.oid = 16781::oid
+	
+2022-11-26 13:59:21.212 UTC [66104] LOG:  duration: 0.334 ms
+2022-11-26 13:59:33.239 UTC [66104] LOG:  statement: SELECT
+	    CASE WHEN c.relkind = 'p' THEN True ELSE False END As ptable
+	FROM
+	    pg_catalog.pg_class c
+	WHERE
+	    c.oid = 16806::oid
+	
+2022-11-26 13:59:33.240 UTC [66104] LOG:  duration: 0.418 ms
+2022-11-26 13:59:34.601 UTC [66104] LOG:  statement: SELECT nsp.nspname AS schema ,rel.relname AS table
+	FROM pg_catalog.pg_class rel
+	    JOIN pg_catalog.pg_namespace nsp
+	    ON rel.relnamespace = nsp.oid::oid
+	    WHERE rel.oid = 16806::oid
+2022-11-26 13:59:34.601 UTC [66104] LOG:  duration: 0.628 ms
+2022-11-26 13:59:34.605 UTC [66104] LOG:  statement: SELECT DISTINCT att.attname as name, att.attnum as OID, pg_catalog.format_type(ty.oid,NULL) AS datatype,
+	att.attnotnull as not_null, att.atthasdef as has_default_val
+	FROM pg_catalog.pg_attribute att
+	    JOIN pg_catalog.pg_type ty ON ty.oid=atttypid
+	    JOIN pg_catalog.pg_namespace tn ON tn.oid=ty.typnamespace
+	    JOIN pg_catalog.pg_class cl ON cl.oid=att.attrelid
+	    JOIN pg_catalog.pg_namespace na ON na.oid=cl.relnamespace
+	    LEFT OUTER JOIN pg_catalog.pg_type et ON et.oid=ty.typelem
+	    LEFT OUTER JOIN pg_catalog.pg_attrdef def ON adrelid=att.attrelid AND adnum=att.attnum
+	    LEFT OUTER JOIN (pg_catalog.pg_depend JOIN pg_catalog.pg_class cs ON classid='pg_class'::regclass AND objid=cs.oid AND cs.relkind='S') ON refobjid=att.attrelid AND refobjsubid=att.attnum
+	    LEFT OUTER JOIN pg_catalog.pg_namespace ns ON ns.oid=cs.relnamespace
+	    LEFT OUTER JOIN pg_catalog.pg_index pi ON pi.indrelid=att.attrelid AND indisprimary
+	WHERE
+	    att.attrelid = 16806::oid
+	    AND att.attnum > 0
+	    AND att.attisdropped IS FALSE
+	ORDER BY att.attnum
+2022-11-26 13:59:34.607 UTC [66104] LOG:  duration: 2.356 ms
+2022-11-26 14:00:01.036 UTC [66104] LOG:  statement: SELECT nsp.nspname AS schema ,rel.relname AS table
+	FROM pg_catalog.pg_class rel
+	    JOIN pg_catalog.pg_namespace nsp
+	    ON rel.relnamespace = nsp.oid::oid
+	    WHERE rel.oid = 16806::oid
+2022-11-26 14:00:01.036 UTC [66104] LOG:  duration: 0.622 ms
+2022-11-26 14:00:01.059 UTC [66104] LOG:  statement: SELECT DISTINCT ON (att.attnum) att.attname as name, att.atttypid, att.attlen, att.attnum, att.attndims,
+			att.atttypmod, att.attacl, att.attnotnull, att.attoptions, att.attstattarget,
+			att.attstorage, att.attidentity,
+			pg_catalog.pg_get_expr(def.adbin, def.adrelid) AS defval,
+			pg_catalog.format_type(ty.oid,NULL) AS typname,
+	        pg_catalog.format_type(ty.oid,att.atttypmod) AS displaytypname,
+			pg_catalog.format_type(ty.oid,att.atttypmod) AS cltype,
+	        CASE WHEN ty.typelem > 0 THEN ty.typelem ELSE ty.oid END as elemoid,
+			(SELECT nspname FROM pg_catalog.pg_namespace WHERE oid = ty.typnamespace) as typnspname,
+	        ty.typstorage AS defaultstorage,
+			description, pi.indkey,
+		(SELECT count(1) FROM pg_catalog.pg_type t2 WHERE t2.typname=ty.typname) > 1 AS isdup,
+		CASE WHEN length(coll.collname::text) > 0 AND length(nspc.nspname::text) > 0  THEN
+		  pg_catalog.concat(pg_catalog.quote_ident(nspc.nspname),'.',pg_catalog.quote_ident(coll.collname))
+		ELSE '' END AS collspcname,
+		EXISTS(SELECT 1 FROM pg_catalog.pg_constraint WHERE conrelid=att.attrelid AND contype='f' AND att.attnum=ANY(conkey)) As is_fk,
+		(SELECT pg_catalog.array_agg(provider || '=' || label) FROM pg_catalog.pg_seclabels sl1 WHERE sl1.objoid=att.attrelid AND sl1.objsubid=att.attnum) AS seclabels,
+		(CASE WHEN (att.attnum < 1) THEN true ElSE false END) AS is_sys_column,
+		(CASE WHEN (att.attidentity in ('a', 'd')) THEN 'i' WHEN (att.attgenerated in ('s')) THEN 'g' ELSE 'n' END) AS colconstype,
+		(CASE WHEN (att.attgenerated in ('s')) THEN pg_catalog.pg_get_expr(def.adbin, def.adrelid) END) AS genexpr, tab.relname as relname,
+		(CASE WHEN tab.relkind = 'v' THEN true ELSE false END) AS is_view_only,
+		seq.*
+	FROM pg_catalog.pg_attribute att
+	  JOIN pg_catalog.pg_type ty ON ty.oid=atttypid
+	  LEFT OUTER JOIN pg_catalog.pg_attrdef def ON adrelid=att.attrelid AND adnum=att.attnum
+	  LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=att.attrelid AND des.objsubid=att.attnum AND des.classoid='pg_class'::regclass)
+	  LEFT OUTER JOIN (pg_catalog.pg_depend dep JOIN pg_catalog.pg_class cs ON dep.classid='pg_class'::regclass AND dep.objid=cs.oid AND cs.relkind='S') ON dep.refobjid=att.attrelid AND dep.refobjsubid=att.attnum
+	  LEFT OUTER JOIN pg_catalog.pg_index pi ON pi.indrelid=att.attrelid AND indisprimary
+	  LEFT OUTER JOIN pg_catalog.pg_collation coll ON att.attcollation=coll.oid
+	  LEFT OUTER JOIN pg_catalog.pg_namespace nspc ON coll.collnamespace=nspc.oid
+	  LEFT OUTER JOIN pg_catalog.pg_sequence seq ON cs.oid=seq.seqrelid
+	  LEFT OUTER JOIN pg_catalog.pg_class tab on tab.oid = att.attrelid
+	WHERE att.attrelid = 16806::oid
+	    AND att.attnum = 4::int
+	    AND att.attnum > 0
+	    AND att.attisdropped IS FALSE
+	    ORDER BY att.attnum;
+2022-11-26 14:00:01.093 UTC [66104] LOG:  duration: 34.381 ms
+2022-11-26 14:00:01.178 UTC [66104] LOG:  statement: SELECT --nspname, collname,
+	    CASE WHEN length(nspname::text) > 0 AND length(collname::text) > 0  THEN
+	        pg_catalog.concat(pg_catalog.quote_ident(nspname), '.', pg_catalog.quote_ident(collname))
+	    ELSE '' END AS copy_collation
+	FROM pg_catalog.pg_collation c, pg_catalog.pg_namespace n
+	WHERE c.collnamespace=n.oid
+	ORDER BY nspname, collname;
+2022-11-26 14:00:01.185 UTC [66104] LOG:  duration: 7.626 ms
+2022-11-26 14:00:01.206 UTC [66104] LOG:  statement: SELECT pg_catalog.array_to_string(pg_catalog.array_agg(inhrelname), ', ') inhrelname, attrname
+	FROM
+	 (SELECT
+	   inhparent::regclass AS inhrelname,
+	   a.attname AS attrname
+	  FROM pg_catalog.pg_inherits i
+	  LEFT JOIN pg_catalog.pg_attribute a ON
+	   (attrelid = inhparent AND attnum > 0)
+	  WHERE inhrelid = 16806::oid
+	  ORDER BY inhseqno
+	 ) a
+	GROUP BY attrname;
+2022-11-26 14:00:01.207 UTC [66104] LOG:  duration: 0.753 ms
+2022-11-26 14:00:01.307 UTC [66104] LOG:  statement: SELECT 'attacl' as deftype,
+	    COALESCE(gt.rolname, 'PUBLIC') grantee,
+	    g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type order by privilege_type) as privileges,
+	    pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN'
+	    END AS privilege_type
+	  FROM
+	    (SELECT attacl
+	        FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16806::oid
+	        AND att.attnum = 4::int
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        pg_catalog.aclexplode(attacl) as d FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16806::oid
+	        AND att.attnum = 4::int) a) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-26 14:00:01.309 UTC [66104] LOG:  duration: 2.042 ms
+2022-11-26 14:00:01.311 UTC [66104] LOG:  statement: SELECT
+	    *
+	FROM
+	    (SELECT
+	        pg_catalog.format_type(t.oid,NULL) AS typname,
+	        CASE WHEN typelem > 0 THEN typelem ELSE t.oid END as elemoid,
+	        typlen, typtype, t.oid, nspname,
+	        (SELECT COUNT(1) FROM pg_catalog.pg_type t2 WHERE t2.typname = t.typname) > 1 AS isdup,
+	        CASE WHEN t.typcollation != 0 THEN TRUE ELSE FALSE END AS is_collatable
+	    FROM
+	        pg_catalog.pg_type t
+	    JOIN
+	        pg_catalog.pg_namespace nsp ON typnamespace=nsp.oid
+	    WHERE
+	        (NOT (typname = 'unknown' AND nspname = 'pg_catalog'))
+	    AND
+	        typisdefined AND typtype IN ('b', 'c', 'd', 'e', 'r')
+	AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_class WHERE relnamespace=typnamespace
+	AND relname = typname AND relkind != 'c') AND
+	(typname NOT LIKE '_%' OR NOT EXISTS (SELECT 1 FROM pg_catalog.pg_class WHERE
+	relnamespace=typnamespace AND relname = substring(typname FROM 2)::name
+	AND relkind != 'c'))
+	AND nsp.nspname != 'information_schema'
+	
+	    UNION SELECT 'smallserial', 0, 2, 'b', 0, 'pg_catalog', false, false
+	    UNION SELECT 'bigserial', 0, 8, 'b', 0, 'pg_catalog', false, false
+	    UNION SELECT 'serial', 0, 4, 'b', 0, 'pg_catalog', false, false
+	    ) AS dummy
+	ORDER BY nspname <> 'pg_catalog', nspname <> 'public', nspname, 1
+2022-11-26 14:00:01.317 UTC [66104] LOG:  duration: 5.394 ms
+2022-11-26 14:00:01.364 UTC [66104] LOG:  statement: SELECT tt.oid, pg_catalog.format_type(tt.oid,NULL) AS typname
+	FROM pg_catalog.pg_type tt
+	    JOIN pg_catalog.pg_cast pc ON tt.oid=pc.casttarget
+	    WHERE pc.castsource= 23
+	    AND pc.castcontext IN ('i', 'a')
+	UNION
+	SELECT tt.oid, pg_catalog.format_type(tt.oid,NULL) AS typname
+	FROM pg_catalog.pg_type tt
+	WHERE tt.typbasetype = 23
+2022-11-26 14:00:01.370 UTC [66104] LOG:  duration: 6.745 ms
+2022-11-26 14:00:16.712 UTC [66104] LOG:  statement: SELECT
+	    nsp.oid,
+	    nsp.nspname as name,
+	    pg_catalog.has_schema_privilege(nsp.oid, 'CREATE') as can_create,
+	    pg_catalog.has_schema_privilege(nsp.oid, 'USAGE') as has_usage
+	FROM
+	    pg_catalog.pg_namespace nsp
+	WHERE
+	            nspname NOT LIKE 'pg!_%' escape '!' AND
+	            NOT (
+	(nsp.nspname = 'pg_catalog' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'pg_class' AND
+	            relnamespace = nsp.oid LIMIT 1)) OR
+	    (nsp.nspname = 'pgagent' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'pga_job' AND
+	            relnamespace = nsp.oid LIMIT 1)) OR
+	    (nsp.nspname = 'information_schema' AND EXISTS
+	        (SELECT 1 FROM pg_catalog.pg_class WHERE relname = 'tables' AND
+	            relnamespace = nsp.oid LIMIT 1))
+	    )
+	
+	    
+	ORDER BY nspname;
+2022-11-26 14:00:16.713 UTC [66104] LOG:  duration: 1.037 ms
+2022-11-26 14:00:16.765 UTC [66104] LOG:  statement: SELECT name, setting::numeric AS setting FROM pg_catalog.pg_settings WHERE name IN('autovacuum_vacuum_threshold','autovacuum_analyze_threshold','autovacuum_vacuum_scale_factor','autovacuum_analyze_scale_factor','autovacuum_vacuum_cost_delay','autovacuum_vacuum_cost_limit','autovacuum_freeze_max_age','vacuum_freeze_min_age','vacuum_freeze_table_age') ORDER BY name
+2022-11-26 14:00:16.767 UTC [66104] LOG:  duration: 1.826 ms
+2022-11-26 14:00:16.785 UTC [66104] LOG:  statement: SELECT name, setting::numeric AS setting FROM pg_catalog.pg_settings WHERE name IN('autovacuum_vacuum_threshold','autovacuum_vacuum_scale_factor','autovacuum_vacuum_cost_delay','autovacuum_vacuum_cost_limit','autovacuum_freeze_max_age','vacuum_freeze_min_age','vacuum_freeze_table_age') ORDER BY name
+2022-11-26 14:00:16.786 UTC [66104] LOG:  duration: 1.564 ms
+2022-11-26 14:00:16.882 UTC [66104] LOG:  statement: SELECT rel.oid, rel.relname AS name, rel.reltablespace AS spcoid,rel.relacl AS relacl_str,
+	  (CASE WHEN length(spc.spcname::text) > 0 OR rel.relkind = 'p' THEN spc.spcname ELSE
+	    (SELECT sp.spcname FROM pg_catalog.pg_database dtb
+	    JOIN pg_catalog.pg_tablespace sp ON dtb.dattablespace=sp.oid
+	    WHERE dtb.oid = 14767::oid)
+	  END) as spcname,
+	  (CASE rel.relreplident
+	          WHEN 'd' THEN 'default'
+	          WHEN 'n' THEN 'nothing'
+	          WHEN 'f' THEN 'full'
+	          WHEN 'i' THEN 'index'
+	  END) as replica_identity,
+	  (select nspname FROM pg_catalog.pg_namespace WHERE oid = 16758::oid ) as schema,
+	  pg_catalog.pg_get_userbyid(rel.relowner) AS relowner, rel.relkind,
+	  (CASE WHEN rel.relkind = 'p' THEN true ELSE false END) AS is_partitioned,
+	  rel.relhassubclass, rel.reltuples::bigint, des.description, con.conname, con.conkey,
+		EXISTS(select 1 FROM pg_catalog.pg_trigger
+				JOIN pg_catalog.pg_proc pt ON pt.oid=tgfoid AND pt.proname='logtrigger'
+				JOIN pg_catalog.pg_proc pc ON pc.pronamespace=pt.pronamespace AND pc.proname='slonyversion'
+				WHERE tgrelid=rel.oid) AS isrepl,
+		(SELECT count(*) FROM pg_catalog.pg_trigger WHERE tgrelid=rel.oid AND tgisinternal = FALSE) AS triggercount,
+		(SELECT ARRAY(SELECT CASE WHEN (nspname NOT LIKE 'pg\_%') THEN
+	            pg_catalog.quote_ident(nspname)||'.'||pg_catalog.quote_ident(c.relname)
+	            ELSE pg_catalog.quote_ident(c.relname) END AS inherited_tables
+	    FROM pg_catalog.pg_inherits i
+	    JOIN pg_catalog.pg_class c ON c.oid = i.inhparent
+	    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+	    WHERE i.inhrelid = rel.oid ORDER BY inhseqno)) AS coll_inherits,
+	  (SELECT count(*)
+			FROM pg_catalog.pg_inherits i
+	      JOIN pg_catalog.pg_class c ON c.oid = i.inhparent
+	      JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+			WHERE i.inhrelid = rel.oid) AS inherited_tables_cnt,
+		(CASE WHEN rel.relpersistence = 'u' THEN true ELSE false END) AS relpersistence,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'fillfactor=([0-9]*)') AS fillfactor,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'parallel_workers=([0-9]*)') AS parallel_workers,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'toast_tuple_target=([0-9]*)') AS toast_tuple_target,
+		(substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_enabled=([a-z|0-9]*)'))::BOOL AS autovacuum_enabled,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_vacuum_threshold=([0-9]*)') AS autovacuum_vacuum_threshold,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_vacuum_scale_factor=([0-9]*[.]?[0-9]*)') AS autovacuum_vacuum_scale_factor,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_analyze_threshold=([0-9]*)') AS autovacuum_analyze_threshold,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_analyze_scale_factor=([0-9]*[.]?[0-9]*)') AS autovacuum_analyze_scale_factor,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_vacuum_cost_delay=([0-9]*)') AS autovacuum_vacuum_cost_delay,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_vacuum_cost_limit=([0-9]*)') AS autovacuum_vacuum_cost_limit,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_freeze_min_age=([0-9]*)') AS autovacuum_freeze_min_age,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_freeze_max_age=([0-9]*)') AS autovacuum_freeze_max_age,
+		substring(pg_catalog.array_to_string(rel.reloptions, ',') FROM 'autovacuum_freeze_table_age=([0-9]*)') AS autovacuum_freeze_table_age,
+		(substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_enabled=([a-z|0-9]*)'))::BOOL AS toast_autovacuum_enabled,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_vacuum_threshold=([0-9]*)') AS toast_autovacuum_vacuum_threshold,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_vacuum_scale_factor=([0-9]*[.]?[0-9]*)') AS toast_autovacuum_vacuum_scale_factor,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_analyze_threshold=([0-9]*)') AS toast_autovacuum_analyze_threshold,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_analyze_scale_factor=([0-9]*[.]?[0-9]*)') AS toast_autovacuum_analyze_scale_factor,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_vacuum_cost_delay=([0-9]*)') AS toast_autovacuum_vacuum_cost_delay,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_vacuum_cost_limit=([0-9]*)') AS toast_autovacuum_vacuum_cost_limit,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_freeze_min_age=([0-9]*)') AS toast_autovacuum_freeze_min_age,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_freeze_max_age=([0-9]*)') AS toast_autovacuum_freeze_max_age,
+		substring(pg_catalog.array_to_string(tst.reloptions, ',') FROM 'autovacuum_freeze_table_age=([0-9]*)') AS toast_autovacuum_freeze_table_age,
+		rel.reloptions AS reloptions, tst.reloptions AS toast_reloptions, rel.reloftype,
+		CASE WHEN typ.typname IS NOT NULL THEN (select pg_catalog.quote_ident(nspname) FROM pg_catalog.pg_namespace WHERE oid = 16758::oid )||'.'||pg_catalog.quote_ident(typ.typname) ELSE typ.typname END AS typname,
+		typ.typrelid AS typoid, rel.relrowsecurity as rlspolicy, rel.relforcerowsecurity as forcerlspolicy,
+		(CASE WHEN rel.reltoastrelid = 0 THEN false ELSE true END) AS hastoasttable,
+		(SELECT pg_catalog.array_agg(provider || '=' || label) FROM pg_catalog.pg_seclabels sl1 WHERE sl1.objoid=rel.oid AND sl1.objsubid=0) AS seclabels,
+		(CASE WHEN rel.oid <= 16383::oid THEN true ElSE false END) AS is_sys_table
+		-- Added for partition table
+	    , (CASE WHEN rel.relkind = 'p' THEN pg_catalog.pg_get_partkeydef(16806::oid) ELSE '' END) AS partition_scheme FROM pg_catalog.pg_class rel
+	  LEFT OUTER JOIN pg_catalog.pg_tablespace spc on spc.oid=rel.reltablespace
+	  LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=rel.oid AND des.objsubid=0 AND des.classoid='pg_class'::regclass)
+	  LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid AND con.contype='p'
+	  LEFT OUTER JOIN pg_catalog.pg_class tst ON tst.oid = rel.reltoastrelid
+	  LEFT JOIN pg_catalog.pg_type typ ON rel.reloftype=typ.oid
+	WHERE rel.relkind IN ('r','s','t','p') AND rel.relnamespace = 16758::oid
+	AND NOT rel.relispartition
+	  AND rel.oid = 16806::oid ORDER BY rel.relname;
+2022-11-26 14:00:16.898 UTC [66104] LOG:  duration: 15.779 ms
+2022-11-26 14:00:17.042 UTC [66104] LOG:  statement: SELECT c.oid, c.relname , nspname,
+	CASE WHEN nspname NOT LIKE 'pg\_%' THEN
+	 pg_catalog.quote_ident(nspname)||'.'||pg_catalog.quote_ident(c.relname)
+	ELSE pg_catalog.quote_ident(c.relname)
+	END AS inherits
+	FROM pg_catalog.pg_class c
+	JOIN pg_catalog.pg_namespace n
+	ON n.oid=c.relnamespace
+	WHERE relkind='r' AND NOT relispartition
+	AND n.nspname NOT LIKE 'pg\_%' AND n.nspname NOT IN ('information_schema') 
+	ORDER BY relnamespace, c.relname
+2022-11-26 14:00:17.042 UTC [66104] LOG:  duration: 0.923 ms
+2022-11-26 14:00:17.065 UTC [66104] LOG:  statement: SELECT c.oid,
+	  pg_catalog.quote_ident(n.nspname)||'.'||pg_catalog.quote_ident(c.relname) AS typname
+	  FROM pg_catalog.pg_namespace n, pg_catalog.pg_class c
+	WHERE c.relkind = 'c' AND c.relnamespace=n.oid
+	AND n.nspname NOT LIKE 'pg\_%' AND n.nspname NOT IN ('information_schema') 
+	ORDER BY typname;
+2022-11-26 14:00:17.066 UTC [66104] LOG:  duration: 0.936 ms
+2022-11-26 14:00:17.094 UTC [66104] LOG:  statement: SELECT
+		r.oid, r.rolname, r.rolcanlogin, r.rolsuper
+	FROM
+		pg_catalog.pg_roles r
+	ORDER BY r.rolcanlogin, r.rolname
+2022-11-26 14:00:17.094 UTC [66104] LOG:  duration: 0.473 ms
+2022-11-26 14:00:17.124 UTC [66104] LOG:  statement: SELECT
+	    ts.oid AS oid, spcname AS name, spcowner as owner
+	FROM
+	    pg_catalog.pg_tablespace ts
+	ORDER BY name;
+2022-11-26 14:00:17.124 UTC [66104] LOG:  duration: 0.465 ms
+2022-11-26 14:00:17.136 UTC [66104] LOG:  statement: SELECT COUNT(*)::text FROM public.reservation;
+2022-11-26 14:00:17.137 UTC [66104] LOG:  duration: 1.109 ms
+2022-11-26 14:00:17.182 UTC [66104] LOG:  statement: SELECT 'relacl' as deftype, COALESCE(gt.rolname, 'PUBLIC') grantee, g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type) as privileges, pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+			WHEN 'CONNECT' THEN 'c'
+			WHEN 'CREATE' THEN 'C'
+			WHEN 'DELETE' THEN 'd'
+			WHEN 'EXECUTE' THEN 'X'
+			WHEN 'INSERT' THEN 'a'
+			WHEN 'REFERENCES' THEN 'x'
+			WHEN 'SELECT' THEN 'r'
+			WHEN 'TEMPORARY' THEN 'T'
+			WHEN 'TRIGGER' THEN 't'
+			WHEN 'TRUNCATE' THEN 'D'
+			WHEN 'UPDATE' THEN 'w'
+			WHEN 'USAGE' THEN 'U'
+			ELSE 'UNKNOWN'
+		END AS privilege_type
+	  FROM
+	    (SELECT rel.relacl
+	        FROM pg_catalog.pg_class rel
+	          LEFT OUTER JOIN pg_catalog.pg_tablespace spc on spc.oid=rel.reltablespace
+	          LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid AND con.contype='p'
+	          LEFT OUTER JOIN pg_catalog.pg_class tst ON tst.oid = rel.reltoastrelid
+	          LEFT JOIN pg_catalog.pg_type typ ON rel.reloftype=typ.oid
+	        WHERE rel.relkind IN ('r','s','t','p') AND rel.relnamespace = 16758::oid
+	            AND rel.oid = 16806::oid
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        aclexplode(rel.relacl) as d
+	        FROM pg_catalog.pg_class rel
+	          LEFT OUTER JOIN pg_catalog.pg_tablespace spc on spc.oid=rel.reltablespace
+	          LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid AND con.contype='p'
+	          LEFT OUTER JOIN pg_catalog.pg_class tst ON tst.oid = rel.reltoastrelid
+	          LEFT JOIN pg_catalog.pg_type typ ON rel.reloftype=typ.oid
+	        WHERE rel.relkind IN ('r','s','t','p') AND rel.relnamespace = 16758::oid
+	            AND rel.oid = 16806::oid
+	        ) a ORDER BY privilege_type) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-26 14:00:17.184 UTC [66104] LOG:  duration: 2.276 ms
+2022-11-26 14:00:17.185 UTC [66104] LOG:  statement: SELECT 'relacl' as deftype, COALESCE(gt.rolname, 'PUBLIC') grantee, g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type) as privileges, pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+			WHEN 'CONNECT' THEN 'c'
+			WHEN 'CREATE' THEN 'C'
+			WHEN 'DELETE' THEN 'd'
+			WHEN 'EXECUTE' THEN 'X'
+			WHEN 'INSERT' THEN 'a'
+			WHEN 'REFERENCES' THEN 'x'
+			WHEN 'SELECT' THEN 'r'
+			WHEN 'TEMPORARY' THEN 'T'
+			WHEN 'TRIGGER' THEN 't'
+			WHEN 'TRUNCATE' THEN 'D'
+			WHEN 'UPDATE' THEN 'w'
+			WHEN 'USAGE' THEN 'U'
+			ELSE 'UNKNOWN'
+		END AS privilege_type
+	  FROM
+	    (SELECT rel.relacl
+	        FROM pg_catalog.pg_class rel
+	          LEFT OUTER JOIN pg_catalog.pg_tablespace spc on spc.oid=rel.reltablespace
+	          LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid AND con.contype='p'
+	          LEFT OUTER JOIN pg_catalog.pg_class tst ON tst.oid = rel.reltoastrelid
+	          LEFT JOIN pg_catalog.pg_type typ ON rel.reloftype=typ.oid
+	        WHERE rel.relkind IN ('r','s','t','p') AND rel.relnamespace = 16758::oid
+	            AND rel.oid = 16806::oid
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        aclexplode(rel.relacl) as d
+	        FROM pg_catalog.pg_class rel
+	          LEFT OUTER JOIN pg_catalog.pg_tablespace spc on spc.oid=rel.reltablespace
+	          LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid AND con.contype='p'
+	          LEFT OUTER JOIN pg_catalog.pg_class tst ON tst.oid = rel.reltoastrelid
+	          LEFT JOIN pg_catalog.pg_type typ ON rel.reloftype=typ.oid
+	        WHERE rel.relkind IN ('r','s','t','p') AND rel.relnamespace = 16758::oid
+	            AND rel.oid = 16806::oid
+	        ) a ORDER BY privilege_type) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-26 14:00:17.187 UTC [66104] LOG:  duration: 2.339 ms
+2022-11-26 14:00:17.189 UTC [66104] LOG:  statement: SELECT DISTINCT ON (att.attnum) att.attname as name, att.atttypid, att.attlen, att.attnum, att.attndims,
+			att.atttypmod, att.attacl, att.attnotnull, att.attoptions, att.attstattarget,
+			att.attstorage, att.attidentity,
+			pg_catalog.pg_get_expr(def.adbin, def.adrelid) AS defval,
+			pg_catalog.format_type(ty.oid,NULL) AS typname,
+	        pg_catalog.format_type(ty.oid,att.atttypmod) AS displaytypname,
+			pg_catalog.format_type(ty.oid,att.atttypmod) AS cltype,
+	        CASE WHEN ty.typelem > 0 THEN ty.typelem ELSE ty.oid END as elemoid,
+			(SELECT nspname FROM pg_catalog.pg_namespace WHERE oid = ty.typnamespace) as typnspname,
+	        ty.typstorage AS defaultstorage,
+			description, pi.indkey,
+		(SELECT count(1) FROM pg_catalog.pg_type t2 WHERE t2.typname=ty.typname) > 1 AS isdup,
+		CASE WHEN length(coll.collname::text) > 0 AND length(nspc.nspname::text) > 0  THEN
+		  pg_catalog.concat(pg_catalog.quote_ident(nspc.nspname),'.',pg_catalog.quote_ident(coll.collname))
+		ELSE '' END AS collspcname,
+		EXISTS(SELECT 1 FROM pg_catalog.pg_constraint WHERE conrelid=att.attrelid AND contype='f' AND att.attnum=ANY(conkey)) As is_fk,
+		(SELECT pg_catalog.array_agg(provider || '=' || label) FROM pg_catalog.pg_seclabels sl1 WHERE sl1.objoid=att.attrelid AND sl1.objsubid=att.attnum) AS seclabels,
+		(CASE WHEN (att.attnum < 1) THEN true ElSE false END) AS is_sys_column,
+		(CASE WHEN (att.attidentity in ('a', 'd')) THEN 'i' WHEN (att.attgenerated in ('s')) THEN 'g' ELSE 'n' END) AS colconstype,
+		(CASE WHEN (att.attgenerated in ('s')) THEN pg_catalog.pg_get_expr(def.adbin, def.adrelid) END) AS genexpr, tab.relname as relname,
+		(CASE WHEN tab.relkind = 'v' THEN true ELSE false END) AS is_view_only,
+		seq.*
+	FROM pg_catalog.pg_attribute att
+	  JOIN pg_catalog.pg_type ty ON ty.oid=atttypid
+	  LEFT OUTER JOIN pg_catalog.pg_attrdef def ON adrelid=att.attrelid AND adnum=att.attnum
+	  LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=att.attrelid AND des.objsubid=att.attnum AND des.classoid='pg_class'::regclass)
+	  LEFT OUTER JOIN (pg_catalog.pg_depend dep JOIN pg_catalog.pg_class cs ON dep.classid='pg_class'::regclass AND dep.objid=cs.oid AND cs.relkind='S') ON dep.refobjid=att.attrelid AND dep.refobjsubid=att.attnum
+	  LEFT OUTER JOIN pg_catalog.pg_index pi ON pi.indrelid=att.attrelid AND indisprimary
+	  LEFT OUTER JOIN pg_catalog.pg_collation coll ON att.attcollation=coll.oid
+	  LEFT OUTER JOIN pg_catalog.pg_namespace nspc ON coll.collnamespace=nspc.oid
+	  LEFT OUTER JOIN pg_catalog.pg_sequence seq ON cs.oid=seq.seqrelid
+	  LEFT OUTER JOIN pg_catalog.pg_class tab on tab.oid = att.attrelid
+	WHERE att.attrelid = 16806::oid
+	    AND att.attnum > 0
+	    AND att.attisdropped IS FALSE
+	    ORDER BY att.attnum;
+2022-11-26 14:00:17.199 UTC [66104] LOG:  duration: 9.808 ms
+2022-11-26 14:00:17.237 UTC [66104] LOG:  statement: SELECT t.main_oid, pg_catalog.ARRAY_AGG(t.typname) as edit_types
+	FROM
+	(SELECT pc.castsource AS main_oid, pg_catalog.format_type(tt.oid,NULL) AS typname
+	FROM pg_catalog.pg_type tt
+	    JOIN pg_catalog.pg_cast pc ON tt.oid=pc.casttarget
+	    WHERE pc.castsource IN (23,1043,1082)
+	    AND pc.castcontext IN ('i', 'a')
+	UNION
+	SELECT tt.typbasetype AS main_oid, pg_catalog.format_type(tt.oid,NULL) AS typname
+	FROM pg_catalog.pg_type tt
+	WHERE tt.typbasetype  IN (23,1043,1082)
+	) t
+	GROUP BY t.main_oid;
+2022-11-26 14:00:17.238 UTC [66104] LOG:  duration: 1.270 ms
+2022-11-26 14:00:17.241 UTC [66104] LOG:  statement: SELECT 'attacl' as deftype,
+	    COALESCE(gt.rolname, 'PUBLIC') grantee,
+	    g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type order by privilege_type) as privileges,
+	    pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN'
+	    END AS privilege_type
+	  FROM
+	    (SELECT attacl
+	        FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16806::oid
+	        AND att.attnum = 1::int
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        pg_catalog.aclexplode(attacl) as d FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16806::oid
+	        AND att.attnum = 1::int) a) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-26 14:00:17.242 UTC [66104] LOG:  duration: 1.357 ms
+2022-11-26 14:00:17.244 UTC [66104] LOG:  statement: SELECT 'attacl' as deftype,
+	    COALESCE(gt.rolname, 'PUBLIC') grantee,
+	    g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type order by privilege_type) as privileges,
+	    pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN'
+	    END AS privilege_type
+	  FROM
+	    (SELECT attacl
+	        FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16806::oid
+	        AND att.attnum = 2::int
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        pg_catalog.aclexplode(attacl) as d FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16806::oid
+	        AND att.attnum = 2::int) a) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-26 14:00:17.245 UTC [66104] LOG:  duration: 1.214 ms
+2022-11-26 14:00:17.246 UTC [66104] LOG:  statement: SELECT 'attacl' as deftype,
+	    COALESCE(gt.rolname, 'PUBLIC') grantee,
+	    g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type order by privilege_type) as privileges,
+	    pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN'
+	    END AS privilege_type
+	  FROM
+	    (SELECT attacl
+	        FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16806::oid
+	        AND att.attnum = 3::int
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        pg_catalog.aclexplode(attacl) as d FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16806::oid
+	        AND att.attnum = 3::int) a) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-26 14:00:17.247 UTC [66104] LOG:  duration: 1.209 ms
+2022-11-26 14:00:17.248 UTC [66104] LOG:  statement: SELECT 'attacl' as deftype,
+	    COALESCE(gt.rolname, 'PUBLIC') grantee,
+	    g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type order by privilege_type) as privileges,
+	    pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN'
+	    END AS privilege_type
+	  FROM
+	    (SELECT attacl
+	        FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16806::oid
+	        AND att.attnum = 4::int
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        pg_catalog.aclexplode(attacl) as d FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16806::oid
+	        AND att.attnum = 4::int) a) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-26 14:00:17.249 UTC [66104] LOG:  duration: 1.196 ms
+2022-11-26 14:00:17.251 UTC [66104] LOG:  statement: SELECT 'attacl' as deftype,
+	    COALESCE(gt.rolname, 'PUBLIC') grantee,
+	    g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type order by privilege_type) as privileges,
+	    pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN'
+	    END AS privilege_type
+	  FROM
+	    (SELECT attacl
+	        FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16806::oid
+	        AND att.attnum = 5::int
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        pg_catalog.aclexplode(attacl) as d FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16806::oid
+	        AND att.attnum = 5::int) a) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-26 14:00:17.252 UTC [66104] LOG:  duration: 1.275 ms
+2022-11-26 14:00:17.254 UTC [66104] LOG:  statement: SELECT 'attacl' as deftype,
+	    COALESCE(gt.rolname, 'PUBLIC') grantee,
+	    g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type order by privilege_type) as privileges,
+	    pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN'
+	    END AS privilege_type
+	  FROM
+	    (SELECT attacl
+	        FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16806::oid
+	        AND att.attnum = 6::int
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        pg_catalog.aclexplode(attacl) as d FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16806::oid
+	        AND att.attnum = 6::int) a) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-26 14:00:17.255 UTC [66104] LOG:  duration: 1.557 ms
+2022-11-26 14:00:17.257 UTC [66104] LOG:  statement: SELECT 'attacl' as deftype,
+	    COALESCE(gt.rolname, 'PUBLIC') grantee,
+	    g.rolname grantor,
+	    pg_catalog.array_agg(privilege_type order by privilege_type) as privileges,
+	    pg_catalog.array_agg(is_grantable) as grantable
+	FROM
+	  (SELECT
+	    d.grantee, d.grantor, d.is_grantable,
+	    CASE d.privilege_type
+	        WHEN 'CONNECT' THEN 'c'
+	        WHEN 'CREATE' THEN 'C'
+	        WHEN 'DELETE' THEN 'd'
+	        WHEN 'EXECUTE' THEN 'X'
+	        WHEN 'INSERT' THEN 'a'
+	        WHEN 'REFERENCES' THEN 'x'
+	        WHEN 'SELECT' THEN 'r'
+	        WHEN 'TEMPORARY' THEN 'T'
+	        WHEN 'TRIGGER' THEN 't'
+	        WHEN 'TRUNCATE' THEN 'D'
+	        WHEN 'UPDATE' THEN 'w'
+	        WHEN 'USAGE' THEN 'U'
+	        ELSE 'UNKNOWN'
+	    END AS privilege_type
+	  FROM
+	    (SELECT attacl
+	        FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16806::oid
+	        AND att.attnum = 7::int
+	    ) acl,
+	    (SELECT (d).grantee AS grantee, (d).grantor AS grantor, (d).is_grantable
+	        AS is_grantable, (d).privilege_type AS privilege_type FROM (SELECT
+	        pg_catalog.aclexplode(attacl) as d FROM pg_catalog.pg_attribute att
+	        WHERE att.attrelid = 16806::oid
+	        AND att.attnum = 7::int) a) d
+	    ) d
+	  LEFT JOIN pg_catalog.pg_roles g ON (d.grantor = g.oid)
+	  LEFT JOIN pg_catalog.pg_roles gt ON (d.grantee = gt.oid)
+	GROUP BY g.rolname, gt.rolname
+	ORDER BY grantee
+2022-11-26 14:00:17.258 UTC [66104] LOG:  duration: 1.295 ms
+2022-11-26 14:00:17.272 UTC [66104] LOG:  statement: SELECT cls.oid,
+	    cls.relname as name,
+	    indnkeyatts as col_count,
+	    CASE WHEN length(spcname::text) > 0 THEN spcname ELSE
+	        (SELECT sp.spcname FROM pg_catalog.pg_database dtb
+	        JOIN pg_catalog.pg_tablespace sp ON dtb.dattablespace=sp.oid
+	        WHERE dtb.oid = 14767::oid)
+	    END as spcname,
+	    CASE contype
+	        WHEN 'p' THEN desp.description
+	        WHEN 'u' THEN desp.description
+	        WHEN 'x' THEN desp.description
+	        ELSE des.description
+	    END AS comment,
+	    condeferrable,
+	    condeferred,
+	    conislocal,
+	    substring(pg_catalog.array_to_string(cls.reloptions, ',') from 'fillfactor=([0-9]*)') AS fillfactor
+	FROM pg_catalog.pg_index idx
+	JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	LEFT OUTER JOIN pg_catalog.pg_tablespace ta on ta.oid=cls.reltablespace
+	LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=cls.oid AND des.classoid='pg_class'::regclass)
+	LEFT OUTER JOIN pg_catalog.pg_description desp ON (desp.objoid=con.oid AND desp.objsubid = 0 AND desp.classoid='pg_constraint'::regclass)
+	WHERE indrelid = 16806::oid
+	AND contype='p'
+	ORDER BY cls.relname
+2022-11-26 14:00:17.276 UTC [66104] LOG:  duration: 3.720 ms
+2022-11-26 14:00:17.318 UTC [66104] LOG:  statement: SELECT * FROM (
+	SELECT  pg_catalog.pg_get_indexdef(16809 , 1 , true) AS column, 0 AS dummy
+	) tmp
+	ORDER BY dummy
+2022-11-26 14:00:17.319 UTC [66104] LOG:  duration: 0.703 ms
+2022-11-26 14:00:17.332 UTC [66104] LOG:  statement: -- pg_get_indexdef did not support INCLUDE columns
+	
+	SELECT a.attname as colname
+	FROM (
+	    SELECT
+	      i.indnkeyatts,
+	      i.indrelid,
+	      pg_catalog.unnest(indkey) AS table_colnum,
+	      pg_catalog.unnest(ARRAY(SELECT pg_catalog.generate_series(1, i.indnatts) AS n)) attnum
+	    FROM
+	      pg_catalog.pg_index i
+	    WHERE i.indexrelid = 16809::OID
+	) i JOIN pg_catalog.pg_attribute a
+	ON (a.attrelid = i.indrelid AND i.table_colnum = a.attnum)
+	WHERE i.attnum > i.indnkeyatts
+	ORDER BY i.attnum
+2022-11-26 14:00:17.333 UTC [66104] LOG:  duration: 1.096 ms
+2022-11-26 14:00:17.334 UTC [66104] LOG:  statement: SELECT cls.oid,
+	    cls.relname as name,
+	    indnkeyatts as col_count,
+	    CASE WHEN length(spcname::text) > 0 THEN spcname ELSE
+	        (SELECT sp.spcname FROM pg_catalog.pg_database dtb
+	        JOIN pg_catalog.pg_tablespace sp ON dtb.dattablespace=sp.oid
+	        WHERE dtb.oid = 14767::oid)
+	    END as spcname,
+	    CASE contype
+	        WHEN 'p' THEN desp.description
+	        WHEN 'u' THEN desp.description
+	        WHEN 'x' THEN desp.description
+	        ELSE des.description
+	    END AS comment,
+	    condeferrable,
+	    condeferred,
+	    conislocal,
+	    substring(pg_catalog.array_to_string(cls.reloptions, ',') from 'fillfactor=([0-9]*)') AS fillfactor
+	FROM pg_catalog.pg_index idx
+	JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	LEFT OUTER JOIN pg_catalog.pg_tablespace ta on ta.oid=cls.reltablespace
+	LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=cls.oid AND des.classoid='pg_class'::regclass)
+	LEFT OUTER JOIN pg_catalog.pg_description desp ON (desp.objoid=con.oid AND desp.objsubid = 0 AND desp.classoid='pg_constraint'::regclass)
+	WHERE indrelid = 16806::oid
+	AND contype='u'
+	ORDER BY cls.relname
+2022-11-26 14:00:17.338 UTC [66104] LOG:  duration: 4.098 ms
+2022-11-26 14:00:17.377 UTC [66104] LOG:  statement: SELECT ct.oid,
+	      conname as name,
+	      condeferrable,
+	      condeferred,
+	      confupdtype,
+	      confdeltype,
+	      CASE confmatchtype
+	        WHEN 's' THEN FALSE
+	        WHEN 'f' THEN TRUE
+	      END AS confmatchtype,
+	      conkey,
+	      confkey,
+	      confrelid,
+	      nl.nspname as fknsp,
+	      cl.relname as fktab,
+	      nr.nspname as refnsp,
+	      cr.relname as reftab,
+	      description as comment,
+	      convalidated,
+	      conislocal
+	FROM pg_catalog.pg_constraint ct
+	JOIN pg_catalog.pg_class cl ON cl.oid=conrelid
+	JOIN pg_catalog.pg_namespace nl ON nl.oid=cl.relnamespace
+	JOIN pg_catalog.pg_class cr ON cr.oid=confrelid
+	JOIN pg_catalog.pg_namespace nr ON nr.oid=cr.relnamespace
+	LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=ct.oid AND des.classoid='pg_constraint'::regclass)
+	WHERE contype='f' AND
+	conrelid = 16806::oid
+	ORDER BY conname
+2022-11-26 14:00:17.379 UTC [66104] LOG:  duration: 2.038 ms
+2022-11-26 14:00:17.419 UTC [66104] LOG:  statement: SELECT a1.attname as conattname,
+	    a2.attname as confattname
+	FROM pg_catalog.pg_attribute a1,
+	    pg_catalog.pg_attribute a2
+	WHERE a1.attrelid=16806::oid
+	    AND a1.attnum=7
+	    AND a2.attrelid=16796::oid
+	    AND a2.attnum=1
+	
+2022-11-26 14:00:17.420 UTC [66104] LOG:  duration: 0.668 ms
+2022-11-26 14:00:17.457 UTC [66104] LOG:  statement: SELECT nsp.nspname AS schema,
+	    rel.relname AS table
+	FROM
+	    pg_catalog.pg_class rel
+	JOIN pg_catalog.pg_namespace nsp
+	ON rel.relnamespace = nsp.oid::oid
+	WHERE rel.oid = 16796::oid
+2022-11-26 14:00:17.458 UTC [66104] LOG:  duration: 0.438 ms
+2022-11-26 14:00:17.495 UTC [66104] LOG:  statement: SELECT   cls.oid, cls.relname as idxname, indnatts as col_count
+	  FROM pg_catalog.pg_index idx
+	  JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	  LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	  LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16806::oid
+	    AND con.contype='p'
+	
+	UNION
+	
+	SELECT  cls.oid, cls.relname as idxname, indnatts
+	    FROM pg_catalog.pg_index idx
+	    JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	    LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	    LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16806::oid
+	    AND con.contype='x'
+	
+	UNION
+	
+	SELECT  cls.oid, cls.relname as idxname, indnatts
+	    FROM pg_catalog.pg_index idx
+	    JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	    LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	    LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16806::oid
+	    AND con.contype='u'
+	
+	UNION
+	
+	SELECT  cls.oid, cls.relname as idxname, indnatts
+	    FROM pg_catalog.pg_index idx
+	    JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	    LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	    LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16806::oid
+	   AND conname IS NULL
+2022-11-26 14:00:17.498 UTC [66104] LOG:  duration: 3.440 ms
+2022-11-26 14:00:17.535 UTC [66104] LOG:  statement: SELECT  pg_catalog.pg_get_indexdef(16809 , 1 , true) AS column
+	
+2022-11-26 14:00:17.535 UTC [66104] LOG:  duration: 0.142 ms
+2022-11-26 14:00:17.536 UTC [66104] LOG:  statement: SELECT a1.attname as conattname,
+	    a2.attname as confattname
+	FROM pg_catalog.pg_attribute a1,
+	    pg_catalog.pg_attribute a2
+	WHERE a1.attrelid=16806::oid
+	    AND a1.attnum=4
+	    AND a2.attrelid=16774::oid
+	    AND a2.attnum=1
+	
+2022-11-26 14:00:17.536 UTC [66104] LOG:  duration: 0.264 ms
+2022-11-26 14:00:17.537 UTC [66104] LOG:  statement: SELECT nsp.nspname AS schema,
+	    rel.relname AS table
+	FROM
+	    pg_catalog.pg_class rel
+	JOIN pg_catalog.pg_namespace nsp
+	ON rel.relnamespace = nsp.oid::oid
+	WHERE rel.oid = 16774::oid
+2022-11-26 14:00:17.537 UTC [66104] LOG:  duration: 0.338 ms
+2022-11-26 14:00:17.538 UTC [66104] LOG:  statement: SELECT   cls.oid, cls.relname as idxname, indnatts as col_count
+	  FROM pg_catalog.pg_index idx
+	  JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	  LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	  LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16806::oid
+	    AND con.contype='p'
+	
+	UNION
+	
+	SELECT  cls.oid, cls.relname as idxname, indnatts
+	    FROM pg_catalog.pg_index idx
+	    JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	    LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	    LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16806::oid
+	    AND con.contype='x'
+	
+	UNION
+	
+	SELECT  cls.oid, cls.relname as idxname, indnatts
+	    FROM pg_catalog.pg_index idx
+	    JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	    LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	    LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16806::oid
+	    AND con.contype='u'
+	
+	UNION
+	
+	SELECT  cls.oid, cls.relname as idxname, indnatts
+	    FROM pg_catalog.pg_index idx
+	    JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	    LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	    LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	WHERE idx.indrelid = 16806::oid
+	   AND conname IS NULL
+2022-11-26 14:00:17.542 UTC [66104] LOG:  duration: 3.242 ms
+2022-11-26 14:00:17.542 UTC [66104] LOG:  statement: SELECT  pg_catalog.pg_get_indexdef(16809 , 1 , true) AS column
+	
+2022-11-26 14:00:17.543 UTC [66104] LOG:  duration: 0.174 ms
+2022-11-26 14:00:17.577 UTC [66104] LOG:  statement: SELECT c.oid, conname as name, relname, nspname, description as comment,
+	       pg_catalog.pg_get_expr(conbin, conrelid, true) as consrc,
+	       connoinherit, NOT convalidated as convalidated, conislocal
+	    FROM pg_catalog.pg_constraint c
+	    JOIN pg_catalog.pg_class cl ON cl.oid=conrelid
+	    JOIN pg_catalog.pg_namespace nl ON nl.oid=relnamespace
+	LEFT OUTER JOIN
+	    pg_catalog.pg_description des ON (des.objoid=c.oid AND
+	                           des.classoid='pg_constraint'::regclass)
+	WHERE contype = 'c'
+	    AND conrelid = 16806::oid
+	
+2022-11-26 14:00:17.577 UTC [66104] LOG:  duration: 0.599 ms
+2022-11-26 14:00:17.590 UTC [66104] LOG:  statement: SELECT cls.oid,
+	    cls.relname as name,
+	    indnkeyatts as col_count,
+	    amname,
+	    CASE WHEN length(spcname::text) > 0 THEN spcname ELSE
+	        (SELECT sp.spcname FROM pg_catalog.pg_database dtb
+	        JOIN pg_catalog.pg_tablespace sp ON dtb.dattablespace=sp.oid
+	        WHERE dtb.oid = 14767::oid)
+	    END as spcname,
+	    CASE contype
+	        WHEN 'p' THEN desp.description
+	        WHEN 'u' THEN desp.description
+	        WHEN 'x' THEN desp.description
+	        ELSE des.description
+	    END AS comment,
+	    condeferrable,
+	    condeferred,
+	    substring(pg_catalog.array_to_string(cls.reloptions, ',') from 'fillfactor=([0-9]*)') AS fillfactor,
+	    pg_catalog.pg_get_expr(idx.indpred, idx.indrelid, true) AS indconstraint
+	FROM pg_catalog.pg_index idx
+	JOIN pg_catalog.pg_class cls ON cls.oid=indexrelid
+	LEFT OUTER JOIN pg_catalog.pg_tablespace ta on ta.oid=cls.reltablespace
+	JOIN pg_catalog.pg_am am ON am.oid=cls.relam
+	LEFT JOIN pg_catalog.pg_depend dep ON (dep.classid = cls.tableoid AND dep.objid = cls.oid AND dep.refobjsubid = '0' AND dep.refclassid=(SELECT oid FROM pg_catalog.pg_class WHERE relname='pg_constraint') AND dep.deptype='i')
+	LEFT OUTER JOIN pg_catalog.pg_constraint con ON (con.tableoid = dep.refclassid AND con.oid = dep.refobjid)
+	LEFT OUTER JOIN pg_catalog.pg_description des ON (des.objoid=cls.oid AND des.classoid='pg_class'::regclass)
+	LEFT OUTER JOIN pg_catalog.pg_description desp ON (desp.objoid=con.oid AND desp.objsubid = 0 AND desp.classoid='pg_constraint'::regclass)
+	WHERE indrelid = 16806::oid
+	AND contype='x'
+	ORDER BY cls.relname
+2022-11-26 14:00:17.599 UTC [66104] LOG:  duration: 9.645 ms
+2022-11-26 14:01:18.780 UTC [66104] LOG:  statement: SELECT
+	    CASE WHEN c.relkind = 'p' THEN True ELSE False END As ptable
+	FROM
+	    pg_catalog.pg_class c
+	WHERE
+	    c.oid = 16774::oid
+	
+2022-11-26 14:01:18.780 UTC [66104] LOG:  duration: 0.479 ms
+2022-11-26 14:01:21.223 UTC [66104] LOG:  statement: SELECT nsp.nspname AS schema ,rel.relname AS table
+	FROM pg_catalog.pg_class rel
+	    JOIN pg_catalog.pg_namespace nsp
+	    ON rel.relnamespace = nsp.oid::oid
+	    WHERE rel.oid = 16774::oid
+2022-11-26 14:01:21.224 UTC [66104] LOG:  duration: 0.602 ms
+2022-11-26 14:01:21.227 UTC [66104] LOG:  statement: SELECT DISTINCT att.attname as name, att.attnum as OID, pg_catalog.format_type(ty.oid,NULL) AS datatype,
+	att.attnotnull as not_null, att.atthasdef as has_default_val
+	FROM pg_catalog.pg_attribute att
+	    JOIN pg_catalog.pg_type ty ON ty.oid=atttypid
+	    JOIN pg_catalog.pg_namespace tn ON tn.oid=ty.typnamespace
+	    JOIN pg_catalog.pg_class cl ON cl.oid=att.attrelid
+	    JOIN pg_catalog.pg_namespace na ON na.oid=cl.relnamespace
+	    LEFT OUTER JOIN pg_catalog.pg_type et ON et.oid=ty.typelem
+	    LEFT OUTER JOIN pg_catalog.pg_attrdef def ON adrelid=att.attrelid AND adnum=att.attnum
+	    LEFT OUTER JOIN (pg_catalog.pg_depend JOIN pg_catalog.pg_class cs ON classid='pg_class'::regclass AND objid=cs.oid AND cs.relkind='S') ON refobjid=att.attrelid AND refobjsubid=att.attnum
+	    LEFT OUTER JOIN pg_catalog.pg_namespace ns ON ns.oid=cs.relnamespace
+	    LEFT OUTER JOIN pg_catalog.pg_index pi ON pi.indrelid=att.attrelid AND indisprimary
+	WHERE
+	    att.attrelid = 16774::oid
+	    AND att.attnum > 0
+	    AND att.attisdropped IS FALSE
+	ORDER BY att.attnum
+2022-11-26 14:01:21.229 UTC [66104] LOG:  duration: 1.928 ms
+2022-11-26 14:01:35.951 UTC [66104] LOG:  statement: SELECT
+	    CASE WHEN c.relkind = 'p' THEN True ELSE False END As ptable
+	FROM
+	    pg_catalog.pg_class c
+	WHERE
+	    c.oid = 16764::oid
+	
+2022-11-26 14:01:35.952 UTC [66104] LOG:  duration: 0.467 ms
+2022-11-26 14:25:17.578 UTC [66104] LOG:  statement: SELECT nsp.nspname AS schema ,rel.relname AS table
+	FROM pg_catalog.pg_class rel
+	    JOIN pg_catalog.pg_namespace nsp
+	    ON rel.relnamespace = nsp.oid::oid
+	    WHERE rel.oid = 16781::oid
+2022-11-26 14:25:17.579 UTC [66104] LOG:  duration: 0.448 ms
+2022-11-26 14:25:17.582 UTC [66104] LOG:  statement: SELECT DISTINCT att.attname as name, att.attnum as OID, pg_catalog.format_type(ty.oid,NULL) AS datatype,
+	att.attnotnull as not_null, att.atthasdef as has_default_val
+	FROM pg_catalog.pg_attribute att
+	    JOIN pg_catalog.pg_type ty ON ty.oid=atttypid
+	    JOIN pg_catalog.pg_namespace tn ON tn.oid=ty.typnamespace
+	    JOIN pg_catalog.pg_class cl ON cl.oid=att.attrelid
+	    JOIN pg_catalog.pg_namespace na ON na.oid=cl.relnamespace
+	    LEFT OUTER JOIN pg_catalog.pg_type et ON et.oid=ty.typelem
+	    LEFT OUTER JOIN pg_catalog.pg_attrdef def ON adrelid=att.attrelid AND adnum=att.attnum
+	    LEFT OUTER JOIN (pg_catalog.pg_depend JOIN pg_catalog.pg_class cs ON classid='pg_class'::regclass AND objid=cs.oid AND cs.relkind='S') ON refobjid=att.attrelid AND refobjsubid=att.attnum
+	    LEFT OUTER JOIN pg_catalog.pg_namespace ns ON ns.oid=cs.relnamespace
+	    LEFT OUTER JOIN pg_catalog.pg_index pi ON pi.indrelid=att.attrelid AND indisprimary
+	WHERE
+	    att.attrelid = 16781::oid
+	    AND att.attnum > 0
+	    AND att.attisdropped IS FALSE
+	ORDER BY att.attnum
+2022-11-26 14:25:17.584 UTC [66104] LOG:  duration: 2.089 ms
+2022-11-26 14:26:21.222 UTC [66126] LOG:  statement: -- clients prenant une réservation en france
+	
+	SELECT NOM,
+		PRENOM
+	FROM CLIENT
+		join reservation 
+		on reservation.idclient = client.id
+	
+2022-11-26 14:26:21.224 UTC [66126] LOG:  duration: 1.982 ms
+2022-11-26 14:26:21.375 UTC [66126] LOG:  statement: SELECT at.attname, ty.typname, at.attnum
+	    FROM pg_catalog.pg_attribute at
+	    LEFT JOIN pg_catalog.pg_type ty ON (ty.oid = at.atttypid)
+	WHERE attrelid=16796::oid
+	    AND at.attnum > 0
+	    AND at.attisdropped = FALSE
+	
+2022-11-26 14:26:21.376 UTC [66126] LOG:  duration: 1.611 ms
+2022-11-26 14:26:21.389 UTC [66126] LOG:  statement: SELECT at.attname, at.attnum, ty.typname
+	FROM pg_catalog.pg_attribute at LEFT JOIN pg_catalog.pg_type ty ON (ty.oid = at.atttypid)
+	WHERE attrelid=16796::oid AND attnum = ANY (
+	    (SELECT con.conkey FROM pg_catalog.pg_class rel LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid
+	    AND con.contype='p' WHERE rel.relkind IN ('r','s','t', 'p') AND rel.oid = 16796::oid)::oid[])
+	
+2022-11-26 14:26:21.392 UTC [66126] LOG:  duration: 2.565 ms
+2022-11-26 14:26:21.393 UTC [66126] LOG:  statement: SELECT DISTINCT att.attname as name, att.attnum as OID, pg_catalog.format_type(ty.oid,NULL) AS datatype,
+	att.attnotnull as not_null, att.atthasdef as has_default_val
+	FROM pg_catalog.pg_attribute att
+	    JOIN pg_catalog.pg_type ty ON ty.oid=atttypid
+	    JOIN pg_catalog.pg_namespace tn ON tn.oid=ty.typnamespace
+	    JOIN pg_catalog.pg_class cl ON cl.oid=att.attrelid
+	    JOIN pg_catalog.pg_namespace na ON na.oid=cl.relnamespace
+	    LEFT OUTER JOIN pg_catalog.pg_type et ON et.oid=ty.typelem
+	    LEFT OUTER JOIN pg_catalog.pg_attrdef def ON adrelid=att.attrelid AND adnum=att.attnum
+	    LEFT OUTER JOIN (pg_catalog.pg_depend JOIN pg_catalog.pg_class cs ON classid='pg_class'::regclass AND objid=cs.oid AND cs.relkind='S') ON refobjid=att.attrelid AND refobjsubid=att.attnum
+	    LEFT OUTER JOIN pg_catalog.pg_namespace ns ON ns.oid=cs.relnamespace
+	    LEFT OUTER JOIN pg_catalog.pg_index pi ON pi.indrelid=att.attrelid AND indisprimary
+	WHERE
+	    att.attrelid = 16796::oid
+	    AND att.attnum > 0
+	    AND att.attisdropped IS FALSE
+	ORDER BY att.attnum
+2022-11-26 14:26:21.398 UTC [66126] LOG:  duration: 4.252 ms
+2022-11-26 14:26:21.401 UTC [66126] LOG:  statement: SELECT oid, pg_catalog.format_type(oid, NULL) AS typname FROM pg_catalog.pg_type WHERE oid IN (1043, 1043) ORDER BY oid;
+2022-11-26 14:26:21.401 UTC [66126] LOG:  duration: 0.457 ms
+2022-11-26 14:26:55.280 UTC [66126] LOG:  statement: -- clients prenant une réservation en france
+	
+	SELECT NOM,
+		PRENOM
+	FROM CLIENT
+		join reservation 
+		on reservation.idclient = client.id
+		join voyage
+		on voyage.id = reservation.idvoyage
+2022-11-26 14:26:55.281 UTC [66126] ERROR:  column reference "nom" is ambiguous at character 54
+2022-11-26 14:26:55.281 UTC [66126] STATEMENT:  -- clients prenant une réservation en france
+	
+	SELECT NOM,
+		PRENOM
+	FROM CLIENT
+		join reservation 
+		on reservation.idclient = client.id
+		join voyage
+		on voyage.id = reservation.idvoyage
+2022-11-26 14:27:06.631 UTC [66126] LOG:  statement: -- clients prenant une réservation en france
+	
+	SELECT client.NOM,
+		client.PRENOM
+	FROM CLIENT
+		join reservation 
+		on reservation.idclient = client.id
+		join voyage
+		on voyage.id = reservation.idvoyage
+2022-11-26 14:27:06.632 UTC [66126] LOG:  duration: 1.109 ms
+2022-11-26 14:27:06.751 UTC [66126] LOG:  statement: SELECT at.attname, ty.typname, at.attnum
+	    FROM pg_catalog.pg_attribute at
+	    LEFT JOIN pg_catalog.pg_type ty ON (ty.oid = at.atttypid)
+	WHERE attrelid=16796::oid
+	    AND at.attnum > 0
+	    AND at.attisdropped = FALSE
+	
+2022-11-26 14:27:06.752 UTC [66126] LOG:  duration: 1.166 ms
+2022-11-26 14:27:06.753 UTC [66126] LOG:  statement: SELECT at.attname, at.attnum, ty.typname
+	FROM pg_catalog.pg_attribute at LEFT JOIN pg_catalog.pg_type ty ON (ty.oid = at.atttypid)
+	WHERE attrelid=16796::oid AND attnum = ANY (
+	    (SELECT con.conkey FROM pg_catalog.pg_class rel LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid
+	    AND con.contype='p' WHERE rel.relkind IN ('r','s','t', 'p') AND rel.oid = 16796::oid)::oid[])
+	
+2022-11-26 14:27:06.754 UTC [66126] LOG:  duration: 1.225 ms
+2022-11-26 14:27:06.756 UTC [66126] LOG:  statement: SELECT DISTINCT att.attname as name, att.attnum as OID, pg_catalog.format_type(ty.oid,NULL) AS datatype,
+	att.attnotnull as not_null, att.atthasdef as has_default_val
+	FROM pg_catalog.pg_attribute att
+	    JOIN pg_catalog.pg_type ty ON ty.oid=atttypid
+	    JOIN pg_catalog.pg_namespace tn ON tn.oid=ty.typnamespace
+	    JOIN pg_catalog.pg_class cl ON cl.oid=att.attrelid
+	    JOIN pg_catalog.pg_namespace na ON na.oid=cl.relnamespace
+	    LEFT OUTER JOIN pg_catalog.pg_type et ON et.oid=ty.typelem
+	    LEFT OUTER JOIN pg_catalog.pg_attrdef def ON adrelid=att.attrelid AND adnum=att.attnum
+	    LEFT OUTER JOIN (pg_catalog.pg_depend JOIN pg_catalog.pg_class cs ON classid='pg_class'::regclass AND objid=cs.oid AND cs.relkind='S') ON refobjid=att.attrelid AND refobjsubid=att.attnum
+	    LEFT OUTER JOIN pg_catalog.pg_namespace ns ON ns.oid=cs.relnamespace
+	    LEFT OUTER JOIN pg_catalog.pg_index pi ON pi.indrelid=att.attrelid AND indisprimary
+	WHERE
+	    att.attrelid = 16796::oid
+	    AND att.attnum > 0
+	    AND att.attisdropped IS FALSE
+	ORDER BY att.attnum
+2022-11-26 14:27:06.758 UTC [66126] LOG:  duration: 2.587 ms
+2022-11-26 14:27:06.763 UTC [66126] LOG:  statement: SELECT oid, pg_catalog.format_type(oid, NULL) AS typname FROM pg_catalog.pg_type WHERE oid IN (1043, 1043) ORDER BY oid;
+2022-11-26 14:27:06.763 UTC [66126] LOG:  duration: 0.438 ms
+2022-11-26 14:27:43.524 UTC [66126] LOG:  statement: -- clients prenant une réservation en france
+	
+	SELECT CLIENT.NOM,
+		CLIENT.PRENOM
+	FROM CLIENT
+	JOIN RESERVATION ON RESERVATION.IDCLIENT = CLIENT.ID
+	JOIN VOYAGE ON VOYAGE.ID = RESERVATION.IDVOYAGE
+	JOIN ETAPE on etape.idvoyage = voyage.id
+2022-11-26 14:27:43.525 UTC [66126] LOG:  duration: 1.383 ms
+2022-11-26 14:27:43.636 UTC [66126] LOG:  statement: SELECT at.attname, ty.typname, at.attnum
+	    FROM pg_catalog.pg_attribute at
+	    LEFT JOIN pg_catalog.pg_type ty ON (ty.oid = at.atttypid)
+	WHERE attrelid=16796::oid
+	    AND at.attnum > 0
+	    AND at.attisdropped = FALSE
+	
+2022-11-26 14:27:43.637 UTC [66126] LOG:  duration: 0.804 ms
+2022-11-26 14:27:43.639 UTC [66126] LOG:  statement: SELECT at.attname, at.attnum, ty.typname
+	FROM pg_catalog.pg_attribute at LEFT JOIN pg_catalog.pg_type ty ON (ty.oid = at.atttypid)
+	WHERE attrelid=16796::oid AND attnum = ANY (
+	    (SELECT con.conkey FROM pg_catalog.pg_class rel LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid
+	    AND con.contype='p' WHERE rel.relkind IN ('r','s','t', 'p') AND rel.oid = 16796::oid)::oid[])
+	
+2022-11-26 14:27:43.639 UTC [66126] LOG:  duration: 0.995 ms
+2022-11-26 14:27:43.641 UTC [66126] LOG:  statement: SELECT DISTINCT att.attname as name, att.attnum as OID, pg_catalog.format_type(ty.oid,NULL) AS datatype,
+	att.attnotnull as not_null, att.atthasdef as has_default_val
+	FROM pg_catalog.pg_attribute att
+	    JOIN pg_catalog.pg_type ty ON ty.oid=atttypid
+	    JOIN pg_catalog.pg_namespace tn ON tn.oid=ty.typnamespace
+	    JOIN pg_catalog.pg_class cl ON cl.oid=att.attrelid
+	    JOIN pg_catalog.pg_namespace na ON na.oid=cl.relnamespace
+	    LEFT OUTER JOIN pg_catalog.pg_type et ON et.oid=ty.typelem
+	    LEFT OUTER JOIN pg_catalog.pg_attrdef def ON adrelid=att.attrelid AND adnum=att.attnum
+	    LEFT OUTER JOIN (pg_catalog.pg_depend JOIN pg_catalog.pg_class cs ON classid='pg_class'::regclass AND objid=cs.oid AND cs.relkind='S') ON refobjid=att.attrelid AND refobjsubid=att.attnum
+	    LEFT OUTER JOIN pg_catalog.pg_namespace ns ON ns.oid=cs.relnamespace
+	    LEFT OUTER JOIN pg_catalog.pg_index pi ON pi.indrelid=att.attrelid AND indisprimary
+	WHERE
+	    att.attrelid = 16796::oid
+	    AND att.attnum > 0
+	    AND att.attisdropped IS FALSE
+	ORDER BY att.attnum
+2022-11-26 14:27:43.643 UTC [66126] LOG:  duration: 2.342 ms
+2022-11-26 14:27:43.647 UTC [66126] LOG:  statement: SELECT oid, pg_catalog.format_type(oid, NULL) AS typname FROM pg_catalog.pg_type WHERE oid IN (1043, 1043) ORDER BY oid;
+2022-11-26 14:27:43.647 UTC [66126] LOG:  duration: 0.411 ms
+2022-11-26 14:27:59.167 UTC [67348] LOG:  connection received: host=::1 port=53540
+2022-11-26 14:27:59.168 UTC [67348] LOG:  connection authorized: user=postgres database=postgres application_name=pgAdmin 4 - CONN:9789923
+2022-11-26 14:27:59.169 UTC [67348] LOG:  statement: SET DateStyle=ISO; SET client_min_messages=notice; SELECT set_config('bytea_output','hex',false) FROM pg_settings WHERE name = 'bytea_output'; SET client_encoding='UNICODE';
+2022-11-26 14:27:59.171 UTC [67348] LOG:  duration: 1.328 ms
+2022-11-26 14:27:59.171 UTC [67348] LOG:  statement: SELECT version()
+2022-11-26 14:27:59.171 UTC [67348] LOG:  duration: 0.123 ms
+2022-11-26 14:27:59.171 UTC [67348] LOG:  statement: 
+	SELECT
+	    db.oid as did, db.datname, db.datallowconn,
+	    pg_encoding_to_char(db.encoding) AS serverencoding,
+	    has_database_privilege(db.oid, 'CREATE') as cancreate,
+	    datistemplate
+	FROM
+	    pg_catalog.pg_database db
+	WHERE db.datname = current_database()
+2022-11-26 14:27:59.172 UTC [67348] LOG:  duration: 0.451 ms
+2022-11-26 14:27:59.172 UTC [67348] LOG:  statement: 
+	        SELECT
+	             gss_authenticated, encrypted
+	        FROM
+	            pg_catalog.pg_stat_gssapi
+	        WHERE pid = pg_backend_pid()
+2022-11-26 14:27:59.173 UTC [67348] LOG:  duration: 0.379 ms
+2022-11-26 14:27:59.173 UTC [67348] LOG:  statement: 
+	        SELECT
+	            roles.oid as id, roles.rolname as name,
+	            roles.rolsuper as is_superuser,
+	            CASE WHEN roles.rolsuper THEN true ELSE roles.rolcreaterole END as
+	            can_create_role,
+	            CASE WHEN roles.rolsuper THEN true
+	            ELSE roles.rolcreatedb END as can_create_db,
+	            CASE WHEN 'pg_signal_backend'=ANY(ARRAY(WITH RECURSIVE cte AS (
+	            SELECT pg_roles.oid,pg_roles.rolname FROM pg_roles
+	                WHERE pg_roles.oid = roles.oid
+	            UNION ALL
+	            SELECT m.roleid,pgr.rolname FROM cte cte_1
+	                JOIN pg_auth_members m ON m.member = cte_1.oid
+	                JOIN pg_roles pgr ON pgr.oid = m.roleid)
+	            SELECT rolname  FROM cte)) THEN True
+	            ELSE False END as can_signal_backend
+	        FROM
+	            pg_catalog.pg_roles as roles
+	        WHERE
+	            rolname = current_user
+2022-11-26 14:27:59.174 UTC [67348] LOG:  duration: 1.630 ms
+2022-11-26 14:27:59.223 UTC [66104] LOG:  statement: SELECT n.nspname, r.relname
+	FROM pg_catalog.pg_class r
+	    LEFT JOIN pg_catalog.pg_namespace n ON (r.relnamespace = n.oid)
+	WHERE r.oid = 16781;
+	
+2022-11-26 14:27:59.223 UTC [66104] LOG:  duration: 0.439 ms
+2022-11-26 14:27:59.455 UTC [66104] LOG:  statement: SELECT at.attname, at.attnum, ty.typname
+	FROM pg_catalog.pg_attribute at LEFT JOIN pg_catalog.pg_type ty ON (ty.oid = at.atttypid)
+	WHERE attrelid=16781::oid AND attnum = ANY (
+	    (SELECT con.conkey FROM pg_catalog.pg_class rel LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid
+	    AND con.contype='p' WHERE rel.relkind IN ('r','s','t', 'p') AND rel.oid = 16781::oid)::oid[])
+	
+2022-11-26 14:27:59.456 UTC [66104] LOG:  duration: 0.956 ms
+2022-11-26 14:27:59.500 UTC [66104] LOG:  statement: SELECT at.attname, at.attnum, ty.typname
+	FROM pg_catalog.pg_attribute at LEFT JOIN pg_catalog.pg_type ty ON (ty.oid = at.atttypid)
+	WHERE attrelid=16781::oid AND attnum = ANY (
+	    (SELECT con.conkey FROM pg_catalog.pg_class rel LEFT OUTER JOIN pg_catalog.pg_constraint con ON con.conrelid=rel.oid
+	    AND con.contype='p' WHERE rel.relkind IN ('r','s','t', 'p') AND rel.oid = 16781::oid)::oid[])
+	
+2022-11-26 14:27:59.501 UTC [66104] LOG:  duration: 1.058 ms
+2022-11-26 14:27:59.504 UTC [67348] LOG:  statement: SELECT * FROM public.etape
+	ORDER BY idvoyage ASC, numordre ASC 
+2022-11-26 14:27:59.504 UTC [67348] LOG:  duration: 0.550 ms
+2022-11-26 14:27:59.640 UTC [67348] LOG:  statement: SELECT DISTINCT att.attname as name, att.attnum as OID, pg_catalog.format_type(ty.oid,NULL) AS datatype,
+	att.attnotnull as not_null, att.atthasdef as has_default_val
+	FROM pg_catalog.pg_attribute att
+	    JOIN pg_catalog.pg_type ty ON ty.oid=atttypid
+	    JOIN pg_catalog.pg_namespace tn ON tn.oid=ty.typnamespace
+	    JOIN pg_catalog.pg_class cl ON cl.oid=att.attrelid
+	    JOIN pg_catalog.pg_namespace na ON na.oid=cl.relnamespace
+	    LEFT OUTER JOIN pg_catalog.pg_type et ON et.oid=ty.typelem
+	    LEFT OUTER JOIN pg_catalog.pg_attrdef def ON adrelid=att.attrelid AND adnum=att.attnum
+	    LEFT OUTER JOIN (pg_catalog.pg_depend JOIN pg_catalog.pg_class cs ON classid='pg_class'::regclass AND objid=cs.oid AND cs.relkind='S') ON refobjid=att.attrelid AND refobjsubid=att.attnum
+	    LEFT OUTER JOIN pg_catalog.pg_namespace ns ON ns.oid=cs.relnamespace
+	    LEFT OUTER JOIN pg_catalog.pg_index pi ON pi.indrelid=att.attrelid AND indisprimary
+	WHERE
+	    att.attrelid = 16781::oid
+	    AND att.attnum > 0
+	    AND att.attisdropped IS FALSE
+	ORDER BY att.attnum
+2022-11-26 14:27:59.643 UTC [67348] LOG:  duration: 3.156 ms
+2022-11-26 14:27:59.646 UTC [67348] LOG:  statement: SELECT oid, pg_catalog.format_type(oid, NULL) AS typname FROM pg_catalog.pg_type WHERE oid IN (23, 23, 23, 23) ORDER BY oid;
+2022-11-26 14:27:59.646 UTC [67348] LOG:  duration: 0.300 ms
+2022-11-26 18:38:50.262 UTC [66126] LOG:  disconnection: session time: 4:40:17.944 user=postgres database=postgres host=::1 port=32946
+2022-11-26 18:38:50.262 UTC [67348] LOG:  disconnection: session time: 4:10:51.095 user=postgres database=postgres host=::1 port=53540
+2022-11-26 18:38:50.262 UTC [66104] LOG:  disconnection: session time: 4:40:25.774 user=postgres database=postgres host=::1 port=34654
+2022-11-26 18:38:51.028 UTC [65772] LOG:  received smart shutdown request
+2022-11-26 18:38:51.034 UTC [65772] LOG:  background worker "logical replication launcher" (PID 65780) exited with exit code 1
+2022-11-26 18:38:51.034 UTC [65775] LOG:  shutting down
+2022-11-26 18:38:51.049 UTC [65772] LOG:  database system is shut down

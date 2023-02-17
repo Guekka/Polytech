@@ -1,1 +1,0 @@
-/nix/store/49pxk6wi1q6isy7cmx437g2nzk4i5yg2-postgresql-14.5/bin/postgres "-p" "5555" "-k" "/home/edgar/code/Polytech_SI3_S5/postgresql/.pg"

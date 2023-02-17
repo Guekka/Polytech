@@ -1,16 +1,0 @@
-
-o
-java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(½ä€¾
-l
-java:S1192&"VDefine a constant instead of duplicating this literal "oops! stack is empty!" 3 times.(…ˆùí
-o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(øÎ‚û
-N	java:S106"9Replace this use of System.out or System.err by a logger.(¡î¥
-N	java:S106"9Replace this use of System.out or System.err by a logger.(†™®Œ
-S	java:S106"9Replace this use of System.out or System.err by a logger.(”¾îûûÿÿÿÿ
-N	java:S106#"9Replace this use of System.out or System.err by a logger.(ÊØ¡Œ
-N	java:S106&"9Replace this use of System.out or System.err by a logger.(…ˆùí
-N	java:S106,"9Replace this use of System.out or System.err by a logger.(¢˜ğ‡
-N	java:S106/"9Replace this use of System.out or System.err by a logger.(…ˆùí
-N	java:S1065"9Replace this use of System.out or System.err by a logger.(šØ³­
-N	java:S1068"9Replace this use of System.out or System.err by a logger.(…ˆùí
-S	java:S106="9Replace this use of System.out or System.err by a logger.(‰É†şÿÿÿÿ

@@ -1,4 +1,0 @@
-2022-11-08 17:03:30.634 UTC [31119] LOG:  received smart shutdown request
-2022-11-08 17:03:30.636 UTC [31119] LOG:  background worker "logical replication launcher" (PID 31127) exited with exit code 1
-2022-11-08 17:03:30.636 UTC [31122] LOG:  shutting down
-2022-11-08 17:03:30.655 UTC [31119] LOG:  database system is shut down

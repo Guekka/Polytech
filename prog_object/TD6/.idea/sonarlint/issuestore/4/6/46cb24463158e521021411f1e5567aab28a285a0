@@ -1,22 +1,0 @@
-
-s	java:S135M"YReduce the total number of break and continue statements in this loop to use at most one.(˜ïˆÿÿÿÿÿ
-¦
-java:S1598"This file "TrainManagement.java" should be located in "lab2/ORIGINE" directory, not in "/home/edgar/code/Polytech_SI3_S5/prog_object/TD6/lab2".(ìì¸ı
-o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ìì¸ı
-—
-java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(™Ò¸¿
-S	java:S106&"9Replace this use of System.out or System.err by a logger.(Ó¬¿ùÿÿÿÿ
-S	java:S106@"9Replace this use of System.out or System.err by a logger.(Æİêùÿÿÿÿ
-S	java:S106L"9Replace this use of System.out or System.err by a logger.(°ºµıÿÿÿÿ
-S	java:S106R"9Replace this use of System.out or System.err by a logger.(ïëœóşÿÿÿÿ
-S	java:S106W"9Replace this use of System.out or System.err by a logger.(ïëœóşÿÿÿÿ
-S	java:S106["9Replace this use of System.out or System.err by a logger.(´Ú¿Ñúÿÿÿÿ
-S	java:S106b"9Replace this use of System.out or System.err by a logger.(±Ïèúÿÿÿÿ
-S	java:S106e"9Replace this use of System.out or System.err by a logger.(äãâ—ıÿÿÿÿ
-C
-java:S1068
-"(Remove this unused "from" private field.(Â—Ü÷ûÿÿÿÿ
-<
-java:S1068"&Remove this unused "to" private field.(¤óÔî
-B
-java:S1144%",Remove this unused private "display" method.(Ñìê

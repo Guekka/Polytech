@@ -1,28 +1,48 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class QMC {
-    private Map<MinTerm, Boolean> terms;
 
-    public QMC(List<Integer> positiveTerms, int bitCount) {
-        var termsCount = (int) Math.round(Math.pow(2, bitCount));
-        terms = IntStream.range(0, termsCount).mapToObj(i -> new MinTerm(i, bitCount)).collect(Collectors.toMap(t -> t, t -> false));
 
-        for (var index : positiveTerms)
-            terms.put(new MinTerm(index, bitCount), true);
+    private final int[] values;
+    private final int bitCount;
+
+    /**
+     * Initialize the algorithm
+     *
+     * @param values decimals
+     */
+    public QMC(int... values) {
+        this.values = values;
+        this.bitCount = Minterm.numberOfBitsNeeded(Arrays.stream(values).max().orElse(0));
     }
 
-    private static Map<Integer, List<MinTerm>> group(List<MinTerm> ungrouped) {
-        return ungrouped.stream().collect(Collectors.groupingBy(MinTerm::countUnchecked));
-    }
+    /**
+     * Calculates and returns the necessary and sufficient minterms.
+     */
+    public List<Minterm> computePrimeImplicants() {
+        var res = new ArrayList<Minterm>();
 
-    public void merge() {
+        // Create the initial minterms
+        List<Minterm> minterms = new ArrayList<Minterm>();
+        for (int i : values) {
+            minterms.add(new Minterm(i, bitCount));
+        }
 
-    }
+        while (true) {
+            var manager = new CategoryManager(minterms, bitCount);
+            // Merge the categories
+            minterms = manager.mergeCategories();
+            if (manager.isLastTurn()) {
+                break;
+            }
+        }
 
-    public Map<MinTerm, Boolean> terms() {
-        return terms;
+        var chart = new PrimeImplicantChart(values, minterms);
+        res.addAll(chart.extractEssentialPrimeImplicants());
+        res.addAll(chart.extractRemainingImplicants());
+        return res;
     }
 }

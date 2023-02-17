@@ -4,26 +4,15 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class QMCTest {
     @Test
-    void constructor() {
-        int bitLen = 5;
-        var input = List.of(0, 2, 5, 9);
-
-        var qmc = new QMC(input, bitLen);
-
-        var positive = Map.of(
-                0,new MinTerm(0, bitLen),
-                2,new MinTerm(2, bitLen),
-                5,new MinTerm(5, bitLen),
-                9,new MinTerm(9, bitLen)
-        );
-
-        var res = qmc.terms();
-        for(int i = 0; i < qmc.terms().size(); ++i) {
-            var term = qmc.terms().get(new MinTerm(i, bitLen));
-            assertEquals(positive.containsKey(i), term);
-        }
+    void t1() {
+        QMC qmc = new QMC(1,2,3,5);
+        List<Minterm> primaryTerms =  qmc.computePrimeImplicants();
+        assertEquals(2,primaryTerms.size());
+        assertTrue(primaryTerms.contains(new Minterm(-1,0,1)));
+        assertTrue(primaryTerms.contains(new Minterm(0,1,-1)));
     }
 }

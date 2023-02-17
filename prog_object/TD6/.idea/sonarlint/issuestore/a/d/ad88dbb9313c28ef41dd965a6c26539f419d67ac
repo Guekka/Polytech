@@ -1,16 +1,0 @@
-
-o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(øÎ‚û
-<
-java:S1170"!Make this final field static too.(„ŸªÂúÿÿÿÿ
-7
-java:S1170"!Make this final field static too.(•ƒÊ­
-7
-java:S1170"!Make this final field static too.(²Ã™¼
-B
-java:S1602(",Remove useless curly braces around statement(Ð÷í‚
-B
-java:S1602A",Remove useless curly braces around statement(Ð÷í‚
-B
-java:S1602f",Remove useless curly braces around statement(Ð÷í‚
-F
-java:S5960!"+Remove this assertion from production code.(—ïËçÿÿÿÿÿ

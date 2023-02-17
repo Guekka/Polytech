@@ -1,3 +1,0 @@
-interface UndoInterface {
-    boolean undo();
-}

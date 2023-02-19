@@ -38,22 +38,22 @@ libTri_%-staticLib.a: %.o unused.o
 
 ####
 ## Exercice 5:
-#DYNAMIC_LIB=$(EXE:.exe=-dynamicLib.exe)
-#
-#tri_%-dynamicLib.exe: main.o timer.o utils.o libTri_%-dynamicLib.so
-#	$(CC) -o $@ $^
-#
-#libTri_%-dynamicLib.so: %.o unused.o
-#	TODO: écrire la règle permettant de créer une bibliothqèue dynamique
+DYNAMIC_LIB=$(EXE:.exe=-dynamicLib.exe)
+
+tri_%-dynamicLib.exe: main.o timer.o utils.o libTri_%-dynamicLib.so
+	$(CC) -o $@ $^
+
+libTri_%-dynamicLib.so: %.o unused.o
+	$(CC) -fpic -shared -o $@ $^
 
 ####
 ## Exercice 7:
-#DYNAMIC_LOAD=tri.exe
+DYNAMIC_LOAD=tri.exe
 
 # Attention, c'est la première règle sans % et donc cela deviendra la règle par défaut quand elle sera activée
 # pour compiler tous les programmes, il faudra faire: make all
-#tri.exe: main_dynload.o load_library.o timer.o utils.o
-#	TODO: écrire la règle permettrant de créer une bibliothèque que l'on charge explicitement
+tri.exe: main_dynload.o load_library.o timer.o utils.o
+	gcc -rdynamic -o tri.exe $^ -ldl
 
 #---------------------------------------------------------------------------------
 # DO NOT EDIT below this line
@@ -69,7 +69,7 @@ OBJ=$(SRC:.c=.o)
 #%.o: %.c
 #	$(CC) $(CFLAGS) -o $@ -c $<
 
-EXE=tri_bubble.exe # tri_insertion.exe tri_merge.exe tri_quick.exe # tri.exe tri_shell.exe
+EXE=tri_bubble.exe tri_insertion.exe tri_merge.exe tri_quick.exe # tri.exe tri_shell.exe
 
 # Si .SECONDARY est défini, permet d'éviter d'effacer les .o générés (ils ne sont plus considérés comme intermédiaires)
 .SECONDARY: $(OBJS)

@@ -30,6 +30,8 @@ static int Verbose = FALSE;
 */
 static void Scan_Args(int argc, char *argv[]);
 static void Usage(const char *execname);
+void load_library(const char *lib);
+void unload_library();
 
 void do_job() {
     int list[Size_Array];
@@ -61,7 +63,21 @@ int main(int argc, char *argv[])
     /* Décodage des arguments de la ligne de commande */
     Scan_Args(argc, argv);
 
-	do_job();
+    const char* libs[] = {
+        "libTri_bubble-dynamicLib.so",
+        "libTri_insertion-dynamicLib.so",
+        "libTri_merge-dynamicLib.so",
+        "libTri_quick-dynamicLib.so"
+    };
+
+    for(int i = 0; i < sizeof(libs) / sizeof(libs[0]); ++i){
+        if (Verbose) {
+            printf("With lib:%s\n", libs[i]);
+        }
+        load_library(libs[i]);
+	    do_job();
+        unload_library();
+    }
 }
 
 /* Analyse des arguments 

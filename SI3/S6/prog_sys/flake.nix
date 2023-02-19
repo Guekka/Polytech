@@ -18,19 +18,18 @@
       packages = forAllSystems ({ pkgs }: {
         default =
           let
-            binName = "tri_bubble-staticLib.exe";
-            cppDependencies = with pkgs; [ gcc gnumake ];
+            cppDependencies = with pkgs; [ gcc gnumake glibc glibc.static ];
           in
           pkgs.stdenv.mkDerivation {
             name = "zero-to-nix-cpp";
             buildInputs = cppDependencies;
             src = self;
             buildPhase = ''
-              make all
+              make clean all
             '';
             installPhase = ''
               mkdir -p $out/bin
-              cp ${binName} $out/bin/
+              cp *.exe $out/bin/
             '';
           };
       });

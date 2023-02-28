@@ -6,6 +6,7 @@
 #include "utils.h"
 #include "timer.h"
 
+#include "unistd.h"
 
 /* ------------------------------------------------------------------------------------
  * Valeurs par défaut des variables globales qui suivent 
@@ -70,9 +71,9 @@ int main(int argc, char *argv[])
         "libTri_quick-dynamicLib.so"
     };
 
-    for(int i = 0; i < sizeof(libs) / sizeof(libs[0]); ++i){
+    for(int i = 0; i < 4; ++i){
         if (Verbose) {
-            printf("With lib:%s\n", libs[i]);
+            printf("With lib: %s\n", libs[i]);
         }
         load_library(libs[i]);
 	    do_job();

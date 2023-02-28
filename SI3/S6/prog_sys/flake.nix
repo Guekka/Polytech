@@ -31,6 +31,9 @@
               mkdir -p $out/bin
               cp *.exe $out/bin/
             '';
+            shellHook = ''
+              export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH;
+            '';
           };
       });
     };

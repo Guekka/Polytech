@@ -1,0 +1,25 @@
+	//////////////////////////
+
+	/**
+	 * Display the BN in (ascii) 2D
+	 */
+    public void display() {
+    	display(this,"","");
+    }
+
+    private void display(BinaryTreeInterface<T> t, String r, String p) {
+        if ( t == null ) {
+            System.out.println(r);
+        }
+        else {
+            String rs = t.data().toString();
+            System.out.println(r + rs);
+            if ( t.left() != null || t.right() != null ) {
+                String rr = p + '|' + makeString('_',rs.length()) + ' ';
+                display(t.right(),rr, p + '|' + makeString(' ',rs.length() + 1));
+                System.out.println(p + '|');
+                display(t.left(),rr, p + makeString(' ',rs.length() + 2));
+            }
+        }
+    }
+

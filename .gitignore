@@ -133,6 +133,8 @@ _deps
  *.iml
  *.ipr
 
+
+
 # CMake
 cmake-build-*/
 
@@ -199,3 +201,4 @@ buildNumber.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/maven,c++,c,cmake,jetbrains+all
 
+.idea

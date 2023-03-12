@@ -1,3 +1,5 @@
+package bst;
+
 import java.util.*;
 
 /**
@@ -29,7 +31,6 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
     protected void setRight(BinarySearchTree<T> right) {
         //to do
     }
-
 
 
     /**
@@ -128,6 +129,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
     /**
      * Remove from the tree. Nothing is done if x is not found.
      * In the test, we replace the removed element by the largest element of the left subtree
+     *
      * @param x the item to remove.
      */
     public void remove(T x) {
@@ -256,6 +258,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
     public void display() {
         display(this, "", "");
     }
+
     private void display(BinarySearchTree<T> t, String r, String p) {
         if (t == null || t.isEmpty()) {
             System.out.println(r);
@@ -292,34 +295,34 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
     /**
      * A short main for quick testing
      */
-    public static void main(String[] args)  {
-            List<Integer> list = read("50 30 70 20 40 80 60");
-            BinarySearchTree<Integer> bst = new BinarySearchTree<>();
-            for (Integer n : list)
-                bst.insert(n);
-            bst.display();
-            //From the lesson
-            list = Arrays.asList(12, 17, 21, 19, 14, 13, 16, 9, 11, 10, 5, 8);
-            System.out.println("---- From the lesson one by one");
-            bst = new BinarySearchTree<>();
-            //To control the position
-            for (Integer n : list) {
-                bst.insert(n);
-            }
-            System.out.println("Before insert 3");
-            bst.display();
-            bst.insert(3);
-            System.out.println("After insert 3");
-            bst.display();
-            bst.remove(17);
-            System.out.println("After remove 17");
-            bst.display();
-            System.out.println("---- From the lesson using initialisation with Arrays.asList");
-            bst = new BinarySearchTree<>(list);
-            bst.display();
-            bst.insert(3);
-            bst.display();
-            bst.remove(17);
-            bst.display();
+    public static void main(String[] args) {
+        List<Integer> list = read("50 30 70 20 40 80 60");
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        for (Integer n : list)
+            bst.insert(n);
+        bst.display();
+        //From the lesson
+        list = Arrays.asList(12, 17, 21, 19, 14, 13, 16, 9, 11, 10, 5, 8);
+        System.out.println("---- From the lesson one by one");
+        bst = new BinarySearchTree<>();
+        //To control the position
+        for (Integer n : list) {
+            bst.insert(n);
+        }
+        System.out.println("Before insert 3");
+        bst.display();
+        bst.insert(3);
+        System.out.println("After insert 3");
+        bst.display();
+        bst.remove(17);
+        System.out.println("After remove 17");
+        bst.display();
+        System.out.println("---- From the lesson using initialisation with Arrays.asList");
+        bst = new BinarySearchTree<>(list);
+        bst.display();
+        bst.insert(3);
+        bst.display();
+        bst.remove(17);
+        bst.display();
     }
 }

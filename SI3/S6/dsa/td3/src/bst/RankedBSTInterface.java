@@ -1,3 +1,5 @@
+package bst;
+
 public interface RankedBSTInterface<T extends Comparable<? super T>> {
     int rank(T e);
 

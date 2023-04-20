@@ -16,7 +16,7 @@ public class RankedBSTWithInnerClass<T extends Comparable<? super T>> implements
      * Construct the tree.
      */
     public RankedBSTWithInnerClass() {
-
+        root = null;
     }
 
     /////////////// isEmpty
@@ -24,13 +24,19 @@ public class RankedBSTWithInnerClass<T extends Comparable<? super T>> implements
 
     @Override
     public int getSize() {
-        return 0;
+        return getSize(root);
+    }
+
+    private int getSize(BinaryNode<T> t) {
+        if (t == null)
+            return 0;
+        return 1 + getSize(t.left) + getSize(t.right);
     }
 
 
     @Override
     public T elementInRank(int r) {
-        return null;
+        return element(root, r);
     }
 
     /**
@@ -39,7 +45,7 @@ public class RankedBSTWithInnerClass<T extends Comparable<? super T>> implements
      * @return true if empty, false otherwise.
      */
     public boolean isEmpty() {
-        return true;
+        return root == null;
     }
 
     /////////////// makeEmpty  
@@ -48,7 +54,7 @@ public class RankedBSTWithInnerClass<T extends Comparable<? super T>> implements
      * Make the tree logically empty.
      */
     public void makeEmpty() {
-
+        root = null;
     }
 
 
@@ -62,11 +68,11 @@ public class RankedBSTWithInnerClass<T extends Comparable<? super T>> implements
      * if x is in the tree, 0 otherwise
      */
     public int rank(T x) {
-        return 0;
+        return rank(root, x);
     }
 
     private int rank(BinaryNode<T> t, T x) {
-        return 0;
+
     }
 
     /////////////// element
@@ -200,19 +206,18 @@ public class RankedBSTWithInnerClass<T extends Comparable<? super T>> implements
     ////////////////////////////////////////////////////
 
     // Basic node stored in unbalanced binary search trees
-    private static class BinaryNode<AnyType> {
+    private static class BinaryNode<T> {
         // Constructors
-        BinaryNode(AnyType theElement) {
+        BinaryNode(T theElement) {
             element = theElement;
             left = null;
             right = null;
             sizeOfLeft = 0;
         }
 
-        AnyType element;            // The getData in the node
-        BinaryNode<AnyType> left;   // Left child
-        BinaryNode<AnyType> right;  // Right child
-
+        T element;            // The getData in the node
+        BinaryNode<T> left;   // Left child
+        BinaryNode<T> right;  // Right child
         int sizeOfLeft; // The size of the left subtree
     }
 

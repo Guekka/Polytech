@@ -114,10 +114,7 @@ public class BinarySearchTreeWithInnerClass<T extends Comparable<? super T>> imp
      * @return smallest item or null if empty.
      */
     public T findMin() {
-        var min = findMin(root).map(e -> e.element);
-        if (min.isEmpty())
-            return null;
-        return min.get();
+        return findMin(root).map(e -> e.element).orElse(null);
     }
 
     /**
@@ -144,10 +141,7 @@ public class BinarySearchTreeWithInnerClass<T extends Comparable<? super T>> imp
      * @return the largest item of null if empty.
      */
     public T findMax() {
-        var max = findMax(root).map(e -> e.element);
-        if (max.isEmpty())
-            return null;
-        return max.get();
+        return findMax(root).map(e -> e.element).orElse(null);
     }
 
     /**

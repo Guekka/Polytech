@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DS2</string>
+    <string name="catch_em_all">Catch\'em all</string>
+    <string name="background">Background</string>
+    <string name="textMain">Adapter\n-Singleton-Fragments\n-Observer/Observable</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

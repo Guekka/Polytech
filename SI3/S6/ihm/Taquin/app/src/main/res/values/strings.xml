@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Taquin</string>
+    <string name="android_est_taquin">Android est taquin</string>
+    <string name="start_game">Start Game</string>
+</resources>

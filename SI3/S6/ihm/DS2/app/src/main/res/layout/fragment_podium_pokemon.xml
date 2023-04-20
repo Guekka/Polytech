@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PodiumPokemonFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginLeft="100dp"
+        android:text="Podium"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center"
+        android:layout_marginTop="50dp"
+        android:text="Podium1 - 200pts"
+        android:background="@color/yellow"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|left"
+        android:layout_marginTop="60dp"
+        android:text="Podium2 - 200pts"
+        android:background="#808080"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"
+        android:layout_marginTop="60dp"
+        android:text="Podium3 - 200pts"
+        android:background="#DEB887"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:src="@drawable/podium" />
+
+    <ImageView
+        android:id="@+id/best1"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_gravity="top|center"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/fond"/>
+
+
+    <ImageView
+        android:id="@+id/best2"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_gravity="top|left"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/fond"/>
+
+    <ImageView
+        android:id="@+id/best3"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_gravity="top|right"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/fond"/>
+
+
+</FrameLayout>

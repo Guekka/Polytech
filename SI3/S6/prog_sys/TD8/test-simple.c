@@ -20,5 +20,6 @@ int main() {
     void *ptr5 = mymalloc(384);
     void *ptr6 = mymalloc(128);
     void *ptr7 = mymalloc(64);
+    mymalloc(32);
     return 0;
 }

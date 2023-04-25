@@ -1,0 +1,26 @@
+#ifndef _OBFUSCATE_H_
+#define _OBFUSCATE_H_
+
+#define d_6832373b099d4a0a8635f83b67263ac2 BLOCKS_TO_ALLOCATE
+#define d_97961cbeceac434c8b591a95007fa3eb MIN_ALLOCATION
+#define d_c504595b54044fc1b9c8c74e8f0b706b SIZE
+#define d_d8aeefb7d2a54e30a43082cf2a535006 NEXT
+#define d_cd7b23f6cf614dac81521ef674a2773f NULL
+#define d_25f02d83e74b494398384a979fc5905e Header
+#define d_b6e8837c0ef040cfa871d5dcb9dc1f61 sizeof
+#define d_1b841f7f16de41708fbaafa426b7de5d void
+#define d_afaf5fd059d94080817053099306ac75 mysbrk
+#define d_2a14cc81eb4144968d5d6cd2113a3ca8 allocate_core
+#define d_77f3a163de9b4c9f9ece0fc1e10c8bdd internal_malloc
+#define d_ce25df4bb9ec4b338f519302e17e923b internal_free
+#define d_a9b416a707ab46538701c47f90c63553 memcpy
+#define d_15e635a880194479a43052f8e7b25db2 bzero
+#define d_f0e6fce3d2144597bc3670844da06bdb freep
+#define d_9704fa3dc09c42a7a0bf66eead5b07c8 if
+#define d_ba16cdac161549a588a46912ca7874cb else
+#define d_3e01c509b63b4fb4bb2cd5580d8e177b for
+#define d_0fca9c5775cb45739917d024a8cecd0c return
+#define d_4e1c50ae9c1e464c8795360721ed2fd7 break
+#define d_de577e1e25b74b728d36e9df44fbee8c unsigned int
+
+#endif /* _OBFUSCATE_H_ */

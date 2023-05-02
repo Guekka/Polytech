@@ -4,17 +4,14 @@
 CC=g++
 CXXFLAGS=-fpic -Wall -I$(JAVA_HOME)/include/ -I$(JAVA_HOME)/include/linux
 
-TARGET=libHelloWorld.so
-SRC=$(wildcard *.cpp)
-OBJ=$(SRC:.cpp=.o)
-H_FILE=$(SRC:.cpp=.h)
+TARGET=libHelloWorld.so libexo1.so
 
 #---------------------------------------------------------------------------------
 # Cibles
 #---------------------------------------------------------------------------------
 all: $(TARGET)
 
-$(TARGET): $(OBJ)
+lib%.so: %.o
 	$(CC) -Wl,-soname,$@ -shared -o $@ $< 
 
 %.o: %.cpp %.h

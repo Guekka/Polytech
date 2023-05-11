@@ -1,1 +1,1 @@
-Polytech S5 courses
+Polytech courses

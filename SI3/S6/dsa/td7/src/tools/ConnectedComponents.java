@@ -1,8 +1,8 @@
-package graphs.tools.ORIGIN;
+package graphs.tools;
 
-import graphs.graph.GraphReader;
-import graphs.graph.UnDiGraph;
-import graphs.graph.Vertex;
+import graphs.GraphReader;
+import graphs.UnDiGraph;
+import graphs.Vertex;
 
 import java.util.Map;
 

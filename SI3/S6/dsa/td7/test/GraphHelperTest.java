@@ -1,6 +1,6 @@
 package graphs.tools;
 
-import graphs.graph.*;
+import graphs.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package graphs.graph;
+package graphs;
 
 public class BadVertexException extends IllegalArgumentException {
 	public BadVertexException(String tag) {

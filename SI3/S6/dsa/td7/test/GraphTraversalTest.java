@@ -1,6 +1,7 @@
 package graphs.tools;
 
-import graphs.graph.*;
+import graphs.*;
+import graphs.GraphReaderTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -9,7 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class GraphTraversalTest {
+class GraphTraversalTest {
 
     @Test
     public void testDFSU1() {

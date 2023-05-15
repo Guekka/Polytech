@@ -1,4 +1,4 @@
-package graphs.graph;
+package graphs;
 
 /**
  * An interface for graphs.

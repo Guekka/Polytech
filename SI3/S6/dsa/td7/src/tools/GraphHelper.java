@@ -1,6 +1,6 @@
-package graphs.tools.ORIGIN;
+package graphs.tools;
 
-import graphs.graph.*;
+import graphs.*;
 
 import java.util.*;
 

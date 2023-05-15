@@ -1,4 +1,4 @@
-package graphs.graph;
+package graphs;
 
 @SuppressWarnings("serial")
 public class DuplicateTagException extends Exception {

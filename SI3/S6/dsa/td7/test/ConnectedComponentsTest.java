@@ -1,9 +1,9 @@
 package graphs.tools;
 
-import graphs.graph.DuplicateTagException;
-import graphs.graph.GraphReader;
-import graphs.graph.UnDiGraph;
-import graphs.graph.Vertex;
+import graphs.DuplicateTagException;
+import graphs.GraphReader;
+import graphs.UnDiGraph;
+import graphs.Vertex;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

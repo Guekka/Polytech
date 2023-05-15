@@ -1,7 +1,7 @@
-package graphs.tools.ORIGIN;
+package graphs.tools;
 
-import graphs.graph.AbstractGraph;
-import graphs.graph.Vertex;
+import graphs.AbstractGraph;
+import graphs.Vertex;
 
 import java.util.*;
 

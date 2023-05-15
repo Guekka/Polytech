@@ -18,6 +18,7 @@ with pkgs;
           matplotlib
           librosa
           scikitimage
+	  scikit-learn
 	  seaborn
 	  yapf
         ]))

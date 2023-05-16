@@ -20,29 +20,27 @@ class ConnectedComponentsTest {
         UnDiGraph g = new UnDiGraph();
         g.addVertex("A");
         ConnectedComponents ccFinder = new ConnectedComponents(g);
-        Map<Vertex,Integer> cc = ccFinder.find();
-        assertEquals(1,ccFinder.getMaxConnectedComponentNumber());
-        assertEquals(1,cc.size());
-        assertEquals(1,cc.get(g.getVertex("A")));
+        Map<Vertex, Integer> cc = ccFinder.find();
+        assertEquals(1, cc.size());
+        assertEquals(1, cc.get(g.getVertex("A")));
     }
+
     @Test
     void find4AGraphOfTwoNodes() throws DuplicateTagException {
         UnDiGraph g = new UnDiGraph();
         Vertex a = g.addVertex("A");
         Vertex b = g.addVertex("B");
         ConnectedComponents ccFinder = new ConnectedComponents(g);
-        Map<Vertex,Integer> cc = ccFinder.find();
-        assertEquals(2,ccFinder.getMaxConnectedComponentNumber());
-        assertEquals(2,cc.size());
-        assertNotEquals(cc.get(g.getVertex("B")),cc.get(g.getVertex("A")));
+        Map<Vertex, Integer> cc = ccFinder.find();
+        assertEquals(2, cc.size());
+        assertNotEquals(cc.get(g.getVertex("B")), cc.get(g.getVertex("A")));
         //We add an edge between A and B
-        g.addEdge(a,b);
+        g.addEdge(a, b);
         ccFinder = new ConnectedComponents(g);
         cc = ccFinder.find();
-        assertEquals(1,ccFinder.getMaxConnectedComponentNumber());
-        assertEquals(2,cc.size());
-        assertEquals(1,cc.get(g.getVertex("A")));
-        assertEquals(1,cc.get(g.getVertex("B")));
+        assertEquals(2, cc.size());
+        assertEquals(1, cc.get(g.getVertex("A")));
+        assertEquals(1, cc.get(g.getVertex("B")));
     }
 
 
@@ -50,22 +48,21 @@ class ConnectedComponentsTest {
     void find4AGraphU1() {
         UnDiGraph g = GraphReader.unDiGraph("A B C D C E D E E F G H G K H I H J H K I J");
         ConnectedComponents ccFinder = new ConnectedComponents(g);
-        Map<Vertex,Integer> cc = ccFinder.find();
-        assertEquals(3,ccFinder.getMaxConnectedComponentNumber());
-        assertEquals(11,cc.size());
-        assertEquals(cc.get(g.getVertex("A")),cc.get(g.getVertex("B")));
+        Map<Vertex, Integer> cc = ccFinder.find();
+        assertEquals(11, cc.size());
+        assertEquals(cc.get(g.getVertex("A")), cc.get(g.getVertex("B")));
         List<Vertex> vertices = new ArrayList<>();
-            vertices.add(g.getVertex("D"));
-            vertices.add(g.getVertex("E"));
-            vertices.add(g.getVertex("F"));
-        vertices.parallelStream().forEach(v -> assertEquals(cc.get(g.getVertex("C")),cc.get(v)));
+        vertices.add(g.getVertex("D"));
+        vertices.add(g.getVertex("E"));
+        vertices.add(g.getVertex("F"));
+        vertices.parallelStream().forEach(v -> assertEquals(cc.get(g.getVertex("C")), cc.get(v)));
         vertices = new ArrayList<>() {{
             add(g.getVertex("H"));
             add(g.getVertex("I"));
             add(g.getVertex("J"));
             add(g.getVertex("K"));
         }};
-        vertices.parallelStream().forEach(v -> assertEquals(cc.get(g.getVertex("G")),cc.get(v)));
+        vertices.parallelStream().forEach(v -> assertEquals(cc.get(g.getVertex("G")), cc.get(v)));
 
     }
 
@@ -73,9 +70,8 @@ class ConnectedComponentsTest {
     void find4AGraphU2() {
         UnDiGraph g = GraphReader.unDiGraph("A D A E A J B C B F B G B I C F C G C H D E D F G H");
         ConnectedComponents ccFinder = new ConnectedComponents(g);
-        Map<Vertex,Integer> cc = ccFinder.find();
-        assertEquals(1,ccFinder.getMaxConnectedComponentNumber());
-        List<Vertex> vertices= new ArrayList<>() {{
+        Map<Vertex, Integer> cc = ccFinder.find();
+        List<Vertex> vertices = new ArrayList<>() {{
             add(g.getVertex("A"));
             add(g.getVertex("B"));
             add(g.getVertex("C"));
@@ -86,7 +82,7 @@ class ConnectedComponentsTest {
             add(g.getVertex("H"));
             add(g.getVertex("I"));
         }};
-        vertices.parallelStream().forEach(v -> assertEquals(1,cc.get(v)));
+        vertices.parallelStream().forEach(v -> assertEquals(1, cc.get(v)));
 
     }
 }

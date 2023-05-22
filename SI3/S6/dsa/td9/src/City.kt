@@ -27,15 +27,11 @@ class City(
         return ((longitude - lonmin) / (lonmax - lonmin) * w).toInt()
     }
 
-    private fun sqr(a: Double): Double {
-        return a * a
-    }
-
     // distance entre deux villes en mètres
     fun distance(dest: City): Double {
         // utilise la distance ellipsoidale de vincenty
         val R = 6371000.0 // rayon de la terre
-        return R * sqrt(sqr(latitude - dest.latitude) + sqr(longitude - dest.longitude)) / 180.0 * Math.PI
+        return R * sqrt((latitude - dest.latitude).pow(2) + (longitude - dest.longitude).pow(2)) / 180.0 * Math.PI
     }
 
     override fun equals(other: Any?): Boolean {

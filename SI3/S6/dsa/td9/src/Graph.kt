@@ -5,7 +5,7 @@ class Graph<T> {
     value class NodeRef(val index: Int)
 
     private val nodes = ArrayList<T>()
-    private val edges = Matrix<Int>()
+    private val edges = SparseMatrix<Int>()
 
     fun addNode(value: T): NodeRef {
         nodes.add(value)
@@ -25,11 +25,22 @@ class Graph<T> {
     /// Edge must be added only once
     /// O(1) complexity
     fun addEdge(lhs: NodeRef, rhs: NodeRef, distance: Int) {
-        edges.add(lhs.index, rhs.index, distance)
+        edges.add(lhs.index.toLong(), rhs.index.toLong(), distance)
+        edges.add(rhs.index.toLong(), lhs.index.toLong(), distance)
     }
 
-    fun getEdge(lhs: NodeRef, rhs: NodeRef): Int {
-        return edges[lhs.index, rhs.index]
+    fun getEdge(lhs: NodeRef, rhs: NodeRef): Int? {
+        return edges[lhs.index.toLong(), rhs.index.toLong()]
+    }
+
+    fun nodes(): List<NodeRef> {
+        return nodes.indices.map { NodeRef(it) }
+    }
+
+    fun adjacents(nodeRef: NodeRef): List<Pair<NodeRef, Int>> {
+        return edges.getRow(nodeRef.index.toLong()).map { (index, value) ->
+            Pair(NodeRef(index.toInt()), value)
+        }
     }
 
     fun nodeCount(): Int {
@@ -37,6 +48,17 @@ class Graph<T> {
     }
 
     fun edgeCount(): Int {
-        return edges.usedSize()
+        return edges.count()
+    }
+
+    fun makeReadOptimized() {
+        edges.makeReadOptimized()
+    }
+
+    fun find(pred: (T) -> Boolean): NodeRef? {
+        for (i in nodes.indices) {
+            if (pred(nodes[i])) return NodeRef(i)
+        }
+        return null
     }
 }

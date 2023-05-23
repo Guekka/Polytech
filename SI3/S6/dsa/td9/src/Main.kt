@@ -1,11 +1,8 @@
 package graphs.roadApplication
 
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
-import java.util.concurrent.Future
 
 object Main {
-    const val distanceLimit = 12000
+    const val distanceLimit = 12000 // 12km
 
     private fun createGraph(cities: List<City>): Graph<City> {
         val graph = Graph<City>()
@@ -14,7 +11,7 @@ object Main {
         }
 
         val total = cities.size / 2 * (cities.size - 1)
-        val progress = ProgressBar(total)
+        val progress = ProgressBar(total, "Creating graph")
 
         for (i in cities.indices) {
             val lhsIndex = graph.makeRef(i)
@@ -32,43 +29,12 @@ object Main {
         return graph
     }
 
-    private fun createGraphPar(cities: List<City>): Graph<City> {
-        val graph = Graph<City>()
-
-        for (city in cities) {
-            graph.addNode(city)
-        }
-
-        val total = cities.size / 2 * (cities.size - 1)
-        val progress = ProgressBar(total)
-
-        val executor: ExecutorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())
-
-        val tasks = ArrayList<Future<Unit>>()
-
-        for (i in cities.indices) {
-            val task = executor.submit<Unit> {
-                val lhsIndex = graph.makeRef(i)
-                for (j in i + 1 until cities.size) {
-                    val rhsIndex = graph.makeRef(j)
-
-                    val distance = graph.getNode(lhsIndex).distance(graph.getNode(rhsIndex))
-                    if (distance > distanceLimit) continue
-
-                    graph.addEdge(lhsIndex, rhsIndex, distance.toInt())
-
-                    progress.step()
-                }
-            }
-
-            tasks.add(task)
-        }
-
-        tasks.forEach { it.get() }
-
-        executor.shutdown()
-
-        return graph
+    private fun findShortestPath(
+        graph: Graph<City>,
+        lhs: Graph.NodeRef,
+        rhs: Graph.NodeRef
+    ): List<Graph.NodeRef> {
+        return dijkstra(graph, lhs, rhs)
     }
 
     @JvmStatic
@@ -78,12 +44,35 @@ object Main {
         cityParser.readAll(rawCities)
 
         // Remove duplicates
-        val cities = CityParser.removeDuplicates(rawCities)
+        var cities: List<City>? = CityParser.removeDuplicates(rawCities)
+        rawCities.clear() // free memory
 
         // Create graph
-        val graph = createGraphPar(cities)
+        val graph = createGraph(cities!!)
+        cities = null // free memory
 
         println("Number of cities: ${graph.nodeCount()}")
         println("Number of edges: ${graph.edgeCount()}")
+
+        graph.makeReadOptimized()
+
+        // Count number of connected components
+        val components = findConnectedComponents(graph)
+        val componentCount = components.size
+
+        println("Number of connected components: $componentCount")
+        for (component in components.sortedBy { it.size }) {
+            println("Component size: ${component.size}")
+        }
+
+        // Find the shortest path between two cities
+        val nice = graph.find { it.nom == "Nice" }
+        val paris = graph.find { it.nom == "Paris" }
+
+        val path = findShortestPath(graph, nice!!, paris!!)
+        println("Shortest path between Nice and Paris:")
+        for (city in path) {
+            println(graph.getNode(city))
+        }
     }
 }

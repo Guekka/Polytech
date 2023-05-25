@@ -57,12 +57,17 @@ fun <T> bfs(graph: Graph<T>, start: NodeRef): List<NodeRef> {
 
 /* -------------------- Dijkstra ---------------------- */
 fun <T> dijkstra(graph: Graph<T>, start: NodeRef, end: NodeRef): List<NodeRef> {
-    val frontier = ArrayDeque<NodeRef>() // TODO: use a priority queue
-    frontier.add(start)
     val cameFrom = HashMap<NodeRef, NodeRef>()
     val costSoFar = HashMap<NodeRef, Double>()
     cameFrom[start] = start
     costSoFar[start] = 0.0
+
+    val frontier = PriorityQueue<NodeRef> { lhs, rhs ->
+        val lhsCost = costSoFar[lhs]!!
+        val rhsCost = costSoFar[rhs]!!
+        lhsCost.compareTo(rhsCost)
+    }
+    frontier.add(start)
 
     while (frontier.isNotEmpty()) {
         val current = frontier.poll()

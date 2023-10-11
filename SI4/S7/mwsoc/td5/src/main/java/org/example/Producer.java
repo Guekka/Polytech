@@ -16,7 +16,7 @@ public class Producer {
         connection.start();
 
         // create a Session
-        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+        Session session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
 
         // create the destination Topic
         Destination destination = session.createQueue("SAMPLE_QUEUE");
@@ -24,9 +24,17 @@ public class Producer {
         // create a MessageProducer for sending messages
         MessageProducer producer = session.createProducer(destination);
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             sendMessage(session, producer);
         }
+
+        session.commit();
+
+        for (int i = 0; i < 5; i++) {
+            sendMessage(session, producer);
+        }
+
+        session.rollback();
 
         // close the session and connection
         session.close();
@@ -45,6 +53,5 @@ public class Producer {
         // send the message
         producer.send(message);
 
-        System.out.println("Message sent successfully");
     }
 }

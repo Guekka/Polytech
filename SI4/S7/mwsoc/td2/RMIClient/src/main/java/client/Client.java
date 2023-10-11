@@ -1,42 +1,40 @@
 package client;
 
-import interfaces.Distante;
+import data.ID;
+import data.VoteValue;
+import interfaces.Candidate;
+import interfaces.RMIService;
 
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Client {
-    static void main1() {
-        ArrayList<Thread> threads = new ArrayList<>();
 
-        for (int i = 0; i < 2; i++) {
-            threads.add(new Thread(Client::main2));
-        }
-
-        threads.forEach(Thread::start);
-
-        threads.forEach(thread -> {
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    static void main2() {
+    public static void main(String[] args) {
         try {
-            Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
-            var distante = (Distante) registry.lookup(Distante.SERVICE_NAME);
+            var registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
+            var service = (RMIService) registry.lookup(RMIService.RMI_NAME);
 
-            var service = distante.getService();
-
-            for (int i = 0; i < 10; i++) {
-                Thread.sleep(1000);
-                System.out.println(Thread.currentThread().getName() + " val reçue : " + service.getVal() + "du Server ");
-                service.setVal(2, new ClientIdImpl(Thread.currentThread().getName()));
+            List<Candidate> candidates = service.listCandidates();
+            System.out.println("Candidates:");
+            for (var candidate : candidates) {
+                System.out.println(candidate);
             }
+
+            // readline
+            System.out.println("Enter your student number: ");
+            var studentNumber = new ID(new Scanner(System.in).nextLine());
+
+            var passwordRequester = new ClientPasswordRequesterImpl();
+            var otp = service.getVoteMaterial(studentNumber, passwordRequester);
+
+            System.out.println("One-time password: " + otp);
+
+            Map<ID, VoteValue> votes = getVotes(candidates);
+            service.vote(votes, studentNumber, otp);
+
+            System.out.println("Result: " + service.requestResult());
 
         } catch (Exception e) {
             System.err.println("Exception:");
@@ -44,7 +42,26 @@ public class Client {
         }
     }
 
-    public static void main(String[] args) {
-        main1();
+    private static Map<ID, VoteValue> getVotes(List<Candidate> candidates) throws RemoteException {
+        var res = new HashMap<ID, VoteValue>();
+        for (var candidate : candidates) {
+            var vote = getVote(candidate);
+            res.put(candidate.getStudentNumber(), vote);
+        }
+        return res;
+    }
+
+    private static VoteValue getVote(Candidate candidate) {
+        Arrays.stream(VoteValue.values()).map(
+                vote -> vote.value() + ": " + vote
+        ).forEach(System.out::println);
+        int vote = 0;
+        try {
+            System.out.println("Enter your vote for " + candidate.getName() + ": ");
+            vote = Integer.parseInt(new Scanner(System.in).nextLine());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return VoteValue.fromValue(vote);
     }
 }

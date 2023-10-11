@@ -15,17 +15,17 @@ public class Consumer {
         connection.start();
 
         // create a Session
-        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+        Session session = connection.createSession(true, Session.CLIENT_ACKNOWLEDGE);
 
         // create the destination Topic
         Destination destination = session.createQueue("SAMPLE_QUEUE");
 
         // create a MessageConsumer for receiving messages, processing only urgent ones
-        MessageConsumer urgentConsumer = session.createConsumer(destination, "Urgent = TRUE");
-        urgentConsumer.setMessageListener(new FaultyListener());
+        MessageConsumer urgentConsumer = session.createConsumer(destination);
+        urgentConsumer.setMessageListener(new FaultyListener(session));
 
-        // wait 10 seconds for urgent messages
-        Thread.sleep(10000);
+        // wait 1 seconds for messages
+        Thread.sleep(1000);
 
         // close the session and connection
         session.close();
@@ -54,16 +54,23 @@ public class Consumer {
     }
 
     static class FaultyListener implements MessageListener {
+        private final Session session;
+        private int count = 0;
+
+        public FaultyListener(Session session) throws JMSException {
+            this.session = session;
+        }
+
         @Override
         public void onMessage(Message message) {
-            System.out.println("Simulating a faulty listener");
             try {
-                System.out.println("ID: " + message.getJMSMessageID());
-                System.out.println("Redelivery count: " + message.getIntProperty("JMSXDeliveryCount"));
+                if (count++ % 2 == 0)
+                    session.commit();
+                else
+                    session.rollback();
             } catch (JMSException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
-            throw new RuntimeException("Something went wrong");
         }
     }
 }

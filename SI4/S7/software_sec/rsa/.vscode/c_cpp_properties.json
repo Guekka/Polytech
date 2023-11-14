@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/nix/store/z72cbiqv4zkzzvp7b2k2hr66h9gx7lyr-openssl-3.0.8-dev/include"
+            ],
+            "defines": [],
+            "compilerPath": "/nix/store/0dvdmqlaq7ll5502y2plzkrsndzckjbd-devenv-profile/bin/clang",
+            "cStandard": "c17",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-clang-x64"
+        }
+    ],
+    "version": 4
+}

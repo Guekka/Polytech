@@ -15,20 +15,6 @@
         (pkgs.python3.withPackages (ps:
           with ps;
           with pkgs.python3Packages; [
-            jupyter
-            ipython
-            ipykernel
-            isort
-            notebook
-            wget
-
-            keras
-            numpy
-            matplotlib
-            scikitimage
-            scikit-learn
-            scikit-learn-extra
-	    tensorflow
             yapf
           ]))
       ];

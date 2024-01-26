@@ -3,23 +3,32 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
+  nixConfig.sandbox = "relaxed";
+
+
   outputs = {
     self,
     nixpkgs,
     ...
-  } @ inputs: let
+  }: let
     pkgs = import nixpkgs {
       system = "x86_64-linux";
       config.allowUnfree = true;
     };
+
+        zephyrSdk = import ./sdk.nix {
+          inherit pkgs;
+          system = "x86_64-linux";
+        };
   in {
     devShell.x86_64-linux = pkgs.mkShell {
       nativeBuildInputs = let
-        python = pkgs.python3.withPackages (with pkgs.python3Packages; [
-          west
-          pyelftools
-          anytree
-        ]);
+        python = pkgs.python3.withPackages (packages:
+          with packages; [
+            west
+            pyelftools
+            anytree
+          ]);
       in
         with pkgs; [
           stm32cubemx
@@ -28,10 +37,17 @@
           gnumake
           gdb
           cmake
-          python3
+          python
           ninja
           dtc
+          wget
+          zephyrSdk
         ];
+      # When shell is created, start with a few Zephyr related environment variables defined.
+      shellHook = ''
+        export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
+        export ZEPHYR_SDK_INSTALL_DIR=${zephyrSdk}/${zephyrSdk.pname}-${zephyrSdk.version}
+      '';
     };
   };
 }

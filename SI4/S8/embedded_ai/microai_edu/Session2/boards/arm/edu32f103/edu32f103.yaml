@@ -1,0 +1,17 @@
+identifier: edu32f103
+name: 32F103 EDU
+type: mcu
+arch: arm
+toolchain:
+  - zephyr
+  - gnuarmemb
+  - xtools
+ram: 96
+flash: 1024
+supported:
+  - gpio
+  - spi
+  - pwm
+  - watchdog
+  - adc
+  - dma

@@ -1,0 +1,41 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build",
+      "type": "shell",
+      "command": ".venv/bin/python",
+      "args": ["-m", "west", "build", "-b", "edu32f103"],
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": "build",
+    },
+    {
+      "label": "DebugServer",
+      "dependsOn": ["Build"],
+      "type": "shell",
+      "command": ".venv/bin/python",
+      "args": ["-m", "west", "debugserver"],
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^(Info |Warn |Error):(.*)$",
+          "severity": 1,
+          "message": 2
+        },
+        "background": {
+           "activeOnStart": true,
+           "beginsPattern": "^Open On-Chip Debugger.*",
+           "endsPattern": ".*Listening.*"
+          }
+        },
+        "isBackground": true,
+    },
+    {
+      "label": "Clean",
+      "type": "shell",
+      "command": "west",
+      "args": ["build", "-t", "clean"],
+    }
+  ]
+}

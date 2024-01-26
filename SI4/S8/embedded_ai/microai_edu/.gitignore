@@ -1,0 +1,10 @@
+# Generated data
+*.csv
+# Trained models
+*.h5
+# JupyterLab
+.ipynb_checkpoints/
+
+# Generated C model and compiled inference engine
+uci-har_*
+polyhar_*

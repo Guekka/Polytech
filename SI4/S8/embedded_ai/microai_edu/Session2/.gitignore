@@ -1,0 +1,4 @@
+build/
+modules/
+zephyr/
+zephyr-sdk-0.16.4*

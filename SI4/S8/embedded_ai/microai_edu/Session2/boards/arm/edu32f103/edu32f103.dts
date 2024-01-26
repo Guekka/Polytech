@@ -1,0 +1,358 @@
+/*
+ * Copyright (c) 2017 Linaro Limited
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/dts-v1/;
+#include <st/f1/stm32f103Xg.dtsi>
+#include <st/f1/stm32f103v(f-g)tx-pinctrl.dtsi>
+
+/ {
+	model = "32F103 EDU board";
+	compatible = "edu32f103";
+
+	chosen {
+		zephyr,console = &usart1;
+		zephyr,shell-uart = &usart1;
+		//zephyr,console = &cdc_acm_uart0;
+		//zephyr,shell-uart = &cdc_acm_uart0;
+		zephyr,sram = &sram0;
+		zephyr,flash = &flash0;
+	};
+
+	leds {
+		compatible = "gpio-leds";
+		led0: led_0 {
+			gpios = <&gpiob 0 GPIO_ACTIVE_LOW>;
+			label = "LED0";
+		};
+		led1: led_1 {
+			gpios = <&gpiob 1 GPIO_ACTIVE_LOW>;
+			label = "LED1";
+		};
+		led2: led_2 {
+			gpios = <&gpiob 2 GPIO_ACTIVE_LOW>;
+			label = "LED2";
+		};
+		led3: led_3 {
+			gpios = <&gpiob 3 GPIO_ACTIVE_LOW>;
+			label = "LED3";
+		};
+		led4: led_4 {
+			gpios = <&gpiob 4 GPIO_ACTIVE_LOW>;
+			label = "LED4";
+		};
+		led5: led_5 {
+			gpios = <&gpiob 5 GPIO_ACTIVE_LOW>;
+			label = "LED5";
+		};
+		led6: led_6 {
+			gpios = <&gpiob 6 GPIO_ACTIVE_LOW>;
+			label = "LED6";
+		};
+		led7: led_7 {
+			gpios = <&gpiob 7 GPIO_ACTIVE_LOW>;
+			label = "LED7";
+		};
+		led8: led_8 {
+			gpios = <&gpiob 8 GPIO_ACTIVE_LOW>;
+			label = "LED8";
+		};
+		led9: led_9 {
+			gpios = <&gpiob 9 GPIO_ACTIVE_LOW>;
+			label = "LED9";
+		};
+		led10: led_10 {
+			gpios = <&gpiob 10 GPIO_ACTIVE_LOW>;
+			label = "LED10";
+		};
+		led11: led_11 {
+			gpios = <&gpiob 11 GPIO_ACTIVE_LOW>;
+			label = "LED11";
+		};
+		led12: led_12 {
+			gpios = <&gpiob 12 GPIO_ACTIVE_LOW>;
+			label = "LED12";
+		};
+		led13: led_13 {
+			gpios = <&gpiob 13 GPIO_ACTIVE_LOW>;
+			label = "LED13";
+		};
+		led14: led_14 {
+			gpios = <&gpiob 14 GPIO_ACTIVE_LOW>;
+			label = "LED14";
+		};
+		led15: led_15 {
+			gpios = <&gpiob 15 GPIO_ACTIVE_LOW>;
+			label = "LED15";
+		};
+	};
+
+	gpio_keys {
+		compatible = "gpio-keys";
+		switch0: switch_0 {
+			label = "SW0";
+			gpios = <&gpioc 0 GPIO_ACTIVE_HIGH>;
+		};
+		switch1: switch_1 {
+			label = "SW1";
+			gpios = <&gpioc 1 GPIO_ACTIVE_HIGH>;
+		};
+		switch2: switch_2 {
+			label = "SW2";
+			gpios = <&gpioc 2 GPIO_ACTIVE_HIGH>;
+		};
+		switch3: switch_3 {
+			label = "SW3";
+			gpios = <&gpioc 3 GPIO_ACTIVE_HIGH>;
+		};
+		switch4: switch_4 {
+			label = "SW4";
+			gpios = <&gpioc 4 GPIO_ACTIVE_HIGH>;
+		};
+		switch5: switch_5 {
+			label = "SW5";
+			gpios = <&gpioc 5 GPIO_ACTIVE_HIGH>;
+		};
+		switch6: switch_6 {
+			label = "SW6";
+			gpios = <&gpioc 6 GPIO_ACTIVE_HIGH>;
+		};
+		switch7: switch_7 {
+			label = "SW7";
+			gpios = <&gpioc 7 GPIO_ACTIVE_HIGH>;
+		};
+		button0: button_0 {
+			label = "BTN0";
+			gpios = <&gpioc 8 GPIO_ACTIVE_HIGH>;
+		};
+		button1: button_1 {
+			label = "BTN1";
+			gpios = <&gpioc 9 GPIO_ACTIVE_HIGH>;
+		};
+		button2: button_2 {
+			label = "BTN2";
+			gpios = <&gpioc 10 GPIO_ACTIVE_HIGH>;
+		};
+		button3: button_3 {
+			label = "BTN3";
+			gpios = <&gpioc 11 GPIO_ACTIVE_HIGH>;
+		};
+		button4: button_4 {
+			label = "BTN4";
+			gpios = <&gpioc 12 GPIO_ACTIVE_HIGH>;
+		};
+		button5: button_5 {
+			label = "BTN5";
+			gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
+		};
+		button6: button_6 {
+			label = "BTN6";
+			gpios = <&gpioc 14 GPIO_ACTIVE_HIGH>;
+		};
+		button7: button_7 {
+			label = "BTN7";
+			gpios = <&gpioc 15 GPIO_ACTIVE_HIGH>;
+		};
+	};
+
+	seven_segments {
+		compatible = "gpio-leds";
+		sevensegment0: seven_segment_0 {
+			label = "7SEG0";
+			gpios = <&gpiod 0 GPIO_ACTIVE_LOW>,
+				<&gpiod 1 GPIO_ACTIVE_LOW>,
+				<&gpiod 2 GPIO_ACTIVE_LOW>,
+				<&gpiod 3 GPIO_ACTIVE_LOW>,
+				<&gpiod 4 GPIO_ACTIVE_LOW>,
+				<&gpiod 5 GPIO_ACTIVE_LOW>,
+				<&gpiod 6 GPIO_ACTIVE_LOW>,
+				<&gpiod 7 GPIO_ACTIVE_LOW>;
+		};
+		sevensegment1: seven_segment_1 {
+			label = "7SEG1";
+			gpios = <&gpiod 8 GPIO_ACTIVE_LOW>,
+				<&gpiod 9 GPIO_ACTIVE_LOW>,
+				<&gpiod 10 GPIO_ACTIVE_LOW>,
+				<&gpiod 11 GPIO_ACTIVE_LOW>,
+				<&gpiod 12 GPIO_ACTIVE_LOW>,
+				<&gpiod 13 GPIO_ACTIVE_LOW>,
+				<&gpiod 14 GPIO_ACTIVE_LOW>,
+				<&gpiod 15 GPIO_ACTIVE_LOW>;
+		};
+		sevensegment2: seven_segment_2 {
+			label = "7SEG2";
+			gpios = <&gpioe 0 GPIO_ACTIVE_LOW>,
+				<&gpioe 1 GPIO_ACTIVE_LOW>,
+				<&gpioe 2 GPIO_ACTIVE_LOW>,
+				<&gpioe 3 GPIO_ACTIVE_LOW>,
+				<&gpioe 4 GPIO_ACTIVE_LOW>,
+				<&gpioe 5 GPIO_ACTIVE_LOW>,
+				<&gpioe 6 GPIO_ACTIVE_LOW>,
+				<&gpioe 7 GPIO_ACTIVE_LOW>;
+		};
+		sevensegment3: seven_segment_3 {
+			label = "7SEG3";
+			gpios = <&gpioe 8 GPIO_ACTIVE_LOW>,
+				<&gpioe 9 GPIO_ACTIVE_LOW>,
+				<&gpioe 10 GPIO_ACTIVE_LOW>,
+				<&gpioe 11 GPIO_ACTIVE_LOW>,
+				<&gpioe 12 GPIO_ACTIVE_LOW>,
+				<&gpioe 13 GPIO_ACTIVE_LOW>,
+				<&gpioe 14 GPIO_ACTIVE_LOW>,
+				<&gpioe 15 GPIO_ACTIVE_LOW>;
+		};
+	};
+
+	light0 {
+				compatible = "voltage-divider";
+				io-channels = <&adc1 3>;
+				output-ohms = <100000>;
+				status = "okay";
+	};
+
+	aliases {
+		led0 = &led0;
+		led1 = &led1;
+		led2 = &led2;
+		led3 = &led3;
+		led4 = &led4;
+		led5 = &led5;
+		led6 = &led6;
+		led7 = &led7;
+		led8 = &led8;
+		led9 = &led9;
+		led10 = &led10;
+		led11 = &led11;
+		led12 = &led12;
+		led13 = &led13;
+		led14 = &led14;
+		led15 = &led15;
+		sw0 = &switch0;
+		sw1 = &switch1;
+		sw2 = &switch2;
+		sw3 = &switch3;
+		sw4 = &switch4;
+		sw5 = &switch5;
+		sw6 = &switch6;
+		sw7 = &switch7;
+		btn0 = &button0;
+		btn1 = &button1;
+		btn2 = &button2;
+		btn3 = &button3;
+		btn4 = &button4;
+		btn5 = &button5;
+		btn6 = &button6;
+		btn7 = &button7;
+		sevenseg0 = &sevensegment0;
+		sevenseg1 = &sevensegment1;
+		sevenseg2 = &sevensegment2;
+		sevenseg3 = &sevensegment3;
+		accel0 = &lsm6dsl;
+	};
+};
+
+&clk_hse {
+	clock-frequency = <DT_FREQ_M(8)>; /* 8MHz oscillator */
+	status = "okay";
+};
+
+&pll {
+	mul = <9>;
+	clocks = <&clk_hse>;
+	status = "okay";
+};
+
+&rcc {
+	clocks = <&pll>;
+	clock-frequency = <DT_FREQ_M(72)>;
+	ahb-prescaler = <1>;
+	apb1-prescaler = <2>;
+	apb2-prescaler = <1>;
+};
+
+&usart1 {
+	pinctrl-0 = <&usart1_tx_pa9 &usart1_rx_pa10>;
+	pinctrl-names = "default";
+	current-speed = <115200>;
+	status = "okay";
+};
+
+&usart2 {
+	pinctrl-0 = <&usart2_tx_pa2 &usart2_rx_pa3>;
+	pinctrl-names = "default";
+	current-speed = <115200>;
+	status = "okay";
+};
+
+&spi1 {
+	pinctrl-0 = <&spi1_nss_master_pa4 &spi1_sck_master_pa5
+               &spi1_miso_master_pa6 &spi1_mosi_master_pa7>;
+	pinctrl-names = "default";
+	status = "okay";
+
+	/* ST Microelectronics LSM6DSL accel/gyro sensor */
+	lsm6dsl: lsm6dsl@1 {
+		compatible = "st,lsm6dsl";
+		reg = <1>;
+		spi-max-frequency = <1000000>;
+	};
+};
+
+
+&iwdg {
+	status = "okay";
+};
+
+&adc1 {
+	pinctrl-0 = <&adc1_in3_pa3>;
+	pinctrl-names = "default";
+	status = "okay";
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	channel@3 {
+		reg = <3>;
+		zephyr,gain = "ADC_GAIN_1";
+		zephyr,reference = "ADC_REF_INTERNAL";
+		zephyr,acquisition-time = <ADC_ACQ_TIME_MAX>;
+		zephyr,resolution = <12>;
+	};
+};
+
+
+&dma1 {
+	status = "okay";
+};
+
+zephyr_udc0: &usb {
+	pinctrl-0 = <&usb_dm_pa11 &usb_dp_pa12>;
+	pinctrl-names = "default";
+	status = "okay";
+};
+
+&zephyr_udc0 {
+	cdc_acm_uart0: cdc_acm_uart0 {
+		compatible = "zephyr,cdc-acm-uart";
+	};
+};
+
+&flash0 {
+	partitions {
+		compatible = "fixed-partitions";
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+		/* Set 2KB of storage at the end of 1024KB flash */
+		storage_partition: partition@1f800 {
+			label = "storage";
+			reg = <0x000ff800 0x00000800>;
+		};
+	};
+};
+
+&pinctrl {
+	/* Free up PB3/PB4 (LED4/LED5) by disabling JTAG debugging */
+//	swj-cfg = "jtag-disable";
+};

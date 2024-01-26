@@ -1,0 +1,8 @@
+# 32F103 EDU board configuration
+
+# Copyright (c) 2022 piernov
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_EDU32F103
+	bool "32F103 EDU Board"
+	depends on SOC_STM32F103XB

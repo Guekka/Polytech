@@ -1,0 +1,20 @@
+{
+    "configurations": [
+    {
+        "cwd": "${workspaceRoot}",
+        "executable": "./build/zephyr/zephyr.elf",
+        "name": "Debug with West",
+        "request": "launch",
+        "type": "cortex-debug",
+        "servertype": "external",
+        "gdbTarget": "localhost:3333",
+        "searchDir": [],
+        "showDevDebugOutput": "raw",
+        "preLaunchTask": "DebugServer",
+        "preLaunchCommands": ["monitor [target current] configure -event gdb-detach {shutdown}"],
+        "rtos": "Zephyr",
+        "armToolchainPath": "${workspaceRoot}/zephyr-sdk-0.16.4/arm-zephyr-eabi/bin",
+        "toolchainPrefix": "arm-zephyr-eabi",
+    }
+    ]
+}

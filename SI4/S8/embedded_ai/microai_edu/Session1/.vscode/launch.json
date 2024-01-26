@@ -1,0 +1,23 @@
+{
+    "configurations": [
+    {
+        "cwd": "${workspaceRoot}",
+        "executable": "./build/EDU32F103_v0.4.elf",
+        "name": "Debug with OpenOCD",
+        "request": "launch",
+        "type": "cortex-debug",
+        "servertype": "openocd",
+        "configFiles": [
+            "./openocd.cfg",
+        ],
+        "searchDir": [],
+        "showDevDebugOutput": "none",
+        "preLaunchTask": "Build",
+        "preLaunchCommands": ["monitor [target current] configure -event gdb-detach {shutdown}"],
+        "liveWatch": {
+            "enabled": true,
+            "samplesPerSecond": 4
+        }
+    }
+    ]
+}

@@ -166,9 +166,32 @@ void store_button_press_time(int *store_to)
     *store_to = time;
 }
 
+int number_of_toggled_switches()
+{
+    const int switches[] = {SW0_Pin, SW1_Pin, SW2_Pin, SW3_Pin, SW4_Pin, SW5_Pin, SW6_Pin, SW7_Pin};
+    int count = 0;
+    for (int i = 0; i < 8; i++)
+    {
+        if (HAL_GPIO_ReadPin(GPIOC, switches[i]) == GPIO_PIN_SET)
+            ++count;
+    }
+    return count;
+}
+
 static int ticks_when_test_started = 0;
 static int ticks_when_user_pressed = 0;
 static int results[10] = {0};
+
+bool is_signal_time(int number_of_switches)
+{
+    const bool random_validated = rand() < RAND_MAX / 100000;
+    const int minimum = 3000 + number_of_switches * 1000;
+
+    const int elapsed = HAL_GetTick() - ticks_when_test_started;
+
+    return random_validated && elapsed > minimum;
+}
+
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
     switch (GPIO_Pin)
@@ -229,6 +252,7 @@ int main(void)
     HAL_GPIO_WritePin(LED0_GPIO_Port, leds, GPIO_PIN_RESET);
 
     int ticks_when_signal_fired = 0;
+    log("%i toggled switches at start", number_of_toggled_switches());
 
     /* USER CODE END 2 */
 
@@ -246,11 +270,7 @@ int main(void)
         const int is_even = (time / period) % 2 == 0;
         light_only_leds(is_even ? even_leds : odd_leds);
 
-        const int proba = 0.00001;
-        const bool random_validated = (rand() / (double)RAND_MAX) < proba;
-        bool is_signal_time = HAL_GetTick() - ticks_when_test_started > 3000 && (rand() % 100000 == 0);
-
-        if (is_signal_time)
+        if (is_signal_time(number_of_toggled_switches()))
         {
             ticks_when_signal_fired = HAL_GetTick();
             log("Firing signal at ticks: %i", ticks_when_signal_fired);

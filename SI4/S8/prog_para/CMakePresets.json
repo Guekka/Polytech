@@ -1,0 +1,104 @@
+{
+  "configurePresets": [
+    {
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "BUILD_TESTING": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "CMAKE_BUILD_TYPE": {
+          "type": "STRING",
+          "value": "Debug"
+        }
+      },
+      "errors": {
+        "deprecated": true
+      },
+      "hidden": true,
+      "name": "cmake-dev",
+      "warnings": {
+        "deprecated": true,
+        "dev": true
+      }
+    },
+    {
+      "cacheVariables": {
+        "CMAKE_EXE_LINKER_FLAGS_RELEASE": {
+          "type": "STRING",
+          "value": "/DEBUG:FASTLINK"
+        },
+        "CMAKE_MSVC_RUNTIME_LIBRARY": {
+          "type": "STRING",
+          "value": "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
+        }
+      },
+      "hidden": true,
+      "name": "windows"
+    },
+    {
+      "cacheVariables": {
+        "CMAKE_CXX_FLAGS": {
+          "type": "STRING",
+          "value": "-fno-sanitize-recover=undefined -fsanitize=address,undefined -pedantic -pedantic-errors -Wall -Werror -Wextra --coverage"
+        },
+        "CMAKE_EXE_LINKER_FLAGS": {
+          "type": "STRING",
+          "value": "-fno-sanitize-recover=undefined -fsanitize=address,undefined --coverage"
+        },
+        "CMAKE_EXPORT_COMPILE_COMMANDS": {
+          "type": "BOOL",
+          "value": "ON"
+        }
+      },
+      "hidden": true,
+      "name": "linux"
+    },
+    {
+      "architecture": {
+        "strategy": "set",
+        "value": "x64"
+      },
+      "cacheVariables": {
+        "CMAKE_CXX_FLAGS": "/EHsc /MP /W4"
+      },
+      "generator": "Visual Studio 17 2022",
+      "inherits": [
+        "cmake-dev",
+        "windows"
+      ],
+      "name": "vs2022-windows",
+      "toolset": "v143"
+    },
+    {
+      "cacheVariables": {
+        "CMAKE_CXX_FLAGS": "/EHsc /MP /W4 /external:anglebrackets /external:W0"
+      },
+      "generator": "Ninja",
+      "inherits": [
+        "cmake-dev",
+        "windows"
+      ],
+      "name": "ninja-windows"
+    },
+    {
+      "generator": "Ninja",
+      "inherits": [
+        "cmake-dev",
+        "linux"
+      ],
+      "name": "ninja-linux"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "ninja-windows",
+      "configurePreset": "ninja-windows"
+    },
+    {
+      "name": "ninja-linux",
+      "configurePreset": "ninja-linux"
+    }
+  ],
+  "version": 3
+}

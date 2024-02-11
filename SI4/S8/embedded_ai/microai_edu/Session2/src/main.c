@@ -49,31 +49,11 @@ static const struct gpio_dt_spec sevenseg1_dp = GPIO_DT_SPEC_GET_BY_IDX(DT_NODEL
 static const struct gpio_dt_spec sevenseg2_dp = GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(sevensegment2), gpios, 7);
 static const struct gpio_dt_spec sevenseg3_dp = GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(sevensegment3), gpios, 7);
 
-/* Light sensor */
-static const struct adc_dt_spec light0 = ADC_DT_SPEC_GET(DT_PATH(light0));
-
-/* Accelerometer */
-static const struct device *accel0 = DEVICE_DT_GET(DT_ALIAS(accel0));
-
-// Active low
-// static const int sevensegLUT[] = { 0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 0x82, 0xF8, 0x80, 0x90, 0x88, 0x83, 0xC6, 0xA1, 0x86, 0x8E };
 // Active high
 static const int sevensegLUT[] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71};
 
-#define USER_PRIO 0
-// Define the delays D1 and D2
-#define DELAY_TASK1 K_MSEC(1000)
-#define DELAY_TASK2 K_MSEC(500)
-// Define the counter variable
-static int counter = 0;
+#define USER_PRIO 2
 #define STACK_SIZE 256
-
-// Define the message queue size and message size
-#define MSGQ_SIZE 10
-#define MSG_SIZE sizeof(int)
-
-// Define the message queue
-K_MSGQ_DEFINE(msgq, MSG_SIZE, MSGQ_SIZE, 4);
 
 void display_show_value(uint16_t i)
 {
@@ -83,51 +63,91 @@ void display_show_value(uint16_t i)
     gpio_port_set_masked(port_7seg23, 0xFF00, sevensegLUT[(i / 1000) % 10] << 8);
 }
 
-// Task 1
-void task1(void *p1, void *p2, void *p3)
+void store_result(int *results, int result, int size)
 {
-    printk("Task 1\n");
-    while (1)
+    for (int i = 0; i < size; i++)
     {
-        // Send counter value to Task 2
-        k_msgq_put(&msgq, &counter, K_FOREVER);
-
-        // Increment counter
-        counter++;
-
-        // Wait for delay D1
-        k_sleep(DELAY_TASK1);
+        if (results[i] == 0)
+        {
+            results[i] = result;
+            break;
+        }
     }
 }
 
-// Task 2
-void task2(void *p1, void *p2, void *p3)
+void display_average(int *results, int size)
 {
-    printk("Task 2\n");
-    int received_value;
-
-    while (1)
+    int sum = 0;
+    int count = 0;
+    for (int i = 0; i < size; i++)
     {
-        // Receive value from Task 1
-        k_msgq_get(&msgq, &received_value, K_FOREVER);
-
-        // Display received value on 7-segment display
-        display_show_value(received_value);
-
-        // Wait for delay D2
-        k_sleep(DELAY_TASK2);
+        if (results[i] == 0)
+            break;
+        sum += results[i];
+        ++count;
     }
+
+    const int average = sum / count;
+    display_value(average);
 }
 
-// Define the thread for Task 1
-K_THREAD_DEFINE(task1_thread_id, STACK_SIZE,
-                task1, NULL, NULL, NULL,
-                USER_PRIO, 0, 0);
+void store_button_press_time(int *store_to)
+{
+    const int time = HAL_GetTick();
+    const int BOUNCE_DELAY = 300;
+    const int delta = time - *store_to;
+    if (delta < BOUNCE_DELAY)
+        return; // button probably activated twice
 
-// Define the thread for Task 2
-K_THREAD_DEFINE(task2_thread_id, STACK_SIZE,
-                task2, NULL, NULL, NULL,
-                USER_PRIO, 0, 0);
+    *store_to = time;
+}
+
+int number_of_toggled_switches()
+{
+    const int switches[] = {SW0_Pin, SW1_Pin, SW2_Pin, SW3_Pin, SW4_Pin, SW5_Pin, SW6_Pin, SW7_Pin};
+    int count = 0;
+    for (int i = 0; i < 8; i++)
+    {
+        if (HAL_GPIO_ReadPin(GPIOC, switches[i]) == GPIO_PIN_SET)
+            ++count;
+    }
+    return count;
+}
+
+static int ticks_when_test_started = 0;
+static int ticks_when_user_pressed = 0;
+static int results[10] = {0};
+
+bool is_signal_time(int number_of_switches)
+{
+    const bool random_validated = rand() < RAND_MAX / 100000;
+    const int minimum = 3000 + number_of_switches * 1000;
+
+    const int elapsed = HAL_GetTick() - ticks_when_test_started;
+
+    return random_validated && elapsed > minimum;
+}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    switch (GPIO_Pin)
+    {
+    case BTN1_Pin:
+        store_button_press_time(&ticks_when_test_started);
+        srand(HAL_GetTick());
+        log("Test started. Ticks: %i", ticks_when_test_started);
+
+        break;
+    case BTN2_Pin:
+        log("Displaying average");
+        display_average(results, 10);
+        break;
+    case BTN4_Pin:
+        store_button_press_time(&ticks_when_user_pressed);
+        log("User pressed the button. Ticks: %i", ticks_when_user_pressed);
+        break;
+    }
+}
 
 int init(void)
 {

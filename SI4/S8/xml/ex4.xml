@@ -1,0 +1,30 @@
+<!--
+    Écrire une version de la base de données filmographiques avec un namespace nommé
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<films xmlns:film="http://www.example.org/films">
+    <film:film titre="Le Parrain" annee="1972">
+        <film:acteurs>
+            <film:acteur>Marlon Brando</film:acteur>
+            <film:acteur>Al Pacino</film:acteur>
+            <film:acteur>James Caan</film:acteur>
+        </film:acteurs>
+        <film:realisateur>Francis Ford Coppola</film:realisateur>
+    </film:film>
+    <film:film titre="Le Parrain 2" annee="1974">
+        <film:acteurs>
+            <film:acteur>Al Pacino</film:acteur>
+            <film:acteur>Robert De Niro</film:acteur>
+            <film:acteur>Robert Duvall</film:acteur>
+        </film:acteurs>
+        <film:realisateur>Francis Ford Coppola</film:realisateur>
+    </film:film>
+    <film:film titre="Le Parrain 3" annee="1990">
+        <film:acteurs>
+            <film:acteur>Al Pacino</film:acteur>
+            <film:acteur>Diane Keaton</film:acteur>
+            <film:acteur>Andy Garcia</film:acteur>
+        </film:acteurs>
+        <film:realisateur>Francis Ford Coppola</film:realisateur>
+    </film:film>
+</films>

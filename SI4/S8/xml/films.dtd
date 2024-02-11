@@ -1,0 +1,15 @@
+<!--
+    Écrire une DTD pour votre base de données filmographiques et vérifier sa validité par rapport à ce modèle.
+-->
+
+<!DOCTYPE films [
+    <!ELEMENT films (film+)>
+    <!ELEMENT film (acteurs, realisateur)>
+    <!ATTLIST film
+        titre CDATA #REQUIRED
+        annee CDATA #REQUIRED
+    >
+    <!ELEMENT acteurs (acteur+)>
+    <!ELEMENT acteur (#PCDATA)>
+    <!ELEMENT realisateur (#PCDATA)>
+]>

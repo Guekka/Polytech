@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Écrire un document XML pour stocker des données filmographiques : titre, année, acteurs, réalisateur.
+    Écrire et comparer plusieurs variations, en utilisant des attributs ou des éléments pour stocker certaines données.
+-->
+
+<!DOCTYPE films SYSTEM "films.dtd">
+<films>
+    <film titre="Le Parrain" annee="1972">
+        <acteurs>
+            <acteur>Marlon Brando</acteur>
+            <acteur>Al Pacino</acteur>
+            <acteur>James Caan</acteur>
+        </acteurs>
+        <realisateur>Francis Ford Coppola</realisateur>
+    </film>
+    <film titre="Le Parrain 2" annee="1974">
+        <acteurs>
+            <acteur>Al Pacino</acteur>
+            <acteur>Robert De Niro</acteur>
+            <acteur>Robert Duvall</acteur>
+        </acteurs>
+        <realisateur>Francis Ford Coppola</realisateur>
+    </film>
+    <film titre="Le Parrain 3" annee="1990">
+        <acteurs>
+            <acteur>Al Pacino</acteur>
+            <acteur>Diane Keaton</acteur>
+            <acteur>Andy Garcia</acteur>
+        </acteurs>
+        <realisateur>Francis Ford Coppola</realisateur>
+    </film>
+</films>

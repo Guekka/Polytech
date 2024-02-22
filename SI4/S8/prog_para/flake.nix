@@ -24,7 +24,7 @@
           inherit inputs pkgs;
           modules = [
             {
-              packages = [pkgs.cmake python pkgs.ninja pkgs.pkg-config pkgs.gcc13 pkgs.libgccjit];
+              packages = [pkgs.cmake python pkgs.ninja pkgs.pkg-config pkgs.gcc13];
             }
           ];
         };

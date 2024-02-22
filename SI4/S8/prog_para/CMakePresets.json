@@ -40,11 +40,11 @@
       "cacheVariables": {
         "CMAKE_CXX_FLAGS": {
           "type": "STRING",
-          "value": "-fno-sanitize-recover=undefined -fsanitize=address,undefined -pedantic -pedantic-errors -Wall -Werror -Wextra --coverage"
+          "value": "-pedantic -pedantic-errors -Wall -Werror -Wextra --coverage"
         },
         "CMAKE_EXE_LINKER_FLAGS": {
           "type": "STRING",
-          "value": "-fno-sanitize-recover=undefined -fsanitize=address,undefined --coverage"
+          "value": "--coverage"
         },
         "CMAKE_EXPORT_COMPILE_COMMANDS": {
           "type": "BOOL",

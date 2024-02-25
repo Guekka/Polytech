@@ -5,6 +5,163 @@
 
 #define SLEEP_TIME_MS 100
 
+// Active high
+static const int sevensegLUT[] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71};
+
+void display_show_value(uint16_t i);
+void display_average(void);
+void store_button_press_time(volatile int *store_to);
+int number_of_toggled_switches(void);
+bool is_signal_time(int number_of_switches);
+void user_pressed_button(void);
+void turn_on_leds(void);
+void reset_state(void);
+
+#define LED_PRIO 2
+#define STACK_SIZE 256
+#define RESULT_SIZE 10
+
+static volatile int results[RESULT_SIZE] = {0};
+static volatile int ticks_when_test_started = 0;
+static volatile int ticks_when_signal_fired = 0;
+static volatile int ticks_when_user_pressed = 0;
+static volatile bool should_blink_leds = false;
+
+void led_blinking_task(void);
+K_THREAD_DEFINE(led_blinking_task_id, STACK_SIZE, led_blinking_task, NULL, NULL, NULL, LED_PRIO, 0, 0);
+
+static struct gpio_callback button_pressed_cb_data;
+static void button_pressed(const struct device *dev, struct gpio_callback *cb, unsigned int pins);
+
+int init(void);
+
+int main(void)
+{
+    if (init() < 0)
+    {
+        return -1;
+    }
+
+    display_show_value(0);
+    turn_off_leds();
+    printk("Initialization complete\n");
+
+    while (true)
+    {
+        if (ticks_when_test_started == 0 || ticks_when_signal_fired != 0)
+        {
+            k_msleep(SLEEP_TIME_MS);
+            continue;
+        }
+
+        printk("Test started. Ticks: %i\n", ticks_when_test_started);
+        should_blink_leds = true;
+
+        printk("%i toggled switches at start\n", number_of_toggled_switches());
+
+        while (ticks_when_signal_fired != 0 || !is_signal_time(number_of_toggled_switches()))
+            k_msleep(10);
+
+        ticks_when_signal_fired = k_uptime_get();
+        printk("Firing signal at ticks: %i\n", ticks_when_signal_fired);
+        // light up all LEDs
+        should_blink_leds = false;
+        turn_on_leds();
+    }
+}
+
+void store_result(int result)
+{
+    for (int i = 0; i < RESULT_SIZE; i++)
+    {
+        if (results[i] == 0)
+        {
+            results[i] = result;
+            break;
+        }
+    }
+}
+
+void display_average()
+{
+    printk("Displaying average\n");
+
+    int sum = 0;
+    int count = 0;
+    for (int i = 0; i < RESULT_SIZE; i++)
+    {
+        if (results[i] == 0)
+            break;
+        sum += results[i];
+        ++count;
+    }
+
+    if (count == 0)
+    {
+        printk("No results to display\n");
+        return;
+    }
+
+    printk("Sum: %i\n", sum);
+
+    const int average = sum / count;
+
+    printk("Average: %i\n", average);
+
+    display_show_value(average);
+}
+
+void store_button_press_time(volatile int *store_to)
+{
+    const int time = k_uptime_get();
+    const int BOUNCE_DELAY = 300;
+    const int delta = time - *store_to;
+    if (delta < BOUNCE_DELAY)
+        return; // button probably activated twice
+
+    *store_to = time;
+}
+
+bool is_signal_time(int number_of_switches)
+{
+    const bool random_validated = rand() < RAND_MAX / 100;
+    const int minimum = 3000 + number_of_switches * 1000;
+
+    const int elapsed = k_uptime_get() - ticks_when_test_started;
+
+    return random_validated && elapsed > minimum;
+}
+
+void user_pressed_button(void)
+{
+    if (ticks_when_signal_fired == 0)
+        // the user pressed the button too early
+        return;
+
+    store_button_press_time(&ticks_when_user_pressed);
+    printk("User pressed the button. Ticks: %i\n", ticks_when_user_pressed);
+
+    const int reaction_time = ticks_when_user_pressed - ticks_when_signal_fired;
+    printk("Reaction time: %i\n", reaction_time);
+
+    store_result(reaction_time);
+
+    reset_state();
+    display_show_value(reaction_time);
+}
+
+void reset_state(void)
+{
+    turn_off_leds();
+    display_show_value(0);
+    should_blink_leds = false;
+    ticks_when_signal_fired = 0;
+    ticks_when_user_pressed = 0;
+    ticks_when_test_started = 0;
+}
+
+/* HARDWARE FUNCTIONS */
+
 static const struct device *port_io = DEVICE_DT_GET(DT_NODELABEL(gpioa));
 static const struct device *port_led = DEVICE_DT_GET(DT_NODELABEL(gpiob));
 static const struct device *port_swbtn = DEVICE_DT_GET(DT_NODELABEL(gpioc));
@@ -50,107 +207,6 @@ static const struct gpio_dt_spec sevensegment3[SEVENSEGMENT3_PINS_COUNT] = {
     DT_FOREACH_PROP_ELEM_SEP(DT_NODELABEL(sevensegment3), gpios, GPIO_DT_SPEC_GET_BY_IDX, (, )),
 };
 
-static const struct gpio_dt_spec sevenseg0_dp = GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(sevensegment0), gpios, 7);
-static const struct gpio_dt_spec sevenseg1_dp = GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(sevensegment1), gpios, 7);
-static const struct gpio_dt_spec sevenseg2_dp = GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(sevensegment2), gpios, 7);
-static const struct gpio_dt_spec sevenseg3_dp = GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(sevensegment3), gpios, 7);
-
-// Active high
-static const int sevensegLUT[] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71};
-
-#define USER_PRIO 2
-#define STACK_SIZE 256
-
-void display_show_value(uint16_t i)
-{
-    gpio_port_set_masked(port_7seg01, 0x00FF, sevensegLUT[i % 10]);
-    gpio_port_set_masked(port_7seg01, 0xFF00, sevensegLUT[(i / 10) % 10] << 8);
-    gpio_port_set_masked(port_7seg23, 0x00FF, sevensegLUT[(i / 100) % 10]);
-    gpio_port_set_masked(port_7seg23, 0xFF00, sevensegLUT[(i / 1000) % 10] << 8);
-}
-
-static int ticks_when_test_started = 0;
-static int ticks_when_user_pressed = 0;
-static int results[10] = {0};
-
-void store_result(int *results, int result, int size)
-{
-    for (int i = 0; i < size; i++)
-    {
-        if (results[i] == 0)
-        {
-            results[i] = result;
-            break;
-        }
-    }
-}
-
-void display_average(int *results, int size)
-{
-    int sum = 0;
-    int count = 0;
-    for (int i = 0; i < size; i++)
-    {
-        if (results[i] == 0)
-            break;
-        sum += results[i];
-        ++count;
-    }
-
-    const int average = sum / count;
-    display_show_value(average);
-}
-
-void store_button_press_time(int *store_to)
-{
-    const int time = k_uptime_get();
-    const int BOUNCE_DELAY = 300;
-    const int delta = time - *store_to;
-    if (delta < BOUNCE_DELAY)
-        return; // button probably activated twice
-
-    *store_to = time;
-}
-
-int number_of_toggled_switches()
-{
-    int count = 0;
-    for (size_t i = SWITCHES_START; i < SWITCHES_END; ++i)
-        count += gpio_pin_get(port_swbtn, i);
-    return count;
-}
-
-bool is_signal_time(int number_of_switches)
-{
-    const bool random_validated = rand() < RAND_MAX / 100000;
-    const int minimum = 3000 + number_of_switches * 1000;
-
-    const int elapsed = k_uptime_get() - ticks_when_test_started;
-
-    return random_validated && elapsed > minimum;
-}
-
-static struct gpio_callback button_pressed_cb_data;
-static void button_pressed(const struct device *dev, struct gpio_callback *cb, unsigned int pins)
-{
-    if (pins & BIT(BUTTONS_START + 1))
-    {
-        store_button_press_time(&ticks_when_test_started);
-        printk("Test started. Ticks: %i\n", ticks_when_test_started);
-        srand(k_uptime_get());
-    }
-    if (pins & BIT(BUTTONS_START + 2))
-    {
-        printk("Displaying average\n");
-        display_average(results, 10);
-    }
-    if (pins & BIT(BUTTONS_START + 4))
-    {
-        store_button_press_time(&ticks_when_user_pressed);
-        printk("User pressed the button. Ticks: %i", ticks_when_user_pressed);
-    }
-}
-
 int init(void)
 {
     int ret = 0;
@@ -193,75 +249,76 @@ int init(void)
                            BIT(BUTTONS_START + 4));
     gpio_add_callback(port_swbtn, &button_pressed_cb_data);
 
+    // this is not a good seed, but it's good enough for this project
+    // using the accelerometer and light sensor would be better I guesss
+    srand(k_uptime_get());
+
     return ret;
 }
 
-int main(void)
+int number_of_toggled_switches()
 {
-    if (init() < 0)
+    int count = 0;
+    for (size_t i = SWITCHES_START; i < SWITCHES_END; ++i)
+        count += gpio_pin_get(port_swbtn, i);
+    return count;
+}
+
+void turn_off_leds()
+{
+    for (size_t i = 0; i < LEDS_COUNT; i++)
+        gpio_pin_set(port_led, leds[i].pin, 0);
+}
+
+void turn_on_leds()
+{
+    for (size_t i = 0; i < LEDS_COUNT; i++)
+        gpio_pin_set(port_led, leds[i].pin, 1);
+}
+
+void turn_on_one_led_out_of_two(int start)
+{
+    turn_off_leds();
+    for (size_t i = start; i < LEDS_COUNT; i += 2)
+        gpio_pin_set(port_led, leds[i].pin, 1);
+}
+
+void led_blinking_task(void)
+{
+    k_thread_name_set(k_current_get(), "LED blinking task");
+    printk("LED blinking task started\n");
+
+    int i = 0;
+    while (true)
     {
-        return -1;
-    }
-
-    display_show_value(0);
-    printk("Starting...\n");
-
-    int ticks_when_signal_fired = 0;
-    printk("%i toggled switches at start\n", number_of_toggled_switches());
-
-    while (1)
-    {
-        // for some reason,
-        k_msleep(1);
-
-        if (ticks_when_test_started == 0)
-            continue;
-
-        // test has started.
-
-        // and the signal has not been fired yet
-        if (ticks_when_signal_fired == 0)
+        if (!should_blink_leds)
         {
-            // Make the LEDs blink. Half a second even, half a second odd.
-            const int time = k_uptime_get() - ticks_when_test_started;
-            const int period = 1000;
-
-            // turn on even LEDs for half a second, then odd LEDs for half a second
-            const int is_even = (time / period) % 2 == 0;
-            for (size_t i = 0; i < LEDS_COUNT; i++)
-            {
-                const int is_on = (i % 2 == 0) == is_even;
-                gpio_pin_set_dt(leds + i, is_on);
-            }
-
-            if (is_signal_time(number_of_toggled_switches()))
-            {
-                ticks_when_signal_fired = k_uptime_get();
-                printk("Firing signal at ticks: %i\n", ticks_when_signal_fired);
-                // light up all LEDs
-                for (size_t i = 0; i < LEDS_COUNT; i++)
-                    gpio_pin_set(port_led, leds[i].pin, 1);
-            }
+            k_msleep(100);
+            continue;
         }
 
-        if (ticks_when_user_pressed == 0)
-            continue;
-
-        if (ticks_when_signal_fired == 0)
-            // the user pressed the button too early
-            continue;
-
-        // test has started and the button has been pressed. Display the time.
-        const int reaction_time = ticks_when_user_pressed - ticks_when_signal_fired;
-        printk("Reaction time: %i\n", reaction_time);
-
-        store_result(results, reaction_time, 10);
-
-        display_show_value(reaction_time);
-        ticks_when_signal_fired = 0;
-        ticks_when_user_pressed = 0;
-        ticks_when_test_started = 0;
+        turn_on_one_led_out_of_two(i);
+        k_msleep(500);
+        i = (i + 1) % 2;
     }
+}
 
-    return -1; // Should never reach this
+static void button_pressed(const struct device *dev, struct gpio_callback *cb, unsigned int pins)
+{
+    if (pins & BIT(BUTTONS_START + 1))
+        store_button_press_time(&ticks_when_test_started);
+
+    else if (pins & BIT(BUTTONS_START + 2))
+        display_average();
+
+    else if (pins & BIT(BUTTONS_START + 4))
+        user_pressed_button();
+}
+
+void display_show_value(uint16_t i)
+{
+    gpio_port_set_masked(port_7seg01, 0x00FF, sevensegLUT[i % 10]);
+    gpio_port_set_masked(port_7seg01, 0xFF00, sevensegLUT[(i / 10) % 10] << 8);
+    gpio_port_set_masked(port_7seg23, 0x00FF, sevensegLUT[(i / 100) % 10]);
+    gpio_port_set_masked(port_7seg23, 0xFF00, sevensegLUT[(i / 1000) % 10] << 8);
 }

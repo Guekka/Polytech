@@ -14,21 +14,30 @@ void store_button_press_time(volatile int *store_to);
 int number_of_toggled_switches(void);
 bool is_signal_time(int number_of_switches);
 void user_pressed_button(void);
+void turn_off_leds(void);
 void turn_on_leds(void);
 void reset_state(void);
 
+#define SWITCHES_PRIO 4
 #define LED_PRIO 2
 #define STACK_SIZE 256
 #define RESULT_SIZE 10
 
-static volatile int results[RESULT_SIZE] = {0};
-static volatile int ticks_when_test_started = 0;
-static volatile int ticks_when_signal_fired = 0;
-static volatile int ticks_when_user_pressed = 0;
-static volatile bool should_blink_leds = false;
+const int k_min_ms_before_signal = 3000;
+const int k_min_ms_before_signal_per_switch = 300;
+
+static volatile int g_results[RESULT_SIZE] = {0};
+static volatile int g_ticks_when_test_started = 0;
+static volatile int g_ticks_when_signal_fired = 0;
+static volatile int g_ticks_when_user_pressed = 0;
+static volatile int g_number_of_switches = 0;
+static volatile bool g_should_blink_leds = false;
 
 void led_blinking_task(void);
 K_THREAD_DEFINE(led_blinking_task_id, STACK_SIZE, led_blinking_task, NULL, NULL, NULL, LED_PRIO, 0, 0);
+
+void switches_task(void);
+K_THREAD_DEFINE(switches_task_id, STACK_SIZE, switches_task, NULL, NULL, NULL, SWITCHES_PRIO, 0, 0);
 
 static struct gpio_callback button_pressed_cb_data;
 static void button_pressed(const struct device *dev, struct gpio_callback *cb, unsigned int pins);
@@ -48,24 +57,24 @@ int main(void)
 
     while (true)
     {
-        if (ticks_when_test_started == 0 || ticks_when_signal_fired != 0)
+        if (g_ticks_when_test_started == 0 || g_ticks_when_signal_fired != 0)
         {
             k_msleep(SLEEP_TIME_MS);
             continue;
         }
 
-        printk("Test started. Ticks: %i\n", ticks_when_test_started);
-        should_blink_leds = true;
+        printk("Test started. Ticks: %i\n", g_ticks_when_test_started);
+        g_should_blink_leds = true;
 
         printk("%i toggled switches at start\n", number_of_toggled_switches());
 
-        while (ticks_when_signal_fired != 0 || !is_signal_time(number_of_toggled_switches()))
+        while (g_ticks_when_signal_fired != 0 || !is_signal_time(number_of_toggled_switches()))
             k_msleep(10);
 
-        ticks_when_signal_fired = k_uptime_get();
-        printk("Firing signal at ticks: %i\n", ticks_when_signal_fired);
+        g_ticks_when_signal_fired = k_uptime_get();
+        printk("Firing signal at ticks: %i\n", g_ticks_when_signal_fired);
         // light up all LEDs
-        should_blink_leds = false;
+        g_should_blink_leds = false;
         turn_on_leds();
     }
 }
@@ -74,9 +83,9 @@ void store_result(int result)
 {
     for (int i = 0; i < RESULT_SIZE; i++)
     {
-        if (results[i] == 0)
+        if (g_results[i] == 0)
         {
-            results[i] = result;
+            g_results[i] = result;
             break;
         }
     }
@@ -90,9 +99,9 @@ void display_average()
     int count = 0;
     for (int i = 0; i < RESULT_SIZE; i++)
     {
-        if (results[i] == 0)
+        if (g_results[i] == 0)
             break;
-        sum += results[i];
+        sum += g_results[i];
         ++count;
     }
 
@@ -122,26 +131,38 @@ void store_button_press_time(volatile int *store_to)
     *store_to = time;
 }
 
+void switches_task(void)
+{
+    k_thread_name_set(k_current_get(), "Switches task");
+    printk("Switches task started\n");
+
+    while (true)
+    {
+        g_number_of_switches = number_of_toggled_switches();
+        k_msleep(100);
+    }
+}
+
 bool is_signal_time(int number_of_switches)
 {
     const bool random_validated = rand() < RAND_MAX / 100;
-    const int minimum = 3000 + number_of_switches * 1000;
+    const int minimum = k_min_ms_before_signal + number_of_switches * k_min_ms_before_signal_per_switch;
 
-    const int elapsed = k_uptime_get() - ticks_when_test_started;
+    const int elapsed = k_uptime_get() - g_ticks_when_test_started;
 
     return random_validated && elapsed > minimum;
 }
 
 void user_pressed_button(void)
 {
-    if (ticks_when_signal_fired == 0)
+    if (g_ticks_when_signal_fired == 0)
         // the user pressed the button too early
         return;
 
-    store_button_press_time(&ticks_when_user_pressed);
-    printk("User pressed the button. Ticks: %i\n", ticks_when_user_pressed);
+    store_button_press_time(&g_ticks_when_user_pressed);
+    printk("User pressed the button. Ticks: %i\n", g_ticks_when_user_pressed);
 
-    const int reaction_time = ticks_when_user_pressed - ticks_when_signal_fired;
+    const int reaction_time = g_ticks_when_user_pressed - g_ticks_when_signal_fired;
     printk("Reaction time: %i\n", reaction_time);
 
     store_result(reaction_time);
@@ -154,10 +175,10 @@ void reset_state(void)
 {
     turn_off_leds();
     display_show_value(0);
-    should_blink_leds = false;
-    ticks_when_signal_fired = 0;
-    ticks_when_user_pressed = 0;
-    ticks_when_test_started = 0;
+    g_should_blink_leds = false;
+    g_ticks_when_signal_fired = 0;
+    g_ticks_when_user_pressed = 0;
+    g_ticks_when_test_started = 0;
 }
 
 /* HARDWARE FUNCTIONS */
@@ -291,7 +312,7 @@ void led_blinking_task(void)
     int i = 0;
     while (true)
     {
-        if (!should_blink_leds)
+        if (!g_should_blink_leds)
         {
             k_msleep(100);
             continue;
@@ -306,7 +327,7 @@ void led_blinking_task(void)
 static void button_pressed(const struct device *dev, struct gpio_callback *cb, unsigned int pins)
 {
     if (pins & BIT(BUTTONS_START + 1))
-        store_button_press_time(&ticks_when_test_started);
+        store_button_press_time(&g_ticks_when_test_started);
 
     else if (pins & BIT(BUTTONS_START + 2))
         display_average();

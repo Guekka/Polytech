@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Artistes>
+	<Artiste><Nom>Bob Dylan</Nom><Pays>USA</Pays></Artiste>
+	<Artiste><Nom>Bonnie Tyler</Nom><Pays>UK</Pays></Artiste>
+	<Artiste><Nom>Dolly Parton</Nom><Pays>USA</Pays></Artiste>
+	<Artiste><Nom>Gary Moore</Nom><Pays>UK</Pays></Artiste>
+	<Artiste><Nom>Eros Ramazzotti</Nom><Pays>EU</Pays></Artiste>
+	<Artiste><Nom>Bee Gees</Nom><Pays>UK</Pays></Artiste>
+	<Artiste><Nom>Dr.Hook</Nom><Pays>UK</Pays></Artiste>
+	<Artiste><Nom>Rod Stewart</Nom><Pays>UK</Pays></Artiste>
+	<Artiste><Nom>Andrea Bocelli</Nom><Pays>EU</Pays></Artiste>
+	<Artiste><Nom>Percy Sledge</Nom><Pays>USA</Pays></Artiste>
+	<Artiste><Nom>Savage Rose</Nom><Pays>EU</Pays></Artiste>
+	<Artiste><Nom>Many</Nom><Pays>USA</Pays></Artiste>
+	<Artiste><Nom>Kenny Rogers</Nom><Pays>UK</Pays></Artiste>
+	<Artiste><Nom>Will Smith</Nom><Pays>USA</Pays></Artiste>
+	<Artiste><Nom>Van Morrison</Nom><Pays>UK</Pays></Artiste>
+	<Artiste><Nom>Jorn Hoel</Nom><Pays>Norway</Pays></Artiste>
+	<Artiste><Nom>Cat Stevens</Nom><Pays>UK</Pays></Artiste>
+	<Artiste><Nom>Sam Brown</Nom><Pays>UK</Pays></Artiste>
+	<Artiste><Nom>T'Pau</Nom><Pays>UK</Pays></Artiste>
+	<Artiste><Nom>Tina Turner</Nom><Pays>UK</Pays></Artiste>
+	<Artiste><Nom>Kim Larsen</Nom><Pays>EU</Pays></Artiste>
+	<Artiste><Nom>Luciano Pavarotti</Nom><Pays>UK</Pays></Artiste>
+	<Artiste><Nom>Otis Redding</Nom><Pays>USA</Pays></Artiste>
+	<Artiste><Nom>Simply Red</Nom><Pays>EU</Pays></Artiste>
+	<Artiste><Nom>The Communards</Nom><Pays>UK</Pays></Artiste>
+	<Artiste><Nom>Joe Cocker</Nom><Pays>USA</Pays></Artiste>
+</Artistes>

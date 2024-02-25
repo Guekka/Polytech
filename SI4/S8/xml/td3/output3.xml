@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<cds>
+  <cd>
+    <title>Empire Burlesque</title>
+    <artist>Bob Dylan</artist>
+  </cd>
+  <cd>
+    <title>Still got the blues</title>
+    <artist>Gary Moore</artist>
+  </cd>
+  <cd>
+    <title>One night only</title>
+    <artist>Bee Gees</artist>
+  </cd>
+  <cd>
+    <title>Romanza</title>
+    <artist>Andrea Bocelli</artist>
+  </cd>
+  <cd>
+    <title>Black angel</title>
+    <artist>Savage Rose</artist>
+  </cd>
+  <cd>
+    <title>1999 Grammy Nominees</title>
+    <artist>Many</artist>
+  </cd>
+</cds>

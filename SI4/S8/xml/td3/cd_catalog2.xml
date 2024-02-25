@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+<?xml-stylesheet type="text/xsl" href="catalog5bis.xsl"?>
+
+
+<CATALOG>
+	<CD year="1985">
+		<TITLE>Empire Burlesque</TITLE>
+		<ARTIST>Bob Dylan</ARTIST>
+		<COUNTRY>USA</COUNTRY>
+		<COMPANY>Columbia</COMPANY>
+		<PRICE>10.90</PRICE>
+	</CD>
+	<CD year="1988">
+		<TITLE>Hide your heart</TITLE>
+		<ARTIST>Bonnie Tyler</ARTIST>
+		<COUNTRY>UK</COUNTRY>
+		<COMPANY>CBS Records</COMPANY>
+		<PRICE>9.90</PRICE>
+	</CD>
+	<CD year="1982">
+		<TITLE>Greatest Hits</TITLE>
+		<ARTIST>Dolly Parton</ARTIST>
+		<COUNTRY>USA</COUNTRY>
+		<COMPANY>RCA</COMPANY>
+		<PRICE>9.90</PRICE>
+	</CD>
+	<CD year="1990">
+		<TITLE>Still got the blues</TITLE>
+		<ARTIST>Gary Moore</ARTIST>
+		<COUNTRY>UK</COUNTRY>
+		<COMPANY>Virgin records</COMPANY>
+		<PRICE>10.20</PRICE>
+	</CD>
+	<CD year="1997">
+		<TITLE>Eros</TITLE>
+		<ARTIST>Eros Ramazzotti</ARTIST>
+		<COUNTRY>EU</COUNTRY>
+		<COMPANY>BMG</COMPANY>
+		<PRICE>9.90</PRICE>
+	</CD>
+	<CD year="1998">
+		<TITLE>One night only</TITLE>
+		<ARTIST>Bee Gees</ARTIST>
+		<COUNTRY>UK</COUNTRY>
+		<COMPANY>Polydor</COMPANY>
+		<PRICE>10.90</PRICE>
+	</CD>
+	<CD year="1973">
+		<TITLE>Sylvias Mother</TITLE>
+		<ARTIST>Dr.Hook</ARTIST>
+		<COUNTRY>UK</COUNTRY>
+		<COMPANY>CBS</COMPANY>
+		<PRICE>8.10</PRICE>
+	</CD>
+</CATALOG>

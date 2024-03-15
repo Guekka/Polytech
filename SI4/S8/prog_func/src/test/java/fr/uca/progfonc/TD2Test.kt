@@ -1,6 +1,6 @@
-package org.example
+package fr.uca.progfonc
 
-import org.example.TD1.sort
+import fr.uca.progfonc.TD1.sort
 import org.junit.Assert
 import org.junit.Test
 

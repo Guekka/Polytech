@@ -1,4 +1,4 @@
-package org.example
+package fr.uca.progfonc
 
 import org.junit.Assert
 import org.junit.Test

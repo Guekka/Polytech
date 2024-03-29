@@ -1,13 +1,15 @@
 package fr.uca.progfonc;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 import java.util.function.*;
 
 import static fr.uca.progfonc.TD1.append;
 import static fr.uca.progfonc.TD3.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TD3Test {
     static Lst<Integer> mile = null;
@@ -28,7 +30,7 @@ public class TD3Test {
         recur(l);
     }
 
-    @BeforeClass
+    @BeforeAll
     public static void initMile() {
         try {
             recur(null);
@@ -46,8 +48,9 @@ public class TD3Test {
             mimile = new Lst<>(l, mimile);
         }
 
-        memFib = memo(TD3Test::recFib);
-        memFib.apply(32);
+        //memFib = memo(TD3Test::recFib);
+        //assertNotNull(memFib);
+        //memFib.apply(32);
     }
 
     @Test
@@ -70,7 +73,8 @@ public class TD3Test {
         assertEquals(5, fib(5));
     }
 
-    @Test(timeout = 2)
+    @Test()
+    @Timeout(2)
     public void testLongFib() {
         assertEquals(1134903170L, fib(45));
     }
@@ -84,7 +88,8 @@ public class TD3Test {
         assertEquals(6, gcd(12, 18));
     }
 
-    @Test(timeout = 2)
+    @Test()
+    @Timeout(2)
     public void testLongGCD() {
         assertEquals(36, gcd(12456, 8979876));
     }
@@ -120,7 +125,8 @@ public class TD3Test {
 
     // This test should fail if the reserve method is not tail recursive.
     // Behavior depends on your hardware or jvm configuration.
-    @Test(timeout = 10)
+    @Test()
+    @Timeout(10)
     public void testReversePerformances() {
         assertNotNull(TD3.reverse(mile));
     }
@@ -143,7 +149,8 @@ public class TD3Test {
         assertTrue(palindrome(list5));
     }
 
-    @Test(timeout = 20)
+    @Test()
+    @Timeout(20)
     public void testPalindromePerformances() {
         assertTrue(TD3.palindrome(append(mile, reverse(mile))));
     }
@@ -156,7 +163,8 @@ public class TD3Test {
         assertEquals(expectedList, flattenedList);
     }
 
-    @Test(timeout = 10)
+    @Test()
+    @Timeout(10)
     public void testFlattenPerformances() {
         Lst<Integer> flattenedList = flatten(mimile);
         assertEquals(depth - (depth % 1000), TD1.length(flattenedList));
@@ -230,6 +238,7 @@ public class TD3Test {
     public void testIterator() {
         Lst<String> l = new Lst<>("apple", new Lst<>("banana", new Lst<>("cherry", null)));
         Supplier<String> it = iterator(l);
+        assertNotNull(it);
         assertEquals("apple", it.get());
         assertEquals("banana", it.get());
         assertEquals("cherry", it.get());
@@ -237,7 +246,8 @@ public class TD3Test {
         assertNull(it.get());
     }
 
-    @Test(timeout = 5)
+    @Test()
+    @Timeout(5)
     public void testMemo() {
         assertEquals(2178309, (int) memFib.apply(32));
         assertEquals(2, (int) memFib.apply(3));

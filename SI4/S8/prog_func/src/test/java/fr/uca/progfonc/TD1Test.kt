@@ -1,36 +1,37 @@
 package fr.uca.progfonc
 
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
+
 
 class TD1Test {
     @Test
     fun testLengthWithEmptyList() {
         val emptyList: Lst<Any>? = null
-        Assert.assertEquals(0, TD1.length(emptyList).toLong())
+        Assertions.assertEquals(0, TD1.length(emptyList).toLong())
     }
 
     @Test
     fun testLengthWithNonEmptyList() {
         val nonEmptyList = Lst(1, Lst(2, Lst<Any>(3, null)))
-        Assert.assertEquals(3, TD1.length(nonEmptyList).toLong())
+        Assertions.assertEquals(3, TD1.length(nonEmptyList).toLong())
     }
 
     @Test
     fun testMemberWithValueInList() {
         val list = Lst(1, Lst(2, Lst<Any>(3, null)))
-        Assert.assertTrue(TD1.member(2, list))
+        Assertions.assertTrue(TD1.member(2, list))
     }
 
     @Test
     fun testMemberWithValueNotInList() {
         val list = Lst(1, Lst(2, Lst<Any>(3, null)))
-        Assert.assertFalse(TD1.member(4, list))
+        Assertions.assertFalse(TD1.member(4, list))
     }
 
     @Test
     fun testAppendWithEmptyLists() {
-        Assert.assertNull(TD1.append<Any>(null, null))
+        Assertions.assertNull(TD1.append<Any>(null, null))
     }
 
     @Test
@@ -38,44 +39,44 @@ class TD1Test {
         val list1 = Lst(1, Lst<Any>(2, null))
         val list2 = Lst(3, Lst<Any>(4, null))
         val expected = Lst(1, Lst(2, Lst(3, Lst<Any>(4, null))))
-        Assert.assertEquals(expected, TD1.append(list1, list2))
+        Assertions.assertEquals(expected, TD1.append(list1, list2))
     }
 
     @Test
     fun testSumWithEmptyList() {
-        Assert.assertEquals(0, TD1.sum(null).toLong())
+        Assertions.assertEquals(0, TD1.sum(null).toLong())
     }
 
     @Test
     fun testSumWithNonEmptyList() {
         val nonEmptyList = Lst(1, Lst(2, Lst(3, null)))
-        Assert.assertEquals(6, TD1.sum(nonEmptyList).toLong())
+        Assertions.assertEquals(6, TD1.sum(nonEmptyList).toLong())
     }
 
     @Test
     fun testRemoveWithValueInList() {
         val list = Lst(1, Lst(2, Lst<Any>(3, null)))
         val expected = Lst(1, Lst<Any>(3, null))
-        Assert.assertEquals(expected, TD1.remove(2, list))
+        Assertions.assertEquals(expected, TD1.remove(2, list))
     }
 
     @Test
     fun testRemoveWithValueNotInList() {
         val list = Lst(1, Lst(2, Lst<Any>(3, null)))
-        Assert.assertEquals(list, TD1.remove(4, list))
+        Assertions.assertEquals(list, TD1.remove(4, list))
     }
 
     @Test
     fun testRemoveAllWithValueInList() {
         val list = Lst(1, Lst(2, Lst<Any>(1, null)))
         val expected = Lst<Any>(2, null)
-        Assert.assertEquals(expected, TD1.removeAll(1, list))
+        Assertions.assertEquals(expected, TD1.removeAll(1, list))
     }
 
     @Test
     fun testRemoveAllWithValueNotInList() {
         val list = Lst(1, Lst(2, Lst<Any>(3, null)))
-        Assert.assertEquals(list, TD1.remove(4, list))
+        Assertions.assertEquals(list, TD1.remove(4, list))
     }
 
     @Test
@@ -117,58 +118,58 @@ class TD1Test {
                 )
             )
         )
-        Assert.assertEquals(expected, TD1.fizzbuzz(2, 21))
+        Assertions.assertEquals(expected, TD1.fizzbuzz(2, 21))
     }
 
     @Test
     fun testFromArrayWithEmptyArray() {
         val emptyArray = arrayOfNulls<Any>(0)
-        Assert.assertNull(TD1.fromArray(emptyArray))
+        Assertions.assertNull(TD1.fromArray(emptyArray))
     }
 
     @Test
     fun testFromArrayWithNonEmptyArray() {
         val nonEmptyArray = arrayOf<Any>(1, 2, 3)
         val expected = Lst(1, Lst(2, Lst<Any>(3, null)))
-        Assert.assertEquals(expected, TD1.fromArray(nonEmptyArray))
+        Assertions.assertEquals(expected, TD1.fromArray(nonEmptyArray))
     }
 
     @Test
     fun testReverseWithEmptyList() {
-        Assert.assertNull(TD1.reverse<Any>(null))
+        Assertions.assertNull(TD1.reverse<Any>(null))
     }
 
     @Test
     fun testReverseWithNonEmptyList() {
         val lst = Lst(1, Lst(2, Lst(3, null)))
         val reversedLst = TD1.reverse(lst)
-        Assert.assertEquals(Lst(3, Lst(2, Lst(1, null))), reversedLst)
+        Assertions.assertEquals(Lst(3, Lst(2, Lst(1, null))), reversedLst)
     }
 
     @Test
     fun testInsertWithEmptyList() {
         val insertedLst = TD1.insert(1, null)
-        Assert.assertEquals(Lst(1, null), insertedLst)
+        Assertions.assertEquals(Lst(1, null), insertedLst)
     }
 
     @Test
     fun testInsertWithNonEmptyList() {
         val lst = Lst(1, Lst(2, Lst(4, null)))
         val insertedLst = TD1.insert(3, lst)
-        Assert.assertEquals(Lst(1, Lst(2, Lst(3, Lst(4, null)))), insertedLst)
+        Assertions.assertEquals(Lst(1, Lst(2, Lst(3, Lst(4, null)))), insertedLst)
     }
 
     @Test
     fun testSortWithEmptyList() {
         val emptyList: Lst<Int>? = null
-        Assert.assertNull(TD1.sort(emptyList))
+        Assertions.assertNull(TD1.sort(emptyList))
     }
 
     @Test
     fun testSortWithNonEmptyList() {
         val lst = Lst(4, Lst(1, Lst(3, null)))
         val insertedLst = TD1.sort(lst)
-        Assert.assertEquals(Lst(1, Lst(3, Lst(4, null))), insertedLst)
+        Assertions.assertEquals(Lst(1, Lst(3, Lst(4, null))), insertedLst)
     }
 
     // Test indexOf method
@@ -179,11 +180,11 @@ class TD1Test {
 
         // Test indexOf when value is present in list
         var index = TD1.indexOf(2, l)
-        Assert.assertEquals(1, index.toLong())
+        Assertions.assertEquals(1, index.toLong())
 
         // Test indexOf when value is not present in list
         index = TD1.indexOf(4, l)
-        Assert.assertEquals(-1, index.toLong())
+        Assertions.assertEquals(-1, index.toLong())
     }
 
     // Test take method
@@ -195,13 +196,13 @@ class TD1Test {
         // Test taking first three elements of list
         val firstThree = TD1.take(3, l)
         val expected = Lst(1, Lst(2, Lst(3, null)))
-        Assert.assertEquals(expected, firstThree)
+        Assertions.assertEquals(expected, firstThree)
 
-        Assert.assertEquals(expected, TD1.take(5, expected))
+        Assertions.assertEquals(expected, TD1.take(5, expected))
 
         // Test taking first zero elements of list
         val noElements = TD1.take(0, l)
-        Assert.assertNull(noElements)
+        Assertions.assertNull(noElements)
     }
 
     // Test unique method
@@ -214,7 +215,7 @@ class TD1Test {
         val unique = TD1.unique(l)
         val expected = Lst(1, Lst(2, null))
         val other = Lst(2, Lst(1, null))
-        Assert.assertTrue(expected == unique || other == unique)
+        Assertions.assertTrue(expected == unique || other == unique)
     }
 
     @Test
@@ -223,9 +224,9 @@ class TD1Test {
             Pair("a", 1),
             Lst(Pair("b", 2), null)
         )
-        Assert.assertTrue(TD1.has(l, "a"))
-        Assert.assertTrue(TD1.has(l, "b"))
-        Assert.assertFalse(TD1.has(l, "c"))
+        Assertions.assertTrue(TD1.has(l, "a"))
+        Assertions.assertTrue(TD1.has(l, "b"))
+        Assertions.assertFalse(TD1.has(l, "c"))
     }
 
     @Test
@@ -234,9 +235,9 @@ class TD1Test {
             Pair("a", 1),
             Lst(Pair("b", 2), null)
         )
-        Assert.assertEquals(1, TD1.get(l, "a")!!.toLong())
-        Assert.assertEquals(2, TD1.get(l, "b")!!.toLong())
-        Assert.assertNull(TD1.get(l, "c"))
+        Assertions.assertEquals(1, TD1.get(l, "a")!!.toLong())
+        Assertions.assertEquals(2, TD1.get(l, "b")!!.toLong())
+        Assertions.assertNull(TD1.get(l, "c"))
     }
 
     @Test
@@ -246,32 +247,32 @@ class TD1Test {
             Lst(Pair("b", 2), null)
         )
         l = TD1.set(l, "a", 3)
-        Assert.assertEquals(3, TD1.get(l, "a")!!.toLong())
+        Assertions.assertEquals(3, TD1.get(l, "a")!!.toLong())
         l = TD1.set(l, "c", 4)
-        Assert.assertEquals(4, TD1.get(l, "c")!!.toLong())
+        Assertions.assertEquals(4, TD1.get(l, "c")!!.toLong())
     }
 
     @Test
     fun testMaxOne() {
         val list = Lst(5, null)
-        Assert.assertEquals(5, TD1.max(list))
+        Assertions.assertEquals(5, TD1.max(list))
     }
 
     @Test
     fun testMaxFirst() {
         val list = Lst(10, Lst(2, Lst(3, null)))
-        Assert.assertEquals(10, TD1.max(list))
+        Assertions.assertEquals(10, TD1.max(list))
     }
 
     @Test
     fun testMaxLast() {
         val list = Lst(10, Lst(2, Lst(30, null)))
-        Assert.assertEquals(30, TD1.max(list))
+        Assertions.assertEquals(30, TD1.max(list))
     }
 
     @Test
     fun testMaxIn() {
         val list = Lst(10, Lst(200, Lst(30, null)))
-        Assert.assertEquals(200, TD1.max(list))
+        Assertions.assertEquals(200, TD1.max(list))
     }
 }
